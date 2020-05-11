@@ -65,7 +65,7 @@ interface Room {
   kingOrder: [string];
   voteTrack: number;
   proposedTeam: [string];
-  teamVoteResults: boolean; // true === approve, false === reject, undefined === not gone?
+  teamVoteResults: boolean; // true === approve, false === reject, undefined === not voted?
   missionVote: [MissionVote];
 }
 
@@ -87,7 +87,7 @@ interface BoardInfo {
 }
 
 interface Mission {
-  count: 1,
+  count: number;
   size: number;
   status: MissionStatus;
 }
