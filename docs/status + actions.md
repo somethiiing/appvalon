@@ -22,10 +22,31 @@ TEAM_VOTE
 
 DISPLAY_TEAM_VOTE
   ACTION: HANDLE_TEAM_VOTE_RESULT
+    - result: approved team
+      - MISSION_VOTE
+    - result: rejected team
+      - TEAM_PROPOSAL
+    - result: rejected team + vote track 5
+      - EVIL_WIN
 
-WAITING_FOR_PLAYERS -> TEAM_PROPOSAL
+MISSION_VOTE
+  ACTION: SUBMIT_MISSION_VOTE
+    data: player, what they voted
+  ACTION: HANDLE_MISSION_VOTE_RESULT
+
+ASSASSINATION
+  ACTION: SUBMIT_ASSASSINATION
+  data: target(s), role
+
+GOOD_WIN
+EVIL_WIN
+  ACTION: RECONFIGURE_GAME
+
+
+
+
 ACTION: GAME_START
-- change status
+- change status to 'TEAM_PROPOSAL'
 - set board
   - mission sizes
   - all missions to "NOT_GONE"
@@ -38,13 +59,16 @@ ACTION: GAME_START
 - first person in player order === king
 - if lake, last player in player order === lake
 
-TEAM_PROPOSAL -> TEAM_VOTE
 ACTION: SUBMIT_FOR_VOTE
-- change status only
+- change status only to 'TEAM_VOTE'
 
-TEAM_VOTE -> DISPLAY_TEAM_VOTE
+ACTION: SUBMIT_TEAM_VOTE
+desc: individual players submitting their vote
+data: player: string, vote: boolean
+- set associated player object's team vote to respective vote
+
 ACTION: REVEAL_TEAM_VOTE
-- change status only
+- change status only to 'DISPLAY_TEAM_VOTE'
 
 HANDLE_TEAM_VOTE_RESULT:
 - team vote approved:
@@ -56,20 +80,53 @@ HANDLE_TEAM_VOTE_RESULT:
 -IF VOTE TRACK === 5 AND TEAM VOTE REJECTED
   -> change status to: GAME_END
 
-DISPLAY_TEAM_VOTE -> MISSION_VOTE
-ACTION: HANDLE_TEAM_VOTE_RESULT
-- update status
 
-DISPLAY_TEAM_VOTE -> TEAM_PROPOSAL
 ACTION: HANDLE_TEAM_VOTE_RESULT
-- update status
+result: approved team
+- update status to 'MISSION_VOTE'
+
+ACTION: SUBMIT_MISSION_VOTE
+desc: only people on the mission get ui to submit mission vote
+- data: player, vote: SUCCESS/FAIL/REVERSE
+- add vote to the MissionVote array
+
+ACTION: HANDLE_MISSION_VOTE_RESULT
+- set mission num's result to result
+- check for 3 success or fail
+result: 3 success
+  - change status to ASSASSINATION
+result: 3 fail
+  - change status to EVIL_WIN
+else:
+- increment mission number
+- reset vote track
+- shift king
+- change status to 'TEAM_PROPOSAL'
+
+ACTION: HANDLE_TEAM_VOTE_RESULT
+result: rejected team
+- update status to 'TEAM_PROPOSAL'
 - shift king
 - increment vote track
 - don't clear submitted team votes
 
-DISPLAY_TEAM_VOTE -> GAME_END
 ACTION: HANDLE_TEAM_VOTE_RESULT
-- change status only
+result: rejected team + vote track 5
+- change status only to GAME_END
 - bad guys scenario
 
-TODO: STATUS and ACTIONS from MISSION_VOTE on
+ACTION: SUBMIT_ASSASSINATION
+data: target(s), role
+result: correct
+- change status to EVIL_WIN
+result: incorrect
+- change status to GOOD_WIN
+
+ACTION: RECONFIGURE_GAME
+- reset all game states
+- take you back to configuration page
+
+
+
+ACTION: FORCE_TEAM_VOTE
+ACTION: FORCE_MISSION_VOTE
