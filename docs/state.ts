@@ -5,11 +5,12 @@ const serverstate = {
     status: 'WAITING_FOR_PLAYERS',
     createdAt: 0,
     playerCount: 5,
+    lakeSettings: 'NONE',
     selectedRoles: ['merlin', 'percival', 'genericGood', 'mordred', 'morgana'],
     players: [
       {
         name: 'alex',
-        
+
       }
     ],
     boardInfo: {
@@ -46,11 +47,34 @@ const serverstate = {
       ]
     },
     kingOrder: ['alex', 'bridget', 'chris', 'david', 'elliot'],
+    currentMission: 1,
     voteTrack: 1,
     proposedTeam: [],
     teamVoteResults: null,
-    // missionVote:
+    missionVote: ['SUCCESS', 'FAIL', 'SUCCESS', 'SUCCESS']
   }
+}
+
+const FESettingsObj = {
+  playerCount: 5,
+  selectedRoles: {
+    merlin: true, //bool
+    percival: true, //bool
+    tristan: false, //bool
+    iseult: false, //bool
+    genericGood: true, //bool
+    numGenGood: 2, //num
+
+    assassin: true, //bool
+    mordred: true, //bool
+    morgana: true, //bool
+    oberon: false, //bool
+    noberon: false, //bool
+    genericEvil: false, //bool
+    numGenEvil: 0 //num
+  },
+  lakeSettings: 'ROLE', // ROLE, ALIGNMENT, NONE
+
 }
 
 interface Room {
@@ -59,13 +83,15 @@ interface Room {
   status: string;
   createdAt: number;
   playerCount: number;
+  lakeSettings: LakeSettings;
   selectedRoles: [Roles];
   players: [Player];
   boardInfo: BoardInfo;
   kingOrder: [string];
   voteTrack: number;
   proposedTeam: [string];
-  teamVoteResults: boolean; // true === approve, false === reject, undefined === not gone?
+  currentMission: number;
+  teamVoteResults: boolean; // true === approve, false === reject, undefined === not voted?
   missionVote: [MissionVote];
 }
 
@@ -87,14 +113,14 @@ interface BoardInfo {
 }
 
 interface Mission {
-  count: 1,
+  count: number;
   size: number;
   status: MissionStatus;
 }
 
 enum Roles {
   merlin, percival, tristan, iseult, genericGood,
-  mordred, morgana, assassin, genericEvil
+  mordred, morgana, assassin, oberon, noberon, genericEvil
 }
 
 enum MissionStatus {
@@ -107,4 +133,8 @@ enum TeamVote {
 
 enum MissionVote {
   SUCCESS, FAIL, REVERSE
+}
+
+enum LakeSettings {
+  ROLE, ALIGNMENT, NONE
 }
