@@ -9,7 +9,7 @@ const io = require('socket.io').listen(server);
 
 const state = {};
 
-app.get('/api/', () => {
+app.get('/api/', (req,res) => {
   res.sendStatus(200);
 })
 
