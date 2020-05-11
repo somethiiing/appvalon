@@ -5,7 +5,7 @@ Landing Page
 Create Room Page // ROOM_SETUP
   - Options:
     - Room owner
-    - # of people
+    - num of people
     - radio buttons: avalon vs thavalon
       - avalon:
         - base roles
