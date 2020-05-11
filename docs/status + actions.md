@@ -1,7 +1,9 @@
+STATUS: What the UI should be showing for the room
+ACTIONS: Server functions and transitions between STATUSES
+
 ROOM_SETUP
   ACTION: CREATE_ROOM
-  data:
-    see other page
+    data: see readme
 
 WAITING_FOR_PLAYERS
   When correct number of players reached:
@@ -19,7 +21,7 @@ TEAM_VOTE
   ACTION: REVEAL_TEAM_VOTE
 
 DISPLAY_TEAM_VOTE
-  ACTION: HANDLE_TEAM_VOTE_RESULTS
+  ACTION: HANDLE_TEAM_VOTE_RESULT
 
 WAITING_FOR_PLAYERS -> TEAM_PROPOSAL
 ACTION: GAME_START
@@ -55,18 +57,19 @@ HANDLE_TEAM_VOTE_RESULT:
   -> change status to: GAME_END
 
 DISPLAY_TEAM_VOTE -> MISSION_VOTE
-ACTION: HANDLE_TEAM_VOTE_RESULTS
+ACTION: HANDLE_TEAM_VOTE_RESULT
 - update status
 
 DISPLAY_TEAM_VOTE -> TEAM_PROPOSAL
-ACTION: HANDLE_TEAM_VOTE_RESULTS
+ACTION: HANDLE_TEAM_VOTE_RESULT
 - update status
 - shift king
 - increment vote track
 - don't clear submitted team votes
 
-
 DISPLAY_TEAM_VOTE -> GAME_END
-ACTION: HANDLE_TEAM_VOTE_RESULTS
+ACTION: HANDLE_TEAM_VOTE_RESULT
 - change status only
 - bad guys scenario
+
+TODO: STATUS and ACTIONS from MISSION_VOTE on
