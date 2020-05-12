@@ -1,4 +1,6 @@
 const missionsData = require('./missionsData');
+const rolesData = require('./roleAssignmentData');
+const helpers = require('./helpers');
 
 const fruits = {
   'apple': false,
@@ -167,5 +169,22 @@ const createInitialRoomState = (room, host, settings) => {
     boardInfo
   });
 };
+
+const handleTeamVoteResult = (room, vote)
+
+const submitAssassination = (room, target) => {
+  let success = false;
+  for (let player of room.players) {
+    if (player.name === target && player.role === rolesData.merlin.roleTitle) {
+      success = true;
+      break;
+    }
+  }
+  if(success) {
+    return helpers.setStatus(room, "EVIL_WIN");
+  } else {
+    return helpers.setStatus(room, "GOOD_WIN");
+  }
+}
 
 module.exports = { getRandomFruit, createInitialRoomState }
