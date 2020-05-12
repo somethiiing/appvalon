@@ -4,14 +4,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: calc(10px + 2vmin);
-  color: white;
   padding: 10px 30px;
 }
 
 .Button {
   min-width: 100px;
-  background-color: green;
+  background-color: #00d673;
   padding: 10px 15px;
   border: none;
   border-radius: 15px;
@@ -21,44 +19,46 @@
 }
 
 .Text-P {
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 500;
   margin: 0;
   padding: 0;
 }
 
 .Text-Heading {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
   margin: 10px;
   padding: 0;
 }
 
 .Text-Sub {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 400;
   margin: 0;
   padding: 0;
 }
 
 .Mission-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 105px;
+  height: 110px;
+  border-radius: 5px;
   margin: 0 20px;
   padding: 10px;
   display: inline-block;
+  position: relative;
 }
 
 .Mission-wrapper.active {
-  background-color: #333;
+  background-color: #212121;
 }
 
 .Mission {
   border-radius: 50%;
-  background-color: #666;
+  background-color: #555555;
   font-size: 3rem;
-  width: 100px;
-  height: 100px;
+  width: 102px;
+  height: 102px;
   margin: 0;
   display: flex;
   align-items: center;
@@ -66,11 +66,33 @@
 }
 
 .Mission.pass {
-  background-color: #0066cc;
+  background-color: #015aff;
 }
 
 .Mission.fail {
-  background-color: red;
+  background-color: #d10146;
+}
+
+.Mission-tracker {
+  border-radius: 50%;
+  background-color: #555555;
+  width: 27px;
+  height: 27px;
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Mission-double-fail {
+  font-size: .8rem;
+}
+
+.Mission-tracker.hammer-vote {
+  background-color: #d10146;
 }
 
  @media screen and (max-width: 600px) {

@@ -13,8 +13,8 @@ function App() {
       }
       <Mission fail count={2} />
       <Mission pass count={3} />
-      <Mission active count={3} />
-      <Mission count={3} />
+      <Mission active missionCount={4} count={3} />
+      <Mission doubleFail count={4} />
       <Mission count={3} />
     </div>
   );
