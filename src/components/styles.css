@@ -17,6 +17,7 @@
   border-radius: 15px;
   font-weight: 500;
   font-size: .8rem;
+  cursor: pointer;
 }
 
 .Text-P {
@@ -38,6 +39,38 @@
   font-weight: 400;
   margin: 0;
   padding: 0;
+}
+
+.Mission-wrapper {
+  width: 100px;
+  height: 100px;
+  margin: 0 20px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.Mission-wrapper.active {
+  background-color: #333;
+}
+
+.Mission {
+  border-radius: 50%;
+  background-color: #666;
+  font-size: 3rem;
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Mission.pass {
+  background-color: #0066cc;
+}
+
+.Mission.fail {
+  background-color: red;
 }
 
  @media screen and (max-width: 600px) {
