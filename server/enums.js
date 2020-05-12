@@ -59,8 +59,13 @@ const GameState = {
     HANDLE_TEAM_VOTE_RESULT: "handleTeamVoteResult",
     // players are voting on success/fail of mission
     MISSION_VOTE: "missionVote",
+    // handle results of the mission proposal vote
+    HANDLE_MISSION_VOTE_RESULT: "handleMissionVoteResult",
     // exactly what it says on the tin
-    GAME_END: "gameEnd"
+    ASSASSINATION: "assassination",
+    GAME_END: "gameEnd",
+    EVIL_WIN: "evilWin",
+    GOOD_WIN: "goodWin"
 }
 
 module.exports = { Roles, MissionStatus, TeamVote, MissionVote, LakeSettings, GameState };

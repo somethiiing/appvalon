@@ -81,6 +81,19 @@ const setKing = (newKingName, players) => {
 }
 
 /**
+ * Shifts the king
+ * @param room
+ */
+const shiftKing = (room) => {
+    let newRoom = otherUtils.deepCopy(room)
+    let currentKing = newRoom.kingOrder.shift();
+    newRoom.kingOrder.push(currentKing);
+    let futureKing = newRoom.kingOrder.shift();
+    newRoom.players = setKing(futureKing, newRoom.players);
+    return newRoom;
+}
+
+/**
  * Sets designated player as lake (THERE CAN ONLY BE ONE!)
  * @param {Player} player
  */
@@ -123,4 +136,4 @@ const resetRoom = (settings, room) => {
     return newRoom;
 }
 
-module.exports = { reallyUsefulFunction, setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus, setKing, setLake, resetRoom };
+module.exports = { reallyUsefulFunction, setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus, setKing, shiftKing, setLake, resetRoom };
