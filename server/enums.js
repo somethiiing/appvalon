@@ -22,7 +22,8 @@ Object.freeze(MissionStatus)
 
 const TeamVote = {
     APPROVE: "approve",
-    REJECT: "reject"
+    REJECT: "reject",
+    NOT_VOTED: "notVoted"
 };
 
 Object.freeze(TeamVote)
