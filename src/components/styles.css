@@ -95,6 +95,19 @@
   background-color: #d10146;
 }
 
+.Card {
+  width: 135px;
+  height: 225px;
+  background: rgb(85, 85, 85);
+  border-radius: 5px;
+  color: #212121;
+  margin: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
  @media screen and (max-width: 600px) {
     .Button {
       width: 100%;
