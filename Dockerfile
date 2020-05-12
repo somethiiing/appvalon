@@ -1,5 +1,9 @@
 
-FROM nginx:stable-alpine
-COPY  build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:14-alpine
+USER node
+COPY  . .
+RUN npm install --silent --no-optional
+RUN npm cache clean --force
+
+EXPOSE 5000
+CMD ["node", "server/server.js"]
