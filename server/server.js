@@ -46,7 +46,6 @@ app.post('/api/update', (req, res) => {
   console.log(type, room, player, data);
   switch(type) {
     case 'UPDATE_TEAM_MEMBERS':
-      state[room] = handleUpdateTeamMembers(state[rooom]);
     case 'SUBMIT_FOR_VOTE':
     case 'SUBMIT_TEAM_VOTE':
     case 'REVEAL_TEAM_VOTE':
