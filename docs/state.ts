@@ -91,14 +91,14 @@ interface Room {
   voteTrack: number;
   proposedTeam: [string];
   currentMission: number;
-  teamVoteResults: boolean; // true === approve, false === reject, undefined === not voted?
-  missionVote: [MissionVote];
+  teamVoteResult: boolean; // true === approve, false === reject, undefined === not voted?
+  missionVote: MissionVote;
 }
 
 interface Player {
   name: string;
   teamVote: boolean;
-  role: [];
+  role: Roles;
   information: {}; // stuff they know
   isKing: boolean;
   isHammer: boolean;
@@ -116,6 +116,13 @@ interface Mission {
   count: number;
   size: number;
   status: MissionStatus;
+  maxVoteTrack: number;
+}
+
+interface MissionVote {
+  success: number;
+  fail: number;
+  reverse: number;
 }
 
 enum Roles {
@@ -129,10 +136,6 @@ enum MissionStatus {
 
 enum TeamVote {
   APPROVE, REJECT
-}
-
-enum MissionVote {
-  SUCCESS, FAIL, REVERSE
 }
 
 enum LakeSettings {

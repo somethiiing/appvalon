@@ -3,9 +3,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
+
+const { getRandomFruit, createInitialRoomState } = require('./roomUtils');
+
+app
+  .use(cors())
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(bodyParser.json())
+  .use(express.static(path.join(__dirname, 'build')));
 
 const state = {};
 
@@ -13,9 +21,16 @@ app.get('/api/', () => {
   res.sendStatus(200);
 })
 
+app.post('/api/createRoom', (req, res) => {
+  const { settings, host } = req.body.data;
+  const room = getRandomFruit();
+  state[room] = createInitialRoomState(room, host, settings);
+  res.send({room, host});
+})
+
 // app.get('/api/getState', (req, res) => {
 //   res.send({state});
-// })
+// });
 
 // app.post('/api/joinRoom', (req, res) => {
 //   const { name, room } = req.body
