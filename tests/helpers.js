@@ -28,7 +28,7 @@ describe.only('setVoteTrackCount', () => {
 
 describe.only('shuffle players', () => {
     const initial_state = in_progress;
-    const result = shufflePlayers(initial_state.players)
+    const result = shufflePlayers(initial_state)
     it('should create a new array of shuffled players', () => {
         // comparing references is fine - could set the random seed but w/e
         assert.notEqual(initial_state.players, result.players)
@@ -57,18 +57,15 @@ describe.only('setKing', () => {
     const initial_state = in_progress;
     const oldKingName = initial_state.players[0].name;
     const newKingName = initial_state.players[1].name;
-    const result = setKing(newKingName, initial_state.players);
+    const result = setKing(initial_state, newKingName);
 
     it('should elect a new king', () => {
-        const newKing = result.find((player) => player.isKing);
-        if (!newKing) {
-            console.log(result)
-        }
+        const newKing = result.players.find((player) => player.isKing);
         assert.exists(newKing);
         assert.equal(newKing.name, newKingName);
     })
     it('should depose the old king', () => {
-        const oldKing = (result.find((player) => player.name == oldKingName));
+        const oldKing = (result.players.find((player) => player.name == oldKingName));
         assert.exists(oldKing);
         assert.equal(oldKing.name, oldKingName);
     })
@@ -81,18 +78,15 @@ describe.only('setLake', () => {
     const initial_state = in_progress;
     const oldLakeName = initial_state.players[0].name;
     const newLakeName = initial_state.players[1].name;
-    const result = setLake(oldLakeName, initial_state.players);
+    const result = setLake(initial_state, newLakeName);
 
     it('should elect a new lake', () => {
-        const newLake = result.find((player) => player.isLake);
-        if (!newLake) {
-            console.log(result)
-        }
+        const newLake = result.players.find((player) => player.isLake);
         assert.exists(newLake);
         assert.equal(newLake.name, newLakeName);
     })
     it('should depose the old lake', () => {
-        const oldLake = (result.find((player) => player.name == oldLakeName));
+        const oldLake = (result.players.find((player) => player.name == oldLakeName));
         assert.exists(oldLake);
         assert.equal(oldLake.name, oldLakeName);
     })

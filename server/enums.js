@@ -55,16 +55,17 @@ const GameState = {
     TEAM_VOTE: "teamVote",
     // displaying the results of the team proposal vote
     DISPLAY_TEAM_VOTE: "displayTeamVote",
-    // handle results of the team proposal vote
-    HANDLE_TEAM_VOTE_RESULT: "handleTeamVoteResult",
     // players are voting on success/fail of mission
     MISSION_VOTE: "missionVote",
     // handle results of the mission proposal vote
     HANDLE_MISSION_VOTE_RESULT: "handleMissionVoteResult",
     // exactly what it says on the tin
-    ASSASSINATION: "assassination",
     GAME_END: "gameEnd",
+    // assassination
+    ASSASSINATION: "assassination",
+    // evil has won the game
     EVIL_WIN: "evilWin",
+    // good has won the game
     GOOD_WIN: "goodWin"
 }
 

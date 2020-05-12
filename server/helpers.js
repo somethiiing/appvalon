@@ -15,8 +15,8 @@ const reallyUsefulFunction = () => true;
  * @param {Mission} room
  * @param {number} count
  */
-const setMissionCount = (mission, count) => {
-    let dup = otherUtils.deepCopy(mission)
+const setMissionCount = (roomObj, count) => {
+    let dup = otherUtils.deepCopy(roomObj);
     dup.currentMission = count;
     return dup;
 };
@@ -26,18 +26,20 @@ const setMissionCount = (mission, count) => {
  * @param {Room} room
  * @param {number} count
  */
-const setVoteTrackCount = (room, count) => {
-    let dup = otherUtils.deepCopy(room)
+const setVoteTrackCount = (roomObj, count) => {
+    let dup = otherUtils.deepCopy(roomObj)
     dup.voteTrack = count;
     return dup;
 }
 
 /**
  * Returns a new list of players that have been shuffled
- * @param {array} array of players to be shuffled
+ * @param {roomObj} array of players to be shuffled
  */
-const shufflePlayers = (players) => {
-    return otherUtils.deepCopy(otherUtils.shuffle(players));
+const shufflePlayers = (roomObj) => {
+    let dup = otherUtils.deepCopy(roomObj)
+    otherUtils.shuffle(dup.players)
+    return dup;
 }
 
 /**
@@ -54,30 +56,25 @@ const assignRoles = (playerNames, settings) => {
  * @param {Room} room
  * @param {GameStatus} status
  */
-const setStatus = (room, status) => {
-    let dup = otherUtils.deepCopy(room);
+const setStatus = (roomObj, status) => {
+    let dup = otherUtils.deepCopy(roomObj);
     dup.status = status;
     return dup;
 }
 
 /**
  * Sets designated player as king (THERE CAN ONLY BE ONE!)
- * @param {Player} player
+ * @param {string} newKingName
+ * @param {[PlayerObj]} newKingName
  */
-const setKing = (newKingName, players) => {
-    let replacedPlayers = [];
-    let deposedKing = otherUtils.deepCopy(players.find((player) => player.isKing));
-    if (deposedKing) {
-        deposedKing.isKing = false;
-        replacedPlayers.push(deposedKing);
-    }
+const setKing = (roomObj, newKingName) => {
+    let dup = otherUtils.deepCopy(roomObj)
+    dup.players.find(player => player.isKing).isKing = false;
 
-    let newKing = otherUtils.deepCopy(players.find(it => it.name === newKingName));
+    let newKing = dup.players.find(it => it.name === newKingName);
     newKing.isKing = true;
 
-    replacedPlayers.push(newKing);
-
-    return replacePlayers(otherUtils.deepCopy(players), replacedPlayers);
+    return dup;
 }
 
 /**
@@ -95,42 +92,22 @@ const shiftKing = (room) => {
 
 /**
  * Sets designated player as lake (THERE CAN ONLY BE ONE!)
- * @param {Player} player
+ * @param {PlayerObj} player
  */
-const setLake = (newLakeName, players) => {
-    let replacedPlayers = [];
-    let deposedLake = otherUtils.deepCopy(players.find((player) => player.isLake));
-    if (deposedLake) {
-        deposedLake.isLake = false;
-        replacedPlayers.push(deposedLake);
-    }
+const setLake = (roomObj, newLakeName) => {
+    let dup = otherUtils.deepCopy(roomObj)
+    dup.players.find(player => player.isLake).isLake = false;
 
-    let newLake = otherUtils.deepCopy(players.find(it => it.name === newLakeName));
+    let newLake = dup.players.find(it => it.name === newLakeName);
     newLake.isLake = true;
 
-    replacedPlayers.push(newLake);
-
-    return replacePlayers(otherUtils.deepCopy(players), replacedPlayers);
-}
-
-const replacePlayers = (players, newPlayers) => {
-    // creates a new players array with replaced players
-    return players.map((player) => {
-        console.log(newPlayers)
-        const playerToReplace = newPlayers
-            .find(newPlayer => newPlayer.name === player.name);
-        if (playerToReplace) {
-            return playerToReplace;
-        } else {
-            return player;
-        }
-    });
+    return dup;
 }
 
 /**
  * Sets room state to initial settings, retaining players (but clearing roles)
  */
-const resetRoom = (settings, room) => {
+const resetRoom = (roomObj, settings) => {
     const newRoom = roomUtils.createInitialRoomState(settings, room.name, room.owner);
     newRoom.players = assignRoles();
     return newRoom;
