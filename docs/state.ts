@@ -84,7 +84,7 @@ interface Room {
   createdAt: number;
   playerCount: number;
   lakeSettings: LakeSettings;
-  selectedRoles: [Roles];
+  selectedRoles: [Role];
   players: [Player];
   boardInfo: BoardInfo;
   kingOrder: [string];
@@ -98,7 +98,7 @@ interface Room {
 interface Player {
   name: string;
   teamVote: boolean;
-  role: Roles;
+  role: Role;
   information: {}; // stuff they know
   isKing: boolean;
   isHammer: boolean;
@@ -125,7 +125,7 @@ interface MissionVote {
   reverse: number;
 }
 
-enum Roles {
+enum Role {
   merlin, percival, tristan, iseult, genericGood,
   mordred, morgana, assassin, oberon, noberon, genericEvil
 }
