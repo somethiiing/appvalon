@@ -1,7 +1,6 @@
 import React from 'react';
 import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
 import { GiJeweledChalice } from 'react-icons/gi';
-import Button from './Button';
 import { P } from './Text';
 
 function Card(props) {
