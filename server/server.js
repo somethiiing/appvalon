@@ -15,7 +15,7 @@ app
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, 'build')));
 
-const state = {};
+const state = {mango:{}, banana: {}, strawberry: {}};
 
 app.get('/api/', () => {
   res.sendStatus(200);
@@ -28,9 +28,9 @@ app.post('/api/createRoom', (req, res) => {
   res.send({room, host});
 })
 
-// app.get('/api/getState', (req, res) => {
-//   res.send({state});
-// });
+app.get('/api/getRoomList', (req, res) => {
+  res.send({roomList: Object.keys(state)});
+});
 
 // app.post('/api/joinRoom', (req, res) => {
 //   const { name, room } = req.body
@@ -39,16 +39,28 @@ app.post('/api/createRoom', (req, res) => {
 //   res.sendStatus(200);
 // });
 
-// app.post('/api/update', (req, res) => {
-//   const { type, data = {} } = req.body;
-//   const { player } = data;
-//   switch(type) {
-//     default:
-//       break;
-//   }
-//   io.emit('UPDATE_STATE', state);
-//   res.sendStatus(200);
-// });
+app.post('/api/update', (req, res) => {
+  const { type, room, player, data = {} } = req.body;
+  // const { player } = data;
+
+  console.log(type, room, player, data);
+  switch(type) {
+    case 'UPDATE_TEAM_MEMBERS':
+    case 'SUBMIT_FOR_VOTE':
+    case 'SUBMIT_TEAM_VOTE':
+    case 'REVEAL_TEAM_VOTE':
+    case 'HANDLE_TEAM_VOTE_RESULT':
+    case 'SUBMIT_MISSION_VOTE':
+    case 'HANDLE_MISSION_VOTE_RESULT':
+    case 'SUBMIT_ASSASSINATION':
+    case 'RECONFIGURE_GAME':
+      break;
+    default:
+      break;
+  }
+  io.emit('UPDATE_STATE', state[room]);
+  res.sendStatus(200);
+});
 
 io.on('connection', socket => {
   console.log('user connected');

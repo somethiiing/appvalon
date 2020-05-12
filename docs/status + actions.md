@@ -34,6 +34,20 @@ MISSION_VOTE
     data: player, what they voted
   ACTION: HANDLE_MISSION_VOTE_RESULT
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 WAITING_FOR_PLAYERS -> TEAM_PROPOSAL
 ACTION: GAME_START
 - change status to 'TEAM_PROPOSAL'
