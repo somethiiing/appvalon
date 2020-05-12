@@ -1,0 +1,80 @@
+.Header {
+  min-height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 10px 30px;
+}
+
+.Button {
+  min-width: 100px;
+  background-color: green;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  font-weight: 500;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.Text-P {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+.Text-Heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 10px;
+  padding: 0;
+}
+
+.Text-Sub {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.Mission-wrapper {
+  width: 100px;
+  height: 100px;
+  margin: 0 20px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.Mission-wrapper.active {
+  background-color: #333;
+}
+
+.Mission {
+  border-radius: 50%;
+  background-color: #666;
+  font-size: 3rem;
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Mission.pass {
+  background-color: #0066cc;
+}
+
+.Mission.fail {
+  background-color: red;
+}
+
+ @media screen and (max-width: 600px) {
+    .Button {
+      width: 100%;
+    }
+  }
