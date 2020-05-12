@@ -1,9 +1,10 @@
 
 FROM node:14-alpine
-
-COPY  . .
-RUN npm install  --no-optional
-RUN npm cache clean --force
 USER node
+COPY  package.json package.json
+COPY package-lock.json package-lock.json
+RUN npm install  --no-optional --force
+RUN npm cache clean --force
+
 EXPOSE 5000
 CMD ["node", "server/server.js"]
