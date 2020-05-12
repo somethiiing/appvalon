@@ -80,9 +80,58 @@ Team Vote // TEAM_VOTE
 Display Team Vote // DISPLAY_TEAM_VOTE
   - EVERYONE
     - See who voted what
-  - KING
-    - next button // Action: DONE_VIEWING_TEAM_VOTE
+  - CURRENT KING
+    - next button // Action: HANDLE_TEAM_VOTE_RESULT
 
-- todo: finish statuses and actions
-- todo: define base roles
+Mission Vote // MISSION_VOTE
+  - EVERYONE
+    - anonymous count for how many people have voted
+  - PEOPLE ON MISSION
+    - buttons: success/fail/reverse
+      - options they can't choose grayed out
+      - onClick submits immediately // Action: SUBMIT_MISSION_VOTE
+  - ADMIN/HOST
+    - force vote button // Action: FORCE_MISSION_VOTE
+
+Display Mission Results // DISPLAY_MISSION_VOTE
+  - EVERYONE
+    - see tally of each vote type
+  - NEXT KING
+    - next button // ACTION: HANDLE_MISSION_VOTE_RESULT
+
+Assassination // ASSASSINATION
+// todo: double assassination lancelot rule
+  - EVERYONE
+    - 5 minute timer tickdown
+  - ASSASSIN
+    - pick to choose who to assassinate as merlin or lovers
+    - submit to assassinate // SUBMIT_ASSASSINATION
+  - EVIL
+    - message to confer with evil compatriots on who to assassinate
+  - GOOD
+    - message to say to not talk
+
+End game page // EVIL_WIN, GOOD_WIN
+  - HOST/ADMIN
+    reconfigure button // RECONFIGURE_GAME
+  - EVERYONE
+    displays relevant information
+
+
+BASE ROLES:
+  GOOD:
+    merlin
+    percival
+    tristan
+    iseult
+    genericGood
+
+  EVIL:
+    mordred
+    morgana
+    assassin
+    oberon
+    noberon
+    genericEvil
+
 - todo: define base rules

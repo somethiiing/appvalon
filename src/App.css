@@ -1,14 +1,3 @@
 .App {
   text-align: center;
 }
-
-.Header {
-  min-height: 70px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  padding: 10px 30px;
-}
