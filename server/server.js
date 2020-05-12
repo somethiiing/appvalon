@@ -25,7 +25,7 @@ app.post('/api/createRoom', (req, res) => {
   const { settings, host } = req.body.data;
   const room = getRandomFruit();
   state[room] = createInitialRoomState(room, host, settings);
-  res.send({room, host});
+  res.send({room, host, roomState: state[room]});
 })
 
 app.get('/api/getRoomList', (req, res) => {
@@ -46,6 +46,7 @@ app.post('/api/update', (req, res) => {
   console.log(type, room, player, data);
   switch(type) {
     case 'UPDATE_TEAM_MEMBERS':
+      state[room] = handleUpdateTeamMembers(state[rooom]);
     case 'SUBMIT_FOR_VOTE':
     case 'SUBMIT_TEAM_VOTE':
     case 'REVEAL_TEAM_VOTE':

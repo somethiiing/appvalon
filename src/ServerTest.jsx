@@ -74,7 +74,7 @@ export class Test extends React.Component {
       settings: FESettingsObj,
       host: this.state.host
     }})
-      .then(res => console.log(res));
+      .then(res => this.setState({roomState: res.data.roomState}));
   }
 
   update(e, action) {
