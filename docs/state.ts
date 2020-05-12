@@ -1,5 +1,5 @@
 const serverstate = {
-  banana: {
+  mango: {
     roomName: 'mango',
     roomOwner: 'alex',
     status: 'WAITING_FOR_PLAYERS',
