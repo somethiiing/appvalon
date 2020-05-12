@@ -1,9 +1,13 @@
 import React from 'react';
-import Button from './Button';
+// import Button from './Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+
+const apiUrl = ""
 export default class JoinForm extends React.Component {
     /**
-     * 
-     * @param {Join Room Page // page: join_room
+     *
+     * {Join Room Page // page: join_room
   - Join as spectator
   - text box for room code
   - Action: ADD_SPECTATOR
@@ -15,45 +19,77 @@ export default class JoinForm extends React.Component {
       - check room code validity
         - check name for duplicate
           - player joins room
-          - Action: ADD_PLAYER} props 
+          - Action: ADD_PLAYER} props
      */
     constructor(props) {
-      super(props);
-      this.state = {
-        roomCode: '',
-        name: null,
-        validity:false,
-        dupe: true
-      };
+        super(props);
+        this.state = {
+            room: '',
+            name: null,
+            validity: false,
+            dupe: true
+        };
     }
+
     onChangeHandler = (e) => {
-      let field = e.target.name;
-      let val = e.target.value;
-      this.setState({[field]: val});
+        let field = e.target.name;
+        let val = e.target.value;
+        this.setState({[field]: val});
     }
+
     onSubmitHandler = (e) => {
+        const {name, room} = this.state;
+        debugger;
         e.preventDefault();
-        //TODO: add logic here 
+        //TODO: add server communication logic here
+        fetch(`${apiUrl}/joinRoom`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({name: name, room: room}),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
     }
+
     render() {
-      return (
-        <form>
-        <p>Enter your name:</p>
-        <input
-          type='text'
-          name='name'
-          label='Enter your name'
-          onChange={this.onChangeHandler}
-        />
-        <p>Enter the room code:</p>
-        <input
-          type='text'
-          name='roomCode'
-          onChange={this.onChangeHandler}
-        />
-        <Button>Join</Button>
-        </form>
-      );
+        return (
+            <form onSubmit={this.onSubmitHandler}>
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    id="name"
+                    label="Name"
+                    name="name"
+                    autoComplete="name"
+                    autoFocus
+                    onChange={this.onChangeHandler}
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    name="roomCode"
+                    label="Room Code"
+                    id="roomCode"
+                    autoComplete="Room Code"
+                    onChange={this.onChangeHandler}
+                />
+                {/*Not sure which style to do here but I'm gonna leave it as is*/}
+                <Button type={"submit"} className={"Button"}>
+                    Join Room
+                </Button>
+            </form>
+        );
     }
-  }
+}
+
+
