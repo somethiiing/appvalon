@@ -41,6 +41,8 @@ const LakeSettings = {
     NONE: "none"
 }
 
+Object.freeze(LakeSettings)
+
 const GameState = {
     // admin is configuring the room
     ROOM_SETUP: "roomSetup",
@@ -60,4 +62,4 @@ const GameState = {
     GAME_END: "gameEnd"
 }
 
-module.exports = { Roles, MissionStatus, TeamVote, MissionVote };
+module.exports = { Roles, MissionStatus, TeamVote, MissionVote, LakeSettings, GameState };

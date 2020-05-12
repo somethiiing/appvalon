@@ -12,20 +12,49 @@ const reallyUsefulFunction = () => true;
  * create a new game based provided settings
  * @param {FESettingsObj} settings provided by admin
  */
-const initializeGame = (settingsObj) => {
+const initializeGame = (settingsObj, playerNames, ownerName) => {
 
 }
 
-const createRoom = () => {
-
+/**
+ * 
+ * @param {FESettingsObj} settingsObj 
+ * @param {[string]} playerNames 
+ * @param {string} ownerName 
+ */
+const createRoom = (settingsObj, playerNames, ownerName) => {
+    const room = {};
+    room.name = "RANDOM_FRUITY_NAME";
+    room.owner = ownerName;
+    room.status = enums.GameState.WAITING_FOR_PLAYERS;
+    room.selectedRoles = pickRoles(settingsObj);
+    room.createdAt = Math.round((new Date()).getTime() / 1000);
+    room.playerCount = playerNames.length;
+    room.players = createPlayers(playerNames);
+    room.boardInfo = createBoardInfo(settingsObj);
+    room.kingOrder = shufflePlayers(room.players);
+    room.currentMission = 1;
+    room.voteTrack = 1;
+    room.proposedTeam = [];
+    room.teamVoteResults = null;
+    room.missionVote = [];
+    return room;
 }
 
-const createBoardInfo = () => {
-
+const createBoardInfo = (settingsObj) => {
+    //todo: create from static JSON file
 }
 
-const createPlayers = () => {
+const createPlayers = (playerNames) => {
+    return playerNames.map(createPlayer);
+}
 
+const createPlayer = (playerName) => {
+    const player = {};
+    player.name = playerName;
+    player.isKing = false;
+    player.isLake = false;
+    return player;
 }
 
 /**
@@ -58,8 +87,8 @@ const shufflePlayers = (players) => {
 
 /**
  * Assigns players roles from a set of roles selected by admin
- * @param {array} players 
- * @param {array} availableRoles 
+ * @param {[Players]} players 
+ * @param {[Roles]} availableRoles 
  */
 const assignRoles = (players, availableRoles) => {
     let playerDup = otherUtils.deepCopy(players);
@@ -72,6 +101,9 @@ const assignRoles = (players, availableRoles) => {
         let player = playerDup[index];
         player.role = allRoles[i]
     }
+
+    //todo: add logic for player information (ect merlin sees these people, evil sees Hannah, ect..)
+
     return playerDup;
 }
 
@@ -113,7 +145,7 @@ const setLake = (player) => {
 
 /**
  * Generates list of roles, with duplicates for generic good and generic bad
- * @param {array} availableRoles - all roles admin has chosen
+ * @param {[Roles]} availableRoles - all roles admin has chosen
  * @param {number} totalGenericEvil - number of generic evil in game
  * @param {number} totalPlayers - total number of players
  */
@@ -130,6 +162,27 @@ const generateAllRoles = (availableRoles, totalGenericEvil, totalPlayers) => {
         totalGenericEvil);
     for (let i = 0; i < genericGoodCount; i++) {
         roles.push(enums.Roles.GENERIC_GOOD);
+    }
+    return roles;
+}
+
+const pickRoles = (settingsObj) => {
+    const roles = {};
+    const selectedRoles = settingsObj.selectedRoles;
+    for (const roleName in settingsObj.selectedRoles) {
+        if (selectedRoles.hasOwnProperty(roleName)) {
+            const roleValue = selectedRoles[roleName];
+            if (roleName === enums.Roles.GENERIC_GOOD || roleName === enums.Roles.GENERIC_EVIL) {
+                otherUtils.times(roleValue, (roleName) => roles.push(roleName))
+            } else if (Object.keys(enums.Roles).includes(roleName) && roleValue) {
+                roles.push(roleName);
+            } else {
+                console.error(`could not find role : ${key} in Roles enum`)
+            }
+        }
+    }
+    if (roles.length != settingsObj.playerCount) {
+        throw "Incorrect role assignment: number of roles does not match number of players!";
     }
     return roles;
 }
