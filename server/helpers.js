@@ -71,10 +71,10 @@ const setKing = (roomObj, newKingName) => {
     let dup = otherUtils.deepCopy(roomObj)
     dup.players.find(player => player.isKing).isKing = false;
 
-    let newKing = otherUtils.deepCopy(dup.players.find(it => it.name === newKingName));
+    let newKing = dup.players.find(it => it.name === newKingName);
     newKing.isKing = true;
 
-    return roomObj;
+    return dup;
 }
 
 /**
@@ -88,7 +88,7 @@ const setLake = (roomObj, newLakeName) => {
     let newLake = dup.players.find(it => it.name === newLakeName);
     newLake.isLake = true;
 
-    return roomObj;
+    return dup;
 }
 
 /**

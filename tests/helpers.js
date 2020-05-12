@@ -61,9 +61,6 @@ describe.only('setKing', () => {
 
     it('should elect a new king', () => {
         const newKing = result.players.find((player) => player.isKing);
-        if (!newKing) {
-            console.log(result)
-        }
         assert.exists(newKing);
         assert.equal(newKing.name, newKingName);
     })
@@ -74,7 +71,6 @@ describe.only('setKing', () => {
     })
     it('should not mutate the original players list', () => {
         assert.notDeepEqual(initial_state.players, result);
-        console.log(result)
     })
 });
 
@@ -86,9 +82,6 @@ describe.only('setLake', () => {
 
     it('should elect a new lake', () => {
         const newLake = result.players.find((player) => player.isLake);
-        if (!newLake) {
-            console.log(result)
-        }
         assert.exists(newLake);
         assert.equal(newLake.name, newLakeName);
     })
@@ -99,8 +92,6 @@ describe.only('setLake', () => {
     })
     it('should not mutate the original players list', () => {
         assert.notDeepEqual(initial_state.players, result);
-        console.log(result)
-
     })
 });
 
