@@ -16,6 +16,7 @@
   font-weight: 500;
   font-size: .8rem;
   cursor: pointer;
+  margin: 10px 0;
 }
 
 .Text-P {
@@ -140,9 +141,17 @@
   top: 10px;
 }
 
+.Join-room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
 
  @media screen and (max-width: 600px) {
     .Button {
-      width: 100%;
+      width: 75%;
     }
   }

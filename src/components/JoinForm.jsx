@@ -1,7 +1,7 @@
 import React from 'react';
 // import Button from './Button';
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import Button from './Button';
 
 const apiUrl = ""
 export default class JoinForm extends React.Component {
@@ -61,7 +61,7 @@ export default class JoinForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmitHandler}>
+            <form className='Join-room' onSubmit={this.onSubmitHandler}>
                 <TextField
                     variant="outlined"
                     margin="normal"
@@ -84,7 +84,7 @@ export default class JoinForm extends React.Component {
                     onChange={this.onChangeHandler}
                 />
                 {/*Not sure which style to do here but I'm gonna leave it as is*/}
-                <Button type={"submit"} className={"Button"}>
+                <Button type="submit">
                     Join Room
                 </Button>
             </form>

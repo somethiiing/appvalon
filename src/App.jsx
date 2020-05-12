@@ -7,8 +7,8 @@ import './components/styles.css';
 
 import Header from './components/Header';
 import Mission from './components/Mission';
-import Mission from './components/Player';
-import Mission from './components/Card';
+import Player from './components/Player';
+import Card from './components/Card';
 import JoinForm from './components/JoinForm';
 
 function App() {
@@ -26,11 +26,11 @@ function App() {
                 {
                     // the below is for testing component purposes
                 }
-                <Mission fail count={2}/>
-                <Mission pass count={3}/>
-                <Mission active count={3}/>
-                <Mission count={3}/>
-                <Mission count={3}/>
+                <Mission fail size={2}/>
+                <Mission pass size={3}/>
+                <Mission active voteTrack={2} size={3}/>
+                <Mission size={3}/>
+                <Mission size={3}/>
                 <Card type='approve' />
                 <Card type='reject' />
                 <Card type='pass' />
