@@ -1,4 +1,6 @@
-class JoinForm extends React.Component {
+import React from 'react';
+import Button from './Button';
+export default class JoinForm extends React.Component {
     /**
      * 
      * @param {Join Room Page // page: join_room
@@ -29,9 +31,29 @@ class JoinForm extends React.Component {
       let val = e.target.value;
       this.setState({[field]: val});
     }
+    onSubmitHandler = (e) => {
+        e.preventDefault();
+        //TODO: add logic here 
+
+    }
     render() {
       return (
-     
+        <form>
+        <p>Enter your name:</p>
+        <input
+          type='text'
+          name='name'
+          label='Enter your name'
+          onChange={this.onChangeHandler}
+        />
+        <p>Enter the room code:</p>
+        <input
+          type='text'
+          name='roomCode'
+          onChange={this.onChangeHandler}
+        />
+        <Button>Join</Button>
+        </form>
       );
     }
   }

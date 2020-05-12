@@ -3,6 +3,7 @@ import './App.css';
 import './components/styles.css';
 import Header from './components/Header';
 import Mission from './components/Mission';
+import JoinForm from './components/JoinForm';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Mission active count={3} />
       <Mission count={3} />
       <Mission count={3} />
+      <JoinForm/>
     </div>
   );
 }
