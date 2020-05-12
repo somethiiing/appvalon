@@ -36,10 +36,10 @@ function App() {
                 <Card type='pass' />
                 <Card type='fail' />
 
-                <Player selected name='Bridget' />
+                <Player selected teamVote='reject' name='Bridget' />
                 <Player king name='Alexandra' />
                 <Player selected hammer name='Wilson' />
-                <Player king hammer name='Mehtab' />
+                <Player king teamVote='approve' hammer name='Mehtab' />
                 <JoinForm/>
             </ThemeProvider>
         </div>
