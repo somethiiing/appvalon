@@ -15,7 +15,7 @@ app
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, 'build')));
 
-const state = {mango:{}, banana: {}, strawberry: {}};
+const state = {};
 
 app.get('/api/', () => {
   res.sendStatus(200);
