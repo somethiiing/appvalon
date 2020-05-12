@@ -35,7 +35,7 @@ function generateRoleList(settings) {
   let rolesKeys = Object.keys(roles);
 
   rolesKeys.forEach( role => {
-    if(roles[role] === true && !(role === 'genericGood' || role === 'genericBad')) {
+    if(roles[role] === true && !(role === 'genericGood' || role === 'genericEvil')) {
       result.push(role);
     }
   });
@@ -100,11 +100,14 @@ function assignSeenData(playerData, assignedRolesObj) {
 /**
  * Creates an array of player objects with roles assigned
  * @param {[string]} playerList 
- * @param {FESettingsObj} settings 
- *
-function createRoleAssignment(playerList, settings) {
+ * @param {FESettingsObj} settings
+ * @param {boolean} shuffle
+ */
+function createRoleAssignment(playerList, settings, shuffle = true) {
   let roleList = generateRoleList(settings);
-  // let roleList = shuffle(generateRoleList(settings));
+  if (shuffle) {
+    roleList = shuffle(generateRoleList(settings));
+  }
   if(!roleNumberCheck(roleList, settings, rolesData)) return null;
 
   let { assignedPlayersObj, assignedRolesObj } = assignRoles(playerList, roleList, rolesData);
@@ -116,16 +119,8 @@ function createRoleAssignment(playerList, settings) {
     );
   });
 
-  // console.log('players', JSON.stringify(assignedPlayersObj, null, 2));
-  // console.log('roles', JSON.stringify(assignedRolesObj, null, 2));
   return assignedPlayersObj;
 };
-
-
-
-
-const testRoleAssignment = createRoleAssignment(fakePlayerList, fakeSettings);
-console.log(JSON.stringify(testRoleAssignment, null, 2));
 
 module.exports = {
   createRoleAssignment
