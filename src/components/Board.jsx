@@ -54,6 +54,7 @@ class Board extends React.Component {
         <KingOrder />
         <Missions />
         <ActionArea/>
+        {/*this TeamSubmission here is just for testing*/}
         <TeamSubmission boardState={boardState} name={this.state.name}/>
       </div>
     );

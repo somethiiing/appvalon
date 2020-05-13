@@ -1,155 +1,219 @@
 import React from 'react';
 import Player from "./Player";
-import {Heading, Sub} from "./Text";
+import {Heading} from "./Text";
 import Button from "./Button";
-import {dispatchSubmitForVote, dispatchSubmitTeamVote, dispatchUpdateTeamMembers} from "../ApiUtils";
-
-const api = 'http://localhost:5000'
-
-let socket;
+import {dispatchSubmitForVote, dispatchUpdateTeamMembers} from "../ApiUtils";
 
 const in_progress = {
-    roomName: 'mango',
-    roomOwner: 'alex',
-    status: 'WAITING_FOR_PLAYERS',
-    createdAt: 0,
-    playerCount: 5,
-    lakeSettings: 'NONE',
-    selectedRoles: ['merlin', 'percival', 'genericGood', 'mordred', 'morgana'],
-    players: [{
-        name: 'alex',
-        isKing: true,
-        isLake: false
-    }, {
-        name: 'wilson',
-        isKing: false,
-        isLake: false
-    }, {
-        name: 'bridget',
-        isKing: false,
-        isLake: true
-    }],
-    boardInfo: {
-        playerCount: 5,
-        numGood: 3,
-        numEvil: 2,
-        doubleFailRequired: false,
-        missions: [{
-            count: 1,
-            size: 2,
-            status: 'NOT_GONE'
+    "roomName": "mango",
+    "roomOwner": "alex",
+    "status": "TEAM_PROPOSAL",
+    "createdAt": 1589336585126,
+    "playerCount": 5,
+    "lakeSetting": "NONE",
+    "selectedRoles": [],
+    "players": {
+        "alex": {
+            "role": "mordred",
+            "name": "alex",
+            "sees": {
+                "morgana": {
+                    "role": "morgana",
+                    "alignment": "evil",
+                    "knowsRole": false,
+                    "players": {
+                        "assigned": [
+                            "jason"
+                        ]
+                    }
+                }
+            },
+            "isKing": true
         },
+        "wilson": {
+            "role": "percival",
+            "name": "wilson",
+            "sees": {
+                "merlin": {
+                    "role": "merlin",
+                    "alignment": "unknown",
+                    "knowsRole": false,
+                    "players": {
+                        "assigned": [
+                            "bridget"
+                        ]
+                    }
+                },
+                "morgana": {
+                    "role": "morgana",
+                    "alignment": "unknown",
+                    "knowsRole": false,
+                    "players": {
+                        "assigned": [
+                            "jason"
+                        ]
+                    }
+                }
+            }
+        },
+        "bridget": {
+            "role": "merlin",
+            "name": "bridget",
+            "sees": {
+                "morgana": {
+                    "role": "morgana",
+                    "alignment": "evil",
+                    "knowsRole": false,
+                    "players": {
+                        "assigned": [
+                            "jason"
+                        ]
+                    }
+                }
+            }
+        },
+        "jason": {
+            "role": "morgana",
+            "name": "jason",
+            "sees": {
+                "mordred": {
+                    "role": "mordred",
+                    "alignment": "evil",
+                    "knowsRole": false,
+                    "players": {
+                        "assigned": [
+                            "alex"
+                        ]
+                    }
+                }
+            }
+        },
+        "ashwin": {
+            "role": "genericGood",
+            "name": "ashwin",
+            "sees": {}
+        }
+    },
+    "boardInfo": {
+        "playerCount": 5,
+        "numGood": 3,
+        "numEvil": 2,
+        "doubleFailRequired": false,
+        "missions": [
             {
-                count: 2,
-                size: 3,
-                status: 'NOT_GONE'
+                "count": 1,
+                "size": 2,
+                "status": "NOT_GONE",
+                "maxVoteTrack": 5
             },
             {
-                count: 3,
-                size: 3,
-                status: 'NOT_GONE'
+                "count": 2,
+                "size": 3,
+                "status": "NOT_GONE",
+                "maxVoteTrack": 5
             },
             {
-                count: 4,
-                size: 2,
-                status: 'NOT_GONE'
+                "count": 3,
+                "size": 2,
+                "status": "NOT_GONE",
+                "maxVoteTrack": 5
             },
             {
-                count: 5,
-                size: 3,
-                status: 'NOT_GONE'
+                "count": 4,
+                "size": 3,
+                "status": "NOT_GONE",
+                "maxVoteTrack": 5
+            },
+            {
+                "count": 5,
+                "size": 3,
+                "status": "NOT_GONE",
+                "maxVoteTrack": 5
             }
         ]
     },
-    kingOrder: ['alex', 'bridget', 'chris', 'david', 'elliot'],
-    currentMission: 1,
-    voteTrack: 1,
-    proposedTeam: [],
-    teamVoteResults: null,
-    missionVote: ['SUCCESS', 'FAIL', 'SUCCESS', 'SUCCESS']
+    "kingOrder": [
+        "bridget",
+        "wilson",
+        "alex",
+        "jason",
+        "ashwin"
+    ],
+    "currentMission": 1,
+    "voteTrack": 1,
+    "proposedTeam": [],
+    "teamVoteResult": null,
+    "missionVote": {
+        "success": 0,
+        "fail": 0,
+        "reverse": 0
+    }
 }
 
+//todo add validity for number of candidate
 export class TeamSubmission extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             teamProposalArray: [],
-            teamVote: 'REJECT',
-            missionVote: 'SUCCESS',
-            roomList: [],
             roomState: in_progress,
+            // move to using props later
+            // roomState: props.roomState
         }
         this.updateTeamProposal = this.updateTeamProposal.bind(this);
     }
 
-    //todo add validity for number of candidates
-    // add highlight on click action
-    // update and send action to server for vote
+    //todo add validity for number of candidate
 
-    getKing = () => {
-        const players = this.state.roomState.players;
-        for (let player in players) {
-            //possible iteration over unexpected members blah blah
-            if (player.isKing) {
-                return player.name;
-            }
-        }
-    }
-
-    getPlayer = () => {
-        const players = this.state.roomState.players;
-        const name = this.state.name;
-        for (let player in players) {
-            //possible iteration over unexpected members blah blah
-            if (player.name === name) {
-                return player;
-            }
-        }
-    }
+    // getKing = () => {
+    //     const players = this.state.roomState.players;
+    //     for (let player in players) {
+    //         //possible iteration over unexpected members blah blah
+    //         if (players[player].isKing) {
+    //             return players[player].name;
+    //         }
+    //     }
+    // }
 
     voteSubmit = () => {
-        //does this just need a player name?
-        const player = this.getPlayer();
-        const room = this.state.roomState;
-        dispatchSubmitForVote({room, player})
+        const playerName = this.props.name;
+        const roomName = this.state.roomState.roomName;
+        console.log(roomName, playerName)
+        dispatchSubmitForVote({room: roomName, player: playerName})
             .then(res => {
                 console.log(res)
             });
     }
 
     updateTeamProposal(candidate) {
-        const player = this.getPlayer();
-        const room = this.state.roomState;
+        const playerName = this.props.name;
+        const roomName = this.state.roomState.roomName;
         let teamProposal = this.state.teamProposalArray;
-        debugger;
         if (teamProposal.includes(candidate)) {
             teamProposal = teamProposal.filter(e => e !== candidate);
-            debugger;
         } else {
             teamProposal = teamProposal.concat(candidate);
-            debugger;
         }
-        // debugger;
-        dispatchUpdateTeamMembers({player, room, teamProposal})
+        dispatchUpdateTeamMembers({player: playerName, room: roomName, teamProposal: teamProposal})
             .then(res => {
                 console.log(res)
             });
+        //should setState be removed once this state is being passed in via props?
+        // updated state should trigger new render
         this.setState({
-            teamProposalArray: teamProposal
+            teamProposalArray: teamProposal,
+            initialPickDone: true
         })
     }
 
     render() {
-        const currentKing = this.getKing();
         const teamProposalArray = this.state.teamProposalArray;
-        console.log(currentKing);
         return (
             <div>
-                {JSON.stringify(this.props.boardState)}
                 <Heading>{this.props.name}, select candidates for your mission. </Heading>
-                {this.state.roomState.players.map(player => {
-                    return <Player name={player.name} selected={teamProposalArray.includes(player.name)}
-                                   onClick={() => this.updateTeamProposal(player.name)}/>
+                {this.state.roomState.kingOrder.map(name => {
+                    return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
+                                   onClick={() => this.updateTeamProposal(name)}/>
                 })}
                 <Button onClick={this.voteSubmit}>Submit For Vote</Button>
             </div>
