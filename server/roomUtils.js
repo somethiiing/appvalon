@@ -177,7 +177,7 @@ const createInitialRoomState = (room, host, settings, playerObjArr = undefined) 
 
 const joinRoom = (roomObj, playerName) => {
   let dup = deepCopy(roomObj);
-  dup.players.push(createPlayerObj(playerName));
+  dup.players[playerName] = (createPlayerObj(playerName));
   return dup;
 }
 
