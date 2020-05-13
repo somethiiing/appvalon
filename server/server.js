@@ -7,6 +7,7 @@ const PORT = process.env.PORT||5000
 const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
+const actionHandlers = require('./actionHandlers');
 const { getRandomFruit, createInitialRoomState, joinRoom } = require('./roomUtils');
 
 app
@@ -49,6 +50,10 @@ app.post('/api/joinRoom', (req, res) => {
     res.send({status: 'FULL'});
   }
 
+  if (players.length === playerCount) {
+    state[room] = actionHandlers.handleGameStart(state[room]);
+  }
+
   io.emit('UPDATE_STATE', {room, roomState: state[room]});
 });
 
@@ -58,22 +63,31 @@ app.post('/api/update', (req, res) => {
   console.log(type, room, player, data);
   switch(type) {
     case 'UPDATE_TEAM_MEMBERS':
+      // state[room] = actionHandlers.handleUpdateTeamMembers(state[room], teamProposalArray);
       break;
     case 'SUBMIT_FOR_VOTE':
+      state[room] = actionHandlers.handleSubmitForVote(state[room]);
       break;
     case 'SUBMIT_TEAM_VOTE':
+      state[room] = actionHandlers.handleSubmitTeamVote(state[room], player, teamVote);
       break;
     case 'REVEAL_TEAM_VOTE':
+      state[room] = actionHandlers.handleRevealTeamVote(state[room]);
       break;
     case 'HANDLE_TEAM_VOTE_RESULT':
+      state[room] = actionHandlers.handleHandleTeamVoteResult(state[room]);
       break;
     case 'SUBMIT_MISSION_VOTE':
+      state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
       break;
     case 'HANDLE_MISSION_VOTE_RESULT':
+      state[room] = actionHandlers.handleHandleMissionVoteResult(state[room]);
       break;
     case 'SUBMIT_ASSASSINATION':
+      state[room] = actionHandlers.handleSubmitAssassination(state[room], assassinationTarget);
       break;
     case 'RECONFIGURE_GAME':
+      state[room] = actionHandlers.handleReconfigureGame(state[room]);
       break;
     default:
       break;
