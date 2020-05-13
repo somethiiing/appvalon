@@ -30,7 +30,7 @@ export default class JoinForm extends React.Component {
     super(props);
 
     // props
-    // handleJoinRoom: function, params: {status: SUCCESS/FULL, name: string, room: string}
+    // handleSubmit: function, params: {status: SUCCESS/FULL, name: string, room: string}
 
     this.state = {
       room: '',
@@ -64,7 +64,7 @@ export default class JoinForm extends React.Component {
     axios.post(`${apiUrl}/api/joinRoom`, {name, room})
       .then( res => {
         const { status } = res.data;
-        this.props.handleJoinRoom({status, name, room})
+        this.props.handleSubmit({status, name, room})
       });
   }
 

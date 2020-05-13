@@ -3,6 +3,7 @@ import './App.css';
 import './components/styles.css';
 import Header from './components/Header';
 import Mission from './components/Mission';
+import CreateForm from './components/CreateForm';
 import JoinForm from './components/JoinForm';
 import Board from './components/Board';
 
@@ -25,6 +26,7 @@ class App extends React.Component {
 
     this.changePage = this.changePage.bind(this);
     this.handleJoinRoom = this.handleJoinRoom.bind(this);
+    this.handleCreateRoom = this.handleCreateRoom.bind(this);
   }
 
   changePage(page) {
@@ -41,10 +43,9 @@ class App extends React.Component {
     }
   }
 
-  renderCreateRoomPage() {
-    return (
-      <div>CREATE ROOM PAGE</div>
-    )
+  handleCreateRoom({name, room}) {
+    this.setState({name, room});
+    this.changePage('board');
   }
 
   render() {
@@ -74,8 +75,8 @@ class App extends React.Component {
           </div>}
           {this.state.currentPage === 'serverTest' && <Test />}
           {this.state.currentPage === 'componentTest' && testingComponents()}
-          {this.state.currentPage === 'joinRoomPage' && <JoinForm handleJoinRoom={this.handleJoinRoom} />}
-          {this.state.currentPage === 'createRoomPage' && this.renderCreateRoomPage()}
+          {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
+          {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
           {this.state.currentPage === 'board' && <Board name={name} room={room} />}
         </ThemeProvider>
       </div>
