@@ -27,7 +27,7 @@ function App() {
                     // the below is for testing component purposes
                 }
                 <Mission fail size={2}/>
-                <Mission pass size={3}/>
+                <Mission success size={3}/>
                 <Mission active voteTrack={2} size={3}/>
                 <Mission size={3}/>
                 <Mission size={3}/>

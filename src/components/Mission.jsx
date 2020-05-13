@@ -1,13 +1,13 @@
 import React from 'react';
 
 function Mission(props) {
-  const { pass, fail, active, size, voteTrack, doubleFail } = props;
+  const { success, fail, active, size, voteTrack, doubleFail } = props;
   return (
     <div className={`Mission-wrapper ${active ? 'active' : ''}`}>
       {doubleFail && 
         <span className="Mission-double-fail">2 Fails Required</span>
       }
-      <div className={`Mission ${pass ? 'pass' : ''} ${fail ? 'fail' : ''}`}>
+      <div className={`Mission ${success ? 'success' : ''} ${fail ? 'fail' : ''}`}>
         {size}
       </div>
       {active && 
