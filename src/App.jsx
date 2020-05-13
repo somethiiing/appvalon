@@ -33,7 +33,7 @@ function App() {
                 <Mission size={3}/>
                 <Card type='approve' />
                 <Card type='reject' />
-                <Card type='pass' />
+                <Card type='success' />
                 <Card type='fail' />
 
                 <Player selected teamVote='reject' name='Bridget' />

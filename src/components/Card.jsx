@@ -13,7 +13,7 @@ function Card(props) {
     case 'reject': 
       cardIcon = <IoIosCloseCircleOutline size={92} color='#d10146' />;
       break;
-    case 'pass': 
+    case 'success': 
       cardIcon = <GiJeweledChalice size={92} color='#ffbb01' />;
       break;
     case 'fail': 
