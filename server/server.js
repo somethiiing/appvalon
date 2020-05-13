@@ -53,17 +53,25 @@ app.post('/api/joinRoom', (req, res) => {
 
 app.post('/api/update', (req, res) => {
   const { type, room, player, data = {} } = req.body;
-  // const { player } = data;
+  const { teamProposalArray, teamVote, missionVote, assassinationTarget } = data;
   console.log(type, room, player, data);
   switch(type) {
     case 'UPDATE_TEAM_MEMBERS':
+      break;
     case 'SUBMIT_FOR_VOTE':
+      break;
     case 'SUBMIT_TEAM_VOTE':
+      break;
     case 'REVEAL_TEAM_VOTE':
+      break;
     case 'HANDLE_TEAM_VOTE_RESULT':
+      break;
     case 'SUBMIT_MISSION_VOTE':
+      break;
     case 'HANDLE_MISSION_VOTE_RESULT':
+      break;
     case 'SUBMIT_ASSASSINATION':
+      break;
     case 'RECONFIGURE_GAME':
       break;
     default:
