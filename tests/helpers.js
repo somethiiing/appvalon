@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const enums = require('../server/enums');
 
-const { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus, setKing, setLake, setTeamMembers, reinitializeBoard } = require('../server/helpers');
+const { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus, setKing, setLake, setTeamMembers, reinitializeBoard, resetRoom, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved } = require('../server/helpers');
 const { inProgress, fivePlayerGameSettings, resetBoard } = require('./sample_server_states');
 
 describe.only('#setMissionCount', () => {
@@ -125,5 +125,102 @@ describe.only('#reinitializeBoard', () => {
     it('should reset mission and vote track', () => {
         assert.equal(result.voteTrack, resetBoard.voteTrack)
         assert.equal(result.currentMission, resetBoard.currentMission)
+    })
+});
+
+
+describe.only('isFailedMission', () => {
+    const missionVotes1 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL];
+    const result1 = isFailedMission(missionVotes1, false);
+
+    it('one fail vote causes mission failure in single fail required', () => {
+        assert.equal(result1, true)
+    })
+
+    const missionVotes2 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL];
+    const result2 = isFailedMission(missionVotes2, true);
+
+    it('one fail vote doesnt causes mission failure in double fail required', () => {
+        assert.equal(result2, false)
+    })
+
+    const missionVotes3 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL, enums.MissionVote.REVERSE];
+    const result3 = isFailedMission(missionVotes3, false);
+
+    it('reverse causes failed mission to succeed', () => {
+        assert.equal(result3, false)
+    })
+
+    const missionVotes4 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL, enums.MissionVote.REVERSE, enums.MissionVote.REVERSE];
+    const result4 = isFailedMission(missionVotes4, false);
+
+    it('double reverse negates any reverse', () => {
+        assert.equal(result4, true)
+    })
+});
+
+const missionCreator = (missionStatuses) => {
+    const missions = [];
+    missionStatuses.forEach(missionStatus => {
+        missions.push({status: missionStatus});
+    })
+    return missions;
+}
+
+describe.only('getGameStateBasedOnMissionStatus', () => {
+    const missionStatus1 = missionCreator([enums.MissionStatus.FAIL, enums.MissionStatus.SUCCESS,
+        enums.MissionStatus.SUCCESS, enums.MissionStatus.SUCCESS,]);
+
+    const result1 = getGameStateBasedOnMissionStatus(missionStatus1);
+    it('3 successes moves the game to assassination', () => {
+        assert.equal(result1, enums.GameState.ASSASSINATION);
+    })
+
+    const missionStatus2 = missionCreator([enums.MissionStatus.FAIL, enums.MissionStatus.SUCCESS,
+        enums.MissionStatus.FAIL, enums.MissionStatus.FAIL,]);
+
+    const result2 = getGameStateBasedOnMissionStatus(missionStatus2);
+    it('3 failures moves the game to evil win', () => {
+        assert.equal(result2, enums.GameState.EVIL_WIN);
+    })
+
+    const missionStatus3 = missionCreator([enums.MissionStatus.FAIL, enums.MissionStatus.SUCCESS]);
+
+    const result3 = getGameStateBasedOnMissionStatus(missionStatus3);
+    it('game moves to team proposal if 3 failures or successes have not been reached', () => {
+        assert.equal(result3, enums.GameState.TEAM_PROPOSAL);
+    })
+});
+
+const playerVoteCreator = (playerVotes) => {
+    const players = [];
+    playerVotes.forEach(vote => {
+        players.push({teamVote: vote});
+    })
+    return players;
+}
+describe.only('isTeamApproved', () => {
+    const votes1 = playerVoteCreator([enums.TeamVote.APPROVE, enums.TeamVote.APPROVE,
+        enums.TeamVote.APPROVE, enums.TeamVote.REJECT, enums.TeamVote.REJECT]);
+    const isApproved1 = isTeamApproved(votes1);
+
+    it('majority approval votes means team is approved', () => {
+        assert.equal(isApproved1, true);
+    })
+
+    const votes2 = playerVoteCreator([enums.TeamVote.APPROVE, enums.TeamVote.APPROVE,
+        enums.TeamVote.REJECT, enums.TeamVote.REJECT, enums.TeamVote.REJECT]);
+    const isApproved2 = isTeamApproved(votes2);
+
+    it('majority reject votes means team is not approved', () => {
+        assert.equal(isApproved2, false);
+    })
+
+    const votes3 = playerVoteCreator([enums.TeamVote.APPROVE, enums.TeamVote.APPROVE, enums.TeamVote.APPROVE,
+        enums.TeamVote.REJECT, enums.TeamVote.REJECT, enums.TeamVote.REJECT]);
+    const isApproved3 = isTeamApproved(votes3);
+
+    it('equal votes means team is not approved', () => {
+        assert.equal(isApproved3, false);
     })
 });

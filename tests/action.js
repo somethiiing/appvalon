@@ -1,8 +1,9 @@
 const assert = require('chai').assert;
 const enums = require('../server/enums');
+const otherUtils = require('../server/otherUtils');
 
-const { handleGameStart, handleSetTeamMembers, handleSubmitForVote } = require('../server/action');
-const { newGame, inProgress, fivePlayerGameSettings, resetBoard } = require('./sample_server_states');
+const { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleSubmitAssassination } = require('../server/action');
+const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
 
 describe.only('#handleGameStart', () => {
   const playerNames = ['alex', 'wilson', 'bridget', 'jason', 'ashwin'];
@@ -46,3 +47,36 @@ describe.only('#handleSubmitForVote', () =>{
 })
 
 
+describe.only('assassinate', () => {
+    const initial_state = inProgress;
+    initial_state.players[0].role = enums.Roles.MERLIN;
+    initial_state.players[1].role = enums.Roles.GENERIC_GOOD;
+    let result1 = handleSubmitAssassination(initial_state, initial_state.players[1].name);
+    it('wrong assassination should mean good wins', () => {
+        assert.equal(result1.status, enums.GameState.GOOD_WIN);
+    });
+    let result2 = handleSubmitAssassination(initial_state, initial_state.players[0].name)
+    it('assassinating merlin should mean evil wins', () => {
+        assert.equal(result2.status, enums.GameState.EVIL_WIN);
+    });
+});
+
+describe.only('missionVote', () => {
+   const initial_state = missionVote;
+   initial_state.status = enums.GameState.MISSION_VOTE;
+   // first vote increments vote track and the game state is s
+   let result1 = handleSubmitMissionVote(initial_state, "test", enums.MissionVote.SUCCESS);
+   it('first vote should increment vote track and continue votes', () => {
+       assert.equal(result1.voteTrack , 2);
+       assert.equal(result1.status, enums.GameState.MISSION_VOTE);
+   })
+    let result2 = otherUtils.deepCopy(result1);
+   // complete the rest of the votes
+   for (let i = 0; i <= result2.boardInfo.missions[result2.currentMission].maxVoteTrack; i++) {
+       result2 = handleSubmitMissionVote(result2, "test", enums.MissionVote.SUCCESS);
+    }
+   // should move to HANDLE_MISSION_VOTE_RESULTS
+    it('when voting is done, it should move to handling the vote results', () => {
+        assert.equal(result2.status, enums.GameState.HANDLE_MISSION_VOTE_RESULT);
+    });
+});
