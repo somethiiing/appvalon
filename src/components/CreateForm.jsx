@@ -39,7 +39,7 @@ export default class CreateForm extends React.Component {
   }
 
   handleOnSubmit() {
-    createRoom()
+    createRoom({settings: constructSettingsObj(), host: this.state.name})
       .then( res => {
         const { room, host } = res.data;
         this.props.handleSubmit({name: host, room})
