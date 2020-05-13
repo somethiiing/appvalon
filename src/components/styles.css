@@ -142,6 +142,12 @@
   border: 3px solid transparent;
 }
 
+.avatar {
+  max-width: 100%;
+  width: 2.8rem;
+  margin-bottom: 0.2rem;
+}
+
 .Player.selected,
 .Player:focus {
   outline: 0;

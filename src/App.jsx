@@ -102,14 +102,18 @@ const testingComponents = () => (
       <Mission size={3}/>
     </div>
     <JoinForm/>
-    <Card type='success' />
-    <Card type='fail' />
-    <Card type='approve' />
-    <Card type='reject' />
-    <Player name='Bridget' king selected />
-    <Player name='Wilson' teamVote='reject' hammer />
-    <Player name='Alexandra' selected />
-    <Player name='Mehtab' king hammer teamVote='approve' />
+    <div className='Card-list'>
+      <Card type='success' />
+      <Card type='fail' />
+      <Card type='approve' />
+      <Card type='reject' />
+    </div>
+    <div className='Player-list'>
+      <Player name='Bridget' king selected />
+      <Player name='Wilson' teamVote='reject' hammer />
+      <Player name='Alexandra' selected />
+      <Player name='Mehtab' king hammer teamVote='approve' />
+    </div>
   </div>
 )
 
