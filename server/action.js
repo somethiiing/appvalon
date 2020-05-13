@@ -67,7 +67,8 @@ const handleHandleTeamVoteResult = (room) => {
     } else {
         // Team not approved
         // Game ends if team approval has reached max failures
-        if (newRoom.voteTrack === 5) {
+        const maxMissionProposals = roomObj.missions[newRoom.voteTrack];
+        if (newRoom.voteTrack === maxMissionProposals) {
             return helpers.setStatus(newRoom, enums.GameState.GAME_END)
         }
         // Otherwise we move things along to the next team proposal
