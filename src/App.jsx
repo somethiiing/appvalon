@@ -52,6 +52,11 @@ class App extends React.Component {
     this.changePage('board');
   }
 
+  exitGame() {
+    window.localStorage.clear();
+    this.changePage('landing');
+  }
+
   render() {
     const theme = createMuiTheme({
       palette: {
@@ -61,6 +66,7 @@ class App extends React.Component {
 
     const { name, room } = this.state;
 
+    window.exitGame = () => this.exitGame();
     window.changePage = (page) => this.changePage(page);
     window.state = () => console.log(this.state);
 

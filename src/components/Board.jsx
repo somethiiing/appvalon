@@ -27,12 +27,15 @@ class Board extends React.Component {
     socket = io(`${api}/`);
     socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
 
-    console.log('room', room)
     fetchRoomData({room})
       .then(res => {
         console.log('data fetch', res.data)
         this.setState({roomState: res.data.roomState});
       });
+  }
+
+  componentWillUnmount() {
+    socket.disconnect();
   }
 
   handleUpdateState(res) {
