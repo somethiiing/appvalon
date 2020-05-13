@@ -15,7 +15,7 @@ app
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, 'build')));
 
-const state = {};
+const state = { mango: {}, lychee: {} };
 
 app.get('/api/', () => {
   res.sendStatus(200);
@@ -32,12 +32,11 @@ app.get('/api/getRoomList', (req, res) => {
   res.send({roomList: Object.keys(state)});
 });
 
-// app.post('/api/joinRoom', (req, res) => {
-//   const { name, room } = req.body
+app.post('/api/joinRoom', (req, res) => {
+  const { name, room } = req.body
 
-//   io.emit('UPDATE_STATE', state);
-//   res.sendStatus(200);
-// });
+  res.send({status: 'SUCCESS', name, room});
+});
 
 app.post('/api/update', (req, res) => {
   const { type, room, player, data = {} } = req.body;
