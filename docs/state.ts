@@ -1,5 +1,5 @@
 const serverstate = {
-  banana: {
+  mango: {
     roomName: 'mango',
     roomOwner: 'alex',
     status: 'WAITING_FOR_PLAYERS',
@@ -10,7 +10,11 @@ const serverstate = {
     players: [
       {
         name: 'alex',
-
+        teamVote: 'APPROVE',
+        role: 'Role',
+        information: {}, // stuff they know
+        isKing: false,
+        isHammer: false
       }
     ],
     boardInfo: {

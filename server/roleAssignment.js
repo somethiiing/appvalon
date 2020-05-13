@@ -97,6 +97,12 @@ function assignSeenData(playerData, assignedRolesObj) {
   return { sees };
 };
 
+/**
+ * Creates an array of player objects with roles assigned
+ * @param {[string]} playerList 
+ * @param {FESettingsObj} settings
+ * @param {boolean} shuffle
+ */
 function createRoleAssignment(playerList, settings, shuffle = true) {
   let roleList = generateRoleList(settings);
   if (shuffle) {
