@@ -8,7 +8,7 @@ const Roles = {
     MORGANA: "morgana",
     ASSASSIN: "assassin",
     GENERIC_EVIL: "genericEvil",
-    NONE: "NONE"
+    NONE: ""
 };
 
 Object.freeze(Roles)

@@ -7,7 +7,7 @@ const PORT = 5000;
 const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
-const { getRandomFruit, createInitialRoomState } = require('./roomUtils');
+const { getRandomFruit, createInitialRoomState, joinRoom } = require('./roomUtils');
 
 app
   .use(cors())
@@ -15,7 +15,7 @@ app
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, 'build')));
 
-const state = {};
+const state = {  };
 
 app.get('/api/', () => {
   res.sendStatus(200);
@@ -25,30 +25,62 @@ app.post('/api/createRoom', (req, res) => {
   const { settings, host } = req.body.data;
   const room = getRandomFruit();
   state[room] = createInitialRoomState(room, host, settings);
-  res.send({room, host});
+  res.send({room, host, roomState: state[room]});
+  io.emit('UPDATE_ROOMLIST', {roomList: Object.keys(state)});
+});
+
+app.get('/api/getRoomList', (req, res) => {
+  res.send({roomList: Object.keys(state)});
+});
+
+app.get('/api/getRoomData', (req, res) => {
+  const { room } = req.query;
+  res.send({roomState: state[room]});
 })
 
-// app.get('/api/getState', (req, res) => {
-//   res.send({state});
-// });
+app.post('/api/joinRoom', (req, res) => {
+  const { name, room } = req.body
+  const { players, playerCount } = state[room];
 
-// app.post('/api/joinRoom', (req, res) => {
-//   const { name, room } = req.body
+  if (players.length < playerCount) {
+    state[room] = joinRoom(state[room], name)
+    res.send({status: 'SUCCESS', name, room});
+  } else {
+    res.send({status: 'FULL'});
+  }
 
-//   io.emit('UPDATE_STATE', state);
-//   res.sendStatus(200);
-// });
+  io.emit('UPDATE_STATE', {room, roomState: state[room]});
+});
 
-// app.post('/api/update', (req, res) => {
-//   const { type, data = {} } = req.body;
-//   const { player } = data;
-//   switch(type) {
-//     default:
-//       break;
-//   }
-//   io.emit('UPDATE_STATE', state);
-//   res.sendStatus(200);
-// });
+app.post('/api/update', (req, res) => {
+  const { type, room, player, data = {} } = req.body;
+  const { teamProposalArray, teamVote, missionVote, assassinationTarget } = data;
+  console.log(type, room, player, data);
+  switch(type) {
+    case 'UPDATE_TEAM_MEMBERS':
+      break;
+    case 'SUBMIT_FOR_VOTE':
+      break;
+    case 'SUBMIT_TEAM_VOTE':
+      break;
+    case 'REVEAL_TEAM_VOTE':
+      break;
+    case 'HANDLE_TEAM_VOTE_RESULT':
+      break;
+    case 'SUBMIT_MISSION_VOTE':
+      break;
+    case 'HANDLE_MISSION_VOTE_RESULT':
+      break;
+    case 'SUBMIT_ASSASSINATION':
+      break;
+    case 'RECONFIGURE_GAME':
+      break;
+    default:
+      break;
+  }
+  io.emit('UPDATE_STATE', {room, roomState: state[room]});
+  res.sendStatus(200);
+});
 
 io.on('connection', socket => {
   console.log('user connected');

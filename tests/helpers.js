@@ -105,25 +105,25 @@ describe.only('#setLake', () => {
     })
 });
 
-// describe.only('#reinitializeBoard', () => {
-//     const initial_state = inProgress;
-//     const result = reinitializeBoard(initial_state, fivePlayerGameSettings);
+describe.only('#reinitializeBoard', () => {
+    const initial_state = inProgress;
+    const result = reinitializeBoard(initial_state, fivePlayerGameSettings);
 
-//     it('should have the same name and owner', () => {
-//         assert.equal(result.roomName, resetBoard.roomName)
-//         assert.equal(result.roomOwner, resetBoard.roomOwner)
-//     })
-//     it('should have an accurate player count', () => {
-//         assert.equal(result.playerCount, resetBoard.playerCount)
-//     })
-//     it('should have accurate lake settings', () => {
-//         assert.equal(result.lakeSetting, resetBoard.lakeSetting)
-//     })
-//     it('should have the same players without roles or information', () => {
-//         assert.deepEqual(result.players, resetBoard.players )
-//     })
-//     it('should reset mission and vote track', () => {
-//         assert.equal(result.voteTrack, resetBoard.voteTrack)
-//         assert.equal(result.currentMission, resetBoard.currentMission)
-//     })
-// });
+    it('should have the same name and owner', () => {
+        assert.equal(result.roomName, resetBoard.roomName)
+        assert.equal(result.roomOwner, resetBoard.roomOwner)
+    })
+    it('should have an accurate player count', () => {
+        assert.equal(result.playerCount, resetBoard.playerCount)
+    })
+    it('should have accurate lake settings', () => {
+        assert.equal(result.lakeSetting, resetBoard.lakeSetting)
+    })
+    it('should have the same players without roles or information', () => {
+        assert.deepEqual(result.players,  resetBoard.players)
+    })
+    it('should reset mission and vote track', () => {
+        assert.equal(result.voteTrack, resetBoard.voteTrack)
+        assert.equal(result.currentMission, resetBoard.currentMission)
+    })
+});

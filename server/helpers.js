@@ -2,12 +2,6 @@ const otherUtils = require('./otherUtils.js');
 const roomUtils = require('./roomUtils.js');
 const roleUtils = require('./roleAssignment.js');
 const enums = require('./enums');
-// changeStatus(obj, newStatus)
-// submitTeamVote(obj, player, vote)
-
-// const submitTeamVote = (state: Room, player: string, vote: string) : Room
-
-const reallyUsefulFunction = () => true;
 
 /**
  * Sets the number of missions that have been approved
@@ -113,8 +107,8 @@ const setTeamMembers = (roomObj, teamMembers) => {
  * Sets room state to initial settings, retaining players (but clearing roles)
  */
 const reinitializeBoard= (roomObj, settings) => {
-    const newRoom = roomUtils.createInitialRoomState(roomObj.roomName, roomObj.roomOwner, settings, roomObj.players);
-    unassignRoles(newRoom);
+    let newRoom = roomUtils.createInitialRoomState(roomObj.roomName, roomObj.roomOwner, settings, roomObj.players);
+    newRoom = unassignRoles(newRoom);
     return newRoom;
 }
 
@@ -130,6 +124,7 @@ const unassignRoles = (roomObj) => {
         player.information = {};
         player.isHammer = false;
         player.isKing = false;
+        player.isLake = false;
     }
 
     return dup;

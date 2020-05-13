@@ -7,8 +7,7 @@ function Header() {
   return (
     <header className="Header">
       <Heading>Appvalon</Heading>
-      <Button>Tis' A Button</Button>
-      <MdInfoOutline />
+      <MdInfoOutline size={32} />
     </header>
   );
 }

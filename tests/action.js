@@ -34,7 +34,6 @@ describe.only('#handleUpdateTeamMembers', () => {
   const result = handleSetTeamMembers(inProgress,  playerNames);
 
   it('should set proposed players', () => {
-    console.log(result.proposedTeam)
     assert.deepEqual(result.proposedTeam, playerNames)
   })
 })

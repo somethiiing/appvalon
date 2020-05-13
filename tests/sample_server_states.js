@@ -143,32 +143,51 @@ const resetBoard = {
     lakeSetting: 'NONE',
     selectedRoles: [],
     players:
-        [{
+        [  {
             name: 'alex',
-            isKing: true,
+            isKing: false,
             isLake: false,
-            role: 'mordred'
-        }, {
-                name: 'wilson',
-                isKing: false,
-                isLake: false,
-                role: 'merlin'
-            }, {
-                name: 'bridget',
-                isKing: false,
-                isLake: false,
-                role: 'percival'
-            }, {
-                name: 'jason',
-                isKing: false,
-                isLake: false,
-                role: 'morgana'
-            }, {
-                name: 'ashwin',
-                isKing: false,
-                isLake: false,
-                role: 'genericGood'
-            } ],
+            role: '',
+            teamVote: 'notVoted',
+            information: {},
+            isHammer: false
+          },
+          {
+            name: 'wilson',
+            isKing: false,
+            isLake: false,
+            role: '',
+            teamVote: 'notVoted',
+            information: {},
+            isHammer: false
+          },
+          {
+            name: 'bridget',
+            isKing: false,
+            isLake: false,
+            role: '',
+            teamVote: 'notVoted',
+            information: {},
+            isHammer: false
+          },
+          {
+            name: 'jason',
+            isKing: false,
+            isLake: false,
+            role: '',
+            teamVote: 'notVoted',
+            information: {},
+            isHammer: false
+          },
+          {
+            name: 'ashwin',
+            isKing: false,
+            isLake: false,
+            role: '',
+            teamVote: 'notVoted',
+            information: {},
+            isHammer: false
+          }],
     boardInfo:
     {
         playerCount: 5,
