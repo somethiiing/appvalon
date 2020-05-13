@@ -72,7 +72,7 @@ export default class JoinForm extends React.Component {
       <div>
         <Button onClick={this.fetchRoomList}>Refresh Room List</Button>
         <div>
-          <form onSubmit={this.onSubmitHandler}>
+          <form className='Join-room' onSubmit={this.onSubmitHandler}>
             <TextField
               variant='outlined'
               margin='normal'

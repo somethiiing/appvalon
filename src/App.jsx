@@ -1,6 +1,4 @@
 import React from 'react';
-import {createMuiTheme} from "@material-ui/core";
-import {ThemeProvider} from "@material-ui/styles";
 
 import './App.css';
 import './components/styles.css';
@@ -96,12 +94,20 @@ const testingComponents = () => (
     {
     // the below is for testing component purposes
     }
-    <Mission fail count={2}/>
-    <Mission pass count={3}/>
-    <Mission active count={3}/>
-    <Mission count={3}/>
-    <Mission count={3}/>
+    <Mission fail size={2}/>
+    <Mission success size={3}/>
+    <Mission active voteTrack={4} size={2}/>
+    <Mission size={3}/>
+    <Mission size={3}/>
     <JoinForm/>
+    <Card type='success' />
+    <Card type='fail' />
+    <Card type='approve' />
+    <Card type='reject' />
+    <Player name='Bridget' king selected />
+    <Player name='Wilson' teamVote='reject' hammer />
+    <Player name='Alexandra' selected />
+    <Player name='Mehtab' king hammer teamVote='approve' />
   </div>
 )
 
