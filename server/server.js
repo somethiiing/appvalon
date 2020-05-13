@@ -26,6 +26,7 @@ app.post('/api/createRoom', (req, res) => {
   const room = getRandomFruit();
   state[room] = createInitialRoomState(room, host, settings);
   res.send({room, host, roomState: state[room]});
+  io.emit('UPDATE_ROOMLIST', {roomList: Object.keys(state)});
 });
 
 app.get('/api/getRoomList', (req, res) => {

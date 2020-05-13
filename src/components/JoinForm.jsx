@@ -1,13 +1,18 @@
 import React from 'react';
-// import Button from './Button';
-import TextField from "@material-ui/core/TextField";
-import Button from './Button';
+import io from 'socket.io-client';
 
+import TextField from "@material-ui/core/TextField";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import Button from './Button';
+
 import { fetchRoomList, joinRoom } from '../ApiUtils';
 import { setRelogToken } from '../utils';
+
+let socket;
+
+let api = 'http://localhost:5000';
 
 export default class JoinForm extends React.Component {
   constructor(props) {
@@ -26,7 +31,16 @@ export default class JoinForm extends React.Component {
   }
 
   componentDidMount() {
+    socket = io(`${api}/`);
+    socket.on('UPDATE_ROOMLIST', res => this.setState({
+      roomList: res.roomList, room: res.roomList[res.roomList.length - 1]
+    }));
+
     this.fetchRoomList();
+  }
+
+  componentWillUnmount() {
+    socket.disconnect();
   }
 
   fetchRoomList() {
@@ -62,7 +76,6 @@ export default class JoinForm extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.fetchRoomList}>Refresh Room List</Button>
         <div>
           <form className='Join-room' onSubmit={this.onSubmitHandler}>
             <TextField
