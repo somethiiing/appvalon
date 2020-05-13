@@ -52,6 +52,11 @@ class App extends React.Component {
     this.changePage('board');
   }
 
+  exitGame() {
+    window.localStorage.clear();
+    this.changePage('landing');
+  }
+
   render() {
     const theme = createMuiTheme({
       palette: {
@@ -61,6 +66,7 @@ class App extends React.Component {
 
     const { name, room } = this.state;
 
+    window.exitGame = () => this.exitGame();
     window.changePage = (page) => this.changePage(page);
     window.state = () => console.log(this.state);
 
@@ -94,20 +100,26 @@ const testingComponents = () => (
     {
     // the below is for testing component purposes
     }
-    <Mission fail size={2}/>
-    <Mission success size={3}/>
-    <Mission active voteTrack={4} size={2}/>
-    <Mission size={3}/>
-    <Mission size={3}/>
+    <div className='Mission-list'>
+      <Mission fail size={2}/>
+      <Mission success size={3}/>
+      <Mission active voteTrack={4} size={2}/>
+      <Mission size={3}/>
+      <Mission size={3}/>
+    </div>
     <JoinForm/>
-    <Card type='success' />
-    <Card type='fail' />
-    <Card type='approve' />
-    <Card type='reject' />
-    <Player name='Bridget' king selected />
-    <Player name='Wilson' teamVote='reject' hammer />
-    <Player name='Alexandra' selected />
-    <Player name='Mehtab' king hammer teamVote='approve' />
+    <div className='Card-list'>
+      <Card type='success' />
+      <Card type='fail' />
+      <Card type='approve' />
+      <Card type='reject' />
+    </div>
+    <div className='Player-list'>
+      <Player name='Bridget' king selected />
+      <Player name='Wilson' teamVote='reject' hammer />
+      <Player name='Alexandra' selected />
+      <Player name='Mehtab' king hammer teamVote='approve' />
+    </div>
   </div>
 )
 

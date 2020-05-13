@@ -4,12 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { Test } from './ServerTest';
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    {/* <Test /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

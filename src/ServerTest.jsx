@@ -46,6 +46,7 @@ export class Test extends React.Component {
     this.update = this.update.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.getRoomList = this.getRoomList.bind(this);
+    this.getRoomData = this.getRoomData.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +74,11 @@ export class Test extends React.Component {
     .then(res => {
       this.setState({roomList: res.data.roomList});
     });
+  }
+
+  getRoomData() {
+    axios.get(`${api}/api/getRoomData?room=${this.state.room}`)
+      .then( res => this.setState({roomState: res.data.roomState}));
   }
 
   createRoom() {
@@ -132,6 +138,10 @@ export class Test extends React.Component {
             <div style={{display: 'flex', flexDirection: 'column'}} >
               <h4>GET ROOM LIST</h4>
               <button onClick={this.getRoomList}>getRoomList</button>
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column'}} >
+              <h4>GET ROOM DATA</h4>
+              <button onClick={this.getRoomData}>getRoomData</button>
             </div>
             <div style={{display: 'flex', flexDirection: 'column'}} >
               <h4>CREATE ROOM</h4>
