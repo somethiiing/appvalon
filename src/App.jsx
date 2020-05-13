@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import './components/styles.css';
 import Header from './components/Header';
-import Board from './components/Board';
 import Mission from './components/Mission';
 import JoinForm from './components/JoinForm';
 import {createMuiTheme} from "@material-ui/core";
@@ -23,7 +22,6 @@ function App() {
                 {
                     // the below is for testing component purposes
                 }
-                <Board />
                 <Mission fail count={2}/>
                 <Mission pass count={3}/>
                 <Mission active count={3}/>
