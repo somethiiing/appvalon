@@ -63,18 +63,20 @@ const handleHandleTeamVoteResult = (room) => {
     let newRoom = otherUtils.deepCopy(room);
 
     const isApproved = helpers.isTeamApproved(newRoom.players);
-
     // Team approved
     if (isApproved) {
+        newRoom = helpers.resetTeamVote(newRoom);
         return helpers.setStatus(newRoom, enums.GameState.MISSION_VOTE);
     } else {
         // Team not approved
         // Game ends if team approval has reached max failures
         if (newRoom.voteTrack === 5) {
+
             return helpers.setStatus(newRoom, enums.GameState.GAME_END)
         }
         // Otherwise we move things along to the next team proposal
         // TODO: Reset state
+        newRoom = helpers.resetTeamVote(newRoom);
         newRoom.voteTrack++;
         newRoom = helpers.shiftKing(newRoom)
         return helpers.setStatus(newRoom, enums.GameState.TEAM_PROPOSAL);
@@ -96,7 +98,7 @@ const handleSubmitMissionVote = (room, player, vote) => {
 const handleHandleMissionVoteResult = (room) => {
     let newRoom = otherUtils.deepCopy(room);
     const failed = helpers.isFailedMission(newRoom.missionVote, newRoom.boardInfo.doubleFailRequired)
-
+    newRoom = helpers.resetMissionVote(newRoom);
     if (failed) {
         newRoom.boardInfo.missions[newRoom.currentMission-1].status = enums.MissionStatus.FAIL;
     } else {

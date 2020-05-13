@@ -3,6 +3,14 @@ const roomUtils = require('./roomUtils.js');
 const roleUtils = require('./roleAssignment.js');
 const enums = require('./enums');
 
+const DEFAULT_MISSION_VOTE = {
+    "success": 0,
+    "fail": 0,
+    "reverse": 0
+};
+
+Object.freeze(DEFAULT_MISSION_VOTE);
+
 /**
  * Sets the number of missions that have been approved
  * @param {Mission} room
@@ -260,6 +268,22 @@ const setHammer = (roomObj) => {
     return dup;
 }
 
+const resetTeamVote = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    dup.teamVoteResult = null;
+
+    return dup;
+}
+
+const resetMissionVote = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    dup.missionVote = otherUtils.deepCopy(DEFAULT_MISSION_VOTE);
+
+    dup.team
+}
+
 const getPlayer = (roomObj, playerName) => {
     return Object.values(roomObj.players).find(player => player.name === playerName);
 }
@@ -269,4 +293,4 @@ const getCurrentMission = (roomObj) => {
 }
 
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
-    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, setKingOrder, setSelectedRoles, setHammer };
+    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote };
