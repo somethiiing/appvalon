@@ -14,9 +14,10 @@ app
   .use(cors())
   .use(bodyParser.urlencoded({ extended: false }))
   .use(bodyParser.json())
-  .use(express.static(path.join(__dirname, 'build')));
+  .use(express.static(path.join(__dirname, '../build')));
 
-const state = {  };
+
+const state = {};
 
 app.get('/api/', (req,res) => {
   res.sendStatus(200);
@@ -94,6 +95,11 @@ app.post('/api/update', (req, res) => {
   }
   io.emit('UPDATE_STATE', {room, roomState: state[room]});
   res.sendStatus(200);
+});
+
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'../build/index.html'));
 });
 
 io.on('connection', socket => {
