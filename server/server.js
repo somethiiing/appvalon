@@ -54,7 +54,6 @@ app.post('/api/joinRoom', (req, res) => {
 app.post('/api/update', (req, res) => {
   const { type, room, player, data = {} } = req.body;
   // const { player } = data;
-
   console.log(type, room, player, data);
   switch(type) {
     case 'UPDATE_TEAM_MEMBERS':
