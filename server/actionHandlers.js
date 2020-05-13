@@ -1,4 +1,4 @@
-const enums = require('../server/enums');
+const enums = require('./enums');
 const helpers = require('./helpers');
 const otherUtils = require( "./otherUtils");
 
@@ -21,7 +21,7 @@ const handleGameStart = (roomObj, settings, playerNames ) => {
 /**
  * Sets the proposed players
  */
-const handleSetTeamMembers = (roomObj, playerNames) => {
+const handleUpdateTeamMembers = (roomObj, playerNames) => {
     return helpers.setTeamMembers(roomObj, playerNames);
 }
 
@@ -131,5 +131,5 @@ const handleSubmitAssassination = (room, target) => {
     }
 }
 
-module.exports = { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleReconfigureGame, handleSubmitTeamVote, handleRevealTeamVote,
+module.exports = { handleGameStart, handleUpdateTeamMembers, handleSubmitForVote, handleReconfigureGame, handleSubmitTeamVote, handleRevealTeamVote,
     handleHandleTeamVoteResult, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination}
