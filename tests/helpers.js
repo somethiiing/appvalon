@@ -130,28 +130,28 @@ describe.only('#reinitializeBoard', () => {
 
 
 describe.only('isFailedMission', () => {
-    const missionVotes1 = { success: 1, failed: 1, reverse: 0 };
+    const missionVotes1 = { success: 1, fail: 1, reverse: 0 };
     const result1 = isFailedMission(missionVotes1, false);
 
     it('one fail vote causes mission failure in single fail required', () => {
         assert.equal(result1, true)
     })
 
-    const missionVotes2 = { success: 1, failed: 1, reverse: 0 };
+    const missionVotes2 = { success: 1, fail: 1, reverse: 0 };
     const result2 = isFailedMission(missionVotes2, true);
 
     it('one fail vote doesnt causes mission failure in double fail required', () => {
         assert.equal(result2, false)
     })
 
-    const missionVotes3 = { success: 1, failed: 1, reverse: 1 };
+    const missionVotes3 = { success: 1, fail: 1, reverse: 1 };
     const result3 = isFailedMission(missionVotes3, false);
 
     it('reverse causes failed mission to succeed', () => {
         assert.equal(result3, false)
     })
 
-    const missionVotes4 = { success: 1, failed: 1, reverse: 2 };
+    const missionVotes4 = { success: 1, fail: 1, reverse: 2 };
     const result4 = isFailedMission(missionVotes4, false);
 
     it('double reverse negates any reverse', () => {

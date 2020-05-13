@@ -278,7 +278,7 @@ const resetMissionVote = (roomObj) => {
 
     dup.missionVote = otherUtils.deepCopy(DEFAULT_MISSION_VOTE);
 
-    dup.team
+    return dup;
 }
 
 const getPlayer = (roomObj, playerName) => {
@@ -310,4 +310,4 @@ const getCurrentMission = (room) => {
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
-    setKingOrder, setSelectedRoles, setHammer };
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote };

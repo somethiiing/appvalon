@@ -99,7 +99,7 @@ describe.only('handleMissionVote', () => {
     assert.equal(room.currentMission, 2);
     // Votes reset
     assert.equal(room.missionVote.success, 0);
-    assert.equal(room.missionVote.failed, 0);
+    assert.equal(room.missionVote.fail, 0);
     assert.equal(room.missionVote.reverse, 0);
     assert.equal(room.voteTrack, 0);
 

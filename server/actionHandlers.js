@@ -149,7 +149,6 @@ const handleHandleMissionVoteResult = (room) => {
     if (newRoom.status === enums.GameState.TEAM_PROPOSAL) {
         newRoom.currentMission++;
         newRoom.voteTrack = 0;
-        newRoom.missionVote = { success: 0, failed: 0, reverse: 0};
         newRoom = helpers.shiftKing(newRoom);
         newRoom.status = enums.GameState.TEAM_PROPOSAL;
     }
