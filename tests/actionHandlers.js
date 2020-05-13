@@ -1,6 +1,7 @@
 const assert = require('chai').assert;
 const enums = require('../server/enums');
 const otherUtils = require('../server/otherUtils');
+const roomUtils = require('../server/roomUtils');
 
 const { handleGameStart, handleUpdateTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination, handleSubmitTeamVote, handleHandleTeamVoteResult } = require('../server/actionHandlers');
 const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
@@ -83,8 +84,12 @@ describe.only('missionVote', () => {
 });
 
 describe.only('integrationTest', () => {
-    // Start with team proposal done
-    let room = otherUtils.deepCopy(missionVote);
+    let room = roomUtils.createInitialRoomState("mango", "alex", fivePlayerGameSettings)
+    const playerNames = ['alex', 'wilson', 'bridget', 'ashwin', 'jason']
+
+    room = handleGameStart(room, fivePlayerGameSettings, playerNames);
+    room = handleUpdateTeamMembers(room, 'alex', 'bridget');
+    room = handleSubmitForVote(room);
     // Everyone submits their vote
     room = handleSubmitTeamVote(room, "alex", enums.TeamVote.APPROVE);
     room = handleSubmitTeamVote(room, "wilson", enums.TeamVote.APPROVE);

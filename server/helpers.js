@@ -37,9 +37,9 @@ const setVoteTrackCount = (roomObj, count) => {
  * Returns a new list of players that have been shuffled
  * @param {roomObj} array of players to be shuffled
  */
-const shufflePlayers = (roomObj) => {
+const shuffleKingOrder = (roomObj) => {
     let dup = otherUtils.deepCopy(roomObj)
-    otherUtils.shuffle(dup.players)
+    otherUtils.shuffle(dup.kingOrder)
     return dup;
 }
 
@@ -308,7 +308,7 @@ const getCurrentMission = (room) => {
     return room.boardInfo.missions[room.currentMission-1];
 }
 
-module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
+module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
     setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote };
