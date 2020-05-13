@@ -46,13 +46,21 @@ export class Test extends React.Component {
     this.update = this.update.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.getRoomList = this.getRoomList.bind(this);
+    this.getRoomData = this.getRoomData.bind(this);
   }
 
   componentDidMount() {
     socket = io(`${api}/`);
-    socket.on('UPDATE_STATE', data => this.setState({roomState: data}));
+    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
 
     this.getRoomList();
+  }
+
+  handleUpdateState(res) {
+    const { room, roomState } = res;
+    if(room === this.state.room) {
+      this.setState({roomState});
+    }
   }
 
   handleInputChange(e, type) {
@@ -68,13 +76,18 @@ export class Test extends React.Component {
     });
   }
 
+  getRoomData() {
+    axios.get(`${api}/api/getRoomData?room=${this.state.room}`)
+      .then( res => this.setState({roomState: res.data.roomState}));
+  }
+
   createRoom() {
     axios.post(`${api}/api/createRoom`, {data: {
       type: 'CREATE_ROOM',
       settings: FESettingsObj,
       host: this.state.host
     }})
-      .then(res => this.setState({roomState: res.data.roomState}));
+      .then(res => this.setState({roomState: res.data.roomState, room: res.data.roomState.roomName}));
   }
 
   update(e, action) {
@@ -116,7 +129,7 @@ export class Test extends React.Component {
   render() {
     return (
       <div style={{display: 'flex', height: '100%', backgroundColor: 'lightgray'}}>
-        <div style={{padding: '10px', height: '100%', width: '50%', color: 'black'}}>
+        <div style={{padding: '10px', height: '100%', width: '50%', color: 'black', borderRight: '1px solid black'}}>
           <div>
             <div>HOST: <input onChange={e => this.handleInputChange(e, 'host')} value={this.state.host} /></div>
             <div>ROOM: <input onChange={e => this.handleInputChange(e, 'room')} value={this.state.room}/></div>
@@ -125,6 +138,10 @@ export class Test extends React.Component {
             <div style={{display: 'flex', flexDirection: 'column'}} >
               <h4>GET ROOM LIST</h4>
               <button onClick={this.getRoomList}>getRoomList</button>
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column'}} >
+              <h4>GET ROOM DATA</h4>
+              <button onClick={this.getRoomData}>getRoomData</button>
             </div>
             <div style={{display: 'flex', flexDirection: 'column'}} >
               <h4>CREATE ROOM</h4>
@@ -183,8 +200,8 @@ export class Test extends React.Component {
             </form>
           </div>
         </div>
-        <div style={{padding: '10px', height: '100%', width: '50%', borderLeft: '1px solid black', overflowY: 'scroll'}}>
-          <pre style={{color: 'black'}}>{JSON.stringify(this.state, null, 2)}</pre>
+        <div style={{padding: '10px', height: '100%', width: '50%', overflowY: 'scroll'}}>
+          <pre style={{color: 'black', textAlign: 'left', paddingLeft: '30px'}}>{JSON.stringify(this.state, null, 2)}</pre>
         </div>
       </div>
     )

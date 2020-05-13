@@ -1,4 +1,5 @@
 const missionsData = require('./missionsData');
+const { deepCopy } = require('./otherUtils');
 
 const fruits = {
   'apple': false,
@@ -129,17 +130,23 @@ const getRandomFruit = () => {
   return randomFruit;
 }
 
-const createInitialRoomState = (room, host, settings) => {
-  const { playerCount, lakeSetting } = settings;
-  const { numGood, numEvil, doubleFailRequired, missionSizes, voteTrack } = missionsData[playerCount];
-
-  const playerObj = {
-    name: host,
+const createPlayerObj = (name) => {
+  return {
+    name: name,
     teamVote: null,
     role: '',
     information: {},
     isKing: false,
     isHammer: false,
+  }
+}
+
+const createInitialRoomState = (room, host, settings, playerObjArr = undefined) => {
+  const { playerCount, lakeSetting } = settings;
+  const { numGood, numEvil, doubleFailRequired, missionSizes, voteTrack } = missionsData[playerCount];
+
+  if (!playerObjArr){
+    playerObjArr = createPlayerObj(host);
   }
 
   const boardInfo = {
@@ -163,9 +170,15 @@ const createInitialRoomState = (room, host, settings) => {
     createdAt: Date.now(),
     playerCount,
     lakeSetting,
-    players: [playerObj],
+    players: playerObjArr,
     boardInfo
   });
 };
 
-module.exports = { getRandomFruit, createInitialRoomState }
+const joinRoom = (roomObj, playerName) => {
+  let dup = deepCopy(roomObj);
+  dup.players.push(createPlayerObj(playerName));
+  return dup;
+}
+
+module.exports = { getRandomFruit, createInitialRoomState, joinRoom };

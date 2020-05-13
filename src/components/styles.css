@@ -4,77 +4,201 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: calc(10px + 2vmin);
-  color: white;
   padding: 10px 30px;
 }
 
 .Button {
   min-width: 100px;
-  background-color: green;
+  background-color: #00d673;
   padding: 10px 15px;
   border: none;
   border-radius: 15px;
   font-weight: 500;
   font-size: .8rem;
   cursor: pointer;
+  margin: 10px 0;
 }
 
 .Text-P {
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 500;
   margin: 0;
   padding: 0;
 }
 
 .Text-Heading {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
   margin: 10px;
   padding: 0;
 }
 
 .Text-Sub {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 400;
   margin: 0;
   padding: 0;
 }
 
 .Mission-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 105px;
+  height: 110px;
+  border-radius: 5px;
   margin: 0 20px;
   padding: 10px;
   display: inline-block;
+  position: relative;
 }
 
 .Mission-wrapper.active {
-  background-color: #333;
+  background-color: #212121;
 }
 
 .Mission {
   border-radius: 50%;
-  background-color: #666;
+  background-color: #555555;
   font-size: 3rem;
-  width: 100px;
-  height: 100px;
+  width: 102px;
+  height: 102px;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.Mission.pass {
-  background-color: #0066cc;
+.Mission.success {
+  background-color: #015aff;
 }
 
 .Mission.fail {
-  background-color: red;
+  background-color: #d10146;
 }
 
- @media screen and (max-width: 600px) {
-    .Button {
-      width: 100%;
-    }
+.Mission-tracker {
+  border-radius: 50%;
+  background-color: #555555;
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Mission-tracker {
+  margin-left: -0.7rem;
+  margin-bottom: -0.7rem;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
+.Mission-tracker:after {
+  content: ' attempts';
+  display: inline-block;
+  position: absolute;
+  bottom: -0.2rem;
+}
+
+
+.Mission-double-fail {
+  font-size: .8rem;
+}
+
+.Mission-tracker.hammer-vote {
+  background-color: #d10146;
+}
+
+.Card {
+  width: 135px;
+  height: 225px;
+  background: rgb(85, 85, 85);
+  border-radius: 5px;
+  color: #212121;
+  margin: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Player {
+  width: 85px;
+  height: 142px;
+  background: #212121;
+  border: 1px solid rgb(151, 151, 151);
+  border-radius: 5px;
+  font-size: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin: 0 20px;
+  color: #f5f5f5;
+  cursor: pointer;
+  padding: 0;
+  border: 3px solid transparent;
+}
+
+.avatar {
+  max-width: 100%;
+  width: 2.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.Player.selected,
+.Player:focus {
+  outline: 0;
+  border: 3px solid #ffbb01;
+}
+
+.Player .hammer-icon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+
+.Player .king-icon {
+  position: absolute;
+  top: 10px;
+}
+
+.Player .vote-icon {
+  position: absolute;
+  bottom: 12px;
+}
+
+.Join-room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.Create-room {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+}
+
+.MuiInput-root.Form-select {
+  margin-top: 20px;
+}
+
+.MuiFormLabel-root.Form-label {
+  margin-top: 30px;
+}
+
+.Form-submit {
+  margin: 30px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .Button {
+    width: 75%;
   }
+}

@@ -1,95 +1,108 @@
 import React from 'react';
-// import Button from './Button';
+import io from 'socket.io-client';
+
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const apiUrl = ""
+import Button from './Button';
+
+import { fetchRoomList, joinRoom } from '../ApiUtils';
+import { setRelogToken } from '../utils';
+
+let socket;
+
+let api = 'http://localhost:5000';
+
 export default class JoinForm extends React.Component {
-    /**
-     *
-     * {Join Room Page // page: join_room
-  - Join as spectator
-  - text box for room code
-  - Action: ADD_SPECTATOR
-- Form:
-  - text box for room code
-  - text box for your name
-  - submit/join room button
-    - onsubmit
-      - check room code validity
-        - check name for duplicate
-          - player joins room
-          - Action: ADD_PLAYER} props
-     */
-    constructor(props) {
-        super(props);
-        this.state = {
-            room: '',
-            name: null,
-            validity: false,
-            dupe: true
-        };
-    }
+  constructor(props) {
+    super(props);
 
-    onChangeHandler = (e) => {
-        let field = e.target.name;
-        let val = e.target.value;
-        this.setState({[field]: val});
-    }
+    // props
+    // handleSubmit: function, params: {status: SUCCESS/FULL, name: string, room: string}
 
-    onSubmitHandler = (e) => {
-        const {name, room} = this.state;
-        debugger;
-        e.preventDefault();
-        //TODO: add server communication logic here
-        fetch(`${apiUrl}/joinRoom`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({name: name, room: room}),
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+    this.state = {
+      room: '',
+      name: '',
+      roomList: []
+    };
 
-    }
+    this.fetchRoomList = this.fetchRoomList.bind(this);
+  }
 
-    render() {
-        return (
-            <form onSubmit={this.onSubmitHandler}>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    id="name"
-                    label="Name"
-                    name="name"
-                    autoComplete="name"
-                    autoFocus
-                    onChange={this.onChangeHandler}
-                />
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    name="roomCode"
-                    label="Room Code"
-                    id="roomCode"
-                    autoComplete="Room Code"
-                    onChange={this.onChangeHandler}
-                />
-                {/*Not sure which style to do here but I'm gonna leave it as is*/}
-                <Button type={"submit"} className={"Button"}>
-                    Join Room
-                </Button>
-            </form>
-        );
-    }
+  componentDidMount() {
+    socket = io(`${api}/`);
+    socket.on('UPDATE_ROOMLIST', res => this.setState({
+      roomList: res.roomList, room: res.roomList[res.roomList.length - 1]
+    }));
+
+    this.fetchRoomList();
+  }
+
+  componentWillUnmount() {
+    socket.disconnect();
+  }
+
+  fetchRoomList() {
+    fetchRoomList()
+      .then( res => {
+        this.setState({roomList: res.data.roomList, room: res.data.roomList[0]});
+
+        const previousRoom = window.localStorage.getItem('room');
+        if(res.data.roomList.includes(previousRoom)) {
+          const previousName = window.localStorage.getItem('name');
+          this.props.handleSubmit({status: 'SUCCESS', room: previousRoom, name: previousName});
+        }
+      });
+  }
+
+  onChangeHandler = (e) => {
+    let field = e.target.name;
+    let val = e.target.value;
+    this.setState({[field]: val});
+  }
+
+  onSubmitHandler = (e) => {
+    e.preventDefault();
+    const {name, room} = this.state;
+    joinRoom({name, room})
+      .then( res => {
+        const { status } = res.data;
+        this.props.handleSubmit({status, name, room})
+        setRelogToken({player: name, room});
+      });
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <form className='Join-room' onSubmit={this.onSubmitHandler}>
+            <TextField
+              variant='outlined'
+              margin='normal'
+              required
+              id='name'
+              label='Name'
+              name='name'
+              autoComplete='name'
+              autoFocus
+              onChange={this.onChangeHandler}
+            />
+            <Select
+              name='room'
+              value={this.state.room}
+              onChange={this.onChangeHandler}
+            >
+              {this.state.roomList.map(room => {
+                return <MenuItem key={room} value={room}>{room}</MenuItem>
+              })}
+            </Select>
+            {/*Not sure which style to do here but I'm gonna leave it as is*/}
+            <Button type='submit' className='Button'>Join Room</Button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
-
-

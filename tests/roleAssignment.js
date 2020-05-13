@@ -7,7 +7,7 @@ describe('testGenerateRoleList', () => {
   it('should return true', () => {
     const generateRoleList = roleAssignment.__get__('generateRoleList');
     const roleSet1 = {
-      roles: {
+      selectedRoles: {
         merlin: true, //bool
         percival: true, //bool
         tristan: false, //bool
@@ -36,7 +36,7 @@ describe('testGenerateRoleList', () => {
       "genericGood",
       "genericGood"];
     const roleSet2 = {
-      roles: {
+      selectedRoles: {
         merlin: true, //bool
         percival: true, //bool
         tristan: true, //bool
@@ -147,10 +147,10 @@ describe('testCreateRoleAssignment', () => {
     const playerList = ['wilson', 'bridget', 'vinh', 'steven', 'kelvin', 'richard', 'alex', 'andrew', 'bob', 'alice'];
 
     const settings = {
-      numPeople: 10, // number
+      playerCount: 10, // number
       numGood: 6, // number
       numEvil: 4, // number
-      roles: {
+      selectedRoles: {
         merlin: true, //bool
         percival: true, //bool
         tristan: true, //bool
@@ -171,11 +171,10 @@ describe('testCreateRoleAssignment', () => {
       }
     };
 
-    const expectedAssignedRoles = {
-      "wilson": {
-        "roleTitle": "Merlin",
+    const expectedAssignedRoles = [
+      {
         "role": "merlin",
-        "player": "wilson",
+        "name": "wilson",
         "sees": {
           "morgana": {
             "role": "morgana",
@@ -209,10 +208,9 @@ describe('testCreateRoleAssignment', () => {
           }
         }
       },
-      "bridget": {
-        "roleTitle": "Percival",
+      {
         "role": "percival",
-        "player": "bridget",
+        "name": "bridget",
         "sees": {
           "merlin": {
             "role": "merlin",
@@ -236,16 +234,14 @@ describe('testCreateRoleAssignment', () => {
           }
         }
       },
-      "vinh": {
-        "roleTitle": "Tristan",
+      {
         "role": "tristan",
-        "player": "vinh",
+        "name": "vinh",
         "sees": {}
       },
-      "steven": {
-        "roleTitle": "Assassin",
+      {
         "role": "assassin",
-        "player": "steven",
+        "name": "steven",
         "sees": {
           "mordred": {
             "role": "mordred",
@@ -279,10 +275,9 @@ describe('testCreateRoleAssignment', () => {
           }
         }
       },
-      "kelvin": {
-        "roleTitle": "Mordred",
+      {
         "role": "mordred",
-        "player": "kelvin",
+        "name": "kelvin",
         "sees": {
           "morgana": {
             "role": "morgana",
@@ -316,10 +311,9 @@ describe('testCreateRoleAssignment', () => {
           }
         }
       },
-      "richard": {
-        "roleTitle": "Morgana",
+      {
         "role": "morgana",
-        "player": "richard",
+        "name": "richard",
         "sees": {
           "mordred": {
             "role": "mordred",
@@ -353,28 +347,24 @@ describe('testCreateRoleAssignment', () => {
           }
         }
       },
-      "alex": {
-        "roleTitle": "Generic Good",
+      {
         "role": "genericGood",
-        "player": "alex",
+        "name": "alex",
         "sees": {}
       },
-      "andrew": {
-        "roleTitle": "Generic Good",
+      {
         "role": "genericGood",
-        "player": "andrew",
+        "name": "andrew",
         "sees": {}
       },
-      "bob": {
-        "roleTitle": "Generic Good",
+      {
         "role": "genericGood",
-        "player": "bob",
+        "name": "bob",
         "sees": {}
       },
-      "alice": {
-        "roleTitle": "Generic Evil",
+      {
         "role": "genericEvil",
-        "player": "alice",
+        "name": "alice",
         "sees": {
           "mordred": {
             "role": "mordred",
@@ -408,7 +398,7 @@ describe('testCreateRoleAssignment', () => {
           }
         }
       }
-    }
+    ]
 
     const assignedRoles = createRoleAssignment(playerList, settings, false);
 
