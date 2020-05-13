@@ -3,6 +3,14 @@ const roomUtils = require('./roomUtils.js');
 const roleUtils = require('./roleAssignment.js');
 const enums = require('./enums');
 
+const DEFAULT_MISSION_VOTE = {
+    "success": 0,
+    "fail": 0,
+    "reverse": 0
+};
+
+Object.freeze(DEFAULT_MISSION_VOTE);
+
 /**
  * Sets the number of missions that have been approved
  * @param {Mission} room
@@ -43,6 +51,12 @@ const shufflePlayers = (roomObj) => {
 const assignRoles = (roomObj, playerNames, settings) => {
     let dup = otherUtils.deepCopy(roomObj)
     dup.players = roleUtils.createRoleAssignment(playerNames, settings)
+    Object.values(dup.players).forEach((player) => {
+        player.teamVote = enums.TeamVote.NOT_VOTED;
+        player.isKing = false;
+        player.isHammer = false;
+        player.isLake = false;
+    })
     return dup;
 }
 
@@ -65,17 +79,37 @@ const setStatus = (roomObj, status) => {
 const setKing = (roomObj, newKingName) => {
     let dup = otherUtils.deepCopy(roomObj)
 
-    const falseKing = dup.players.find(player => player.isKing);
+    const falseKing = Object.values(dup.players).find(player => player.isKing);
 
     if (falseKing){
         falseKing.isKing = false;
     }
-
-    let newKing = dup.players.find(it => it.name === newKingName);
+    let newKing = Object.values(dup.players).find(it => it.name === newKingName);
     newKing.isKing = true;
 
     return dup;
 }
+
+const setKingOrder = (roomObj) => {
+    let dup = otherUtils.deepCopy(roomObj)
+
+    dup.kingOrder = otherUtils.shuffle(Object.keys(dup.players))
+
+    return dup;
+}
+
+ const setSelectedRoles = (roomObj) => {
+    let dup = otherUtils.deepCopy(roomObj);
+
+    const roles = [];
+
+    Object.values(roomObj.players).forEach((player) => {
+        roles.push(player.role);
+    })
+
+    dup.selectedRoles = roles;
+    return dup;
+ }
 
 /**
  * Shifts the king
@@ -213,6 +247,48 @@ const isTeamApproved = (players) => {
 }
 
 /**
+ * sets a player as the hammer based on number of mission proposals and king order
+ * @param {RoomObj} roomObj
+ */
+const setHammer = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    const currentMission = getCurrentMission(dup);
+    const maxVoteCount = currentMission.maxVoteTrack;
+
+    const hammerName = dup.kingOrder[maxVoteCount - 1];
+    const newHammer = getPlayer(dup, hammerName);
+
+    const falseHammer = Object.values(dup.players).find(player => player.isHammer);
+    if (falseHammer) {
+        falseHammer.isHammer = false;
+    }
+    newHammer.isHammer = true
+
+    return dup;
+}
+
+const resetTeamVote = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    dup.teamVoteResult = null;
+
+    return dup;
+}
+
+const resetMissionVote = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    dup.missionVote = otherUtils.deepCopy(DEFAULT_MISSION_VOTE);
+
+    dup.team
+}
+
+const getPlayer = (roomObj, playerName) => {
+    return Object.values(roomObj.players).find(player => player.name === playerName);
+}
+
+/**
  * Returns players array with team votes reset to NOT_VOTED
  * @param players
  */
@@ -225,7 +301,7 @@ const resetPlayerTeamVotes = (players) => {
 }
 
 /**
- * Returns mission that the game is currently
+ * Returns mission that the game is currently active
  *
  * @param room
  * @returns mission
@@ -236,4 +312,5 @@ const getCurrentMission = (room) => {
 
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
-    getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission };
+    getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
+    setKingOrder, setSelectedRoles, setHammer };
