@@ -7,7 +7,8 @@ const Roles = {
     MORDRED: "mordred",
     MORGANA: "morgana",
     ASSASSIN: "assassin",
-    GENERIC_EVIL: "genericEvil"
+    GENERIC_EVIL: "genericEvil",
+    NONE: "NONE"
 };
 
 Object.freeze(Roles)
@@ -37,34 +38,34 @@ const MissionVote = {
 Object.freeze(MissionVote)
 
 const LakeSettings = {
-    ROLE: "role",
-    ALIGNMENT: "alignment",
-    NONE: "none"
+    ROLE: "ROLE",
+    ALIGNMENT: "ALIGNMENT",
+    NONE: "NONE"
 }
 
 Object.freeze(LakeSettings)
 
 const GameState = {
     // admin is configuring the room
-    ROOM_SETUP: "roomSetup",
+    ROOM_SETUP: "ROOM_SETUP",
     // players are proposing a team
-    TEAM_PROPOSAL: "teamProposal",
+    TEAM_PROPOSAL: "TEAM_PROPOSAL",
     // waiting for players to ????
-    WAITING_FOR_PLAYERS: "waitingForPlayers",
+    WAITING_FOR_PLAYERS: "WAITING_FOR_PLAYERS",
     // waiting for players to vote on a team
-    TEAM_VOTE: "teamVote",
+    TEAM_VOTE: "TEAM_VOTE",
     // displaying the results of the team proposal vote
-    DISPLAY_TEAM_VOTE: "displayTeamVote",
+    DISPLAY_TEAM_VOTE: "DISPLAY_TEAM_VOTE",
     // players are voting on success/fail of mission
-    MISSION_VOTE: "missionVote",
+    MISSION_VOTE: "MISSION_VOTE",
     // exactly what it says on the tin
-    GAME_END: "gameEnd",
+    GAME_END: "GAME_END",
     // assassination
-    ASSASSINATION: "assassination",
+    ASSASSINATION: "ASSASSINATION",
     // evil has won the game
-    EVIL_WIN: "evilWin",
+    EVIL_WIN: "EVIL_WIN",
     // good has won the game
-    GOOD_WIN: "goodWin"
+    GOOD_WIN: "GOOD_WIN"
 }
 
 module.exports = { Roles, MissionStatus, TeamVote, MissionVote, LakeSettings, GameState };

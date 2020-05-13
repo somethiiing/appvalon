@@ -23,10 +23,4 @@ const deepCopy = function(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 
-const times = function(n, func) {
-    Array(n).fill().map(() => {
-        func();
-    })
-}
-
-module.exports = { shuffle, deepCopy, times };
+module.exports = { shuffle, deepCopy };

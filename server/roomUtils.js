@@ -129,17 +129,19 @@ const getRandomFruit = () => {
   return randomFruit;
 }
 
-const createInitialRoomState = (room, host, settings) => {
+const createInitialRoomState = (room, host, settings, playerObj = undefined) => {
   const { playerCount, lakeSetting } = settings;
   const { numGood, numEvil, doubleFailRequired, missionSizes, voteTrack } = missionsData[playerCount];
 
-  const playerObj = {
-    name: host,
-    teamVote: null,
-    role: '',
-    information: {},
-    isKing: false,
-    isHammer: false,
+  if (!playerObj){
+    playerObj = [{
+      name: host,
+      teamVote: null,
+      role: '',
+      information: {},
+      isKing: false,
+      isHammer: false,
+    }]
   }
 
   const boardInfo = {
@@ -163,7 +165,7 @@ const createInitialRoomState = (room, host, settings) => {
     createdAt: Date.now(),
     playerCount,
     lakeSetting,
-    players: [playerObj],
+    players: playerObj,
     boardInfo
   });
 };
