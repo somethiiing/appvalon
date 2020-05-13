@@ -53,7 +53,7 @@ export class KingProposalView extends React.Component {
             debugger;
             teamProposal = teamProposal.concat(candidate);
         }
-        dispatchUpdateTeamMembers({player: playerName, room: roomName, proposedTeam: teamProposal})
+        dispatchUpdateTeamMembers({player: playerName, room: roomName, teamProposalArray: teamProposal})
             .then(res => {
                 console.log(res)
             });
