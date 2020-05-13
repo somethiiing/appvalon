@@ -1,8 +1,5 @@
 import React from 'react';
 import Player from "./Player";
-import {Heading} from "./Text";
-import Button from "./Button";
-import {dispatchSubmitForVote, dispatchUpdateTeamMembers} from "../ApiUtils";
 
 const in_progress = {
     "roomName": "mango",
@@ -150,72 +147,24 @@ const in_progress = {
     }
 }
 
-//todo add validity for number of candidate
-export class TeamSubmission extends React.Component {
+export class NonKingProposalView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamProposalArray: [],
+            teamProposalArray: ['alex'],
             roomState: in_progress,
             // move to using props later
             // roomState: props.roomState
         }
-        this.updateTeamProposal = this.updateTeamProposal.bind(this);
-    }
-
-    //todo add validity for number of candidate
-
-    // getKing = () => {
-    //     const players = this.state.roomState.players;
-    //     for (let player in players) {
-    //         //possible iteration over unexpected members blah blah
-    //         if (players[player].isKing) {
-    //             return players[player].name;
-    //         }
-    //     }
-    // }
-
-    voteSubmit = () => {
-        const playerName = this.props.name;
-        const roomName = this.state.roomState.roomName;
-        console.log(roomName, playerName)
-        dispatchSubmitForVote({room: roomName, player: playerName})
-            .then(res => {
-                console.log(res)
-            });
-    }
-
-    updateTeamProposal(candidate) {
-        const playerName = this.props.name;
-        const roomName = this.state.roomState.roomName;
-        let teamProposal = this.state.teamProposalArray;
-        if (teamProposal.includes(candidate)) {
-            teamProposal = teamProposal.filter(e => e !== candidate);
-        } else {
-            teamProposal = teamProposal.concat(candidate);
-        }
-        dispatchUpdateTeamMembers({player: playerName, room: roomName, teamProposal: teamProposal})
-            .then(res => {
-                console.log(res)
-            });
-        //should setState be removed once this state is being passed in via props?
-        // updated state should trigger new render
-        this.setState({
-            teamProposalArray: teamProposal,
-            initialPickDone: true
-        })
     }
 
     render() {
         const teamProposalArray = this.state.teamProposalArray;
         return (
             <div>
-                <Heading>{this.props.name}, select candidates for your mission. </Heading>
                 {this.state.roomState.kingOrder.map(name => {
-                    return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
-                                   onClick={() => this.updateTeamProposal(name)}/>
+                    return <Player key={name} name={name} selected={teamProposalArray.includes(name)}/>
                 })}
-                <Button onClick={this.voteSubmit}>Submit For Vote</Button>
             </div>
         );
     }

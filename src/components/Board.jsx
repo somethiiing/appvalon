@@ -5,7 +5,8 @@ import Missions from './Missions';
 import ActionArea from './ActionArea';
 
 import {fetchRoomData} from '../ApiUtils';
-import {TeamSubmission} from "./TeamSubmission";
+import {KingProposalView} from "./KingProposalView";
+import {NonKingProposalView} from "./NonKingProposalView";
 
 const api = 'http://localhost:5000';
 let socket;
@@ -30,6 +31,7 @@ class Board extends React.Component {
 
     fetchRoomData({room})
       .then(res => {
+        debugger;
         console.log('data fetch', res.data)
         this.setState({roomState: res.data.roomState});
       });
@@ -49,14 +51,15 @@ class Board extends React.Component {
   render() {
     const boardState = this.state.roomState;
     return (
-      <div className="Board">
-        <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
-        <KingOrder />
-        <Missions />
-        <ActionArea/>
-        {/*this TeamSubmission here is just for testing*/}
-        <TeamSubmission boardState={boardState} name={this.state.name}/>
-      </div>
+        <div className="Board">
+          <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
+          <KingOrder/>
+          <Missions/>
+          <ActionArea/>
+          {/*this KingProposalView here is just for testing*/}
+          {<KingProposalView boardState={boardState} name={this.state.name}/>}
+          {<NonKingProposalView boardState={boardState} name={this.state.name}/>}
+        </div>
     );
   }
 }

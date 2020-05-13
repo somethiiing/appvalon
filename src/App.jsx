@@ -15,7 +15,7 @@ import { Test } from './ServerTest';
 
 import {createMuiTheme} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
-import TeamSubmission from "./components/TeamSubmission";
+import TeamSubmission from "./components/KingProposalView";
 
 class App extends React.Component {
   constructor(props) {
@@ -76,16 +76,16 @@ class App extends React.Component {
           <ThemeProvider theme={theme}>
               {/*/!* <div>*/}
               {/*  <button onClick={() => this.changePage('testing')}>testingComponents</button>*/}
-              {/*</div> *!/*/}
-              {/*<TeamSubmission/>*/}
-              {this.state.currentPage === 'landing' &&
-              <div>
-                  <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>
-                  <button onClick={() => this.changePage('componentTest')}>testingComponents</button>
-                  <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
-                  <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
-                  <button onClick={() => this.changePage('board')}>Board Test</button>
-              </div>}
+            {/*</div> *!/*/}
+            {/*<KingProposalView/>*/}
+            {this.state.currentPage === 'landing' &&
+            <div>
+              <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>
+              <button onClick={() => this.changePage('componentTest')}>testingComponents</button>
+              <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
+              <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
+              <button onClick={() => this.changePage('board')}>Board Test</button>
+            </div>}
 
               {this.state.currentPage === 'serverTest' && <Test/>}
           {this.state.currentPage === 'componentTest' && testingComponents()}
