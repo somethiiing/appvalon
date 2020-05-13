@@ -14,6 +14,7 @@ const handleGameStart = (roomObj, settings, playerNames ) => {
     roomObj = helpers.setKing(roomObj, Object.values(roomObj.players)[0].name);
     roomObj = helpers.setKingOrder(roomObj);
     roomObj = helpers.setSelectedRoles(roomObj);
+    roomObj = helpers.setHammer(roomObj);
     if (roomObj.lakeSetting !== enums.LakeSettings.NONE){
         roomObj = helpers.setLake(roomObj, roomObj.players[roomObj.players.length - 1].name)
     }

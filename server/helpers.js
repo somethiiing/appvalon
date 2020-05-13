@@ -43,6 +43,12 @@ const shufflePlayers = (roomObj) => {
 const assignRoles = (roomObj, playerNames, settings) => {
     let dup = otherUtils.deepCopy(roomObj)
     dup.players = roleUtils.createRoleAssignment(playerNames, settings)
+    Object.values(dup.players).forEach((player) => {
+        player.teamVote = enums.TeamVote.NOT_VOTED;
+        player.isKing = false;
+        player.isHammer = false;
+        player.isLake = false;
+    })
     return dup;
 }
 
@@ -79,7 +85,7 @@ const setKing = (roomObj, newKingName) => {
 const setKingOrder = (roomObj) => {
     let dup = otherUtils.deepCopy(roomObj)
 
-    dup.kingOrder = otherUtils.shuffle(Object.keys(dup.players)) 
+    dup.kingOrder = otherUtils.shuffle(Object.keys(dup.players))
 
     return dup;
 }
@@ -93,7 +99,6 @@ const setKingOrder = (roomObj) => {
         roles.push(player.role);
     })
 
-    console.log(roles);
     dup.selectedRoles = roles;
     return dup;
  }
@@ -233,5 +238,35 @@ const isTeamApproved = (players) => {
 
 }
 
+/**
+ * sets a player as the hammer based on number of mission proposals and king order
+ * @param {RoomObj} roomObj
+ */
+const setHammer = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    const currentMission = getCurrentMission(dup);
+    const maxVoteCount = currentMission.maxVoteTrack;
+
+    const hammerName = dup.kingOrder[maxVoteCount - 1];
+    const newHammer = getPlayer(dup, hammerName);
+
+    const falseHammer = Object.values(dup.players).find(player => player.isHammer);
+    if (falseHammer) {
+        falseHammer.isHammer = false;
+    }
+    newHammer.isHammer = true
+
+    return dup;
+}
+
+const getPlayer = (roomObj, playerName) => {
+    return Object.values(roomObj.players).find(player => player.name === playerName);
+}
+
+const getCurrentMission = (roomObj) => {
+    return roomObj.boardInfo.missions[roomObj.currentMission - 1];
+}
+
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
-    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, setKingOrder, setSelectedRoles };
+    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, setKingOrder, setSelectedRoles, setHammer };

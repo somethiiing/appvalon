@@ -41,7 +41,8 @@ function assignRoles(playerList, roleList) {
     assignedPlayersObj[ playerList[ind] ] = {
       role,
       name: playerList[ind],
-      sees: {}
+      sees: {},
+      alignment: rolesData[role].alignment
     };
 
   });
