@@ -4,166 +4,20 @@ import {Heading} from "./Text";
 import Button from "./Button";
 import {dispatchSubmitForVote, dispatchUpdateTeamMembers} from "../ApiUtils";
 
-const in_progress = {
-    "roomName": "mango",
-    "roomOwner": "alex",
-    "status": "TEAM_PROPOSAL",
-    "createdAt": 1589336585126,
-    "playerCount": 5,
-    "lakeSetting": "NONE",
-    "selectedRoles": [],
-    "players": {
-        "alex": {
-            "role": "mordred",
-            "name": "alex",
-            "sees": {
-                "morgana": {
-                    "role": "morgana",
-                    "alignment": "evil",
-                    "knowsRole": false,
-                    "players": {
-                        "assigned": [
-                            "jason"
-                        ]
-                    }
-                }
-            },
-            "isKing": true
-        },
-        "wilson": {
-            "role": "percival",
-            "name": "wilson",
-            "sees": {
-                "merlin": {
-                    "role": "merlin",
-                    "alignment": "unknown",
-                    "knowsRole": false,
-                    "players": {
-                        "assigned": [
-                            "bridget"
-                        ]
-                    }
-                },
-                "morgana": {
-                    "role": "morgana",
-                    "alignment": "unknown",
-                    "knowsRole": false,
-                    "players": {
-                        "assigned": [
-                            "jason"
-                        ]
-                    }
-                }
-            }
-        },
-        "bridget": {
-            "role": "merlin",
-            "name": "bridget",
-            "sees": {
-                "morgana": {
-                    "role": "morgana",
-                    "alignment": "evil",
-                    "knowsRole": false,
-                    "players": {
-                        "assigned": [
-                            "jason"
-                        ]
-                    }
-                }
-            }
-        },
-        "jason": {
-            "role": "morgana",
-            "name": "jason",
-            "sees": {
-                "mordred": {
-                    "role": "mordred",
-                    "alignment": "evil",
-                    "knowsRole": false,
-                    "players": {
-                        "assigned": [
-                            "alex"
-                        ]
-                    }
-                }
-            }
-        },
-        "ashwin": {
-            "role": "genericGood",
-            "name": "ashwin",
-            "sees": {}
-        }
-    },
-    "boardInfo": {
-        "playerCount": 5,
-        "numGood": 3,
-        "numEvil": 2,
-        "doubleFailRequired": false,
-        "missions": [
-            {
-                "count": 1,
-                "size": 2,
-                "status": "NOT_GONE",
-                "maxVoteTrack": 5
-            },
-            {
-                "count": 2,
-                "size": 3,
-                "status": "NOT_GONE",
-                "maxVoteTrack": 5
-            },
-            {
-                "count": 3,
-                "size": 2,
-                "status": "NOT_GONE",
-                "maxVoteTrack": 5
-            },
-            {
-                "count": 4,
-                "size": 3,
-                "status": "NOT_GONE",
-                "maxVoteTrack": 5
-            },
-            {
-                "count": 5,
-                "size": 3,
-                "status": "NOT_GONE",
-                "maxVoteTrack": 5
-            }
-        ]
-    },
-    "kingOrder": [
-        "bridget",
-        "wilson",
-        "alex",
-        "jason",
-        "ashwin"
-    ],
-    "currentMission": 1,
-    "voteTrack": 1,
-    "proposedTeam": [],
-    "teamVoteResult": null,
-    "missionVote": {
-        "success": 0,
-        "fail": 0,
-        "reverse": 0
-    }
-}
-
 //todo add validity for number of candidate
 export class KingProposalView extends React.Component {
     constructor(props) {
         super(props);
-        // const array = this.props.boardState.proposedTeam;
-        const array = in_progress.proposedTeam;
         this.state = {
-            teamProposalArray: array,
-            // teamProposalArray: [],
-            roomState: in_progress,
-            // move to using props later
-            // roomState: props.roomState
+            teamProposalArray: [],
         }
         this.updateTeamProposal = this.updateTeamProposal.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            teamProposalArray: this.props.roomState.proposedTeam
+        })
     }
 
     //todo add validity for number of candidate
@@ -180,7 +34,7 @@ export class KingProposalView extends React.Component {
 
     voteSubmit = () => {
         const playerName = this.props.name;
-        const roomName = this.state.roomState.roomName;
+        const roomName = this.props.roomState.roomName;
         console.log(roomName, playerName)
         dispatchSubmitForVote({room: roomName, player: playerName})
             .then(res => {
@@ -190,11 +44,13 @@ export class KingProposalView extends React.Component {
 
     updateTeamProposal(candidate) {
         const playerName = this.props.name;
-        const roomName = in_progress.roomName;
+        const roomName = this.props.roomState.roomName;
         let teamProposal = this.state.teamProposalArray;
         if (teamProposal.includes(candidate)) {
+            debugger;
             teamProposal = teamProposal.filter(e => e !== candidate);
         } else {
+            debugger;
             teamProposal = teamProposal.concat(candidate);
         }
         dispatchUpdateTeamMembers({player: playerName, room: roomName, proposedTeam: teamProposal})
@@ -204,19 +60,18 @@ export class KingProposalView extends React.Component {
         //should setState be removed once this state is being passed in via props?
         // updated state should trigger new render
         this.setState({
-            teamProposalArray: teamProposal,
-            initialPickDone: true
+            teamProposalArray: teamProposal
         })
     }
 
     render() {
         const teamProposalArray = this.state.teamProposalArray;
-        const roomState = this.state.roomState;
-        debugger;
+        const kingOrder = this.props.roomState.kingOrder;
+        const name = this.props.name;
         return (
             <div>
-                <Heading>{this.props.name}, select candidates for your mission. </Heading>
-                {roomState.kingOrder.map(name => {
+                <Heading>{name}, select candidates for your mission. </Heading>
+                {kingOrder.map(name => {
                     return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
                                    onClick={() => this.updateTeamProposal(name)}/>
                 })}

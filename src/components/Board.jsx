@@ -6,35 +6,40 @@ import ActionArea from './ActionArea';
 
 import {fetchRoomData} from '../ApiUtils';
 import {KingProposalView} from "./KingProposalView";
-import {NonKingProposalView} from "./NonKingProposalView";
+import NonKingProposalView from "./NonKingProposalView";
 
 const api = 'http://localhost:5000';
 let socket;
+
+//TODO remove after testing
+const testRoomState = require('../testRoomStateObjects/teamProposal');
+console.log(testRoomState);
 
 class Board extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      room: '',
-      roomState: {}
+      //testing stuff
+      name: 'Jesus',
+      room: 'mango',
+      roomState: testRoomState
     };
   }
 
   componentDidMount() {
-    const { name, room } = this.props;
-    this.setState({name, room});
-
-    socket = io(`${api}/`);
-    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
-
-    fetchRoomData({room})
-      .then(res => {
-        debugger;
-        console.log('data fetch', res.data)
-        this.setState({roomState: res.data.roomState});
-      });
+    const {name, room} = this.props;
+    // this.setState({name, room});
+    //
+    // socket = io(`${api}/`);
+    // socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
+    //
+    // fetchRoomData({room})
+    //   .then(res => {
+    //     debugger;
+    //     console.log('data fetch', res.data)
+    //     this.setState({roomState: res.data.roomState});
+    //   });
   }
 
   componentWillUnmount() {
@@ -57,8 +62,8 @@ class Board extends React.Component {
           <Missions/>
           <ActionArea/>
           {/*this KingProposalView here is just for testing*/}
-          {<KingProposalView boardState={boardState} name={this.state.name}/>}
-          {<NonKingProposalView boardState={boardState} name={this.state.name}/>}
+          {<KingProposalView roomState={boardState} name={this.state.name}/>}
+          {<NonKingProposalView roomState={boardState} name={this.state.name}/>}
         </div>
     );
   }
