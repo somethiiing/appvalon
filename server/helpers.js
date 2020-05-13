@@ -212,5 +212,28 @@ const isTeamApproved = (players) => {
 
 }
 
+/**
+ * Returns players array with team votes reset to NOT_VOTED
+ * @param players
+ */
+const resetPlayerTeamVotes = (players) => {
+    const newPlayers = otherUtils.deepCopy(players);
+    newPlayers.forEach(player => {
+        player.teamVote = enums.TeamVote.NOT_VOTED;
+    })
+    return newPlayers;
+}
+
+/**
+ * Returns mission that the game is currently
+ *
+ * @param room
+ * @returns mission
+ */
+const getCurrentMission = (room) => {
+    return room.boardInfo.missions[room.currentMission-1];
+}
+
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
-    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved };
+    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
+    getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission };

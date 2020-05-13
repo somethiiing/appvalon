@@ -1,8 +1,8 @@
 const assert = require('chai').assert;
 const enums = require('../server/enums');
 
-const { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus, setKing, setLake, setTeamMembers, reinitializeBoard, resetRoom, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved } = require('../server/helpers');
-const { inProgress, fivePlayerGameSettings, resetBoard } = require('./sample_server_states');
+const { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus, setKing, setLake, setTeamMembers, reinitializeBoard, resetRoom, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission } = require('../server/helpers');
+const { inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
 
 describe.only('#setMissionCount', () => {
     const initial_state = inProgress;
@@ -222,5 +222,25 @@ describe.only('isTeamApproved', () => {
 
     it('equal votes means team is not approved', () => {
         assert.equal(isApproved3, false);
+    })
+});
+
+describe.only('resetPlayerTeamVotes', () => {
+    const players = playerVoteCreator([enums.TeamVote.APPROVE, enums.TeamVote.APPROVE,
+        enums.TeamVote.APPROVE, enums.TeamVote.REJECT, enums.TeamVote.REJECT]);
+    const resetPlayers = resetPlayerTeamVotes(players);
+
+    it('players votes should be reset to NOT_VOTED', () => {
+        resetPlayers.forEach( player => {
+            assert.equal(player.teamVote, enums.TeamVote.NOT_VOTED);
+        })
+    })
+});
+
+describe.only('getCurrentMission', () => {
+    const currentMission = getCurrentMission(missionVote);
+
+    it('currentMission should be returned', () => {
+        assert.equal(currentMission.size, 3);
     })
 });
