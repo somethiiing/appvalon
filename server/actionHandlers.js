@@ -47,11 +47,10 @@ const handleReconfigureGame = (roomObj) => {
 
 const handleSubmitTeamVote = (room, player, vote) => {
     let newRoom = otherUtils.deepCopy(room);
-    newRoom.players.forEach(p => {
-        if (p.name === player) {
-            p.teamVote = vote;
-        }
-    })
+
+    const playerObj = Object.values(newRoom.players).find(p => p.name === player);
+    playerObj.teamVote = vote;
+
     return newRoom;
 }
 

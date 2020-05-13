@@ -235,7 +235,7 @@ const fivePlayerGameSettings = {
 const missionVote = {
     "roomName": "mango", // room name - used for all api calls
     "roomOwner": "alex", // room owner - used for forcing votes/afk,etc
-    "status": "MISSION_VOTE", // controls action area
+    "status": "TEAM_VOTE", // controls action area
     "createdAt": 1589336585126, // probably not useful, but just in case
     "playerCount": 5, // mostly state stuff, determines # of good/evil
     "lakeSetting": "NONE", // lake setting, lake role/alignment/none
@@ -380,7 +380,7 @@ const missionVote = {
     ],
     "currentMission": 1, // what mission # we're on
     "voteTrack": 1, // how many team proposals its been
-    "proposedTeam": [], // team proposal array, list of strings
+    "proposedTeam": ["alex", "wilson"], // team proposal array, list of strings
     "teamVoteResult": null, // result of most recent vote
     "missionVote": { // count of mission votes
         "success": 0,

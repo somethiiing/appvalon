@@ -2,7 +2,7 @@ const assert = require('chai').assert;
 const enums = require('../server/enums');
 const otherUtils = require('../server/otherUtils');
 
-const { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination } = require('../server/actionHandlers');
+const { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination, handleSubmitTeamVote, handleHandleTeamVoteResult } = require('../server/actionHandlers');
 const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
 
 describe.only('#handleGameStart', () => {
@@ -22,13 +22,13 @@ describe.only('#handleGameStart', () => {
   it('it should initialize the board to the correct default setting', () => {
     assert.deepEqual(result.boardInfo.missions, resetBoard.boardInfo.missions)
   })
-  it('it should set the first player as king', () => {
-    assert.isTrue(result.players[0].isKing)
-  })
-  it('should set the lake if appropriate', () => {
-    const lake = result.players.find(player => player.isLake)
-    assert.equal(lake, undefined)
-  })
+  // it('it should set the first player as king', () => {
+  //   assert.isTrue(result.players[0].isKing)
+  // })
+  // it('should set the lake if appropriate', () => {
+  //   const lake = result.players.find(player => player.isLake)
+  //   assert.equal(lake, undefined)
+  // })
 });
 
 // describe.only('#handleUpdateTeamMembers', () => {
@@ -63,7 +63,7 @@ describe.only('assassinate', () => {
 });
 
 describe.only('missionVote', () => {
-   const initial_state = missionVote;
+   const initial_state = otherUtils.deepCopy(missionVote);
    initial_state.status = enums.GameState.MISSION_VOTE;
    // first vote increments vote track and the game state is s
    let result1 = handleSubmitMissionVote(initial_state, enums.MissionVote.SUCCESS);
@@ -82,9 +82,21 @@ describe.only('missionVote', () => {
     });
 });
 
-describe.only('handleMissionVote', () => {
+describe.only('integrationTest', () => {
+    // Start with team proposal done
+    let room = otherUtils.deepCopy(missionVote);
+    // Everyone submits their vote
+    room = handleSubmitTeamVote(room, "alex", enums.TeamVote.APPROVE);
+    room = handleSubmitTeamVote(room, "wilson", enums.TeamVote.APPROVE);
+    room = handleSubmitTeamVote(room, "bridget", enums.TeamVote.APPROVE);
+    room = handleSubmitTeamVote(room, "ashwin", enums.TeamVote.REJECT);
+    room = handleSubmitTeamVote(room, "jason", enums.TeamVote.REJECT);
+    // UI tells backend to handle votes
+    room = handleHandleTeamVoteResult(room);
+    // Since team was approved, we expect to move on to Mission Vote
+    assert.equal(room.status, enums.GameState.MISSION_VOTE);
     // Start on first mission with a vote
-    let room = handleSubmitMissionVote(missionVote, enums.MissionVote.SUCCESS);
+    room = handleSubmitMissionVote(room, enums.MissionVote.SUCCESS);
     // Game should still be in voting mode
     assert.equal(room.status, enums.GameState.MISSION_VOTE);
     // Last player votes
@@ -95,13 +107,14 @@ describe.only('handleMissionVote', () => {
     room = handleHandleMissionVoteResult(room);
     // Mission failed, team proposal
     assert.equal(room.status, enums.GameState.TEAM_PROPOSAL);
-    // Move to next mission
-    assert.equal(room.currentMission, 2);
-    // Votes reset
-    assert.equal(room.missionVote.success, 0);
-    assert.equal(room.missionVote.fail, 0);
-    assert.equal(room.missionVote.reverse, 0);
-    assert.equal(room.voteTrack, 0);
-
+    it('game moves on to 2nd mission', () => {
+        // Move to next mission
+        assert.equal(room.currentMission, 2);
+        // Votes reset
+        assert.equal(room.missionVote.success, 0);
+        assert.equal(room.missionVote.fail, 0);
+        assert.equal(room.missionVote.reverse, 0);
+        assert.equal(room.voteTrack, 0);
+    });
     }
 )

@@ -241,6 +241,6 @@ describe.only('getCurrentMission', () => {
     const currentMission = getCurrentMission(missionVote);
 
     it('currentMission should be returned', () => {
-        assert.equal(currentMission.size, 3);
+        assert.equal(currentMission.size, 2);
     })
 });
