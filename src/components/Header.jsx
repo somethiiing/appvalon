@@ -12,18 +12,18 @@ class Header extends React.Component {
     };
   }
 
-  toggleDrawer = () => {
-    this.setState(prev  => ({
-      isOpen: !prev.isOpen
-    }));
+  toggleDrawer = (isOpen) => {
+    this.setState({
+      isOpen
+    });
   }
 
   render() {
     return (
       <header className="Header">
         <Heading>Appvalon</Heading>
-        <MdInfoOutline onClick={this.toggleDrawer} size={32} />
-        <Drawer isOpen={this.state.isOpen} />
+        <MdInfoOutline className='Info-icon' onClick={() => this.toggleDrawer(true)} size={32} />
+        <Drawer isOpen={this.state.isOpen} toggleDrawer={() => this.toggleDrawer(false)}/>
       </header>
     );
   }

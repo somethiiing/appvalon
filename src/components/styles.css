@@ -29,7 +29,7 @@
 .Text-Heading {
   font-size: 2rem;
   font-weight: 600;
-  margin: 10px;
+  margin: 10px 0;
   padding: 0;
 }
 
@@ -38,6 +38,30 @@
   font-weight: 400;
   margin: 0;
   padding: 0;
+}
+
+.Text-Highlight {
+  font-size: 1.25rem;
+  font-weight: 550;
+  display: block;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  padding: 0;
+  color: #ccc;
+}
+
+.Text-Link {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+  color: #ccc;
+}
+
+.Text-Link:hover {
+  text-decoration: underline;
+  color: white;
 }
 
 .Mission-wrapper {
@@ -183,6 +207,25 @@
   border-radius: 5px;
   background-color: #282828;
   padding: 20px;
+}
+
+.Drawer-close {
+  cursor: pointer;
+  color: red;
+}
+
+.Info-icon {
+  cursor: pointer;
+}
+
+.MuiTabs-root {
+  background-color: #212121;
+}
+
+.Rules-role {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #555555;
 }
 
 
