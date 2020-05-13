@@ -41,7 +41,8 @@ function assignRoles(playerList, roleList) {
     assignedPlayersObj[ playerList[ind] ] = {
       role,
       name: playerList[ind],
-      sees: {}
+      sees: {},
+      alignment: rolesData[role].alignment
     };
 
   });
@@ -88,7 +89,7 @@ function createRoleAssignment(playerList, settings, shuffle = true) {
       assignSeenData(assignedPlayersObj[player], assignedRolesObj)
     );
   });
-  return Object.values(assignedPlayersObj);
+  return assignedPlayersObj;
 };
 
 module.exports = {

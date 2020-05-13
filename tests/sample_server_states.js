@@ -291,7 +291,7 @@ const missionVote = {
         ]
     },
     kingOrder: ['alex', 'bridget', 'chris', 'david', 'elliot'],
-    currentMission: 1,
+    currentMission: 3,
     voteTrack: 1,
     proposedTeam: [],
     teamVoteResults: null,
