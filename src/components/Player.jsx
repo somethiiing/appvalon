@@ -13,7 +13,7 @@ import { ReactComponent as GrClose } from '../icon-x.svg';
 import { Sub } from './Text';
 
 function Player(props) {
-  const { name, king, hammer, selected, teamVote } = props;
+  const {name, king, hammer, selected, teamVote, onClick} = props;
 
   // use this to generate random icon colors on initialization
   // const randomColor = "#" + Math.random().toString(16).slice(2, 8);
@@ -21,17 +21,17 @@ function Player(props) {
   const randomNumber = Math.floor(Math.random() * Math.floor(360));
 
   return (
-    <button type='button' className={`Player ${selected ? 'selected': ''}`}>
-      {king &&
-        <FaCrown className='king-icon' size={22} color='#ffbb01' />
-      }
-      {hammer &&
-        <BsHammer className='hammer-icon' size={20} color='#ffbb01' />
-      }
+      <button type='button' className={`Player ${selected ? 'selected' : ''}`} onClick={onClick}>
+          {king &&
+          <FaCrown className='king-icon' size={22} color='#ffbb01'/>
+          }
+          {hammer &&
+          <BsHammer className='hammer-icon' size={20} color='#ffbb01'/>
+          }
 
-      {/*<GiCloakDagger size={48} color={randomColor} />*/}
-      <Avatar className='avatar' style={{filter: `hue-rotate(` + randomNumber + `deg)`}} />
-      <Sub>{name}</Sub>
+          {/*<GiCloakDagger size={48} color={randomColor} />*/}
+          <Avatar className='avatar' style={{filter: `hue-rotate(` + randomNumber + `deg)`}}/>
+          <Sub>{name}</Sub>
       {teamVote === 'approve' && 
         <FcCheckmark className='vote-icon' size={25} color='#00d673'/>
       }
