@@ -2,13 +2,12 @@ const assert = require('chai').assert;
 const enums = require('../server/enums');
 const otherUtils = require('../server/otherUtils');
 
-const { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination, handleSubmitTeamVote, handleHandleTeamVoteResult } = require('../server/actionHandlers');
+const { handleGameStart, handleUpdateTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination, handleSubmitTeamVote, handleHandleTeamVoteResult } = require('../server/actionHandlers');
 const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
 
 describe.only('#handleGameStart', () => {
   const playerNames = ['alex', 'wilson', 'bridget', 'jason', 'ashwin'];
   const result = handleGameStart(newGame, fivePlayerGameSettings, playerNames);
-  console.log(JSON.stringify(result))
 
   it('should set the TEAM_PROPOSAL status', () => {
     assert.equal(result.status, enums.GameState.TEAM_PROPOSAL)
@@ -22,23 +21,24 @@ describe.only('#handleGameStart', () => {
   it('it should initialize the board to the correct default setting', () => {
     assert.deepEqual(result.boardInfo.missions, resetBoard.boardInfo.missions)
   })
-  // it('it should set the first player as king', () => {
-  //   assert.isTrue(result.players[0].isKing)
-  // })
-  // it('should set the lake if appropriate', () => {
-  //   const lake = result.players.find(player => player.isLake)
-  //   assert.equal(lake, undefined)
-  // })
+  it('it should set the first player as king', () => {
+    const firstKingName = result.kingOrder[0];
+    assert.isTrue(result.players[firstKingName].isKing)
+  })
+  it('should set the lake if appropriate', () => {
+    const lake = Object.values(result.players).find(player => player.isLake)
+    assert.equal(lake, undefined)
+  })
 });
 
-// describe.only('#handleUpdateTeamMembers', () => {
-//   const playerNames = ['alex', 'bridget'];
-//   const result = handleSetTeamMembers(inProgress,  playerNames);
-//
-//   it('should set proposed players', () => {
-//     assert.deepEqual(result.proposedTeam, playerNames)
-//   })
-// })
+describe.only('#handleUpdateTeamMembers', () => {
+  const playerNames = ['alex', 'bridget'];
+  const result = handleUpdateTeamMembers(inProgress,  playerNames);
+
+  it('should set proposed players', () => {
+    assert.deepEqual(result.proposedTeam, playerNames)
+  })
+})
 
 describe.only('#handleSubmitForVote', () =>{
   const result = handleSubmitForVote(inProgress);
