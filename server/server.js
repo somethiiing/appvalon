@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT||5000
 const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
@@ -17,7 +17,7 @@ app
 
 const state = {  };
 
-app.get('/api/', () => {
+app.get('/api/', (req,res) => {
   res.sendStatus(200);
 })
 
