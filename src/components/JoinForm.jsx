@@ -1,30 +1,20 @@
 import React from 'react';
-// import Button from './Button';
-import TextField from "@material-ui/core/TextField";
-import Button from './Button';
+import io from 'socket.io-client';
 
+import TextField from "@material-ui/core/TextField";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import Button from './Button';
+
 import { fetchRoomList, joinRoom } from '../ApiUtils';
+import { setRelogToken } from '../utils';
+
+let socket;
+
+let api = 'http://localhost:5000';
 
 export default class JoinForm extends React.Component {
-  /**
-  *
-  * {Join Room Page // page: join_room
-    - Join as spectator
-    - text box for room code
-    - Action: ADD_SPECTATOR
-    - Form:
-    - text box for room code
-    - text box for your name
-    - submit/join room button
-    - onsubmit
-    - check room code validity
-    - check name for duplicate
-    - player joins room
-    - Action: ADD_PLAYER} props
-    */
   constructor(props) {
     super(props);
 
@@ -41,13 +31,28 @@ export default class JoinForm extends React.Component {
   }
 
   componentDidMount() {
+    socket = io(`${api}/`);
+    socket.on('UPDATE_ROOMLIST', res => this.setState({
+      roomList: res.roomList, room: res.roomList[res.roomList.length - 1]
+    }));
+
     this.fetchRoomList();
+  }
+
+  componentWillUnmount() {
+    socket.disconnect();
   }
 
   fetchRoomList() {
     fetchRoomList()
       .then( res => {
         this.setState({roomList: res.data.roomList, room: res.data.roomList[0]});
+
+        const previousRoom = window.localStorage.getItem('room');
+        if(res.data.roomList.includes(previousRoom)) {
+          const previousName = window.localStorage.getItem('name');
+          this.props.handleSubmit({status: 'SUCCESS', room: previousRoom, name: previousName});
+        }
       });
   }
 
@@ -64,13 +69,13 @@ export default class JoinForm extends React.Component {
       .then( res => {
         const { status } = res.data;
         this.props.handleSubmit({status, name, room})
+        setRelogToken({player: name, room});
       });
   }
 
   render() {
     return (
       <div>
-        <Button onClick={this.fetchRoomList}>Refresh Room List</Button>
         <div>
           <form className='Join-room' onSubmit={this.onSubmitHandler}>
             <TextField
@@ -93,16 +98,6 @@ export default class JoinForm extends React.Component {
                 return <MenuItem key={room} value={room}>{room}</MenuItem>
               })}
             </Select>
-            {/* <TextField
-              variant='outlined'
-              margin='normal'
-              required
-              name='roomCode'
-              label='Room Code'
-              id='roomCode'
-              autoComplete='Room Code'
-              onChange={this.onChangeHandler}
-            /> */}
             {/*Not sure which style to do here but I'm gonna leave it as is*/}
             <Button type='submit' className='Button'>Join Room</Button>
           </form>
