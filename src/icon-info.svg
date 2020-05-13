@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-info</title>
+    <g id="icon-info" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-info-copy">
+            <g id="Icon" transform="translate(2.000000, 2.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                <path d="M14,0 C6.26875,0 0,6.26875 0,14 C0,21.73125 6.26875,28 14,28 C21.73125,28 28,21.73125 28,14 C28,6.26875 21.73125,0 14,0 Z M14,25.625 C7.58125,25.625 2.375,20.41875 2.375,14 C2.375,7.58125 7.58125,2.375 14,2.375 C20.41875,2.375 25.625,7.58125 25.625,14 C25.625,20.41875 20.41875,25.625 14,25.625 Z" id="Icon-Shape"></path>
+                <path d="M12.5,8.5 C12.5,9.3284271 13.1715729,10 14,10 C14.8284271,10 15.5,9.3284271 15.5,8.5 C15.5,7.67157288 14.8284271,7 14,7 C13.1715729,7 12.5,7.67157288 12.5,8.5 Z M14.75,12 L13.25,12 C13.1125,12 13,12.1125 13,12.25 L13,20.75 C13,20.8875 13.1125,21 13.25,21 L14.75,21 C14.8875,21 15,20.8875 15,20.75 L15,12.25 C15,12.1125 14.8875,12 14.75,12 Z" id="Icon-Shape"></path>
+            </g>
+            <rect id="ViewBox" x="0" y="0" width="32" height="32"></rect>
+        </g>
+    </g>
+</svg>
