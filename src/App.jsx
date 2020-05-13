@@ -1,11 +1,15 @@
 import React from 'react';
+
 import './App.css';
 import './components/styles.css';
+
 import Header from './components/Header';
 import Mission from './components/Mission';
 import CreateForm from './components/CreateForm';
 import JoinForm from './components/JoinForm';
 import Board from './components/Board';
+import Player from './components/Player';
+import Card from './components/Card';
 
 import { Test } from './ServerTest';
 
@@ -48,6 +52,11 @@ class App extends React.Component {
     this.changePage('board');
   }
 
+  exitGame() {
+    window.localStorage.clear();
+    this.changePage('landing');
+  }
+
   render() {
     const theme = createMuiTheme({
       palette: {
@@ -57,6 +66,7 @@ class App extends React.Component {
 
     const { name, room } = this.state;
 
+    window.exitGame = () => this.exitGame();
     window.changePage = (page) => this.changePage(page);
     window.state = () => console.log(this.state);
 
@@ -90,12 +100,26 @@ const testingComponents = () => (
     {
     // the below is for testing component purposes
     }
-    <Mission fail count={2}/>
-    <Mission pass count={3}/>
-    <Mission active count={3}/>
-    <Mission count={3}/>
-    <Mission count={3}/>
+    <div className='Mission-list'>
+      <Mission fail size={2}/>
+      <Mission success size={3}/>
+      <Mission active voteTrack={4} size={2}/>
+      <Mission size={3}/>
+      <Mission size={3}/>
+    </div>
     <JoinForm/>
+    <div className='Card-list'>
+      <Card type='success' />
+      <Card type='fail' />
+      <Card type='approve' />
+      <Card type='reject' />
+    </div>
+    <div className='Player-list'>
+      <Player name='Bridget' king selected />
+      <Player name='Wilson' teamVote='reject' hammer />
+      <Player name='Alexandra' selected />
+      <Player name='Mehtab' king hammer teamVote='approve' />
+    </div>
   </div>
 )
 

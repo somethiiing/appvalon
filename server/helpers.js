@@ -1,14 +1,7 @@
 const otherUtils = require('./otherUtils.js');
 const roomUtils = require('./roomUtils.js');
-const roleUtils = require('./roleAssignment.js')
-const enums = require('./enums.js');
-
-// changeStatus(obj, newStatus)
-// submitTeamVote(obj, player, vote)
-
-// const submitTeamVote = (state: Room, player: string, vote: string) : Room
-
-const reallyUsefulFunction = () => true;
+const roleUtils = require('./roleAssignment.js');
+const enums = require('./enums');
 
 /**
  * Sets the number of missions that have been approved
@@ -47,8 +40,10 @@ const shufflePlayers = (roomObj) => {
  * @param {[Players]} players
  * @param {FESettingsObj} availableRoles
  */
-const assignRoles = (playerNames, settings) => {
-    return roleUtils.createRoleAssignment(playerNames, settings)
+const assignRoles = (roomObj, playerNames, settings) => {
+    let dup = otherUtils.deepCopy(roomObj)
+    dup.players = roleUtils.createRoleAssignment(playerNames, settings)
+    return dup;
 }
 
 /**
@@ -69,7 +64,12 @@ const setStatus = (roomObj, status) => {
  */
 const setKing = (roomObj, newKingName) => {
     let dup = otherUtils.deepCopy(roomObj)
-    dup.players.find(player => player.isKing).isKing = false;
+
+    const falseKing = dup.players.find(player => player.isKing);
+
+    if (falseKing){
+        falseKing.isKing = false;
+    }
 
     let newKing = dup.players.find(it => it.name === newKingName);
     newKing.isKing = true;
@@ -95,8 +95,12 @@ const shiftKing = (room) => {
  * @param {PlayerObj} player
  */
 const setLake = (roomObj, newLakeName) => {
-    let dup = otherUtils.deepCopy(roomObj)
-    dup.players.find(player => player.isLake).isLake = false;
+    let dup = otherUtils.deepCopy(roomObj);
+
+    const falseLake =  dup.players.find(player => player.isLake);
+    if (falseLake){
+        falseLake.isLake = false;
+    }
 
     let newLake = dup.players.find(it => it.name === newLakeName);
     newLake.isLake = true;
@@ -104,13 +108,39 @@ const setLake = (roomObj, newLakeName) => {
     return dup;
 }
 
+const setTeamMembers = (roomObj, teamMembers) => {
+    let dup = otherUtils.deepCopy(roomObj);
+
+    dup.proposedTeam = teamMembers;
+
+    return dup;
+}
+
 /**
  * Sets room state to initial settings, retaining players (but clearing roles)
  */
-const resetRoom = (roomObj, settings) => {
-    const newRoom = roomUtils.createInitialRoomState(settings, room.name, room.owner);
-    newRoom.players = assignRoles();
+const reinitializeBoard= (roomObj, settings) => {
+    let newRoom = roomUtils.createInitialRoomState(roomObj.roomName, roomObj.roomOwner, settings, roomObj.players);
+    newRoom = unassignRoles(newRoom);
     return newRoom;
+}
+
+/**
+ * unassigns player roles
+ */
+const unassignRoles = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    for (const player of dup.players) {
+        player.teamVote = enums.TeamVote.NOT_VOTED;
+        player.role = enums.Roles.NONE;
+        player.information = {};
+        player.isHammer = false;
+        player.isKing = false;
+        player.isLake = false;
+    }
+
+    return dup;
 }
 
 /**
@@ -182,5 +212,5 @@ const isTeamApproved = (players) => {
 
 }
 
-module.exports = { reallyUsefulFunction, setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus,
-    isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, setKing, shiftKing, setLake, resetRoom };
+module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
+    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved };

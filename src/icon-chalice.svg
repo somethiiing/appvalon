@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-chalice</title>
+    <g id="icon-chalice" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/chalice">
+            <g id="icon">
+                <rect id="ViewBox" fill-rule="nonzero" x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="Group" transform="translate(6.000000, 1.000000)" stroke="#FFBB01">
+                <path d="M22.9486777,0 C23.9550475,7.57894737 23.0582324,12.6315789 20.2582324,15.1578947 C16.0582324,18.9473684 7.65823237,18.9473684 3.45823237,15.1578947 C0.658232371,12.6315789 -0.441477027,7.57894737 0.159104177,0 L22.9486777,0 Z" id="Rectangle" stroke-width="3" fill="#FFBB01"></path>
+                <circle id="Oval" stroke-width="3" cx="12" cy="25" r="3.5"></circle>
+                <line x1="5" y1="33" x2="19" y2="33" id="Path-2" stroke-width="4" stroke-linecap="round"></line>
+                <line x1="12" y1="22" x2="12" y2="19" id="Path" stroke-width="4"></line>
+                <line x1="12" y1="32" x2="12" y2="29" id="Path-Copy" stroke-width="4"></line>
+            </g>
+        </g>
+    </g>
+</svg>

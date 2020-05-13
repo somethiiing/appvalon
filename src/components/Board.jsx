@@ -1,17 +1,60 @@
 import React from 'react';
+import io from 'socket.io-client';
 import KingOrder from './KingOrder';
 import Missions from './Missions';
 import ActionArea from './ActionArea';
 
-function Board(props) {
-  return (
-    <div className="Board">
-      {<div>PROPS: {props.name} {props.room}</div>}
-      <KingOrder />
-      <Missions />
-      <ActionArea />
-    </div>
-  );
+import { fetchRoomData } from '../ApiUtils';
+
+const api = 'http://localhost:5000';
+let socket;
+
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      room: '',
+      roomState: {}
+    };
+  }
+
+  componentDidMount() {
+    const { name, room } = this.props;
+    this.setState({name, room});
+
+    socket = io(`${api}/`);
+    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
+
+    fetchRoomData({room})
+      .then(res => {
+        console.log('data fetch', res.data)
+        this.setState({roomState: res.data.roomState});
+      });
+  }
+
+  componentWillUnmount() {
+    socket.disconnect();
+  }
+
+  handleUpdateState(res) {
+    const { room, roomState } = res;
+    if(room === this.state.room) {
+      this.setState({roomState});
+    }
+  }
+
+  render() {
+    return (
+      <div className="Board">
+        <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
+        <KingOrder />
+        <Missions />
+        <ActionArea />
+      </div>
+    );
+  }
 }
 
 export default Board;
