@@ -2,13 +2,12 @@ const assert = require('chai').assert;
 const enums = require('../server/enums');
 const otherUtils = require('../server/otherUtils');
 
-const { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleSubmitAssassination } = require('../server/actionHandlers');
+const { handleGameStart, handleUpdateTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleSubmitAssassination } = require('../server/actionHandlers');
 const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
 
 describe.only('#handleGameStart', () => {
   const playerNames = ['alex', 'wilson', 'bridget', 'jason', 'ashwin'];
   const result = handleGameStart(newGame, fivePlayerGameSettings, playerNames);
-  console.log(JSON.stringify(result))
 
   it('should set the TEAM_PROPOSAL status', () => {
     assert.equal(result.status, enums.GameState.TEAM_PROPOSAL)
@@ -23,17 +22,18 @@ describe.only('#handleGameStart', () => {
     assert.deepEqual(result.boardInfo.missions, resetBoard.boardInfo.missions)
   })
   it('it should set the first player as king', () => {
-    assert.isTrue(result.players[0].isKing)
+    const firstKingName = result.kingOrder[0];
+    assert.isTrue(result.players[firstKingName].isKing)
   })
   it('should set the lake if appropriate', () => {
-    const lake = result.players.find(player => player.isLake)
+    const lake = Object.values(result.players).find(player => player.isLake)
     assert.equal(lake, undefined)
   })
 });
 
 describe.only('#handleUpdateTeamMembers', () => {
   const playerNames = ['alex', 'bridget'];
-  const result = handleSetTeamMembers(inProgress,  playerNames);
+  const result = handleUpdateTeamMembers(inProgress,  playerNames);
 
   it('should set proposed players', () => {
     assert.deepEqual(result.proposedTeam, playerNames)
