@@ -6,6 +6,10 @@ const fetchRoomList = () => {
   return axios.get(`${api}/api/getRoomList`);
 }
 
+const fetchRoomData = ({room}) => {
+  return axios.get(`${api}/api/getRoomData?room=${room}`);
+}
+
 const joinRoom = ({name, room}) => {
   return axios.post(`${api}/api/joinRoom`, {name, room})
 }
@@ -17,5 +21,6 @@ const createRoom = ({settings, host}) => {
 export {
   createRoom,
   joinRoom,
-  fetchRoomList
+  fetchRoomList,
+  fetchRoomData
 };
