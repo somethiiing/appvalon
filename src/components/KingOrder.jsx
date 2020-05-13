@@ -20,27 +20,9 @@ function KingOrder(props) {
   }
   return (
     <div className="KingOrder">
-      {/* map king order list to player display, using players.isKing and isHammer for icons */}
       {kingOrder.map((player) => {return getPlayerComponent(player)})}
     </div>
   );
 }
 
-//    "alex": {
-    //   "role": "mordred",
-    //   "name": "alex",
-    //   "sees": {
-    //     "morgana": {
-    //       "role": "morgana",
-    //       "alignment": "evil",
-    //       "knowsRole": false,
-    //       "players": {
-    //         "assigned": [
-    //           "jason"
-    //         ]
-    //       }
-    //     }
-    //   },
-    //   "isKing": true
-    // },
 export default KingOrder;
