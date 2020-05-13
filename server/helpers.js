@@ -78,6 +78,19 @@ const setKing = (roomObj, newKingName) => {
 }
 
 /**
+ * Shifts the king
+ * @param room
+ */
+const shiftKing = (room) => {
+    let newRoom = otherUtils.deepCopy(room)
+    let currentKing = newRoom.kingOrder.shift();
+    newRoom.kingOrder.push(currentKing);
+    let futureKing = newRoom.kingOrder.shift();
+    newRoom.players = setKing(futureKing, newRoom.players);
+    return newRoom;
+}
+
+/**
  * Sets designated player as lake (THERE CAN ONLY BE ONE!)
  * @param {PlayerObj} player
  */
@@ -130,4 +143,74 @@ const unassignRoles = (roomObj) => {
     return dup;
 }
 
-module.exports = { reallyUsefulFunction, setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles, setStatus, setKing, setLake, reinitializeBoard, setTeamMembers };
+/**
+ * Returns true if mission has failed. Takes in an array of votes and whether double failed is required
+ *
+ * @param missionVotes
+ * @param isDoubleFailRequired
+ */
+const isFailedMission = (missionVotes, isDoubleFailRequired) => {
+    const failCount = missionVotes.filter( i => i === enums.MissionVote.FAIL).length;
+    const reverseCount = missionVotes.filter( i => i === enums.MissionVote.REVERSE).length;
+    let failed = false;
+    // check if mission was successful
+    if ((!isDoubleFailRequired && failCount > 0) ||
+        (isDoubleFailRequired && failCount > 1)) {
+        failed = true;
+    }
+    // reverse logic
+    if (reverseCount > 0 && reverseCount % 2 === 1) {
+        failed = !failed;
+    }
+    return failed;
+}
+
+/**
+ * Gets the game state based on the status of the array of missions provided
+ * Can be one of GameState.ASSASSINATION, EVIL_WIN, or TEAM_PROPOSAL if the game continues
+ * @param missions
+ */
+const getGameStateBasedOnMissionStatus = (missions) => {
+    // Check if the game ends
+    let missionFailedCount = 0;
+    let missionSuccessCount = 0;
+    missions.forEach(mission => {
+        if (mission.status === enums.MissionStatus.SUCCESS) {
+            missionSuccessCount++;
+        } else if (mission.status === enums.MissionStatus.FAIL) {
+            missionFailedCount++;
+        }
+    });
+
+    // Game ends
+    if (missionSuccessCount === 3) {
+        return enums.GameState.ASSASSINATION;
+    } else if (missionFailedCount === 3) {
+        return enums.GameState.EVIL_WIN;
+    }
+
+    return enums.GameState.TEAM_PROPOSAL;
+}
+
+/**
+ * Returns true if the team is approved based on the votes of the players
+ *
+ * @param players
+ */
+const isTeamApproved = (players) => {
+    let failCount = 0;
+    let successCount = 0;
+    players.forEach(player => {
+        if (player.teamVote === enums.TeamVote.APPROVE) {
+            successCount++;
+        } else if (player.teamVote === enums.TeamVote.REJECT) {
+            failCount++;
+        }
+    });
+
+    return successCount > failCount;
+
+}
+
+module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
+    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved };
