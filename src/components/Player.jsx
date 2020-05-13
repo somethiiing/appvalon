@@ -2,10 +2,14 @@ import React from 'react';
 import { IoMdClose, IoIosCloseCircleOutline } from 'react-icons/io';
 import { GiCloakDagger } from 'react-icons/gi';
 import { ReactComponent as Avatar } from '../avatar.svg';
-import { FaCrown } from 'react-icons/fa';
-import { BsHammer } from 'react-icons/bs';
-import { FcCheckmark } from 'react-icons/fc';
-import { GrClose } from 'react-icons/gr';
+import { ReactComponent as Chalice } from '../icon-chalice.svg';
+import { ReactComponent as FcCheckmark } from '../icon-check.svg';
+import { ReactComponent as Close } from '../icon-close.svg';
+import { ReactComponent as FaCrown } from '../icon-crown.svg';
+import { ReactComponent as BsHammer } from '../icon-hammer.svg';
+import { ReactComponent as Info } from '../icon-info.svg';
+import { ReactComponent as GrClose } from '../icon-x.svg';
+
 import { Sub } from './Text';
 
 function Player(props) {
