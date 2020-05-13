@@ -7,7 +7,7 @@ const PORT = 5000;
 const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
-const { getRandomFruit, createInitialRoomState } = require('./roomUtils');
+const { getRandomFruit, createInitialRoomState, joinRoom } = require('./roomUtils');
 
 app
   .use(cors())
@@ -26,7 +26,7 @@ app.post('/api/createRoom', (req, res) => {
   const room = getRandomFruit();
   state[room] = createInitialRoomState(room, host, settings);
   res.send({room, host, roomState: state[room]});
-})
+});
 
 app.get('/api/getRoomList', (req, res) => {
   res.send({roomList: Object.keys(state)});
@@ -34,8 +34,16 @@ app.get('/api/getRoomList', (req, res) => {
 
 app.post('/api/joinRoom', (req, res) => {
   const { name, room } = req.body
+  const { players, playerCount } = state[room];
 
-  res.send({status: 'SUCCESS', name, room});
+  if (players.length < playerCount) {
+    state[room] = joinRoom(state[room], name)
+    res.send({status: 'SUCCESS', name, room});
+  } else {
+    res.send({status: 'FULL'});
+  }
+
+  io.emit('UPDATE_STATE', {room, roomState: state[room]});
 });
 
 app.post('/api/update', (req, res) => {
@@ -57,7 +65,7 @@ app.post('/api/update', (req, res) => {
     default:
       break;
   }
-  io.emit('UPDATE_STATE', state[room]);
+  io.emit('UPDATE_STATE', {room, roomState: state[room]});
   res.sendStatus(200);
 });
 
