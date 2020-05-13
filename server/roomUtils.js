@@ -146,7 +146,7 @@ const createInitialRoomState = (room, host, settings, playerObjArr = undefined) 
   const { numGood, numEvil, doubleFailRequired, missionSizes, voteTrack } = missionsData[playerCount];
 
   if (!playerObjArr){
-    playerObjArr = createPlayerObj(host);
+    playerObjArr = {[host]: createPlayerObj(host)};
   }
 
   const boardInfo = {
