@@ -6,8 +6,7 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-
-const apiUrl = 'http://localhost:5000'
+import { fetchRoomList, joinRoom } from '../ApiUtils';
 
 export default class JoinForm extends React.Component {
   /**
@@ -46,7 +45,7 @@ export default class JoinForm extends React.Component {
   }
 
   fetchRoomList() {
-    axios.get(`${apiUrl}/api/getRoomList`)
+    fetchRoomList()
       .then( res => {
         this.setState({roomList: res.data.roomList, room: res.data.roomList[0]});
       });
@@ -61,7 +60,7 @@ export default class JoinForm extends React.Component {
   onSubmitHandler = (e) => {
     e.preventDefault();
     const {name, room} = this.state;
-    axios.post(`${apiUrl}/api/joinRoom`, {name, room})
+    joinRoom({name, room})
       .then( res => {
         const { status } = res.data;
         this.props.handleSubmit({status, name, room})

@@ -24,7 +24,7 @@ export default class CreateForm extends React.Component {
     //     iseult: false, //bool
     //     genericGood: true, //bool
     //     numGenGood: 2, //num
-    
+
     //     assassin: true, //bool
     //     mordred: true, //bool
     //     morgana: true, //bool
@@ -39,7 +39,7 @@ export default class CreateForm extends React.Component {
   }
 
   handleOnSubmit() {
-    createRoom({settings: constructSettingsObj(), host: this.state.name})
+    createRoom({settings: this.constructSettingsObj(), host: this.state.name})
       .then( res => {
         const { room, host } = res.data;
         this.props.handleSubmit({name: host, room})
