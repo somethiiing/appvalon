@@ -288,9 +288,29 @@ const getPlayer = (roomObj, playerName) => {
     return Object.values(roomObj.players).find(player => player.name === playerName);
 }
 
-const getCurrentMission = (roomObj) => {
-    return roomObj.boardInfo.missions[roomObj.currentMission - 1];
+/**
+ * Returns players array with team votes reset to NOT_VOTED
+ * @param players
+ */
+const resetPlayerTeamVotes = (players) => {
+    const newPlayers = otherUtils.deepCopy(players);
+    newPlayers.forEach(player => {
+        player.teamVote = enums.TeamVote.NOT_VOTED;
+    })
+    return newPlayers;
+}
+
+/**
+ * Returns mission that the game is currently active
+ *
+ * @param room
+ * @returns mission
+ */
+const getCurrentMission = (room) => {
+    return room.boardInfo.missions[room.currentMission-1];
 }
 
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
-    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote };
+    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
+    getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
+    setKingOrder, setSelectedRoles, setHammer };

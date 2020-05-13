@@ -66,9 +66,9 @@ describe.only('missionVote', () => {
    const initial_state = missionVote;
    initial_state.status = enums.GameState.MISSION_VOTE;
    // first vote increments vote track and the game state is s
-   let result1 = handleSubmitMissionVote(initial_state, "test", enums.MissionVote.SUCCESS);
-   it('first vote should increment vote track and continue votes', () => {
-       assert.equal(result1.voteTrack , 2);
+   let result1 = handleSubmitMissionVote(initial_state, enums.MissionVote.SUCCESS);
+   it('first vote should add to votes and continue voting', () => {
+       assert.equal(result1.missionVote.length , 1);
        assert.equal(result1.status, enums.GameState.MISSION_VOTE);
    })
     let result2 = otherUtils.deepCopy(result1);
