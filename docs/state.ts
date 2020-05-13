@@ -10,7 +10,11 @@ const serverstate = {
     players: [
       {
         name: 'alex',
-
+        teamVote: 'APPROVE',
+        role: 'Role',
+        information: {}, // stuff they know
+        isKing: false,
+        isHammer: false
       }
     ],
     boardInfo: {
