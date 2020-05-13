@@ -44,14 +44,14 @@ app.post('/api/joinRoom', (req, res) => {
   const { name, room } = req.body
   const { players, playerCount } = state[room];
 
-  if (players.length < playerCount) {
+  if (Object.values(players).length < playerCount) {
     state[room] = joinRoom(state[room], name)
     res.send({status: 'SUCCESS', name, room});
   } else {
     res.send({status: 'FULL'});
   }
 
-  if (players.length === playerCount) {
+  if (Object.values(players).length === playerCount) {
     state[room] = actionHandlers.handleGameStart(state[room]);
   }
 
