@@ -1,33 +1,6 @@
 const rolesData = require('./roleAssignmentData');
 const otherUtils = require('./otherUtils');
 
-const fakePlayerList = ['wilson', 'bridget', 'vinh', 'steven', 'kelvin', 'richard', 'andrew'];
-
-const fakeSettings = {
-  numPeople: 7, // number
-  numGood: 4, // number
-  numEvil: 3, // number
-  roles: {
-    merlin: true, //bool
-    percival: true, //bool
-    tristan: false, //bool
-    iseult: false, //bool
-    titania: false, //bool
-    genericGood: true, //bool
-    numGenGood: 2, //num
-
-    assassin: true, //bool
-    mordred: true, //bool
-    morgana: true, //bool
-    agravaine: false, //bool
-    colgrevance: false, //bool
-    oberon: false, //bool
-    noberon: false, //bool
-    genericEvil: false, //bool
-    numGenEvil: 0 //num
-  }
-};
-
 function generateRoleList(settings) {
   let result = [];
   const { selectedRoles } = settings;
