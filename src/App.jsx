@@ -82,6 +82,7 @@ class App extends React.Component {
             <button onClick={() => this.changePage('componentTest')}>testingComponents</button>
             <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
             <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
+            <button onClick={() => this.changePage('board')}>Test Board</button>
           </div>}
           {this.state.currentPage === 'serverTest' && <Test />}
           {this.state.currentPage === 'componentTest' && testingComponents()}

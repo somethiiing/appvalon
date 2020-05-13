@@ -6,6 +6,9 @@ import ActionArea from './ActionArea';
 
 import { fetchRoomData } from '../ApiUtils';
 
+//TODO remove after testing
+const testRoomState = require('../testRoomStateObjects/teamProposal');
+
 const api = 'http://localhost:5000';
 let socket;
 
@@ -22,16 +25,18 @@ class Board extends React.Component {
 
   componentDidMount() {
     const { name, room } = this.props;
-    this.setState({name, room});
+    // this.setState({name, room});
+    this.setState({name, room, roomState: testRoomState})
 
-    socket = io(`${api}/`);
-    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
-
-    fetchRoomData({room})
-      .then(res => {
-        console.log('data fetch', res.data)
-        this.setState({roomState: res.data.roomState});
-      });
+    // TODO uncomment - Disabled for testing
+    // socket = io(`${api}/`);
+    // socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
+    //
+    // fetchRoomData({room})
+    //   .then(res => {
+    //     console.log('data fetch', res.data)
+    //     this.setState({roomState: res.data.roomState});
+    //   });
   }
 
   componentWillUnmount() {
@@ -46,12 +51,26 @@ class Board extends React.Component {
   }
 
   render() {
+    const { roomName, roomOwner, status, createdAt,
+      playerCount, lakeSetting, selectedRoles, players,
+      boardInfo, kingOrder, currentMission, voteTrack,
+      proposedTeam, teamVoteResult, missionVote
+    } = this.state.roomState;
+
     return (
       <div className="Board">
-        <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
-        <KingOrder />
-        <Missions />
-        <ActionArea />
+        <KingOrder
+          kingOrder={kingOrder}
+          players={players}
+        />
+        <Missions
+          currentMission={currentMission}
+          boardInfo={boardInfo}
+          voteTrack={voteTrack}
+        />
+        <ActionArea
+          roomState={this.state.roomState}
+        />
       </div>
     );
   }
