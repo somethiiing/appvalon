@@ -8,6 +8,7 @@ const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } =
 describe.only('#handleGameStart', () => {
   const playerNames = ['alex', 'wilson', 'bridget', 'jason', 'ashwin'];
   const result = handleGameStart(newGame, fivePlayerGameSettings, playerNames);
+  console.log(JSON.stringify(result))
 
   it('should set the TEAM_PROPOSAL status', () => {
     assert.equal(result.status, enums.GameState.TEAM_PROPOSAL)
