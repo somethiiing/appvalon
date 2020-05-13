@@ -65,17 +65,38 @@ const setStatus = (roomObj, status) => {
 const setKing = (roomObj, newKingName) => {
     let dup = otherUtils.deepCopy(roomObj)
 
-    const falseKing = dup.players.find(player => player.isKing);
+    const falseKing = Object.values(dup.players).find(player => player.isKing);
 
     if (falseKing){
         falseKing.isKing = false;
     }
-
-    let newKing = dup.players.find(it => it.name === newKingName);
+    let newKing = Object.values(dup.players).find(it => it.name === newKingName);
     newKing.isKing = true;
 
     return dup;
 }
+
+const setKingOrder = (roomObj) => {
+    let dup = otherUtils.deepCopy(roomObj)
+
+    dup.kingOrder = otherUtils.shuffle(Object.keys(dup.players)) 
+
+    return dup;
+}
+
+ const setSelectedRoles = (roomObj) => {
+    let dup = otherUtils.deepCopy(roomObj);
+
+    const roles = [];
+
+    Object.values(roomObj.players).forEach((player) => {
+        roles.push(player.role);
+    })
+
+    console.log(roles);
+    dup.selectedRoles = roles;
+    return dup;
+ }
 
 /**
  * Shifts the king
@@ -213,4 +234,4 @@ const isTeamApproved = (players) => {
 }
 
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
-    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved };
+    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission, getGameStateBasedOnMissionStatus, isTeamApproved, setKingOrder, setSelectedRoles };

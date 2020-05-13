@@ -88,7 +88,7 @@ function createRoleAssignment(playerList, settings, shuffle = true) {
       assignSeenData(assignedPlayersObj[player], assignedRolesObj)
     );
   });
-  return Object.values(assignedPlayersObj);
+  return assignedPlayersObj;
 };
 
 module.exports = {
