@@ -90,7 +90,7 @@ export class TeamSubmission extends React.Component {
         const players = this.state.roomState.players;
         for (let player in players) {
             //possible iteration over unexpected members blah blah
-            if (player.king) {
+            if (player.isKing) {
                 return player.name;
             }
         }
@@ -121,12 +121,15 @@ export class TeamSubmission extends React.Component {
         const player = this.getPlayer();
         const room = this.state.roomState;
         let teamProposal = this.state.teamProposalArray;
-        teamProposal = teamProposal.filter(e => e !== candidate);
-        if (teamProposal[candidate]) {
+        debugger;
+        if (teamProposal.includes(candidate)) {
             teamProposal = teamProposal.filter(e => e !== candidate);
+            debugger;
         } else {
-            teamProposal.concat(candidate);
+            teamProposal = teamProposal.concat(candidate);
+            debugger;
         }
+        // debugger;
         dispatchUpdateTeamMembers({player, room, teamProposal})
             .then(res => {
                 console.log(res)
@@ -145,8 +148,8 @@ export class TeamSubmission extends React.Component {
                 {JSON.stringify(this.props.boardState)}
                 <Heading>{this.props.name}, select candidates for your mission. </Heading>
                 {this.state.roomState.players.map(player => {
-                    return <Player name={player.name} selected={teamProposalArray[player.name]}
-                                   onClick={this.updateTeamProposal(player.name)}/>
+                    return <Player name={player.name} selected={teamProposalArray.includes(player.name)}
+                                   onClick={() => this.updateTeamProposal(player.name)}/>
                 })}
                 <Button onClick={this.voteSubmit}>Submit For Vote</Button>
             </div>
