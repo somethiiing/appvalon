@@ -1,21 +1,42 @@
 module.exports = {
-  "roomName": "mango", // room name - used for all api calls
-  "roomOwner": "alex", // room owner - used for forcing votes/afk,etc
-  "status": "TEAM_PROPOSAL", // controls action area
-  "createdAt": 1589336585126, // probably not useful, but just in case
-  "playerCount": 5, // mostly state stuff, determines # of good/evil
-  "lakeSetting": "NONE", // lake setting, lake role/alignment/none
-  "selectedRoles": [ // list of roles that are used in this game.
-    'percival',
-    'morgana',
-    'mordred',
-    'merlin',
-    'genericGood'
+  "roomName": "mango",
+  "roomOwner": "alex",
+  "status": "TEAM_PROPOSAL",
+  "createdAt": 1589336585126,
+  "playerCount": 5,
+  "lakeSetting": "NONE",
+  "selectedRoles": [
+    "morgana",
+    "merlin",
+    "mordred",
+    "percival",
+    "genericGood"
   ],
-  "players": { // object used for live object lookup. player name is key,
+  "players": {
     "alex": {
-      "role": "mordred",
+      "role": "morgana",
       "name": "alex",
+      "sees": {
+        "mordred": {
+          "role": "mordred",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "bridget"
+            ]
+          }
+        }
+      },
+      "alignment": "evil",
+      "teamVote": "notVoted",
+      "isKing": true,
+      "isHammer": false,
+      "isLake": false
+    },
+    "wilson": {
+      "role": "merlin",
+      "name": "wilson",
       "sees": {
         "morgana": {
           "role": "morgana",
@@ -23,16 +44,41 @@ module.exports = {
           "knowsRole": false,
           "players": {
             "assigned": [
-              "jason"
+              "alex"
             ]
           }
         }
       },
-      "isKing": true
+      "alignment": "good",
+      "teamVote": "notVoted",
+      "isKing": false,
+      "isHammer": false,
+      "isLake": false
     },
-    "wilson": {
+    "bridget": {
+      "role": "mordred",
+      "name": "bridget",
+      "sees": {
+        "morgana": {
+          "role": "morgana",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "alex"
+            ]
+          }
+        }
+      },
+      "alignment": "evil",
+      "teamVote": "notVoted",
+      "isKing": false,
+      "isHammer": true,
+      "isLake": false
+    },
+    "jason": {
       "role": "percival",
-      "name": "wilson",
+      "name": "jason",
       "sees": {
         "merlin": {
           "role": "merlin",
@@ -40,7 +86,7 @@ module.exports = {
           "knowsRole": false,
           "players": {
             "assigned": [
-              "bridget"
+              "wilson"
             ]
           }
         },
@@ -50,61 +96,39 @@ module.exports = {
           "knowsRole": false,
           "players": {
             "assigned": [
-              "jason"
-            ]
-          }
-        }
-      }
-    },
-    "bridget": {
-      "role": "merlin",
-      "name": "bridget",
-      "sees": {
-        "morgana": {
-          "role": "morgana",
-          "alignment": "evil",
-          "knowsRole": false,
-          "players": {
-            "assigned": [
-              "jason"
-            ]
-          }
-        }
-      }
-    },
-    "jason": {
-      "role": "morgana",
-      "name": "jason",
-      "sees": {
-        "mordred": {
-          "role": "mordred",
-          "alignment": "evil",
-          "knowsRole": false,
-          "players": {
-            "assigned": [
               "alex"
             ]
           }
         }
-      }
+      },
+      "alignment": "good",
+      "teamVote": "notVoted",
+      "isKing": false,
+      "isHammer": false,
+      "isLake": false
     },
     "ashwin": {
       "role": "genericGood",
       "name": "ashwin",
-      "sees": {}
+      "sees": {},
+      "alignment": "good",
+      "teamVote": "notVoted",
+      "isKing": false,
+      "isHammer": false,
+      "isLake": false
     }
   },
   "boardInfo": {
-    "playerCount": 5, // total # of players
-    "numGood": 3, // number of good on a team
-    "numEvil": 2, // number of evil on a team
-    "doubleFailRequired": false, // double fail on mission 4
+    "playerCount": 5,
+    "numGood": 3,
+    "numEvil": 2,
+    "doubleFailRequired": false,
     "missions": [
       {
-        "count": 1, // mission number
-        "size": 2, // size of mission
-        "status": "NOT_GONE", // status of mission: NOT_GONE, SUCCESS, FAIL
-        "maxVoteTrack": 5 // max # of picks on a mission, used for thavalon. defaults to 5 for normal avalon
+        "count": 1,
+        "size": 2,
+        "status": "NOT_GONE",
+        "maxVoteTrack": 5
       },
       {
         "count": 2,
@@ -132,18 +156,18 @@ module.exports = {
       }
     ]
   },
-  "kingOrder": [ // order for rendering players. first person is always king
-    "bridget",
-    "wilson",
+  "kingOrder": [
+    "ashwin",
     "alex",
     "jason",
-    "ashwin"
+    "wilson",
+    "bridget"
   ],
-  "currentMission": 1, // what mission # we're on
-  "voteTrack": 1, // how many team proposals its been
-  "proposedTeam": [], // team proposal array, list of strings
-  "teamVoteResult": null, // result of most recent vote
-  "missionVote": { // count of mission votes
+  "currentMission": 1,
+  "voteTrack": 1,
+  "proposedTeam": ['ashwin', 'jason'],
+  "teamVoteResult": null,
+  "missionVote": {
     "success": 0,
     "fail": 0,
     "reverse": 0

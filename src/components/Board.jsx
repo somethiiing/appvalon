@@ -8,6 +8,7 @@ import { fetchRoomData } from '../ApiUtils';
 
 //TODO remove after testing
 const testRoomState = require('../testRoomStateObjects/teamProposal');
+console.log(testRoomState)
 
 const api = 'http://localhost:5000';
 let socket;
@@ -19,14 +20,13 @@ class Board extends React.Component {
     this.state = {
       name: '',
       room: '',
-      roomState: {}
+      roomState: testRoomState//TODO set back to {} after testing
     };
   }
 
   componentDidMount() {
     const { name, room } = this.props;
-    // this.setState({name, room});
-    this.setState({name, room, roomState: testRoomState})
+    this.setState({name, room});
 
     // TODO uncomment - Disabled for testing
     // socket = io(`${api}/`);
@@ -62,6 +62,7 @@ class Board extends React.Component {
         <KingOrder
           kingOrder={kingOrder}
           players={players}
+          proposedTeam={proposedTeam}
         />
         <Missions
           currentMission={currentMission}
