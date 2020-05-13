@@ -171,8 +171,8 @@ describe('testCreateRoleAssignment', () => {
       }
     };
 
-    const expectedAssignedRoles = [
-      {
+    const expectedAssignedRoles = {
+      "wilson": {
         "role": "merlin",
         "name": "wilson",
         "sees": {
@@ -206,9 +206,10 @@ describe('testCreateRoleAssignment', () => {
               ]
             }
           }
-        }
+        },
+        "alignment": "good"
       },
-      {
+      "bridget": {
         "role": "percival",
         "name": "bridget",
         "sees": {
@@ -232,14 +233,16 @@ describe('testCreateRoleAssignment', () => {
               ]
             }
           }
-        }
+        },
+        "alignment": "good"
       },
-      {
+      "vinh": {
         "role": "tristan",
         "name": "vinh",
-        "sees": {}
+        "sees": {},
+        "alignment": "good"
       },
-      {
+      "steven": {
         "role": "assassin",
         "name": "steven",
         "sees": {
@@ -273,9 +276,10 @@ describe('testCreateRoleAssignment', () => {
               ]
             }
           }
-        }
+        },
+        "alignment": "evil"
       },
-      {
+      "kelvin": {
         "role": "mordred",
         "name": "kelvin",
         "sees": {
@@ -309,9 +313,10 @@ describe('testCreateRoleAssignment', () => {
               ]
             }
           }
-        }
+        },
+        "alignment": "evil"
       },
-      {
+      "richard": {
         "role": "morgana",
         "name": "richard",
         "sees": {
@@ -345,24 +350,28 @@ describe('testCreateRoleAssignment', () => {
               ]
             }
           }
-        }
+        },
+        "alignment": "evil"
       },
-      {
+      "alex": {
         "role": "genericGood",
         "name": "alex",
-        "sees": {}
+        "sees": {},
+        "alignment": "good"
       },
-      {
+      "andrew": {
         "role": "genericGood",
         "name": "andrew",
-        "sees": {}
+        "sees": {},
+        "alignment": "good"
       },
-      {
+      "bob": {
         "role": "genericGood",
         "name": "bob",
-        "sees": {}
+        "sees": {},
+        "alignment": "good"
       },
-      {
+      "alice": {
         "role": "genericEvil",
         "name": "alice",
         "sees": {
@@ -396,9 +405,10 @@ describe('testCreateRoleAssignment', () => {
               ]
             }
           }
-        }
+        },
+        "alignment": "evil"
       }
-    ]
+    }
 
     const assignedRoles = createRoleAssignment(playerList, settings, false);
 
