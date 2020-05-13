@@ -178,9 +178,27 @@
   margin-top: 20px;
 }
 
+.Create-room {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+}
 
- @media screen and (max-width: 600px) {
-    .Button {
-      width: 75%;
-    }
+.MuiInput-root.Form-select {
+  margin-top: 20px;
+}
+
+.MuiFormLabel-root.Form-label {
+  margin-top: 30px;
+}
+
+.Form-submit {
+  margin: 30px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .Button {
+    width: 75%;
   }
+}
