@@ -232,10 +232,10 @@ const fivePlayerGameSettings = {
     lakeSetting: 'NONE', // ROLE, ALIGNMENT, NONE
 }
 
-const mission_vote = {
+const missionVote = {
     roomName: 'mango',
     roomOwner: 'alex',
-    status: 'missionVote',
+    status: 'MISSION_VOTE',
     createdAt: 0,
     playerCount: 5,
     lakeSettings: 'NONE',
@@ -298,4 +298,4 @@ const mission_vote = {
     missionVote: []
 }
 
-module.exports = { newGame, inProgress, mission_vote, fivePlayerGameSettings, resetBoard };
+module.exports = { newGame, inProgress, missionVote, fivePlayerGameSettings, resetBoard };
