@@ -154,6 +154,13 @@
   margin-top: 20px;
 }
 
+.MuiDrawer-paperAnchorRight {
+  width: 380px;
+  border-radius: 5px;
+  background-color: #282828;
+  padding: 20px;
+}
+
 
  @media screen and (max-width: 600px) {
     .Button {
