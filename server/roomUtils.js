@@ -141,9 +141,13 @@ const createPlayerObj = (name) => {
   }
 }
 
-const createInitialRoomState = (room, host, settings) => {
+const createInitialRoomState = (room, host, settings, playerObjArr = undefined) => {
   const { playerCount, lakeSetting } = settings;
   const { numGood, numEvil, doubleFailRequired, missionSizes, voteTrack } = missionsData[playerCount];
+
+  if (!playerObjArr){
+    playerObjArr = createPlayerObj(host);
+  }
 
   const boardInfo = {
     playerCount,
@@ -166,7 +170,7 @@ const createInitialRoomState = (room, host, settings) => {
     createdAt: Date.now(),
     playerCount,
     lakeSetting,
-    players: [createPlayerObj(host)],
+    players: playerObjArr,
     boardInfo
   });
 };

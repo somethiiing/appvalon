@@ -21,8 +21,8 @@ const serverstate = {
       "playerCount": 5,
       "lakeSetting": "ROLE",
       "selectedRoles": [],
-      "players": [
-        {
+      "players": {
+        "asdf": {
           "name": "asdf",
           "teamVote": null,
           "role": "",
@@ -30,7 +30,7 @@ const serverstate = {
           "isKing": false,
           "isHammer": false
         }
-      ],
+      },
       "boardInfo": {
         "playerCount": 5,
         "numGood": 3,
