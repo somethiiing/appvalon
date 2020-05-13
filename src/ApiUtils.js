@@ -15,7 +15,7 @@ const joinRoom = ({name, room}) => {
 }
 
 const createRoom = ({settings, host}) => {
-  return axios.post(`${api}/api/createRoom`, {settings, host});
+  return axios.post(`${api}/api/createRoom`, {data: {type: 'CREATE_ROOM', settings, host}});
 }
 
 const dispatchUpdateTeamMembers = ({room, player, teamProposalArray}) => {
