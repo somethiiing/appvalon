@@ -4,7 +4,8 @@ import KingOrder from './KingOrder';
 import Missions from './Missions';
 import ActionArea from './ActionArea';
 
-import { fetchRoomData } from '../ApiUtils';
+import {fetchRoomData} from '../ApiUtils';
+import {TeamSubmission} from "./TeamSubmission";
 
 const api = 'http://localhost:5000';
 let socket;
@@ -43,12 +44,14 @@ class Board extends React.Component {
   }
 
   render() {
+    const boardState = this.state.roomState;
     return (
       <div className="Board">
         <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
         <KingOrder />
         <Missions />
-        <ActionArea />
+        <ActionArea/>
+        <TeamSubmission boardState={boardState} name={this.state.name}/>
       </div>
     );
   }
