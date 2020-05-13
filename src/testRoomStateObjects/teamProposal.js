@@ -29,10 +29,10 @@ module.exports = {
         }
       },
       "alignment": "evil",
-      "teamVote": "notVoted",
+      "teamVote": "reject",
       "isKing": true,
-      "isHammer": false,
-      "isLake": false
+      "isHammer": true,
+      "isLake": true
     },
     "wilson": {
       "role": "merlin",
@@ -50,7 +50,7 @@ module.exports = {
         }
       },
       "alignment": "good",
-      "teamVote": "notVoted",
+      "teamVote": "APPROVE",
       "isKing": false,
       "isHammer": false,
       "isLake": false
@@ -71,9 +71,51 @@ module.exports = {
         }
       },
       "alignment": "evil",
-      "teamVote": "notVoted",
+      "teamVote": "REJECT",
       "isKing": false,
       "isHammer": true,
+      "isLake": false
+    },
+    "fred": {
+      "role": "merlin",
+      "name": "wilson",
+      "sees": {
+        "morgana": {
+          "role": "morgana",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "alex"
+            ]
+          }
+        }
+      },
+      "alignment": "good",
+      "teamVote": "notVoted",
+      "isKing": false,
+      "isHammer": false,
+      "isLake": false
+    },
+    "jesus": {
+      "role": "merlin",
+      "name": "wilson",
+      "sees": {
+        "morgana": {
+          "role": "morgana",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "alex"
+            ]
+          }
+        }
+      },
+      "alignment": "good",
+      "teamVote": "notVoted",
+      "isKing": false,
+      "isHammer": false,
       "isLake": false
     },
     "jason": {
@@ -161,11 +203,16 @@ module.exports = {
     "alex",
     "jason",
     "wilson",
-    "bridget"
+    "bridget",
+    "fred",
+    "jesus",
+    "fred",
+    "alex",
+    "wilson"
   ],
   "currentMission": 1,
   "voteTrack": 1,
-  "proposedTeam": ['ashwin', 'jason'],
+  "proposedTeam": ["ashwin", "jason", "bridget"],
   "teamVoteResult": null,
   "missionVote": {
     "success": 0,
