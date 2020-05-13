@@ -50,6 +50,14 @@
   color: #ccc;
 }
 
+.Text-Bold {
+  font-size: 1.25rem;
+  font-weight: 550;
+  margin-bottom: 5px;
+  padding: 0;
+  color: #ccc;
+}
+
 .Text-Link {
   font-size: 1rem;
   font-weight: 400;
@@ -96,6 +104,14 @@
 
 .Mission.fail {
   background-color: #d10146;
+}
+
+.red {
+  color: #d10146;
+}
+
+.blue {
+  color: #015aff
 }
 
 .Mission-tracker {
@@ -205,7 +221,7 @@
 .MuiDrawer-paperAnchorRight {
   width: 380px;
   border-radius: 5px;
-  background-color: #282828;
+  background-color: #eee;
   padding: 20px;
 }
 

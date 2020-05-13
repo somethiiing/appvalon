@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import KingOrder from './KingOrder';
 import Missions from './Missions';
 import ActionArea from './ActionArea';
+import Header from './Header';
 
 import { fetchRoomData } from '../ApiUtils';
 
@@ -48,6 +49,7 @@ class Board extends React.Component {
   render() {
     return (
       <div className="Board">
+        <Header name={this.props.name} roomState={this.state.roomState} />
         <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
         <KingOrder />
         <Missions />

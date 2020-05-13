@@ -32,6 +32,14 @@ function Highlight(props) {
   );
 }
 
+function Bold(props) {
+  return (
+    <span className="Text-Bold">
+      {props.children}
+    </span>
+  );
+}
+
 function Link(props) {
   return (
     <a href={props.href} target="_blank" className="Text-Link">
@@ -45,5 +53,6 @@ export {
   Heading,
   Sub,
   Link,
-  Highlight
+  Highlight,
+  Bold
 };
