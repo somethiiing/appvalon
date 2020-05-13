@@ -13,7 +13,7 @@ function Player(props) {
   // use this to generate random icon colors on initialization
   const randomColor = "#" + Math.random().toString(16).slice(2, 8);
   return (
-    <div className={`Player ${selected ? 'selected': ''}`}>
+    <button type='button' className={`Player ${selected ? 'selected': ''}`}>
       {king &&
         <FaCrown className='king-icon' size={22} color='#ffbb01' />
       }
@@ -28,7 +28,7 @@ function Player(props) {
       {teamVote === 'reject' && 
         <IoMdClose className='vote-icon' size={25} color='#d10146'/>
       }
-    </div>
+    </button>
   );
 }
 

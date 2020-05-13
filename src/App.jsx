@@ -94,11 +94,13 @@ const testingComponents = () => (
     {
     // the below is for testing component purposes
     }
-    <Mission fail size={2}/>
-    <Mission success size={3}/>
-    <Mission active voteTrack={4} size={2}/>
-    <Mission size={3}/>
-    <Mission size={3}/>
+    <div className='Mission-list'>
+      <Mission fail size={2}/>
+      <Mission success size={3}/>
+      <Mission active voteTrack={4} size={2}/>
+      <Mission size={3}/>
+      <Mission size={3}/>
+    </div>
     <JoinForm/>
     <Card type='success' />
     <Card type='fail' />
