@@ -2,7 +2,7 @@ const assert = require('chai').assert;
 const enums = require('../server/enums');
 const otherUtils = require('../server/otherUtils');
 
-const { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleSubmitAssassination } = require('../server/actionHandlers');
+const { handleGameStart, handleSetTeamMembers, handleSubmitForVote, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination } = require('../server/actionHandlers');
 const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
 
 describe.only('#handleGameStart', () => {
@@ -30,14 +30,14 @@ describe.only('#handleGameStart', () => {
   })
 });
 
-describe.only('#handleUpdateTeamMembers', () => {
-  const playerNames = ['alex', 'bridget'];
-  const result = handleSetTeamMembers(inProgress,  playerNames);
-
-  it('should set proposed players', () => {
-    assert.deepEqual(result.proposedTeam, playerNames)
-  })
-})
+// describe.only('#handleUpdateTeamMembers', () => {
+//   const playerNames = ['alex', 'bridget'];
+//   const result = handleSetTeamMembers(inProgress,  playerNames);
+//
+//   it('should set proposed players', () => {
+//     assert.deepEqual(result.proposedTeam, playerNames)
+//   })
+// })
 
 describe.only('#handleSubmitForVote', () =>{
   const result = handleSubmitForVote(inProgress);
@@ -67,16 +67,40 @@ describe.only('missionVote', () => {
    // first vote increments vote track and the game state is s
    let result1 = handleSubmitMissionVote(initial_state, enums.MissionVote.SUCCESS);
    it('first vote should add to votes and continue voting', () => {
-       assert.equal(result1.missionVote.length , 1);
+       assert.equal(result1.missionVote.success , 1);
        assert.equal(result1.status, enums.GameState.MISSION_VOTE);
    })
     let result2 = otherUtils.deepCopy(result1);
    // complete the rest of the votes
    for (let i = 0; i <= result2.boardInfo.missions[result2.currentMission].maxVoteTrack; i++) {
-       result2 = handleSubmitMissionVote(result2, "test", enums.MissionVote.SUCCESS);
+       result2 = handleSubmitMissionVote(result2, enums.MissionVote.SUCCESS);
     }
    // should move to HANDLE_MISSION_VOTE_RESULTS
     it('when voting is done, it should move to handling the vote results', () => {
         assert.equal(result2.status, enums.GameState.HANDLE_MISSION_VOTE_RESULT);
     });
 });
+
+describe.only('handleMissionVote', () => {
+    // Start on first mission with a vote
+    let room = handleSubmitMissionVote(missionVote, enums.MissionVote.SUCCESS);
+    // Game should still be in voting mode
+    assert.equal(room.status, enums.GameState.MISSION_VOTE);
+    // Last player votes
+    room = handleSubmitMissionVote(room, enums.MissionVote.FAIL);
+    // Game should move on to handle mission votes
+    assert.equal(room.status, enums.GameState.HANDLE_MISSION_VOTE_RESULT);
+    // Handle the mission votes
+    room = handleHandleMissionVoteResult(room);
+    // Mission failed, team proposal
+    assert.equal(room.status, enums.GameState.TEAM_PROPOSAL);
+    // Move to next mission
+    assert.equal(room.currentMission, 2);
+    // Votes reset
+    assert.equal(room.missionVote.success, 0);
+    assert.equal(room.missionVote.failed, 0);
+    assert.equal(room.missionVote.reverse, 0);
+    assert.equal(room.voteTrack, 0);
+
+    }
+)

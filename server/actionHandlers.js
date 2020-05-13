@@ -99,9 +99,20 @@ const handleHandleTeamVoteResult = (room) => {
  */
 const handleSubmitMissionVote = (room, vote) => {
     const newRoom = otherUtils.deepCopy(room);
-    newRoom.missionVote.push(vote);
+    switch(vote) {
+        case enums.MissionVote.FAIL:
+            newRoom.missionVote.fail++;
+            break;
+        case enums.MissionVote.SUCCESS:
+            newRoom.missionVote.success++;
+            break;
+        case enums.MissionVote.REVERSE:
+            newRoom.missionVote.reverse++;
+            break;
+    }
+    const totalVotes = newRoom.missionVote.fail + newRoom.missionVote.success + newRoom.missionVote.reverse;
     // Max votes reached
-    if (newRoom.missionVote.length === helpers.getCurrentMission(newRoom).size) {
+    if (totalVotes === helpers.getCurrentMission(newRoom).size) {
         newRoom.status = enums.GameState.HANDLE_MISSION_VOTE_RESULT;
     }
     return newRoom;
@@ -128,14 +139,14 @@ const handleHandleMissionVoteResult = (room) => {
         currentMission.status = enums.MissionStatus.SUCCESS;
     }
 
-    const gameState = helpers.getGameStateBasedOnMissionStatus(newRoom.missions);
+    const gameState = helpers.getGameStateBasedOnMissionStatus(newRoom.boardInfo.missions);
     //Update the game state
-    newRoom = helpers.setStatus(gameState);
+    newRoom = helpers.setStatus(newRoom, gameState);
     // If the game is not over we need to move things along for the next mission
     if (newRoom.status === enums.GameState.TEAM_PROPOSAL) {
         newRoom.currentMission++;
         newRoom.voteTrack = 0;
-        newRoom.missionVote = [];
+        newRoom.missionVote = { success: 0, failed: 0, reverse: 0};
         newRoom = helpers.shiftKing(newRoom);
         newRoom.status = enums.GameState.TEAM_PROPOSAL;
     }

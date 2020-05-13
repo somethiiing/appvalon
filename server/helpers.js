@@ -86,8 +86,7 @@ const shiftKing = (room) => {
     let currentKing = newRoom.kingOrder.shift();
     newRoom.kingOrder.push(currentKing);
     let futureKing = newRoom.kingOrder.shift();
-    newRoom.players = setKing(futureKing, newRoom.players);
-    return newRoom;
+    return setKing(newRoom, futureKing);
 }
 
 /**
@@ -150,16 +149,14 @@ const unassignRoles = (roomObj) => {
  * @param isDoubleFailRequired
  */
 const isFailedMission = (missionVotes, isDoubleFailRequired) => {
-    const failCount = missionVotes.filter( i => i === enums.MissionVote.FAIL).length;
-    const reverseCount = missionVotes.filter( i => i === enums.MissionVote.REVERSE).length;
     let failed = false;
     // check if mission was successful
-    if ((!isDoubleFailRequired && failCount > 0) ||
-        (isDoubleFailRequired && failCount > 1)) {
+    if ((!isDoubleFailRequired && missionVotes.failed > 0) ||
+        (isDoubleFailRequired && missionVotes.failed > 1)) {
         failed = true;
     }
     // reverse logic
-    if (reverseCount > 0 && reverseCount % 2 === 1) {
+    if (missionVotes.reverse > 0 && missionVotes.reverse % 2 === 1) {
         failed = !failed;
     }
     return failed;
