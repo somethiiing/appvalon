@@ -83,10 +83,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const {name, room, roomState} = this.props;
-    // const boardState = this.state.roomState;
-    // const missionState = this.state.missionState;
-    // const voteState = this.state.voteState;
+    const roomState = this.state.roomState;
     return (
         <div className="Board">
           <Header name={this.state.name} roomState={roomState}/>

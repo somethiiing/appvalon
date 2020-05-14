@@ -82,14 +82,12 @@ class App extends React.Component {
             {this.state.currentPage === 'landing' &&
             <div>
               <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>
-              <button onClick={() => this.changePage('componentTest')}>testingComponents</button>
               <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
               <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
               <button onClick={() => this.changePage('board')}>Board Test</button>
             </div>}
 
           {this.state.currentPage === 'serverTest' && <Test/>}
-          {this.state.currentPage === 'componentTest' && testingComponents()}
           {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
           {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
           {this.state.currentPage === 'board' && <Board name={name} room={room} />}
@@ -98,33 +96,5 @@ class App extends React.Component {
     );
   }
 }
-
-const testingComponents = () => (
-  <div>
-    {
-    // the below is for testing component purposes
-    }
-    <div className='Mission-list'>
-      <Mission fail size={2}/>
-      <Mission success size={3}/>
-      <Mission active voteTrack={4} size={2}/>
-      <Mission size={3}/>
-      <Mission size={3}/>
-    </div>
-    <JoinForm/>
-    <div className='Card-list'>
-      <Card type='success' />
-      <Card type='fail' />
-      <Card type='approve' />
-      <Card type='reject' />
-    </div>
-    <div className='Player-list'>
-      <Player name='Bridget' king selected />
-      <Player name='Wilson' teamVote='REJECT' hammer />
-      <Player name='Alexandra' selected />
-      <Player name='Mehtab' king hammer teamVote='APPROVE' />
-    </div>
-  </div>
-)
 
 export default App;

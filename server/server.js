@@ -83,9 +83,6 @@ app.post('/api/update', (req, res) => {
     case 'SUBMIT_MISSION_VOTE':
       state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
       break;
-    case 'REVEAL_MISSION_VOTE':
-      state[room] = actionHandlers.handleRevealMissionVote(state[room]);
-      break;
     case 'HANDLE_MISSION_VOTE_RESULT':
       state[room] = actionHandlers.handleHandleMissionVoteResult(state[room]);
       break;

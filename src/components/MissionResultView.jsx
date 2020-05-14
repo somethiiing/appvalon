@@ -17,11 +17,11 @@ function MissionResultView(props) {
     const cards = [];
 
     for (let i = 0; i < success; i++) {
-      cards.push(<Card type='success' />)
+      cards.push(<Card disabled type='success' />)
     }
 
     for (let i = 0; i < fail; i++) {
-      cards.push(<Card type='fail' />)
+      cards.push(<Card disabled type='fail' />)
     }
 
     return cards;
