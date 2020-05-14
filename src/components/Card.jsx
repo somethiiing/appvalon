@@ -6,6 +6,7 @@ import { P } from './Text';
 function Card(props) {
   let cardIcon;
 
+
   switch(props.type) {
     case 'approve':
       cardIcon = <IoIosCheckmarkCircleOutline size={92} color='#00d673'/>;

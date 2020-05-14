@@ -18,7 +18,6 @@ app
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, '../build')));
 
-
 const state = {};
 
 app.get('/api/', (req,res) => {
