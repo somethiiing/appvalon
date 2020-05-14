@@ -76,16 +76,14 @@ class App extends React.Component {
           <ThemeProvider theme={theme}>
             {this.state.currentPage === 'landing' &&
             <div>
-              <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>
+              {/*<button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>*/}
               <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
               <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
-              <button onClick={() => this.changePage('board')}>Board Test</button>
             </div>}
 
           {this.state.currentPage === 'serverTest' && <Test/>}
           {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
           {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
-          {this.state.currentPage === 'board' && <Board name={name} exitGame={this.exitGame} room={room} />}
         </ThemeProvider>
       </div>
     );
