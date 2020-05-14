@@ -18,7 +18,7 @@ function VoteResultView(props) {
       const player = players[key];
       const { isKing, isHammer, teamVote, name, hue } = player;
         playersComponents.push(
-          <Player name={name} king={isKing} hammer={isHammer} teamVote={teamVote} hue={hue} />
+          <Player name={name} king={isKing} hammer={isHammer} teamVote={teamVote} hue={hue}/>
         );
     });
 
