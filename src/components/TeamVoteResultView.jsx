@@ -16,9 +16,9 @@ function TeamVoteResultView(props) {
         const playersComponents = [];
         Object.keys(players).map((key, index) => {
             const player = players[key];
-            const {isKing, isHammer, teamVote, name} = player;
+            const {isKing, isHammer, teamVote, name, hue} = player;
             playersComponents.push(
-                <Player name={name} king={isKing} hammer={isHammer} teamVote={teamVote}/>
+                <Player name={name} king={isKing} hammer={isHammer} teamVote={teamVote} hue={hue}/>
             );
         });
 

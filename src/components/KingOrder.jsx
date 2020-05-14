@@ -5,7 +5,7 @@ function KingOrder(props) {
   const {kingOrder, players, proposedTeam, roomState} = props;
 
   function getPlayerComponent(player, roomState) {
-    const {isHammer = false, isKing = false, teamVote = false} = players[player];
+    const {isHammer = false, isKing = false, teamVote = false, hue = 1} = players[player];
     return (
         <Player
             name={player}
@@ -14,6 +14,7 @@ function KingOrder(props) {
             selected={proposedTeam.includes(player)}
             teamVote={teamVote}
             roomState={roomState}
+            hue={hue}
         />
     )
   }

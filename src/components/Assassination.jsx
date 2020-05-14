@@ -50,6 +50,7 @@ export class Assassination extends React.Component {
         const disabled = this.state.target === '';
         const target = this.state.target;
         const candidates = this.state.candidates;
+        const players = this.props.roomState.players;
         const isAssassin = this.props.name === this.state.assassin;
         return (
             <React.Fragment>
@@ -58,7 +59,7 @@ export class Assassination extends React.Component {
                     <div className='PlayerGroup PlayerGroup--KingView'>
                         {candidates.map(name => {
                             return <Player key={name} name={name} selected={target === name}
-                                           onClick={() => this.updateTarget(name)}/>
+                                           onClick={() => this.updateTarget(name)} hue={players[name].hue}/>
                         })}
                     </div>
                     <Button type='button' onClick={this.submitAssassination} disabled={disabled}>Attempt

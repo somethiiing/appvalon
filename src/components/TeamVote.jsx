@@ -39,7 +39,8 @@ class TeamVote extends React.Component {
         return (
             <div>
                 {teamProposalArray.map(name => {
-                    return <Player key={name} name={name} selected={teamProposalArray.includes(name)}/>
+                    return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
+                                   hue={players[name].hue}/>
                 })}
                 <div className='Card-list'>
                     <Card type='approve' onClick={() => this.dispatchTeamVote('APPROVE')}/>
