@@ -33,7 +33,7 @@ class ActionArea extends React.Component {
         return <TeamVoteResultView roomState={roomState} name={name} room={room}/>
       case 'MISSION_VOTE':
         if (proposedTeam.includes(name)) {
-          return (<MissionVote name={name} room={room}/>);
+          return (<MissionVote name={name} room={room} roomState={roomState}/>);
         } else {
           return <P>Please wait while the mission is going</P>;
         }
