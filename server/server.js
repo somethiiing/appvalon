@@ -46,15 +46,16 @@ app.post('/api/joinRoom', (req, res) => {
 
   if (Object.values(players).length < playerCount) {
     state[room] = joinRoom(state[room], name)
+    console.log("room joined")
     res.send({status: 'SUCCESS', name, room});
   } else {
+    console.log("room full")
     res.send({status: 'FULL'});
   }
 
   if (Object.values(players).length === playerCount) {
     state[room] = actionHandlers.handleGameStart(state[room]);
   }
-
   io.emit('UPDATE_STATE', {room, roomState: state[room]});
 });
 
@@ -108,5 +109,9 @@ io.on('connection', socket => {
     console.log('user disconnected')
   });
 });
+
+const checkIfGoTime = () => {
+
+}
 
 console.log(`listening on port: ${PORT}`);
