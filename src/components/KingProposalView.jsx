@@ -79,10 +79,12 @@ export class KingProposalView extends React.Component {
         return (
             <div>
                 <Heading>{name}, select {missionSize} candidates for your mission. </Heading>
-                {kingOrder.map(name => {
-                    return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
-                                   onClick={() => this.updateTeamProposal(name)}/>
-                })}
+                <div className='PlayerGroup PlayerGroup--KingView'>
+                    {kingOrder.map(name => {
+                        return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
+                                       onClick={() => this.updateTeamProposal(name)}/>
+                    })}
+                </div>
                 <Button onClick={this.voteSubmit} disabled={disabled}>Submit For Vote</Button>
             </div>
         );

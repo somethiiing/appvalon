@@ -266,6 +266,10 @@ const setHammer = (roomObj) => {
     return dup;
 }
 
+/**
+ * removes all votes for team from room
+ * @param {RoomObj} roomObj
+ */
 const resetTeamVote = (roomObj) => {
     const dup = otherUtils.deepCopy(roomObj);
 
@@ -292,7 +296,7 @@ const getPlayer = (roomObj, playerName) => {
  */
 const resetPlayerTeamVotes = (players) => {
     const newPlayers = otherUtils.deepCopy(players);
-    newPlayers.forEach(player => {
+    Object.values(newPlayers).forEach(player => {
         player.teamVote = enums.TeamVote.NOT_VOTED;
     })
     return newPlayers;
@@ -308,7 +312,20 @@ const getCurrentMission = (room) => {
     return room.boardInfo.missions[room.currentMission-1];
 }
 
+const addHueToPlayers = (room) => {
+    const dup = otherUtils.deepCopy(room);
+    // ensure an even spread over the 360 different colors frontend can display,
+    // assuming max of 10 players
+    const hueIncrement = 35;
+    let hueValue = 1;
+    Object.values(dup.players).forEach(player => {
+        player.hue = hueValue;
+        hueValue += hueIncrement;
+    })
+    return dup;
+}
+
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
-    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote };
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote, addHueToPlayers };
