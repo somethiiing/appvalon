@@ -6,7 +6,7 @@ import TeamVoteResultView from './TeamVoteResultView';
 import MissionVote from './MissionVote';
 import MissionResultView from './MissionResultView';
 import {P} from './Text';
-
+import Assassination from './Assassination';
 import {dispatchHandleTeamVoteResult} from '../ApiUtils';
 
 class ActionArea extends React.Component {
@@ -30,22 +30,17 @@ class ActionArea extends React.Component {
       case 'TEAM_VOTE':
         return <TeamVote roomState={roomState} name={name}/>;
       case 'DISPLAY_TEAM_VOTE':
-        if (players[name].isKing) {
-          return <button onClick={() => dispatchHandleTeamVoteResult({room, name})}>Continue</button>
-        } else {
-          return <div>todo: display results here</div>;
-        }
+        return <TeamVoteResultView roomState={roomState} name={name} room={room}/>
       case 'MISSION_VOTE':
         if (proposedTeam.includes(name)) {
-          return (<MissionVote name={name} room={room}/>);
+          return (<MissionVote name={name} room={room} roomState={roomState}/>);
         } else {
           return <P>Please wait while the mission is going</P>;
         }
       case 'DISPLAY_MISSION_VOTE':
         return <MissionResultView boardState={roomState} name={name}/>;
-      case 'SUBMIT_ASSASSINATION':
-        // if assassin
-        break;
+      case 'ASSASSINATION':
+        return <Assassination roomState={roomState} name={name} />
       default:
         break;
     }

@@ -9,12 +9,13 @@ const renderEvilWin = () => {
   return <div>Bad wins! Mordred's dark forces of evil triumphs!</div>
 }
 
-export default (props) => {
+function EndGame (props) {
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
-      {props.status === 'GOOD_WIN' && this.renderGoodWin()}
-      {props.status === 'EVIL_WIN' && this.renderEvilWin()}
-      <div style={{width: '2rems'}}><Button onClick={props.exitGame}>Exit Game</Button></div>
+      {props.status === 'GOOD_WIN' && renderGoodWin()}
+      {props.status === 'EVIL_WIN' && renderEvilWin()}
+      <div style={{width: '2rems'}}><Button onClick={window.exitGame}>Exit Game</Button></div>
     </div>
   )
 }
+export default EndGame;
