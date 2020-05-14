@@ -44,35 +44,4 @@ class Card extends React.Component {
     }
 }
 
-/*function Card(props) {
-  let cardIcon;
-
-
-  switch(props.type) {
-    case 'approve':
-      cardIcon = <IoIosCheckmarkCircleOutline size={92} color='#00d673'/>;
-      break;
-    case 'reject':
-      cardIcon = <IoIosCloseCircleOutline size={92} color='#d10146' />;
-      break;
-    case 'success':
-      cardIcon = <GiJeweledChalice size={92} color='#ffbb01' />;
-      break;
-    case 'fail':
-      cardIcon = <GiJeweledChalice size={92} color='#212121' />;
-      break;
-    default:
-      break;
-  }
-  return (
-    <label className='CardWrapper'>
-      <input className={`${props.type}`} type='checkbox'></input>
-      <div className={`Card ${props.type}`} >
-        {cardIcon}
-        <P>{props.type}</P>
-      </div>
-    </label>
-  );
-}*/
-
 export default Card;
