@@ -74,9 +74,8 @@ class Board extends React.Component {
     return (
         <div className="Board">
           <Header name={this.state.name} roomState={voteState} />
-          <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
-          <KingOrder/>
-          <Missions boardState={boardState} />
+          <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam}/>
+          <Missions currentMission={currentMission} boardInfo={boardInfo} voteTrack={voteTrack}/>
           <ActionArea name={name} roomState={roomState} />
           <MissionResultView boardState={missionState} name={this.state.name}/>
           <VoteResultView boardState={voteState} name={this.state.name}/>
