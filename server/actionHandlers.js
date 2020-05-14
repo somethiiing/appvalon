@@ -51,7 +51,7 @@ const handleSubmitTeamVote = (room, player, vote) => {
     let newRoom = otherUtils.deepCopy(room);
 
     const playerObj = Object.values(newRoom.players).find(p => p.name === player);
-    playerObj.teamVote = vote;
+    playerObj.teamVote = vote.toUpperCase();
     return newRoom;
 }
 
@@ -77,11 +77,13 @@ const handleHandleTeamVoteResult = (room) => {
     const isApproved = helpers.isTeamApproved(newRoom.players);
     // Team approved
     if (isApproved) {
+        console.log("proposed team has been approved")
         newRoom = helpers.resetTeamVote(newRoom);
         return helpers.setStatus(newRoom, enums.GameState.MISSION_VOTE);
     } else {
         // Team not approved
         // Game ends if team approval has reached max failures
+        console.log("proposed team has been rejected")
         const currentMission = helpers.getCurrentMission(newRoom);
         if (newRoom.voteTrack === currentMission.maxVoteTrack) {
             return helpers.setStatus(newRoom, enums.GameState.GAME_END)
@@ -106,7 +108,8 @@ const handleHandleTeamVoteResult = (room) => {
  */
 const handleSubmitMissionVote = (room, vote) => {
     const newRoom = otherUtils.deepCopy(room);
-    switch(vote) {
+    console.log("vote recieved: " + vote)
+    switch(vote.toUpperCase()) {
         case enums.MissionVote.FAIL:
             newRoom.missionVote.fail++;
             break;
@@ -120,6 +123,7 @@ const handleSubmitMissionVote = (room, vote) => {
     const totalVotes = newRoom.missionVote.fail + newRoom.missionVote.success + newRoom.missionVote.reverse;
     // Max votes reached
     if (totalVotes === helpers.getCurrentMission(newRoom).size) {
+        console.log("mission votes have been submitted")
         newRoom.status = enums.GameState.HANDLE_MISSION_VOTE_RESULT;
     }
     return newRoom;
@@ -137,14 +141,18 @@ const handleSubmitMissionVote = (room, vote) => {
  */
 const handleHandleMissionVoteResult = (room) => {
     let newRoom = otherUtils.deepCopy(room);
-    const failed = helpers.isFailedMission(newRoom.missionVote, newRoom.boardInfo.doubleFailRequired)
+    console.log(newRoom.boardInfo.doubleFailRequired)
+    //gross magic numbers ewww
+    const failed = helpers.isFailedMission(newRoom.missionVote, newRoom.boardInfo.doubleFailRequired && room.currentMission == 4)
     newRoom = helpers.resetMissionVote(newRoom);
     const currentMission = helpers.getCurrentMission(newRoom);
     if (failed) {
+        console.log("fission mailed.")
         currentMission.status = enums.MissionStatus.FAIL;
     } else {
+        console.log("mission has succeeded!")
         currentMission.status = enums.MissionStatus.SUCCESS;
-    }
+}
 
     const gameState = helpers.getGameStateBasedOnMissionStatus(newRoom.boardInfo.missions);
     //Update the game state
@@ -169,15 +177,17 @@ const handleHandleMissionVoteResult = (room) => {
  */
 const handleSubmitAssassination = (room, target) => {
     let success = false;
-    for (let player of room.players) {
+    for (let player of Object.values(room.players)) {
         if (player.name === target && player.role === enums.Roles.MERLIN) {
             success = true;
             break;
         }
     }
     if(success) {
+        console.log("merlin has been assassinated!")
         return helpers.setStatus(room, enums.GameState.EVIL_WIN);
     } else {
+        console.log('the loyal servants of king arthur are victorious!')
         return helpers.setStatus(room, enums.GameState.GOOD_WIN);
     }
 }

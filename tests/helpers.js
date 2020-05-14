@@ -130,7 +130,7 @@ describe.only('#reinitializeBoard', () => {
 
 
 describe.only('isFailedMission', () => {
-    const missionVotes1 = { success: 1, fail: 1, reverse: 0 };
+    const missionVotes1 = { success: 2, fail: 1, reverse: 0 };
     const result1 = isFailedMission(missionVotes1, false);
 
     it('one fail vote causes mission failure in single fail required', () => {

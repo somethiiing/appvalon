@@ -14,25 +14,25 @@ const Roles = {
 Object.freeze(Roles)
 
 const MissionStatus = {
-    SUCCESS: "success",
-    FAIL: "fail",
-    NOT_GONE: "notGone"
+    SUCCESS: "SUCCESS",
+    FAIL: "FAIL",
+    NOT_GONE: "NOT_GONE"
 };
 
 Object.freeze(MissionStatus)
 
 const TeamVote = {
-    APPROVE: "approve",
-    REJECT: "reject",
-    NOT_VOTED: "notVoted"
+    APPROVE: "APPROVE",
+    REJECT: "REJECT",
+    NOT_VOTED: "NOT_VOTED"
 };
 
 Object.freeze(TeamVote)
 
 const MissionVote = {
-    SUCCESS: "success",
-    FAIL: "fail",
-    REVERSE: "reverse"
+    SUCCESS: "SUCCESS",
+    FAIL: "FAIL",
+    REVERSE: "REVERSE"
 }
 
 Object.freeze(MissionVote)

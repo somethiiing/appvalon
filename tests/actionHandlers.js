@@ -92,6 +92,8 @@ describe.only('integrationTest', () => {
     room = roomUtils.joinRoom(room, "jason");
 
     room = handleGameStart(room);
+    assert.equal(room.currentMission, 1);
+
     room = handleUpdateTeamMembers(room, 'alex', 'bridget');
     room = handleSubmitForVote(room);
     // Everyone submits their vote
@@ -109,13 +111,17 @@ describe.only('integrationTest', () => {
     // Game should still be in voting mode
     assert.equal(room.status, enums.GameState.MISSION_VOTE);
     // Last player votes
-    room = handleSubmitMissionVote(room, enums.MissionVote.FAIL);
+    room = handleSubmitMissionVote(room, enums.MissionVote.SUCCESS);
     // Game should move on to handle mission votes
+  assert.equal(room.currentMission, 1);
+
     assert.equal(room.status, enums.GameState.HANDLE_MISSION_VOTE_RESULT);
     // Handle the mission votes
     room = handleHandleMissionVoteResult(room);
     // Mission failed, team proposal
+
     assert.equal(room.status, enums.GameState.TEAM_PROPOSAL);
+
     it('game moves on to 2nd mission', () => {
         // Move to next mission
         assert.equal(room.currentMission, 2);
@@ -125,5 +131,6 @@ describe.only('integrationTest', () => {
         assert.equal(room.missionVote.reverse, 0);
         assert.equal(room.voteTrack, 0);
     });
-    }
+   }
+
 )
