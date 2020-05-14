@@ -19,7 +19,8 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run build && node server/server.js",
+    "start:watch": "npm run build && nodemon server/server.js",
     "build": "react-scripts build",
     "test": "mocha ./tests",
     "eject": "react-scripts eject"
