@@ -37,7 +37,7 @@ function VoteResultView(props) {
         {renderPlayers()}
       </div>
       {(props.name === kingOrder[0]) && 
-        <Button onClick={onClick}>Continue</Button>
+        <Button onClick={onClick}>Contifnue</Button>
       }
     </div>
   );

@@ -27,3 +27,8 @@
 .PlayerGroup--PlayerView .Player {
 	pointer-events: none;
 }
+.LayoutGroup--KingProposalView,
+.Vote-Result,
+.Mission-Result {
+	margin-bottom: 5rem;
+}
