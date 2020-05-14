@@ -34,7 +34,8 @@ class TeamVote extends React.Component {
         const players = this.props.roomState.players;
         const teamProposalArray = this.props.roomState.proposedTeam;
         const isKing = this.props.name === this.props.roomState.kingOrder[0];
-        const anyNotVoted = this.props.roomState.kingOrder.filter(player => players[player].teamVote !== "NOT_VOTED").length !== 0;
+        const anyNotVoted = this.props.roomState.kingOrder.filter(player => players[player].teamVote === "NOT_VOTED").length !== 0;
+        console.log(isKing, anyNotVoted, players);
         return (
             <div>
                 {teamProposalArray.map(name => {

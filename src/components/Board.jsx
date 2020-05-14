@@ -74,7 +74,7 @@ class Board extends React.Component {
     } else {
       return (
           <React.Fragment>
-            <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam}/>
+            <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam} roomState={roomState}/>
             <Missions currentMission={currentMission} boardInfo={boardInfo} voteTrack={voteTrack}/>
             <ActionArea name={name} room={room} roomState={roomState}/>
           </React.Fragment>
