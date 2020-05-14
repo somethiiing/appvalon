@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './Card';
 import { dispatchSubmitMissionVote } from '../ApiUtils';
+import { throttle } from '../utils';
 
 class MissionVote extends React.Component {
   constructor(props) {

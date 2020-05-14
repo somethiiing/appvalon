@@ -18,22 +18,47 @@
 }
 
 .PlayerGroup {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .PlayerGroup--KingView {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .PlayerGroup--PlayerView .Player {
-	pointer-events: none;
+  pointer-events: none;
 }
 .LayoutGroup--KingProposalView,
 .Vote-Result,
 .Mission-Result {
-	margin-bottom: 5rem;
+  margin-bottom: 5rem;
 }
 
 .ActionArea {
-	margin-bottom: 5rem;
+  margin-bottom: 5rem;
+}
+
+.KingOrder {
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Portrait and Landscape */
+@media (max-width:767px) {
+  .Board:before {
+    content: '';
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: transparent;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    box-shadow: inset 0px -20px 25px 20px black;
+  }
 }

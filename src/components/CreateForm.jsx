@@ -19,18 +19,18 @@ export default class CreateForm extends React.Component {
     // TODO set default role choices based on player number
     this.state = {
       name: '', // host name
-      playerCount: 7,
+      playerCount: 5,
       lakeSetting: 'ALIGNMENT',
 
       merlin: true, //bool
       percival: true, //bool
       tristan: false, //bool
       iseult: false, //bool
-      numGenGood: 2, //num
+      numGenGood: 1, //num
 
       assassin: true, //bool
       mordred: true, //bool
-      morgana: true, //bool
+      morgana: false, //bool
       oberon: false, //bool
       noberon: false, //bool
       numGenEvil: 0 //num
@@ -232,7 +232,7 @@ export default class CreateForm extends React.Component {
         </FormControl>
         {/* SUBMIT */}
         <div className='Form-submit'>
-          <Button><div onClick={this.handleOnSubmit}>Create Room</div></Button>
+          <Button onClick={this.handleOnSubmit}>Create Room</Button>
         </div>
       </div>
     );

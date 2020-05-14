@@ -17,7 +17,8 @@ function Player(props) {
   // use this to generate random icon colors on initialization
   // const randomColor = "#" + Math.random().toString(16).slice(2, 8);
   // Your colors are better but without access to the keyed layers to do a proper offset, this does the trick.
-  const randomNumber = hue ? hue : Math.floor(Math.random() * Math.floor(360));
+  // const randomNumber = hue ? hue : Math.floor(Math.random() * Math.floor(360));
+  const randomNumber = hue ? hue : 1;
 
   return (
       <button type='button' className={`Player ${selected ? 'selected' : ''}`} onClick={onClick}>
@@ -30,7 +31,7 @@ function Player(props) {
 
           <Avatar className='avatar' style={{filter: `hue-rotate(` + randomNumber + `deg)`}}/>
           <Sub>{name}</Sub>
-      {teamVote === 'APPROVE' && 
+      {teamVote === 'APPROVE' &&
         <FcCheckmark className='vote-icon' size={25} color='#00d673'/>
       }
       {teamVote === 'REJECT' &&

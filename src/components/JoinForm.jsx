@@ -46,7 +46,7 @@ export default class JoinForm extends React.Component {
   fetchRoomList() {
     fetchRoomList()
       .then( res => {
-        this.setState({roomList: res.data.roomList, room: res.data.roomList[0]});
+        this.setState({roomList: res.data.roomList.reverse(), room: res.data.roomList[0]});
 
         const previousRoom = window.localStorage.getItem('room');
         if(res.data.roomList.includes(previousRoom)) {
@@ -69,7 +69,7 @@ export default class JoinForm extends React.Component {
       .then( res => {
         const { status } = res.data;
         this.props.handleSubmit({status, name, room})
-        setRelogToken({player: name, room});
+        // setRelogToken({player: name, room});
       });
   }
 

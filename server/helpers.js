@@ -53,6 +53,7 @@ const assignRoles = (roomObj, playerNames, settings) => {
     dup.players = roleUtils.createRoleAssignment(playerNames, settings)
     Object.values(dup.players).forEach((player) => {
         player.teamVote = enums.TeamVote.NOT_VOTED;
+        player.missionVote = enums.MissionVote.NOT_VOTED;
         player.isKing = false;
         player.isHammer = false;
         player.isLake = false;
@@ -284,7 +285,9 @@ const resetTeamVote = (roomObj) => {
 
 const resetMissionVote = (roomObj) => {
     const dup = otherUtils.deepCopy(roomObj);
-
+    Object.values(roomObj.players).forEach((player) => {
+        player.missionVote = enums.MissionVote.NOT_VOTED;
+    })
     dup.missionVote = otherUtils.deepCopy(DEFAULT_MISSION_VOTE);
 
     return dup;
@@ -336,4 +339,4 @@ const addHueToPlayers = (room) => {
 module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
-    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote, addHueToPlayers };
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote, addHueToPlayers, getPlayer };
