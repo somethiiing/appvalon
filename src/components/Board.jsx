@@ -46,12 +46,13 @@ class Board extends React.Component {
   }
 
   render() {
+    const { name, roomState } = this.state;
     return (
       <div className="Board">
         <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
         <KingOrder />
         <Missions />
-        <ActionArea />
+        <ActionArea name={name} roomState={roomState} />
       </div>
     );
   }

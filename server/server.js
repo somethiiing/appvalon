@@ -29,6 +29,7 @@ app.post('/api/createRoom', (req, res) => {
   state[room] = createInitialRoomState(room, host, settings);
   res.send({room, host, roomState: state[room]});
   io.emit('UPDATE_ROOMLIST', {roomList: Object.keys(state)});
+  console.log('Room created :', room);
 });
 
 app.get('/api/getRoomList', (req, res) => {
@@ -103,9 +104,7 @@ app.get('*', (req,res) =>{
 });
 
 io.on('connection', socket => {
-  console.log('user connected');
   socket.on('disconnect', testdata => {
-    console.log('user disconnected')
   });
 });
 
