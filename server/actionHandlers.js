@@ -17,6 +17,7 @@ const handleGameStart = (roomObj ) => {
     roomObj = helpers.setSelectedRoles(roomObj);
     roomObj = helpers.setHammer(roomObj);
     roomObj = helpers.addHueToPlayers(roomObj);
+    roomObj = helpers.addAssassin(roomObj);
     if (roomObj.lakeSetting !== enums.LakeSettings.NONE){
         roomObj = helpers.setLake(roomObj, roomObj.kingOrder[roomObj.kingOrder.length - 1])
     }
@@ -78,7 +79,7 @@ const handleHandleTeamVoteResult = (room) => {
     // Team approved
     if (isApproved) {
         console.log("proposed team has been approved")
-        newRoom = helpers.resetPlayerTeamVotes(newRoom);
+        newRoom.players = helpers.resetPlayerTeamVotes(newRoom.players);
         return helpers.setStatus(newRoom, enums.GameState.MISSION_VOTE);
     } else {
         // Team not approved
