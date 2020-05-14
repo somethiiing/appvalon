@@ -58,7 +58,7 @@ class Board extends React.Component {
         <div className="Board">
           <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
           <KingOrder/>
-          <Missions/>
+          <Missions boardState={boardState} />
           <ActionArea/>
           {/*this KingProposalView here is just for testing*/}
           {<KingProposalView roomState={boardState} name={this.state.name}/>}
