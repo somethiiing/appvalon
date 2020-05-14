@@ -5,35 +5,34 @@ import Player from './Player';
 import {dispatchHandleTeamVoteResult} from "../ApiUtils";
 
 function TeamVoteResultView(props) {
-    const {currentMission, missionVote, kingOrder, roomName, voteTrack, teamVoteResult, players} = props.boardState;
-
-    const onClick = () => {
-        // enable this when backend doesn't crash
-        // dispatchHandleTeamVoteResult(roomName, kingOrder[0]);
-    }
-
-    const renderPlayers = () => {
-        const playersComponents = [];
-        Object.keys(players).map((key, index) => {
-            const player = players[key];
-            const {isKing, isHammer, teamVote, name} = player;
-            playersComponents.push(
-                <Player name={name} king={isKing} hammer={isHammer} teamVote={teamVote}/>
-            );
-        });
-
-        return playersComponents;
-    }
+    const { room, name, roomState } = props;
+    const {currentMission, kingOrder, voteTrack, players} = roomState;
+    const numApproved = kingOrder.filter((player) => {
+      return players[player].teamVote === 'APPROVE'
+    }).length;
+    const numRejected = kingOrder.filter((player) => {
+      return players[player].teamVote === 'REJECT'
+    }).length;
+    const teamApproved = numApproved > numRejected;
+    // const renderPlayers = () => {
+    //     const playersComponents = [];
+    //     Object.keys(players).map((key, index) => {
+    //         const player = players[key];
+    //         const {isKing, isHammer, teamVote, name} = player;
+    //         playersComponents.push(
+    //             <Player name={name} king={isKing} hammer={isHammer} teamVote={teamVote}/>
+    //         );
+    //     });
+    //
+    //     return playersComponents;
+    // }
 
     return (
         <div className="Vote-Result">
             <Sub>Vote Results for Mission #{currentMission}, Proposal #{voteTrack}</Sub>
-            <P>{teamVoteResult === 'APPROVE' ? 'This proposed mission was approved.' : 'This proposed mission was rejected.'}</P>
-            <div className='Player-list'>
-                {renderPlayers()}
-            </div>
+            <P>{teamApproved ? 'This proposed mission was approved.' : 'This proposed mission was rejected.'}</P>
             {(props.name === kingOrder[0]) &&
-            <Button onClick={onClick}>Continue</Button>
+            <Button onClick={() => dispatchHandleTeamVoteResult({room, name})}>Continue</Button>
             }
         </div>
     );
