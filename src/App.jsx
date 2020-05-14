@@ -25,8 +25,8 @@ class App extends React.Component {
       // serverTest, componentTest
       // landing, joinRoomPage, createRoomPage, board
       currentPage: 'landing',
-      name: 'ashwin',
-      room: 'mango'
+      name: '',
+      room: ''
     };
 
     this.changePage = this.changePage.bind(this);
@@ -84,6 +84,7 @@ class App extends React.Component {
           {this.state.currentPage === 'serverTest' && <Test/>}
           {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
           {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
+          {this.state.currentPage === 'board' && <Board name={this.state.name} room={this.state.room} />}
         </ThemeProvider>
       </div>
     );
