@@ -1,6 +1,6 @@
 const missionsData = require('./missionsData');
 const { deepCopy } = require('./otherUtils');
-
+const enums = require('./enums')
 const fruits = {
   'apple': false,
   'apricot': false,
@@ -74,7 +74,7 @@ const defaultState = {
   currentMission: 1,
   voteTrack: 1,
   proposedTeam: [],
-  teamVoteResult: null,
+  teamVoteResult: enums.TeamVote.NOT_VOTED,
   missionVote: {
     success: 0,
     fail: 0,
