@@ -60,12 +60,13 @@ const renderRoleInfo = (name, room) => {
     return <P>Your role info will show up here.</P>
   }
 
-  let roleInfo = `You are ${currentPlayer.role === 'genericGood' ? 'Generic Good' : currentPlayer.role}. You are ${currentPlayer.alignment || 'neutral'}.`;
+  let roleInfo = `${room.players.name}, you are ${currentPlayer.role === 'genericGood' ? 'Generic Good' : currentPlayer.role}. You are ${currentPlayer.alignment || 'neutral'}.`;
 
   if (currentPlayer.role === 'genericGood') {
-    roleInfo = 'You are Generic Good.'
+    roleInfo = `${room.players.name}, you are Generic Good.`
   } else {
-    roleInfo = <Sub>You are {currentPlayer.role}. You are <span className={`${currentPlayer.alignment === 'evil' ? 'red' : 'blue'}`}>{currentPlayer.alignment}</span>.</Sub>;
+    roleInfo = <Sub>{room.players.name}, you are {currentPlayer.role}. You are <span
+        className={`${currentPlayer.alignment === 'evil' ? 'red' : 'blue'}`}>{currentPlayer.alignment}</span>.</Sub>;
   }
 
   const sees = currentPlayer.sees;
@@ -135,7 +136,8 @@ const renderRoleInfo = (name, room) => {
   }
   seeInfo.push(noteInfo);
 
-  const countNote = <Sub>There are {room.boardInfo.numGood} good players and {room.boardInfo.numEvil} players.</Sub>
+  const countNote = <Sub>There are {room.boardInfo.numGood} good players and {room.boardInfo.numEvil} evil
+    players.</Sub>
   seeInfo.push(countNote);
 
   return <div>
