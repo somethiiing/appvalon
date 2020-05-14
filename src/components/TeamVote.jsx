@@ -33,8 +33,7 @@ class TeamVote extends React.Component {
         }
         const players = this.props.roomState.players;
         const teamProposalArray = this.props.roomState.proposedTeam;
-        const isKing = this.props.name === this.props.roomState.kingOrder[0];
-        const canReveal = this.props.roomState.kingOrder.filter(player => players[player].teamVote === "notVoted").length === 0;
+        const anyNotVoted = this.props.roomState.kingOrder.filter(player => players[player].teamVote !== "NOT_VOTED").length !== 0;
         return (
             <div>
                 {teamProposalArray.map(name => {
@@ -44,7 +43,7 @@ class TeamVote extends React.Component {
                     <Card type='approve' onClick={() => this.dispatchTeamVote('APPROVE')}/>
                     <Card type='reject' onClick={() => this.dispatchTeamVote('REJECT')}/>
                 </div>
-                {isKing && <Button onClick={this.showVoteResult} disabled={!canReveal}>Reveal Votes</Button>}
+                {isKing && <Button onClick={this.showVoteResult} disabled={anyNotVoted}>Reveal Votes</Button>}
             </div>
         );
     }
