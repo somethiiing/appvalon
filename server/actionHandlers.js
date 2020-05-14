@@ -79,7 +79,7 @@ const handleHandleTeamVoteResult = (room) => {
     // Team approved
     if (isApproved) {
         console.log("proposed team has been approved")
-        newRoom = helpers.resetPlayerTeamVotes(newRoom);
+        newRoom.players = helpers.resetPlayerTeamVotes(newRoom.players);
         return helpers.setStatus(newRoom, enums.GameState.MISSION_VOTE);
     } else {
         // Team not approved
