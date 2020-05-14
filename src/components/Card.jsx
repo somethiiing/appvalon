@@ -36,11 +36,11 @@ class Card extends React.Component {
         }
         return (
             <div className='CardWrapper' onClick={this.handleOnClick}>
-                <input disabled={this.props.disabled} className={`${this.props.type}`} type='checkbox'></input>
-                <div className={`Card ${this.props.type}`}>
-                    {cardIcon}
-                    <P>{this.props.type}</P>
-                </div>
+                  <input disabled={this.props.disabled} className={`${this.props.type}`} name={this.props.inputName} type={this.props.inputType}></input>
+                  <div className={`Card ${this.props.type}`}>
+                      {cardIcon}
+                      <P>{this.props.type}</P>
+                  </div>
             </div>
         );
     }
