@@ -9,7 +9,6 @@ export default class WaitingArea extends React.Component {
 
   generateSelectedRolesList(settings) {
     let result = [];
-    console.log("creating roles with settings: " + JSON.stringify(settings), null, 2)
     const { selectedRoles = {} } = settings;
     const { genericGood, genericEvil, numGenEvil, numGenGood } = selectedRoles;
     let rolesKeys = Object.keys(selectedRoles);

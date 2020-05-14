@@ -49,7 +49,6 @@ class App extends React.Component {
   }
 
   handleCreateRoom({name, room}) {
-    console.log('handlecreateroom', name, room)
     this.setState({name, room});
     this.changePage('board');
   }
@@ -75,10 +74,6 @@ class App extends React.Component {
     return (
       <div className="App">
           <ThemeProvider theme={theme}>
-              {/*/!* <div>*/}
-              {/*  <button onClick={() => this.changePage('testing')}>testingComponents</button>*/}
-            {/*</div> *!/*/}
-            {/*<KingProposalView/>*/}
             {this.state.currentPage === 'landing' &&
             <div>
               <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>

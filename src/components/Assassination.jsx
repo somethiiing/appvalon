@@ -18,10 +18,7 @@ export default class Assassination extends React.Component {
     submitAssassination = () => {
         const playerName = this.props.name;
         const roomName = this.props.roomState.roomName;
-        dispatchSubmitAssassination({room: roomName, player: playerName, assassinationTarget: this.state.target})
-            .then(res => {
-                console.log(res)
-            });
+        dispatchSubmitAssassination({room: roomName, player: playerName, assassinationTarget: this.state.target});
     }
 
     updateTarget(candidate) {

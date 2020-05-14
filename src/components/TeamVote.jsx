@@ -11,19 +11,11 @@ class TeamVote extends React.Component {
             room: this.props.roomState.roomName,
             player: this.props.name,
             teamVote: vote
-        }).then(r => {
-            console.log(r);
-        }).catch(e => {
-            console.log(e);
-        })
+        });
     }
 
     showVoteResult = () => {
-        dispatchRevealTeamVote({room: this.props.roomState.roomName, player: this.props.name}).then(r => {
-            console.log(r);
-        }).catch(e => {
-            console.log(e);
-        })
+        dispatchRevealTeamVote({room: this.props.roomState.roomName, player: this.props.name});
     }
 
 

@@ -34,7 +34,6 @@ class Board extends React.Component {
 
   componentDidMount() {
     const {name, room} = this.props;
-    console.log('props', name, room, this.props)
     this.setState({name, room});
 
     socket = io(`${api}/`);
@@ -42,7 +41,6 @@ class Board extends React.Component {
 
     fetchRoomData({room})
         .then(res => {
-          console.log('data fetch', res.data)
           this.setState({roomState: res.data.roomState});
         });
   }
@@ -67,7 +65,6 @@ class Board extends React.Component {
       boardInfo, kingOrder, currentMission, voteTrack,
       proposedTeam, teamVoteResult, missionVote
     } = this.state.roomState;
-    console.log(status)
     if (!status) {
       return null;
     } else if (status === 'WAITING_FOR_PLAYERS') {

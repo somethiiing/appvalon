@@ -35,10 +35,7 @@ export default class KingProposalView extends React.Component {
     voteSubmit = () => {
         const playerName = this.props.name;
         const roomName = this.props.roomState.roomName;
-        dispatchSubmitForVote({room: roomName, player: playerName})
-            .then(res => {
-                console.log(res)
-            });
+        dispatchSubmitForVote({room: roomName, player: playerName});
     }
 
     updateTeamProposal(candidate) {
@@ -58,10 +55,7 @@ export default class KingProposalView extends React.Component {
             }
         }
         if (valid) {
-            dispatchUpdateTeamMembers({player: playerName, room: roomName, teamProposalArray: teamProposal})
-                .then(res => {
-                    console.log(res)
-                });
+            dispatchUpdateTeamMembers({player: playerName, room: roomName, teamProposalArray: teamProposal});
             //should setState be removed once this state is being passed in via props?
             // updated state should trigger new render
             this.setState({
