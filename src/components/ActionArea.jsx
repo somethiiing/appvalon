@@ -1,4 +1,5 @@
 import React from 'react';
+import MissionVote from './MissionVote';
 
 class ActionArea extends React.Component {
   constructor(props) {
@@ -48,9 +49,11 @@ class ActionArea extends React.Component {
   }
 
   render() {
+    //MissionVote currently here for testing
+    const { name, room } = this.props;
     return (
-      <div className='ActionArea'>
-
+      <div className="ActionArea">
+        <MissionVote name={name} room={room} />
       </div>
     );
   }

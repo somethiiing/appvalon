@@ -22,15 +22,15 @@ class Board extends React.Component {
 
     this.state = {
       //testing stuff
-      name: 'Jesus',
-      room: 'mango',
+      name: '',
+      room: '',
       roomState: testRoomState
     };
   }
 
   componentDidMount() {
     const {name, room} = this.props;
-    // this.setState({name, room});
+    this.setState({name, room});
     //
     // socket = io(`${api}/`);
     // socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
@@ -54,18 +54,15 @@ class Board extends React.Component {
   }
 
   render() {
-    const { name, roomState } = this.props;
+    const { name, room } = this.props;
     const boardState = this.state.roomState;
+
     return (
         <div className="Board">
           <Header name={this.props.name} roomState={this.state.roomState} />
-          <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
-          <KingOrder/>
+          <KingOrder />
           <Missions boardState={boardState} />
-          <ActionArea name={name} roomState={roomState} />
-          {/*this KingProposalView here is just for testing*/}
-          {<KingProposalView roomState={boardState} name={this.state.name}/>}
-          {<NonKingProposalView roomState={boardState} name={this.state.name}/>}
+          <ActionArea name={name} room={room} roomState={boardState} />
         </div>
     );
   }
