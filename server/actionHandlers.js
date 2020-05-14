@@ -78,7 +78,7 @@ const handleHandleTeamVoteResult = (room) => {
     // Team approved
     if (isApproved) {
         console.log("proposed team has been approved")
-        newRoom = helpers.resetTeamVote(newRoom);
+        newRoom = helpers.resetPlayerTeamVotes(newRoom);
         return helpers.setStatus(newRoom, enums.GameState.MISSION_VOTE);
     } else {
         // Team not approved
@@ -174,7 +174,6 @@ const handleHandleMissionVoteResult = (room) => {
         newRoom = helpers.shiftKing(newRoom);
         newRoom.status = enums.GameState.TEAM_PROPOSAL;
     }
-
     return newRoom;
 }
 
