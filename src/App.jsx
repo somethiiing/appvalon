@@ -25,8 +25,8 @@ class App extends React.Component {
       // serverTest, componentTest
       // landing, joinRoomPage, createRoomPage, board
       currentPage: 'landing',
-      name: '',
-      room: ''
+      name: 'ashwin',
+      room: 'mango'
     };
 
     this.changePage = this.changePage.bind(this);
