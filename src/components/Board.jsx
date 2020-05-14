@@ -4,6 +4,7 @@ import KingOrder from './KingOrder';
 import Missions from './Missions';
 import ActionArea from './ActionArea';
 import Header from './Header';
+import EndGame from './EndGame';
 
 import {fetchRoomData} from '../ApiUtils';
 import WaitingArea from "./WaitingArea";
@@ -88,6 +89,9 @@ class Board extends React.Component {
         <div className="Board">
           <Header name={this.state.name} roomState={roomState}/>
           {this.renderBoard()}
+          {(roomState.status === 'EVIL_WIN' || roomState.status === 'GOOD_WIN')
+            && <EndGame status={roomState.status} exitGame={this.props.exitGame} />
+          }
         </div>
     );
   }
