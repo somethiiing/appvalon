@@ -49,6 +49,7 @@ class App extends React.Component {
   }
 
   handleCreateRoom({name, room}) {
+    console.log('handlecreateroom', name, room)
     this.setState({name, room});
     this.changePage('board');
   }

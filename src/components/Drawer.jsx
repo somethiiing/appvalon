@@ -54,12 +54,12 @@ const useStyles = makeStyles((theme) => ({
 
 const renderRoleInfo = (name, room) => {
 
-  const currentPlayer = room.players[name];
+  const currentPlayer = room && room.players && room.players[name];
 
   if (!currentPlayer) {
     return <P>Your role info will show up here.</P>
   }
-  
+
   let roleInfo = `You are ${currentPlayer.role === 'genericGood' ? 'Generic Good' : currentPlayer.role}. You are ${currentPlayer.alignment || 'neutral'}.`;
 
   if (currentPlayer.role === 'genericGood') {

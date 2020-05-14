@@ -8,8 +8,8 @@ class TeamVote extends React.Component {
 
     dispatchTeamVote = (vote) => {
         dispatchSubmitTeamVote({
-            player: this.props.roomState.roomName,
-            vote: this.props.name,
+            room: this.props.roomState.roomName,
+            player: this.props.name,
             teamVote: vote
         }).then(r => {
             console.log(r);
