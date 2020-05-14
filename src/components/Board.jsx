@@ -9,7 +9,7 @@ import EndGame from './EndGame';
 import {fetchRoomData} from '../ApiUtils';
 import WaitingArea from "./WaitingArea";
 
-const api = 'http://localhost:5000';
+const api = '';
 let socket;
 
 //TODO remove after testing

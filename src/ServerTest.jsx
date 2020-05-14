@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-const api = 'http://localhost:5000'
+const api = ''
 
 let socket;
 

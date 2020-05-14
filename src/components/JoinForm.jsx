@@ -12,7 +12,7 @@ import { setRelogToken } from '../utils';
 
 let socket;
 
-let api = 'http://localhost:5000';
+let api = '';
 
 export default class JoinForm extends React.Component {
   constructor(props) {

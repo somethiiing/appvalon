@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = 'http://localhost:5000';
+const api = '';
 
 const fetchRoomList = () => {
   return axios.get(`${api}/api/getRoomList`);
