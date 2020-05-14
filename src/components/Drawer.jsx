@@ -63,9 +63,9 @@ const renderRoleInfo = (name, room) => {
   let roleInfo = `${room.players.name}, you are ${currentPlayer.role === 'genericGood' ? 'Generic Good' : currentPlayer.role}. You are ${currentPlayer.alignment || 'neutral'}.`;
 
   if (currentPlayer.role === 'genericGood') {
-    roleInfo = `${room.players.name}, you are Generic Good.`
+    roleInfo = `${name}, you are Generic Good.`
   } else {
-    roleInfo = <Sub>{room.players.name}, you are {currentPlayer.role}. You are <span
+    roleInfo = <Sub>{name}, you are {currentPlayer.role}. You are <span
         className={`${currentPlayer.alignment === 'evil' ? 'red' : 'blue'}`}>{currentPlayer.alignment}</span>.</Sub>;
   }
 
