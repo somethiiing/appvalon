@@ -25,8 +25,8 @@ class App extends React.Component {
       // serverTest, componentTest
       // landing, joinRoomPage, createRoomPage, board
       currentPage: 'landing',
-      name: '',
-      room: ''
+      name: 'ashwin',
+      room: 'mango'
     };
 
     this.changePage = this.changePage.bind(this);
@@ -87,7 +87,7 @@ class App extends React.Component {
               <button onClick={() => this.changePage('board')}>Board Test</button>
             </div>}
 
-              {this.state.currentPage === 'serverTest' && <Test/>}
+          {this.state.currentPage === 'serverTest' && <Test/>}
           {this.state.currentPage === 'componentTest' && testingComponents()}
           {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
           {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
@@ -119,9 +119,9 @@ const testingComponents = () => (
     </div>
     <div className='Player-list'>
       <Player name='Bridget' king selected />
-      <Player name='Wilson' teamVote='reject' hammer />
+      <Player name='Wilson' teamVote='REJECT' hammer />
       <Player name='Alexandra' selected />
-      <Player name='Mehtab' king hammer teamVote='approve' />
+      <Player name='Mehtab' king hammer teamVote='APPROVE' />
     </div>
   </div>
 )

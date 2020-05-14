@@ -15,3 +15,20 @@
 .Mission-wrapper {
   scroll-snap-align: center;
 }
+
+.PlayerGroup {
+	margin-bottom: 1rem;
+}
+
+.PlayerGroup--KingView {
+	margin-bottom: 1rem;
+}
+
+.PlayerGroup--PlayerView .Player {
+	pointer-events: none;
+}
+.LayoutGroup--KingProposalView,
+.Vote-Result,
+.Mission-Result {
+	margin-bottom: 5rem;
+}

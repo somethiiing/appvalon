@@ -31,10 +31,10 @@ function Player(props) {
           {/*<GiCloakDagger size={48} color={randomColor} />*/}
           <Avatar className='avatar' style={{filter: `hue-rotate(` + randomNumber + `deg)`}}/>
           <Sub>{name}</Sub>
-      {teamVote === 'approve' && 
+      {teamVote === 'APPROVE' && 
         <FcCheckmark className='vote-icon' size={25} color='#00d673'/>
       }
-      {teamVote === 'reject' && 
+      {teamVote === 'REJECT' &&
         <IoMdClose className='vote-icon' size={25} color='#d10146'/>
       }
     </button>

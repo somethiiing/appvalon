@@ -77,13 +77,15 @@ export class KingProposalView extends React.Component {
         const missionSize = this.props.roomState.boardInfo.missions[this.props.roomState.currentMission].size;
         const disabled = missionSize !== teamProposalArray.length
         return (
-            <div>
+            <div className='LayoutGroup LayoutGroup--KingProposalView'>
                 <Heading>{name}, select {missionSize} candidates for your mission. </Heading>
-                {kingOrder.map(name => {
-                    return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
-                                   onClick={() => this.updateTeamProposal(name)}/>
-                })}
-                <Button onClick={this.voteSubmit} disabled={disabled}>Submit For Vote</Button>
+                <div className='PlayerGroup PlayerGroup--KingView'>
+                    {kingOrder.map(name => {
+                        return <Player key={name} name={name} selected={teamProposalArray.includes(name)}
+                                       onClick={() => this.updateTeamProposal(name)}/>
+                    })}
+                </div>
+                <Button type='button' onClick={this.voteSubmit} disabled={disabled}>Submit For Vote</Button>
             </div>
         );
     }
