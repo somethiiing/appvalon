@@ -80,7 +80,7 @@ const handleHandleTeamVoteResult = (room) => {
     if (isApproved) {
         console.log("proposed team has been approved")
         newRoom = helpers.resetPlayerTeamVotes(newRoom);
-        return helpers.setStatus(newRoom, enums.GameState.MISSION_VOTE);
+        return helpers.setStatus(newRoom, enums.GameState.EVIL_WIN);
     } else {
         // Team not approved
         // Game ends if team approval has reached max failures
