@@ -6,7 +6,7 @@ import TeamVoteResultView from './TeamVoteResultView';
 import MissionVote from './MissionVote';
 import MissionResultView from './MissionResultView';
 import {P} from './Text';
-
+import Assassination from './Assassination';
 import {dispatchHandleTeamVoteResult} from '../ApiUtils';
 
 class ActionArea extends React.Component {
@@ -43,9 +43,8 @@ class ActionArea extends React.Component {
         }
       case 'DISPLAY_MISSION_VOTE':
         return <MissionResultView boardState={roomState} name={name}/>;
-      case 'SUBMIT_ASSASSINATION':
-        // if assassin
-        break;
+      case 'ASSASSINATION':
+        return <Assassination roomState={roomState} name={name} />
       default:
         break;
     }

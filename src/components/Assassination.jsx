@@ -5,7 +5,7 @@ import Button from "./Button";
 import {dispatchSubmitAssassination} from "../ApiUtils";
 import Timer from "./Timer";
 
-export class Assassination extends React.Component {
+export default class Assassination extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,7 +51,7 @@ export class Assassination extends React.Component {
         const target = this.state.target;
         const candidates = this.state.candidates;
         const players = this.props.roomState.players;
-        const isAssassin = this.props.name === this.state.assassin;
+        const isAssassin =  this.props.name === this.props.roomState.assassin
         return (
             <React.Fragment>
                 {isAssassin && <div className='LayoutGroup LayoutGroup--KingProposalView'>

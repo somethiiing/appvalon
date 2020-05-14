@@ -323,9 +323,26 @@ const addHueToPlayers = (room) => {
     return dup;
 }
 
+const getAssassin = (roomObj) => {
+    const players = roomObj.players
+    let assassin = Object.values(players).find(player => player.role === 'assassin');
+    assassin = assassin && assassin.name;
+    if (!assassin) {
+        assassin = Object.values(players).find(player => player.role === 'morgana');
+        assassin = assassin && assassin.name;
+    }
+    if (!assassin) {
+        assassin = Object.values(players).find(player => player.role === 'mordred');
+        assassin = assassin && assassin.name;
+    }
+    roomObj.assassin = assassin;
+    return roomObj;
+}
+
 module.exports = {
     setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
-    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, addHueToPlayers, getPlayer
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, addHueToPlayers, getPlayer,
+    getAssassin
 };
