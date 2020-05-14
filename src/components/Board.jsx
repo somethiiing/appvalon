@@ -53,6 +53,7 @@ class Board extends React.Component {
   }
 
   render() {
+    const { name, roomState } = this.props;
     const boardState = this.state.roomState;
     return (
         <div className="Board">
