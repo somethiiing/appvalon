@@ -80,14 +80,14 @@ const handleHandleTeamVoteResult = (room) => {
     if (isApproved) {
         console.log("proposed team has been approved")
         newRoom = helpers.resetPlayerTeamVotes(newRoom);
-        return helpers.setStatus(newRoom, enums.GameState.EVIL_WIN);
+        return helpers.setStatus(newRoom, enums.GameState.MISSION_VOTE);
     } else {
         // Team not approved
         // Game ends if team approval has reached max failures
         console.log("proposed team has been rejected")
         const currentMission = helpers.getCurrentMission(newRoom);
         if (newRoom.voteTrack === currentMission.maxVoteTrack) {
-            return helpers.setStatus(newRoom, enums.GameState.GAME_END)
+            return helpers.setStatus(newRoom, enums.GameState.EVIL_WIN)
         }
         // Otherwise we move things along to the next team proposal
         // Reset the player votes
