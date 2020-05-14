@@ -24,10 +24,13 @@ function Card(props) {
       break;
   }
   return (
-    <div className="Card" onClick={props.onClick}>
-      {cardIcon}
-      <P>{props.type}</P>
-    </div>
+    <label className='CardWrapper' onClick={props.onClick}>
+      <input className={`${props.type}`} type='checkbox'></input>
+      <div className={`Card ${props.type}`} >
+        {cardIcon}
+        <P>{props.type}</P>
+      </div>
+    </label>
   );
 }
 

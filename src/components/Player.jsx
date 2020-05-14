@@ -17,7 +17,6 @@ function Player(props) {
   // use this to generate random icon colors on initialization
   // const randomColor = "#" + Math.random().toString(16).slice(2, 8);
   // Your colors are better but without access to the keyed layers to do a proper offset, this does the trick.
-  console.log('hue', hue, typeof hue);
   const randomNumber = hue ? hue : Math.floor(Math.random() * Math.floor(360));
 
   return (
@@ -29,7 +28,6 @@ function Player(props) {
           <BsHammer className='hammer-icon' size={20} color='#ffbb01'/>
           }
 
-          {/*<GiCloakDagger size={48} color={randomColor} />*/}
           <Avatar className='avatar' style={{filter: `hue-rotate(` + randomNumber + `deg)`}}/>
           <Sub>{name}</Sub>
       {teamVote === 'APPROVE' && 

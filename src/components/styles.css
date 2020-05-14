@@ -166,6 +166,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 3px solid transparent;
+}
+
+.CardWrapper input {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.CardWrapper input:checked + .Card {
+  border: 3px solid #ffbb01;
 }
 
 .Player {

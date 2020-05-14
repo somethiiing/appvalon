@@ -3,7 +3,6 @@ import Player from './Player';
 
 function KingOrder(props) {
   const { kingOrder, players, proposedTeam } = props;
-  console.log(kingOrder, players, proposedTeam);
 
   function getPlayerComponent(player) {
     const { isHammer = false, isKing = false, teamVote = false } = players[player];
