@@ -33,7 +33,7 @@ export default class JoinForm extends React.Component {
   componentDidMount() {
     socket = io(`${api}/`);
     socket.on('UPDATE_ROOMLIST', res => this.setState({
-      roomList: res.roomList, room: res.roomList[res.roomList.length - 1]
+      roomList: res.roomList.reverse(), room: res.roomList[0]
     }));
 
     this.fetchRoomList();

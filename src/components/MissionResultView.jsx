@@ -9,8 +9,7 @@ function MissionResultView(props) {
   const { success, fail } = missionVote;
 
   const onClick = () => {
-    // enable this when backend doesn't crash
-    // dispatchHandleMissionVoteResult(roomName, kingOrder[1]);
+    dispatchHandleMissionVoteResult({room: roomName, player: kingOrder[1]});
   }
 
   const renderCards = () => {

@@ -120,7 +120,7 @@ const shiftKing = (room) => {
     let newRoom = otherUtils.deepCopy(room)
     let currentKing = newRoom.kingOrder.shift();
     newRoom.kingOrder.push(currentKing);
-    let futureKing = newRoom.kingOrder.shift();
+    let futureKing = newRoom.kingOrder[0];
     return setKing(newRoom, futureKing);
 }
 
@@ -205,20 +205,19 @@ const isFailedMission = (missionVotes, isDoubleFailRequired) => {
  */
 const getGameStateBasedOnMissionStatus = (missions) => {
     // Check if the game ends
-    let missionFailedCount = 0;
     let missionSuccessCount = 0;
+    let missionFailedCount = 0;
     missions.forEach(mission => {
         if (mission.status === enums.MissionStatus.SUCCESS) {
-            missionSuccessCount++;
+            missionSuccessCount = missionSuccessCount + 1;
         } else if (mission.status === enums.MissionStatus.FAIL) {
-            missionFailedCount++;
+            missionFailedCount = missionFailedCount + 1;
         }
     });
-
     // Game ends
-    if (missionSuccessCount === 3) {
+    if (missionSuccessCount >= 3) {
         return enums.GameState.ASSASSINATION;
-    } else if (missionFailedCount === 3) {
+    } else if (missionFailedCount >= 3) {
         return enums.GameState.EVIL_WIN;
     }
 
@@ -271,21 +270,9 @@ const setHammer = (roomObj) => {
     return dup;
 }
 
-/**
- * removes all votes for team from room
- * @param {RoomObj} roomObj
- */
-const resetTeamVote = (roomObj) => {
-    const dup = otherUtils.deepCopy(roomObj);
-
-    dup.teamVoteResult = null;
-
-    return dup;
-}
-
 const resetMissionVote = (roomObj) => {
     const dup = otherUtils.deepCopy(roomObj);
-    Object.values(roomObj.players).forEach((player) => {
+    Object.values(dup.players).forEach((player) => {
         player.missionVote = enums.MissionVote.NOT_VOTED;
     })
     dup.missionVote = otherUtils.deepCopy(DEFAULT_MISSION_VOTE);
@@ -340,5 +327,5 @@ module.exports = {
     setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
-    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote, addHueToPlayers, getPlayer
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, addHueToPlayers, getPlayer
 };
