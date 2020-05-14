@@ -22,10 +22,10 @@ class Board extends React.Component {
     super(props);
 
     this.state = {
-      //testing stuff
-      name: 'Jesus',
-      room: 'mango',
-      roomState: testRoomState
+        //testing stuff
+        name: 'ashwin',
+        room: 'mango',
+        roomState: testRoomState
     };
   }
 

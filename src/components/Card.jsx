@@ -22,12 +22,10 @@ function Card(props) {
       break;
   }
   return (
-      <div onClick={props.onClick}>
-        <div className="Card">
+        <div className="Card" onClick={props.onClick}>
           {cardIcon}
           <P>{props.type}</P>
         </div>
-      </div>
   );
 }
 
