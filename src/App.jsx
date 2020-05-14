@@ -119,9 +119,9 @@ const testingComponents = () => (
     </div>
     <div className='Player-list'>
       <Player name='Bridget' king selected />
-      <Player name='Wilson' teamVote='reject' hammer />
+      <Player name='Wilson' teamVote='REJECT' hammer />
       <Player name='Alexandra' selected />
-      <Player name='Mehtab' king hammer teamVote='approve' />
+      <Player name='Mehtab' king hammer teamVote='APPROVE' />
     </div>
   </div>
 )

@@ -34,7 +34,7 @@ function Player(props) {
       {teamVote === 'APPROVE' && 
         <FcCheckmark className='vote-icon' size={25} color='#00d673'/>
       }
-      {teamVote === 'REJECT' && 
+      {teamVote === 'REJECT' &&
         <IoMdClose className='vote-icon' size={25} color='#d10146'/>
       }
     </button>
