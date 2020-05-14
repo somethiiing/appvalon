@@ -100,7 +100,6 @@ class App extends React.Component {
 
 const testingComponents = () => (
   <div>
-    <Header/>
     {
     // the below is for testing component purposes
     }

@@ -171,7 +171,8 @@ const createInitialRoomState = (room, host, settings, playerObjArr = undefined) 
     playerCount,
     lakeSetting,
     players: playerObjArr,
-    boardInfo
+    boardInfo,
+    gameSettings: settings
   });
 };
 

@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import KingOrder from './KingOrder';
 import Missions from './Missions';
 import ActionArea from './ActionArea';
+import Header from './Header';
 
 import {fetchRoomData} from '../ApiUtils';
 import {KingProposalView} from "./KingProposalView";
@@ -53,13 +54,15 @@ class Board extends React.Component {
   }
 
   render() {
+    const { name, roomState } = this.props;
     const boardState = this.state.roomState;
     return (
         <div className="Board">
+          <Header name={this.props.name} roomState={this.state.roomState} />
           <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
           <KingOrder/>
           <Missions boardState={boardState} />
-          <ActionArea/>
+          <ActionArea name={name} roomState={roomState} />
           {/*this KingProposalView here is just for testing*/}
           {<KingProposalView roomState={boardState} name={this.state.name}/>}
           {<NonKingProposalView roomState={boardState} name={this.state.name}/>}

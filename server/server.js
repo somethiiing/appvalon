@@ -29,6 +29,7 @@ app.post('/api/createRoom', (req, res) => {
   state[room] = createInitialRoomState(room, host, settings);
   res.send({room, host, roomState: state[room]});
   io.emit('UPDATE_ROOMLIST', {roomList: Object.keys(state)});
+  console.log('Room created :', room);
 });
 
 app.get('/api/getRoomList', (req, res) => {
@@ -46,15 +47,15 @@ app.post('/api/joinRoom', (req, res) => {
 
   if (Object.values(players).length < playerCount) {
     state[room] = joinRoom(state[room], name)
+    console.log('room joined')
     res.send({status: 'SUCCESS', name, room});
   } else {
+    console.log('room full')
     res.send({status: 'FULL'});
   }
-
-  if (Object.values(players).length === playerCount) {
+  if (Object.values(state[room].players).length === playerCount) {
     state[room] = actionHandlers.handleGameStart(state[room]);
   }
-
   io.emit('UPDATE_STATE', {room, roomState: state[room]});
 });
 
@@ -103,10 +104,12 @@ app.get('*', (req,res) =>{
 });
 
 io.on('connection', socket => {
-  console.log('user connected');
   socket.on('disconnect', testdata => {
-    console.log('user disconnected')
   });
 });
+
+const checkIfGoTime = () => {
+
+}
 
 console.log(`listening on port: ${PORT}`);

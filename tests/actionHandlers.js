@@ -7,8 +7,9 @@ const { handleGameStart, handleUpdateTeamMembers, handleSubmitForVote, handleSub
 const { newGame, inProgress, fivePlayerGameSettings, resetBoard, missionVote } = require('./sample_server_states');
 
 describe.only('#handleGameStart', () => {
-  const playerNames = ['alex', 'wilson', 'bridget', 'jason', 'ashwin'];
-  const result = handleGameStart(newGame, fivePlayerGameSettings, playerNames);
+  const newGameDup = otherUtils.deepCopy(newGame);
+  newGameDup.gameSettings = fivePlayerGameSettings;
+  const result = handleGameStart(newGameDup);
 
   it('should set the TEAM_PROPOSAL status', () => {
     assert.equal(result.status, enums.GameState.TEAM_PROPOSAL)
@@ -85,9 +86,12 @@ describe.only('missionVote', () => {
 
 describe.only('integrationTest', () => {
     let room = roomUtils.createInitialRoomState("mango", "alex", fivePlayerGameSettings)
-    const playerNames = ['alex', 'wilson', 'bridget', 'ashwin', 'jason']
+    room = roomUtils.joinRoom(room, "bridget");
+    room = roomUtils.joinRoom(room, "wilson");
+    room = roomUtils.joinRoom(room, "ashwin");
+    room = roomUtils.joinRoom(room, "jason");
 
-    room = handleGameStart(room, fivePlayerGameSettings, playerNames);
+    room = handleGameStart(room);
     room = handleUpdateTeamMembers(room, 'alex', 'bridget');
     room = handleSubmitForVote(room);
     // Everyone submits their vote

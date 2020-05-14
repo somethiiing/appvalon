@@ -130,12 +130,12 @@ const shiftKing = (room) => {
 const setLake = (roomObj, newLakeName) => {
     let dup = otherUtils.deepCopy(roomObj);
 
-    const falseLake =  dup.players.find(player => player.isLake);
+    const falseLake = Object.values(dup.players).find(player => player.isLake);
     if (falseLake){
         falseLake.isLake = false;
     }
 
-    let newLake = dup.players.find(it => it.name === newLakeName);
+    let newLake = Object.values(dup.players).find(it => it.name === newLakeName);
     newLake.isLake = true;
 
     return dup;
