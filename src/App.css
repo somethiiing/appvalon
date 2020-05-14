@@ -18,24 +18,24 @@
 }
 
 .PlayerGroup {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .PlayerGroup--KingView {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .PlayerGroup--PlayerView .Player {
-	pointer-events: none;
+  pointer-events: none;
 }
 .LayoutGroup--KingProposalView,
 .Vote-Result,
 .Mission-Result {
-	margin-bottom: 5rem;
+  margin-bottom: 5rem;
 }
 
 .ActionArea {
-	margin-bottom: 5rem;
+  margin-bottom: 5rem;
 }
 
 .KingOrder {
