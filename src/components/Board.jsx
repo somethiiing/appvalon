@@ -64,7 +64,9 @@ class Board extends React.Component {
           <Missions boardState={boardState} />
           <ActionArea name={name} roomState={roomState} />
           {/*this KingProposalView here is just for testing*/}
+
           {<KingProposalView roomState={boardState} name={this.state.name}/>}
+
           {<NonKingProposalView roomState={boardState} name={this.state.name}/>}
         </div>
     );
