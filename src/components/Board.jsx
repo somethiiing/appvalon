@@ -27,8 +27,8 @@ class Board extends React.Component {
 
     this.state = {
       //testing stuff
-      name: 'ashwin',
-      room: 'mango',
+      name: '',
+      room: '',
       roomState: testRoomState,
       missionState: testMissionResultState,
       voteState: testTeamVoteResultState
