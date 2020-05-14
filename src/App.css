@@ -10,6 +10,7 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 1.5rem;
+  margin-top: 1rem;
 }
 
 .Mission-wrapper {
@@ -30,5 +31,9 @@
 .LayoutGroup--KingProposalView,
 .Vote-Result,
 .Mission-Result {
+	margin-bottom: 5rem;
+}
+
+.ActionArea {
 	margin-bottom: 5rem;
 }

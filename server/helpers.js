@@ -185,6 +185,7 @@ const unassignRoles = (roomObj) => {
 const isFailedMission = (missionVotes, isDoubleFailRequired) => {
     let failed = false;
     // check if mission was successful
+    console.log(missionVotes)
     if ((!isDoubleFailRequired && missionVotes.fail > 0) ||
         (isDoubleFailRequired && missionVotes.fail > 1)) {
         failed = true;
@@ -233,6 +234,7 @@ const isTeamApproved = (players) => {
     let successCount = 0;
 
     Object.values(players).forEach(player => {
+        console.log(player.teamVote)
         if (player.teamVote === enums.TeamVote.APPROVE) {
             successCount++;
         } else if (player.teamVote === enums.TeamVote.REJECT) {
@@ -240,6 +242,8 @@ const isTeamApproved = (players) => {
         }
     });
 
+    console.log("fail count: " + failCount)
+    console.log("success count: " + successCount)
     return successCount > failCount;
 
 }
@@ -316,11 +320,15 @@ const addHueToPlayers = (room) => {
     const dup = otherUtils.deepCopy(room);
     // ensure an even spread over the 360 different colors frontend can display,
     // assuming max of 10 players
+
     const hueIncrement = 35;
     let hueValue = 1;
     Object.values(dup.players).forEach(player => {
         player.hue = hueValue;
         hueValue += hueIncrement;
+        if(player.name === 'iAshwin') {
+            player.hue = undefined;
+        }
     })
     return dup;
 }

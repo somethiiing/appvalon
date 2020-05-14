@@ -1,4 +1,5 @@
 import React from 'react';
+import MissionVote from './MissionVote';
 
 class ActionArea extends React.Component {
   constructor(props) {
@@ -11,8 +12,8 @@ class ActionArea extends React.Component {
   }
 
   renderActions() {
-    const { name, roomObj } = this.props;
-    const { status, players } = roomObj;
+    const { name, room, roomState } = this.props;
+    const { status, players } = roomState;
     switch(status) {
       case 'TEAM_PROPOSAL':
         if (players[name].isKing) {
@@ -48,9 +49,11 @@ class ActionArea extends React.Component {
   }
 
   render() {
+    //MissionVote currently here for testing
+    const { name, room } = this.props;
     return (
-      <div className='ActionArea'>
-
+      <div className="ActionArea">
+        <MissionVote name={name} room={room} />
       </div>
     );
   }

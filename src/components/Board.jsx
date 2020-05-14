@@ -27,8 +27,8 @@ class Board extends React.Component {
 
     this.state = {
       //testing stuff
-      name: 'ashwin',
-      room: 'mango',
+      name: '',
+      room: '',
       roomState: testRoomState,
       missionState: testMissionResultState,
       voteState: testTeamVoteResultState
@@ -36,9 +36,10 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
-    const {name, room} = this.props;
-    // this.setState({name, room});
-    //
+    const { name, room } = this.props;
+    this.setState({name, room});
+
+    // TODO uncomment - Disabled for testing
     // socket = io(`${api}/`);
     // socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
     //
@@ -61,17 +62,21 @@ class Board extends React.Component {
   }
 
   render() {
-    const { name, roomState } = this.props;
+    const { name, room, roomState } = this.props;
+    const { roomName, roomOwner, status, createdAt,
+      playerCount, lakeSetting, selectedRoles, players,
+      boardInfo, kingOrder, currentMission, voteTrack,
+      proposedTeam, teamVoteResult, missionVote
+    } = this.state.roomState;
     const boardState = this.state.roomState;
     const missionState = this.state.missionState;
     const voteState = this.state.voteState;
     return (
         <div className="Board">
           <Header name={this.state.name} roomState={voteState} />
-          <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
-          <KingOrder/>
-          <Missions boardState={boardState} />
-          <ActionArea name={name} roomState={roomState} />
+          <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam}/>
+          <Missions currentMission={currentMission} boardInfo={boardInfo} voteTrack={voteTrack}/>
+          <ActionArea name={name} room={room} roomState={roomState} />
           <MissionResultView boardState={missionState} name={this.state.name}/>
           <VoteResultView boardState={voteState} name={this.state.name}/>
           {/*this KingProposalView here is just for testing*/}

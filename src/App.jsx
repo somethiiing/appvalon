@@ -25,8 +25,8 @@ class App extends React.Component {
       // serverTest, componentTest
       // landing, joinRoomPage, createRoomPage, board
       currentPage: 'landing',
-      name: '',
-      room: ''
+      name: 'ashwin',
+      room: 'mango'
     };
 
     this.changePage = this.changePage.bind(this);
@@ -119,9 +119,9 @@ const testingComponents = () => (
     </div>
     <div className='Player-list'>
       <Player name='Bridget' king selected />
-      <Player name='Wilson' teamVote='reject' hammer />
+      <Player name='Wilson' teamVote='REJECT' hammer />
       <Player name='Alexandra' selected />
-      <Player name='Mehtab' king hammer teamVote='approve' />
+      <Player name='Mehtab' king hammer teamVote='APPROVE' />
     </div>
   </div>
 )
