@@ -87,7 +87,7 @@ const handleHandleTeamVoteResult = (room) => {
         console.log("proposed team has been rejected")
         const currentMission = helpers.getCurrentMission(newRoom);
         if (newRoom.voteTrack === currentMission.maxVoteTrack) {
-            return helpers.setStatus(newRoom, enums.GameState.GAME_END)
+            return helpers.setStatus(newRoom, enums.GameState.EVIL_WIN)
         }
         // Otherwise we move things along to the next team proposal
         // Reset the player votes
