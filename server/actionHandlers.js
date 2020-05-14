@@ -107,7 +107,7 @@ const handleHandleTeamVoteResult = (room) => {
  * @returns newRoom
  */
 const handleSubmitMissionVote = (room, player, vote) => {
-    const newRoom = otherUtils.deepCopy(room);
+    let newRoom = otherUtils.deepCopy(room);
     const playerObj = Object.values(newRoom.players).find(p => p.name === player);
     console.log(playerObj.missionVote)
     if (playerObj.missionVote === enums.MissionVote.NOT_VOTED) {
@@ -128,8 +128,8 @@ const handleSubmitMissionVote = (room, player, vote) => {
         const totalVotes = newRoom.missionVote.fail + newRoom.missionVote.success + newRoom.missionVote.reverse;
         // Max votes reached
         if (totalVotes === helpers.getCurrentMission(newRoom).size) {
-            console.log("mission votes have been submitted")
-            newRoom.status = enums.GameState.HANDLE_MISSION_VOTE_RESULT;
+            console.log("mission votes have been submitted");
+            newRoom = handleRevealMissionVote(newRoom);
         }
         return newRoom
     } else {

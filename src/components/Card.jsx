@@ -11,7 +11,9 @@ class Card extends React.Component {
     }
 
     handleOnClick() {
-        this.props.onClick();
+        if (!this.props.disabled) {
+            this.props.onClick();
+        }
     }
 
     render() {
@@ -33,13 +35,13 @@ class Card extends React.Component {
                 break;
         }
         return (
-            <label className='CardWrapper'>
-                <input className={`${this.props.type}`} type='checkbox'></input>
-                <div className={`Card ${this.props.type}`} onClick={this.handleOnClick}>
+            <div className='CardWrapper' onClick={this.handleOnClick}>
+                <input disabled={this.props.disabled} className={`${this.props.type}`} type='checkbox'></input>
+                <div className={`Card ${this.props.type}`}>
                     {cardIcon}
                     <P>{this.props.type}</P>
                 </div>
-            </label>
+            </div>
         );
     }
 }
