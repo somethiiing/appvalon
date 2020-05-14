@@ -39,7 +39,8 @@ function Player(props) {
             {status && teamVote === 'REJECT' &&
             <IoMdClose className='vote-icon' size={25} color='#d10146'/>
             }
-            {!status && teamVote !== 'NOT_VOTE' && <BsQuestion className='vote-icon' size={25} color="#015aff"/>}
+            {!status && teamVote && teamVote !== 'NOT_VOTED' &&
+            <BsQuestion className='vote-icon' size={25} color="#015aff"/>}
     </button>
   );
 }
