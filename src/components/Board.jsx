@@ -62,7 +62,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const { name, roomState } = this.props;
+    const { name, room, roomState } = this.props;
     const { roomName, roomOwner, status, createdAt,
       playerCount, lakeSetting, selectedRoles, players,
       boardInfo, kingOrder, currentMission, voteTrack,
@@ -76,7 +76,7 @@ class Board extends React.Component {
           <Header name={this.state.name} roomState={voteState} />
           <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam}/>
           <Missions currentMission={currentMission} boardInfo={boardInfo} voteTrack={voteTrack}/>
-          <ActionArea name={name} roomState={roomState} />
+          <ActionArea name={name} room={room} roomState={roomState} />
           <MissionResultView boardState={missionState} name={this.state.name}/>
           <VoteResultView boardState={voteState} name={this.state.name}/>
           {/*this KingProposalView here is just for testing*/}
