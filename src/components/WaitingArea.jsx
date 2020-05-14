@@ -40,6 +40,7 @@ export default class WaitingArea extends React.Component {
             <div>{`Room Code: ${roomName}`}</div>
             <div>{`Host: ${roomOwner}`}</div>
           <div>{`Lake Setting: ${lakeSetting}`}</div>
+          <div>{`Current Players: ${Object.keys(players)}`}</div>
           <div>{`Roles: ${JSON.stringify(this.generateSelectedRolesList(gameSettings))}`}</div>
         </div>
       </div>
