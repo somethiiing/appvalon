@@ -79,7 +79,6 @@ class App extends React.Component {
               {/*  <button onClick={() => this.changePage('testing')}>testingComponents</button>*/}
             {/*</div> *!/*/}
             {/*<KingProposalView/>*/}
-            <Card disabled type='success' />
             {this.state.currentPage === 'landing' &&
             <div>
               <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>
