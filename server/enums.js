@@ -58,6 +58,8 @@ const GameState = {
     DISPLAY_TEAM_VOTE: "DISPLAY_TEAM_VOTE",
     // players are voting on success/fail of mission
     MISSION_VOTE: "MISSION_VOTE",
+    // reveal the results of the mission
+    DISPLAY_MISSION_VOTE: "DISPLAY_MISSION_VOTE",
     // handle results of the mission proposal vote
     HANDLE_MISSION_VOTE_RESULT: "HANDLE_MISSION_VOTE_RESULT",
     // exactly what it says on the tin

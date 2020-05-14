@@ -7,6 +7,8 @@ const PORT = process.env.PORT||5000
 const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
+const enums = require('./enums')
+
 const actionHandlers = require('./actionHandlers');
 const { getRandomFruit, createInitialRoomState, joinRoom } = require('./roomUtils');
 
@@ -80,6 +82,9 @@ app.post('/api/update', (req, res) => {
       break;
     case 'SUBMIT_MISSION_VOTE':
       state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
+      break;
+    case 'REVEAL_MISSION_VOTE':
+      state[room] = actionHandlers.handleRevealMissionVote(state[room]);
       break;
     case 'HANDLE_MISSION_VOTE_RESULT':
       state[room] = actionHandlers.handleHandleMissionVoteResult(state[room]);

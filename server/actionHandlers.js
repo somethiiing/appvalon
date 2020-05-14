@@ -16,6 +16,7 @@ const handleGameStart = (roomObj ) => {
     roomObj = helpers.setKing(roomObj, roomObj.kingOrder[0]);
     roomObj = helpers.setSelectedRoles(roomObj);
     roomObj = helpers.setHammer(roomObj);
+    roomObj = helpers.addHueToPlayers(roomObj);
     if (roomObj.lakeSetting !== enums.LakeSettings.NONE){
         roomObj = helpers.setLake(roomObj, roomObj.kingOrder[roomObj.kingOrder.length - 1])
     }
@@ -51,12 +52,15 @@ const handleSubmitTeamVote = (room, player, vote) => {
 
     const playerObj = Object.values(newRoom.players).find(p => p.name === player);
     playerObj.teamVote = vote;
-
     return newRoom;
 }
 
 const handleRevealTeamVote = (room) => {
     return helpers.setStatus(room, enums.GameState.DISPLAY_TEAM_VOTE);
+}
+
+const handleRevealMissionVote = (room) => {
+    return helpers.setStatus(room, enums.GameState.DISPLAY_MISSION_VOTE);
 }
 
 /**
@@ -179,4 +183,4 @@ const handleSubmitAssassination = (room, target) => {
 }
 
 module.exports = { handleGameStart, handleUpdateTeamMembers, handleSubmitForVote, handleReconfigureGame, handleSubmitTeamVote, handleRevealTeamVote,
-    handleHandleTeamVoteResult, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination}
+    handleHandleTeamVoteResult, handleSubmitMissionVote, handleHandleMissionVoteResult, handleSubmitAssassination, handleRevealMissionVote}
