@@ -45,17 +45,17 @@ app.post('/api/joinRoom', (req, res) => {
   const { name, room } = req.body
   const { players, playerCount } = state[room];
 
-  if (players.length < playerCount) {
+  if (Object.values(players).length < playerCount) {
     state[room] = joinRoom(state[room], name)
+    console.log("room joined")
     res.send({status: 'SUCCESS', name, room});
   } else {
+    console.log("room full")
     res.send({status: 'FULL'});
   }
-
-  if (players.length === playerCount) {
+  if (Object.values(state[room].players).length === playerCount) {
     state[room] = actionHandlers.handleGameStart(state[room]);
   }
-
   io.emit('UPDATE_STATE', {room, roomState: state[room]});
 });
 
@@ -107,5 +107,9 @@ io.on('connection', socket => {
   socket.on('disconnect', testdata => {
   });
 });
+
+const checkIfGoTime = () => {
+
+}
 
 console.log(`listening on port: ${PORT}`);

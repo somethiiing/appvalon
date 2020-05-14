@@ -146,7 +146,7 @@ const createInitialRoomState = (room, host, settings, playerObjArr = undefined) 
   const { numGood, numEvil, doubleFailRequired, missionSizes, voteTrack } = missionsData[playerCount];
 
   if (!playerObjArr){
-    playerObjArr = createPlayerObj(host);
+    playerObjArr = {[host]: createPlayerObj(host)};
   }
 
   const boardInfo = {
@@ -171,13 +171,14 @@ const createInitialRoomState = (room, host, settings, playerObjArr = undefined) 
     playerCount,
     lakeSetting,
     players: playerObjArr,
-    boardInfo
+    boardInfo,
+    gameSettings: settings
   });
 };
 
 const joinRoom = (roomObj, playerName) => {
   let dup = deepCopy(roomObj);
-  dup.players.push(createPlayerObj(playerName));
+  dup.players[playerName] = (createPlayerObj(playerName));
   return dup;
 }
 
