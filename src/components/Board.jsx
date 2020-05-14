@@ -36,7 +36,6 @@ class Board extends React.Component {
     //
     // fetchRoomData({room})
     //   .then(res => {
-    //     debugger;
     //     console.log('data fetch', res.data)
     //     this.setState({roomState: res.data.roomState});
     //   });
