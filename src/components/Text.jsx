@@ -26,15 +26,23 @@ function Sub(props) {
 
 function Highlight(props) {
   return (
-    <span className="Text-Highlight">
+      <span className="Text-Highlight">
       {props.children}
     </span>
   );
 }
 
+function HighLightSameLine(props) {
+  return (
+      <span className="Text-Highlight">
+      {props.children}
+    </span>
+  )
+}
+
 function Bold(props) {
   return (
-    <span className="Text-Bold">
+      <span className="Text-Bold">
       {props.children}
     </span>
   );
