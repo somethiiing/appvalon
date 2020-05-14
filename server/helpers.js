@@ -3,6 +3,14 @@ const roomUtils = require('./roomUtils.js');
 const roleUtils = require('./roleAssignment.js');
 const enums = require('./enums');
 
+const DEFAULT_MISSION_VOTE = {
+    "success": 0,
+    "fail": 0,
+    "reverse": 0
+};
+
+Object.freeze(DEFAULT_MISSION_VOTE);
+
 /**
  * Sets the number of missions that have been approved
  * @param {Mission} room
@@ -29,9 +37,9 @@ const setVoteTrackCount = (roomObj, count) => {
  * Returns a new list of players that have been shuffled
  * @param {roomObj} array of players to be shuffled
  */
-const shufflePlayers = (roomObj) => {
+const shuffleKingOrder = (roomObj) => {
     let dup = otherUtils.deepCopy(roomObj)
-    otherUtils.shuffle(dup.players)
+    otherUtils.shuffle(dup.kingOrder)
     return dup;
 }
 
@@ -43,6 +51,12 @@ const shufflePlayers = (roomObj) => {
 const assignRoles = (roomObj, playerNames, settings) => {
     let dup = otherUtils.deepCopy(roomObj)
     dup.players = roleUtils.createRoleAssignment(playerNames, settings)
+    Object.values(dup.players).forEach((player) => {
+        player.teamVote = enums.TeamVote.NOT_VOTED;
+        player.isKing = false;
+        player.isHammer = false;
+        player.isLake = false;
+    })
     return dup;
 }
 
@@ -65,17 +79,37 @@ const setStatus = (roomObj, status) => {
 const setKing = (roomObj, newKingName) => {
     let dup = otherUtils.deepCopy(roomObj)
 
-    const falseKing = dup.players.find(player => player.isKing);
+    const falseKing = Object.values(dup.players).find(player => player.isKing);
 
     if (falseKing){
         falseKing.isKing = false;
     }
-
-    let newKing = dup.players.find(it => it.name === newKingName);
+    let newKing = Object.values(dup.players).find(it => it.name === newKingName);
     newKing.isKing = true;
 
     return dup;
 }
+
+const setKingOrder = (roomObj) => {
+    let dup = otherUtils.deepCopy(roomObj)
+
+    dup.kingOrder = otherUtils.shuffle(Object.keys(dup.players))
+
+    return dup;
+}
+
+ const setSelectedRoles = (roomObj) => {
+    let dup = otherUtils.deepCopy(roomObj);
+
+    const roles = [];
+
+    Object.values(roomObj.players).forEach((player) => {
+        roles.push(player.role);
+    })
+
+    dup.selectedRoles = roles;
+    return dup;
+ }
 
 /**
  * Shifts the king
@@ -86,8 +120,7 @@ const shiftKing = (room) => {
     let currentKing = newRoom.kingOrder.shift();
     newRoom.kingOrder.push(currentKing);
     let futureKing = newRoom.kingOrder.shift();
-    newRoom.players = setKing(futureKing, newRoom.players);
-    return newRoom;
+    return setKing(newRoom, futureKing);
 }
 
 /**
@@ -97,12 +130,12 @@ const shiftKing = (room) => {
 const setLake = (roomObj, newLakeName) => {
     let dup = otherUtils.deepCopy(roomObj);
 
-    const falseLake =  dup.players.find(player => player.isLake);
+    const falseLake = Object.values(dup.players).find(player => player.isLake);
     if (falseLake){
         falseLake.isLake = false;
     }
 
-    let newLake = dup.players.find(it => it.name === newLakeName);
+    let newLake = Object.values(dup.players).find(it => it.name === newLakeName);
     newLake.isLake = true;
 
     return dup;
@@ -150,16 +183,14 @@ const unassignRoles = (roomObj) => {
  * @param isDoubleFailRequired
  */
 const isFailedMission = (missionVotes, isDoubleFailRequired) => {
-    const failCount = missionVotes.filter( i => i === enums.MissionVote.FAIL).length;
-    const reverseCount = missionVotes.filter( i => i === enums.MissionVote.REVERSE).length;
     let failed = false;
     // check if mission was successful
-    if ((!isDoubleFailRequired && failCount > 0) ||
-        (isDoubleFailRequired && failCount > 1)) {
+    if ((!isDoubleFailRequired && missionVotes.fail > 0) ||
+        (isDoubleFailRequired && missionVotes.fail > 1)) {
         failed = true;
     }
     // reverse logic
-    if (reverseCount > 0 && reverseCount % 2 === 1) {
+    if (missionVotes.reverse > 0 && missionVotes.reverse % 2 === 1) {
         failed = !failed;
     }
     return failed;
@@ -200,7 +231,8 @@ const getGameStateBasedOnMissionStatus = (missions) => {
 const isTeamApproved = (players) => {
     let failCount = 0;
     let successCount = 0;
-    players.forEach(player => {
+
+    Object.values(players).forEach(player => {
         if (player.teamVote === enums.TeamVote.APPROVE) {
             successCount++;
         } else if (player.teamVote === enums.TeamVote.REJECT) {
@@ -213,19 +245,65 @@ const isTeamApproved = (players) => {
 }
 
 /**
+ * sets a player as the hammer based on number of mission proposals and king order
+ * @param {RoomObj} roomObj
+ */
+const setHammer = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    const currentMission = getCurrentMission(dup);
+    const maxVoteCount = currentMission.maxVoteTrack;
+
+    const hammerName = dup.kingOrder[maxVoteCount - 1];
+    const newHammer = getPlayer(dup, hammerName);
+
+    const falseHammer = Object.values(dup.players).find(player => player.isHammer);
+    if (falseHammer) {
+        falseHammer.isHammer = false;
+    }
+    newHammer.isHammer = true
+
+    return dup;
+}
+
+/**
+ * removes all votes for team from room
+ * @param {RoomObj} roomObj
+ */
+const resetTeamVote = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    dup.teamVoteResult = null;
+
+    return dup;
+}
+
+const resetMissionVote = (roomObj) => {
+    const dup = otherUtils.deepCopy(roomObj);
+
+    dup.missionVote = otherUtils.deepCopy(DEFAULT_MISSION_VOTE);
+
+    return dup;
+}
+
+const getPlayer = (roomObj, playerName) => {
+    return Object.values(roomObj.players).find(player => player.name === playerName);
+}
+
+/**
  * Returns players array with team votes reset to NOT_VOTED
  * @param players
  */
 const resetPlayerTeamVotes = (players) => {
     const newPlayers = otherUtils.deepCopy(players);
-    newPlayers.forEach(player => {
+    Object.values(newPlayers).forEach(player => {
         player.teamVote = enums.TeamVote.NOT_VOTED;
     })
     return newPlayers;
 }
 
 /**
- * Returns mission that the game is currently
+ * Returns mission that the game is currently active
  *
  * @param room
  * @returns mission
@@ -234,6 +312,20 @@ const getCurrentMission = (room) => {
     return room.boardInfo.missions[room.currentMission-1];
 }
 
-module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
+const addHueToPlayers = (room) => {
+    const dup = otherUtils.deepCopy(room);
+    // ensure an even spread over the 360 different colors frontend can display,
+    // assuming max of 10 players
+    const hueIncrement = 35;
+    let hueValue = 1;
+    Object.values(dup.players).forEach(player => {
+        player.hue = hueValue;
+        hueValue += hueIncrement;
+    })
+    return dup;
+}
+
+module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
-    getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission };
+    getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote, addHueToPlayers };

@@ -130,28 +130,28 @@ describe.only('#reinitializeBoard', () => {
 
 
 describe.only('isFailedMission', () => {
-    const missionVotes1 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL];
+    const missionVotes1 = { success: 1, fail: 1, reverse: 0 };
     const result1 = isFailedMission(missionVotes1, false);
 
     it('one fail vote causes mission failure in single fail required', () => {
         assert.equal(result1, true)
     })
 
-    const missionVotes2 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL];
+    const missionVotes2 = { success: 1, fail: 1, reverse: 0 };
     const result2 = isFailedMission(missionVotes2, true);
 
     it('one fail vote doesnt causes mission failure in double fail required', () => {
         assert.equal(result2, false)
     })
 
-    const missionVotes3 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL, enums.MissionVote.REVERSE];
+    const missionVotes3 = { success: 1, fail: 1, reverse: 1 };
     const result3 = isFailedMission(missionVotes3, false);
 
     it('reverse causes failed mission to succeed', () => {
         assert.equal(result3, false)
     })
 
-    const missionVotes4 = [enums.MissionVote.SUCCESS, enums.MissionVote.FAIL, enums.MissionVote.REVERSE, enums.MissionVote.REVERSE];
+    const missionVotes4 = { success: 1, fail: 1, reverse: 2 };
     const result4 = isFailedMission(missionVotes4, false);
 
     it('double reverse negates any reverse', () => {
@@ -241,6 +241,6 @@ describe.only('getCurrentMission', () => {
     const currentMission = getCurrentMission(missionVote);
 
     it('currentMission should be returned', () => {
-        assert.equal(currentMission.size, 3);
+        assert.equal(currentMission.size, 2);
     })
 });

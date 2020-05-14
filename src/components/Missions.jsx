@@ -5,7 +5,6 @@ function Missions(props) {
   const { currentMission, boardInfo, voteTrack } = props;
 
   function getMissionComponent(mission) {
-    console.log('things', mission)
     const { doubleFailRequired } = boardInfo;
     const { count, size, status, maxVoteTrack } = mission;
     const isSuccess = status === 'SUCCESS';
@@ -25,10 +24,12 @@ function Missions(props) {
       />
     );
   }
-  //const { success, fail, active, size, voteTrack, doubleFail } = props;
+
   return (
     <div className="Missions">
-      {boardInfo.missions.map((mission) => {return getMissionComponent(mission)})}
+      <div className='Mission-list'>
+        {boardInfo.missions.map((mission) => {return getMissionComponent(mission)})}
+      </div>
     </div>
   );
 }

@@ -3,24 +3,35 @@ import io from 'socket.io-client';
 import KingOrder from './KingOrder';
 import Missions from './Missions';
 import ActionArea from './ActionArea';
+import Header from './Header';
 
-import { fetchRoomData } from '../ApiUtils';
-
-//TODO remove after testing
-const testRoomState = require('../testRoomStateObjects/teamProposal');
-console.log(testRoomState)
+import {fetchRoomData} from '../ApiUtils';
+import {KingProposalView} from "./KingProposalView";
+import NonKingProposalView from "./NonKingProposalView";
+import MissionResultView from './MissionResultView';
+import VoteResultView from './VoteResultView';
+import TeamVote from "./TeamVote";
 
 const api = 'http://localhost:5000';
 let socket;
+
+//TODO remove after testing
+const testRoomState = require('../testRoomStateObjects/teamProposal');
+const testMissionResultState = require('../testRoomStateObjects/missionResult');
+const testTeamVoteResultState = require('../testRoomStateObjects/teamVoteResult');
+console.log(testRoomState);
 
 class Board extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      //testing stuff
       name: '',
       room: '',
-      roomState: testRoomState//TODO set back to {} after testing
+      roomState: testRoomState,
+      missionState: testMissionResultState,
+      voteState: testTeamVoteResultState
     };
   }
 
@@ -51,28 +62,29 @@ class Board extends React.Component {
   }
 
   render() {
+    const { name, roomState } = this.props;
     const { roomName, roomOwner, status, createdAt,
       playerCount, lakeSetting, selectedRoles, players,
       boardInfo, kingOrder, currentMission, voteTrack,
       proposedTeam, teamVoteResult, missionVote
     } = this.state.roomState;
-
+    const boardState = this.state.roomState;
+    const missionState = this.state.missionState;
+    const voteState = this.state.voteState;
     return (
-      <div className="Board">
-        <KingOrder
-          kingOrder={kingOrder}
-          players={players}
-          proposedTeam={proposedTeam}
-        />
-        <Missions
-          currentMission={currentMission}
-          boardInfo={boardInfo}
-          voteTrack={voteTrack}
-        />
-        <ActionArea
-          roomState={this.state.roomState}
-        />
-      </div>
+        <div className="Board">
+          <Header name={this.state.name} roomState={voteState} />
+          <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
+          <KingOrder/>
+          <Missions boardState={boardState} />
+          <ActionArea name={name} roomState={roomState} />
+          <MissionResultView boardState={missionState} name={this.state.name}/>
+          <VoteResultView boardState={voteState} name={this.state.name}/>
+          {/*this KingProposalView here is just for testing*/}
+          {<KingProposalView roomState={boardState} name={this.state.name}/>}
+          {<NonKingProposalView roomState={boardState} name={this.state.name}/>}
+            <TeamVote roomState={boardState} name={this.state.name}/>
+        </div>
     );
   }
 }

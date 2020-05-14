@@ -1,63 +1,35 @@
 module.exports = {
-  "roomName": "mango",
+  "roomName": "pamelo",
   "roomOwner": "alex",
   "status": "TEAM_PROPOSAL",
-  "createdAt": 1589336585126,
-  "playerCount": 5,
-  "lakeSetting": "NONE",
+  "createdAt": 1589429564693,
+  "playerCount": 8,
+  "lakeSetting": "ALIGNMENT",
   "selectedRoles": [
-    "morgana",
-    "merlin",
+    "genericGood",
     "mordred",
+    "genericGood",
     "percival",
-    "genericGood"
+    "merlin",
+    "assassin",
+    "genericGood",
+    "morgana"
   ],
   "players": {
     "alex": {
-      "role": "morgana",
+      "role": "genericGood",
       "name": "alex",
-      "sees": {
-        "mordred": {
-          "role": "mordred",
-          "alignment": "evil",
-          "knowsRole": false,
-          "players": {
-            "assigned": [
-              "bridget"
-            ]
-          }
-        }
-      },
-      "alignment": "evil",
-      "teamVote": "reject",
-      "isKing": true,
-      "isHammer": true,
-      "isLake": true
-    },
-    "wilson": {
-      "role": "merlin",
-      "name": "wilson",
-      "sees": {
-        "morgana": {
-          "role": "morgana",
-          "alignment": "evil",
-          "knowsRole": false,
-          "players": {
-            "assigned": [
-              "alex"
-            ]
-          }
-        }
-      },
+      "sees": {},
       "alignment": "good",
       "teamVote": "APPROVE",
       "isKing": false,
       "isHammer": false,
-      "isLake": false
+      "isLake": false,
+      "hue": 1
     },
-    "bridget": {
+    "jesus": {
       "role": "mordred",
-      "name": "bridget",
+      "name": "jesus",
       "sees": {
         "morgana": {
           "role": "morgana",
@@ -65,62 +37,42 @@ module.exports = {
           "knowsRole": false,
           "players": {
             "assigned": [
-              "alex"
+              "fred"
+            ]
+          }
+        },
+        "assassin": {
+          "role": "assassin",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "jason"
             ]
           }
         }
       },
       "alignment": "evil",
-      "teamVote": "REJECT",
-      "isKing": false,
-      "isHammer": true,
-      "isLake": false
-    },
-    "fred": {
-      "role": "merlin",
-      "name": "wilson",
-      "sees": {
-        "morgana": {
-          "role": "morgana",
-          "alignment": "evil",
-          "knowsRole": false,
-          "players": {
-            "assigned": [
-              "alex"
-            ]
-          }
-        }
-      },
-      "alignment": "good",
-      "teamVote": "notVoted",
+      "teamVote": "APPROVE",
       "isKing": false,
       "isHammer": false,
-      "isLake": false
+      "isLake": false,
+      "hue": 36
     },
-    "jesus": {
-      "role": "merlin",
-      "name": "wilson",
-      "sees": {
-        "morgana": {
-          "role": "morgana",
-          "alignment": "evil",
-          "knowsRole": false,
-          "players": {
-            "assigned": [
-              "alex"
-            ]
-          }
-        }
-      },
+    "mehtab": {
+      "role": "genericGood",
+      "name": "mehtab",
+      "sees": {},
       "alignment": "good",
-      "teamVote": "notVoted",
+      "teamVote": "APPROVE",
       "isKing": false,
       "isHammer": false,
-      "isLake": false
+      "isLake": true,
+      "hue": 71
     },
-    "jason": {
+    "wilson": {
       "role": "percival",
-      "name": "jason",
+      "name": "wilson",
       "sees": {
         "merlin": {
           "role": "merlin",
@@ -128,7 +80,7 @@ module.exports = {
           "knowsRole": false,
           "players": {
             "assigned": [
-              "wilson"
+              "bridget"
             ]
           }
         },
@@ -138,85 +90,200 @@ module.exports = {
           "knowsRole": false,
           "players": {
             "assigned": [
-              "alex"
+              "fred"
             ]
           }
         }
       },
       "alignment": "good",
-      "teamVote": "notVoted",
+      "teamVote": "APPROVE",
       "isKing": false,
       "isHammer": false,
-      "isLake": false
+      "isLake": false,
+      "hue": 106
+    },
+    "bridget": {
+      "role": "merlin",
+      "name": "bridget",
+      "sees": {
+        "morgana": {
+          "role": "morgana",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "fred"
+            ]
+          }
+        },
+        "assassin": {
+          "role": "assassin",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "jason"
+            ]
+          }
+        }
+      },
+      "alignment": "good",
+      "teamVote": "APPROVE",
+      "isKing": false,
+      "isHammer": false,
+      "isLake": false,
+      "hue": 141
+    },
+    "jason": {
+      "role": "assassin",
+      "name": "jason",
+      "sees": {
+        "mordred": {
+          "role": "mordred",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "jesus"
+            ]
+          }
+        },
+        "morgana": {
+          "role": "morgana",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "fred"
+            ]
+          }
+        }
+      },
+      "alignment": "evil",
+      "teamVote": "APPROVE",
+      "isKing": false,
+      "isHammer": true,
+      "isLake": false,
+      "hue": 176
     },
     "ashwin": {
       "role": "genericGood",
       "name": "ashwin",
       "sees": {},
       "alignment": "good",
-      "teamVote": "notVoted",
+      "teamVote": "APPROVE",
       "isKing": false,
       "isHammer": false,
-      "isLake": false
+      "isLake": false,
+      "hue": 211
+    },
+    "fred": {
+      "role": "morgana",
+      "name": "fred",
+      "sees": {
+        "mordred": {
+          "role": "mordred",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "jesus"
+            ]
+          }
+        },
+        "assassin": {
+          "role": "assassin",
+          "alignment": "evil",
+          "knowsRole": false,
+          "players": {
+            "assigned": [
+              "jason"
+            ]
+          }
+        }
+      },
+      "alignment": "evil",
+      "teamVote": "APPROVE",
+      "isKing": true,
+      "isHammer": false,
+      "isLake": false,
+      "hue": 246
     }
   },
   "boardInfo": {
-    "playerCount": 5,
-    "numGood": 3,
-    "numEvil": 2,
-    "doubleFailRequired": false,
+    "playerCount": 8,
+    "numGood": 5,
+    "numEvil": 3,
+    "doubleFailRequired": true,
     "missions": [
       {
         "count": 1,
-        "size": 2,
+        "size": 3,
         "status": "NOT_GONE",
         "maxVoteTrack": 5
       },
       {
         "count": 2,
-        "size": 3,
+        "size": 4,
         "status": "NOT_GONE",
         "maxVoteTrack": 5
       },
       {
         "count": 3,
-        "size": 2,
+        "size": 4,
         "status": "NOT_GONE",
         "maxVoteTrack": 5
       },
       {
         "count": 4,
-        "size": 3,
+        "size": 5,
         "status": "NOT_GONE",
         "maxVoteTrack": 5
       },
       {
         "count": 5,
-        "size": 3,
+        "size": 5,
         "status": "NOT_GONE",
         "maxVoteTrack": 5
       }
     ]
   },
   "kingOrder": [
-    "ashwin",
-    "alex",
-    "jason",
-    "wilson",
+    "fred",
     "bridget",
-    "fred",
     "jesus",
-    "fred",
+    "ashwin",
+    "jason",
     "alex",
-    "wilson"
+    "wilson",
+    "mehtab"
   ],
   "currentMission": 1,
   "voteTrack": 1,
-  "proposedTeam": ["ashwin", "jason", "bridget"],
+  "proposedTeam": [],
   "teamVoteResult": null,
   "missionVote": {
     "success": 0,
     "fail": 0,
     "reverse": 0
+  },
+  "gameSettings": {
+    "playerCount": 8,
+    "lakeSetting": "ALIGNMENT",
+    "selectedRoles": {
+      "merlin": true,
+      "percival": true,
+      "tristan": false,
+      "iseult": false,
+      "genericGood": true,
+      "numGenGood": 3,
+      "assassin": true,
+      "mordred": true,
+      "morgana": true,
+      "oberon": false,
+      "noberon": false,
+      "genericEvil": false,
+      "numGenEvil": 0
+    }
   }
 }

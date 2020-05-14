@@ -22,3 +22,11 @@ resource "heroku_formation" "appvalon" {
   quantity = 1
   size     = "free"
 }
+resource "heroku_pipeline" "appvalon" {
+  name = "appvalon"
+}
+resource "heroku_pipeline_coupling" "appvalon" {
+  app      = "${heroku_app.appvalon.name}"
+  pipeline = "${heroku_pipeline.appvalon.id}"
+  stage    = "production"
+}

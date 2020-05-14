@@ -24,8 +24,35 @@ function Sub(props) {
   );
 }
 
+function Highlight(props) {
+  return (
+    <span className="Text-Highlight">
+      {props.children}
+    </span>
+  );
+}
+
+function Bold(props) {
+  return (
+    <span className="Text-Bold">
+      {props.children}
+    </span>
+  );
+}
+
+function Link(props) {
+  return (
+    <a href={props.href} target="_blank" className="Text-Link">
+      {props.children}
+    </a>
+  );
+}
+
 export {
   P,
   Heading,
   Sub,
+  Link,
+  Highlight,
+  Bold
 };

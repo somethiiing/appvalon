@@ -7,6 +7,8 @@ const PORT = process.env.PORT||5000
 const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
+const enums = require('./enums')
+
 const actionHandlers = require('./actionHandlers');
 const { getRandomFruit, createInitialRoomState, joinRoom } = require('./roomUtils');
 
@@ -14,9 +16,9 @@ app
   .use(cors())
   .use(bodyParser.urlencoded({ extended: false }))
   .use(bodyParser.json())
-  .use(express.static(path.join(__dirname, 'build')));
+  .use(express.static(path.join(__dirname, '../build')));
 
-const state = {  };
+const state = {};
 
 app.get('/api/', (req,res) => {
   res.sendStatus(200);
@@ -28,6 +30,7 @@ app.post('/api/createRoom', (req, res) => {
   state[room] = createInitialRoomState(room, host, settings);
   res.send({room, host, roomState: state[room]});
   io.emit('UPDATE_ROOMLIST', {roomList: Object.keys(state)});
+  console.log('Room created :', room);
 });
 
 app.get('/api/getRoomList', (req, res) => {
@@ -43,17 +46,17 @@ app.post('/api/joinRoom', (req, res) => {
   const { name, room } = req.body
   const { players, playerCount } = state[room];
 
-  if (players.length < playerCount) {
+  if (Object.values(players).length < playerCount) {
     state[room] = joinRoom(state[room], name)
+    console.log('room joined')
     res.send({status: 'SUCCESS', name, room});
   } else {
+    console.log('room full')
     res.send({status: 'FULL'});
   }
-
-  if (players.length === playerCount) {
+  if (Object.values(state[room].players).length === playerCount) {
     state[room] = actionHandlers.handleGameStart(state[room]);
   }
-
   io.emit('UPDATE_STATE', {room, roomState: state[room]});
 });
 
@@ -80,6 +83,9 @@ app.post('/api/update', (req, res) => {
     case 'SUBMIT_MISSION_VOTE':
       state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
       break;
+    case 'REVEAL_MISSION_VOTE':
+      state[room] = actionHandlers.handleRevealMissionVote(state[room]);
+      break;
     case 'HANDLE_MISSION_VOTE_RESULT':
       state[room] = actionHandlers.handleHandleMissionVoteResult(state[room]);
       break;
@@ -96,11 +102,18 @@ app.post('/api/update', (req, res) => {
   res.sendStatus(200);
 });
 
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'../build/index.html'));
+});
+
 io.on('connection', socket => {
-  console.log('user connected');
   socket.on('disconnect', testdata => {
-    console.log('user disconnected')
   });
 });
+
+const checkIfGoTime = () => {
+
+}
 
 console.log(`listening on port: ${PORT}`);

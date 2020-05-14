@@ -15,6 +15,7 @@ import { Test } from './ServerTest';
 
 import {createMuiTheme} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
+import TeamSubmission from "./components/KingProposalView";
 
 class App extends React.Component {
   constructor(props) {
@@ -72,19 +73,21 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <ThemeProvider theme={theme}>
-          {/* <div>
-            <button onClick={() => this.changePage('testing')}>testingComponents</button>
-          </div> */}
-          {this.state.currentPage === 'landing' &&
-          <div>
-            <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>
-            <button onClick={() => this.changePage('componentTest')}>testingComponents</button>
-            <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
-            <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
-            <button onClick={() => this.changePage('board')}>Test Board</button>
-          </div>}
-          {this.state.currentPage === 'serverTest' && <Test />}
+          <ThemeProvider theme={theme}>
+              {/*/!* <div>*/}
+              {/*  <button onClick={() => this.changePage('testing')}>testingComponents</button>*/}
+            {/*</div> *!/*/}
+            {/*<KingProposalView/>*/}
+            {this.state.currentPage === 'landing' &&
+            <div>
+              <button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>
+              <button onClick={() => this.changePage('componentTest')}>testingComponents</button>
+              <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
+              <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
+              <button onClick={() => this.changePage('board')}>Board Test</button>
+            </div>}
+
+          {this.state.currentPage === 'serverTest' && <Test/>}
           {this.state.currentPage === 'componentTest' && testingComponents()}
           {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
           {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
@@ -97,7 +100,6 @@ class App extends React.Component {
 
 const testingComponents = () => (
   <div>
-    <Header/>
     {
     // the below is for testing component purposes
     }

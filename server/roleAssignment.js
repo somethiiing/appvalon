@@ -3,6 +3,7 @@ const otherUtils = require('./otherUtils');
 
 function generateRoleList(settings) {
   let result = [];
+  console.log("creating roles with settings: " + JSON.stringify(settings), null, 2)
   const { selectedRoles } = settings;
   const { genericGood, genericEvil, numGenEvil, numGenGood } = selectedRoles;
   let rolesKeys = Object.keys(selectedRoles);
@@ -41,7 +42,8 @@ function assignRoles(playerList, roleList) {
     assignedPlayersObj[ playerList[ind] ] = {
       role,
       name: playerList[ind],
-      sees: {}
+      sees: {},
+      alignment: rolesData[role].alignment
     };
 
   });
@@ -88,7 +90,7 @@ function createRoleAssignment(playerList, settings, shuffle = true) {
       assignSeenData(assignedPlayersObj[player], assignedRolesObj)
     );
   });
-  return Object.values(assignedPlayersObj);
+  return assignedPlayersObj;
 };
 
 module.exports = {
