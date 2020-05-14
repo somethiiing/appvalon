@@ -5,7 +5,7 @@ import Missions from './Missions';
 import ActionArea from './ActionArea';
 import Header from './Header';
 
-import { fetchRoomData } from '../ApiUtils';
+import {fetchRoomData} from '../ApiUtils';
 import WaitingArea from "./WaitingArea";
 
 const api = 'http://localhost:5000';
@@ -32,7 +32,7 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
-    const { name, room } = this.props;
+    const {name, room} = this.props;
     console.log('props', name, room, this.props)
     this.setState({name, room});
 
@@ -40,10 +40,10 @@ class Board extends React.Component {
     socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
 
     fetchRoomData({room})
-      .then(res => {
-        console.log('data fetch', res.data)
-        this.setState({roomState: res.data.roomState});
-      });
+        .then(res => {
+          console.log('data fetch', res.data)
+          this.setState({roomState: res.data.roomState});
+        });
   }
 
   componentWillUnmount() {
@@ -51,16 +51,17 @@ class Board extends React.Component {
   }
 
   handleUpdateState(res) {
-    const { room, roomState } = res;
-    if(room === this.state.room) {
+    const {room, roomState} = res;
+    if (room === this.state.room) {
       this.setState({roomState});
     }
   }
 
   renderBoard() {
-    const { name, room } = this.props;
-    const { roomState } = this.state;
-    const { roomName, roomOwner, status, createdAt,
+    const {name, room} = this.props;
+    const {roomState} = this.state;
+    const {
+      roomName, roomOwner, status, createdAt,
       playerCount, lakeSetting, selectedRoles, players,
       boardInfo, kingOrder, currentMission, voteTrack,
       proposedTeam, teamVoteResult, missionVote
@@ -69,26 +70,26 @@ class Board extends React.Component {
     if (!status) {
       return null;
     } else if (status === 'WAITING_FOR_PLAYERS') {
-      return <WaitingArea roomState={roomState} />
+      return <WaitingArea roomState={roomState}/>
     } else {
       return (
-        <React.Fragment>
-          <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam}/>
-          <Missions currentMission={currentMission} boardInfo={boardInfo} voteTrack={voteTrack}/>
-          <ActionArea name={name} room={room} roomState={roomState} />
-        </React.Fragment>
+          <React.Fragment>
+            <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam}/>
+            <Missions currentMission={currentMission} boardInfo={boardInfo} voteTrack={voteTrack}/>
+            <ActionArea name={name} room={room} roomState={roomState}/>
+          </React.Fragment>
       );
     }
   }
 
   render() {
-    const { name, room, roomState } = this.props;
+    const {name, room, roomState} = this.props;
     // const boardState = this.state.roomState;
     // const missionState = this.state.missionState;
     // const voteState = this.state.voteState;
     return (
         <div className="Board">
-          <Header name={this.state.name} roomState={roomState} />
+          <Header name={this.state.name} roomState={roomState}/>
           {this.renderBoard()}
         </div>
     );

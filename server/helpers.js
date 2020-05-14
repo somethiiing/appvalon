@@ -336,7 +336,9 @@ const addHueToPlayers = (room) => {
     return dup;
 }
 
-module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
+module.exports = {
+    setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
-    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote, addHueToPlayers, getPlayer };
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote, addHueToPlayers, getPlayer
+};

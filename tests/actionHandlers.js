@@ -132,6 +132,6 @@ describe.only('integrationTest', () => {
         assert.equal(room.voteTrack, 0);
     });
 
-   }
+    }
 
 )

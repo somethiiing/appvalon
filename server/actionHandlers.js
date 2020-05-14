@@ -110,7 +110,7 @@ const handleSubmitMissionVote = (room, player, vote) => {
     const newRoom = otherUtils.deepCopy(room);
     const playerObj = Object.values(newRoom.players).find(p => p.name === player);
     console.log(playerObj.missionVote)
-    if (playerObj.missionVote === enums.MissionVote.NOT_VOTED){
+    if (playerObj.missionVote === enums.MissionVote.NOT_VOTED) {
         console.log("vote recieved: " + vote)
         switch (vote.toUpperCase()) {
             case enums.MissionVote.FAIL:

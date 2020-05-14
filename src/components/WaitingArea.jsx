@@ -26,8 +26,8 @@ export default class WaitingArea extends React.Component {
   }
 
   render() {
-    const { players = {}, roomOwner, gameSettings = {}, playerCount, roomName } = this.props.roomState;
-    const { lakeSetting } = gameSettings;
+    const {players = {}, roomOwner, gameSettings = {}, playerCount, roomName} = this.props.roomState;
+      const {lakeSetting} = gameSettings;
     let currentPlayerCount = Object.keys(players).length;
 
     return (
@@ -37,8 +37,8 @@ export default class WaitingArea extends React.Component {
         </div>
 
         <div style={{display: 'flex', flexDirection: 'column'}}>
-          <div>{`Room Code: ${roomName}`}</div>
-          <div>{`Host: ${roomOwner}`}</div>
+            <div>{`Room Code: ${roomName}`}</div>
+            <div>{`Host: ${roomOwner}`}</div>
           <div>{`Lake Setting: ${lakeSetting}`}</div>
           <div>{`Roles: ${JSON.stringify(this.generateSelectedRolesList(gameSettings))}`}</div>
         </div>

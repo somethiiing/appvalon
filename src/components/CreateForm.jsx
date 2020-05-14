@@ -18,22 +18,22 @@ export default class CreateForm extends React.Component {
     // props: handleSubmit
     // TODO set default role choices based on player number
     this.state = {
-      name: '', // host name
-      playerCount: 5,
-      lakeSetting: 'ALIGNMENT',
+        name: '', // host name
+        playerCount: 5,
+        lakeSetting: 'ALIGNMENT',
 
-      merlin: true, //bool
-      percival: true, //bool
-      tristan: false, //bool
-      iseult: false, //bool
-      numGenGood: 1, //num
+        merlin: true, //bool
+        percival: true, //bool
+        tristan: false, //bool
+        iseult: false, //bool
+        numGenGood: 1, //num
 
-      assassin: true, //bool
-      mordred: true, //bool
-      morgana: false, //bool
-      oberon: false, //bool
-      noberon: false, //bool
-      numGenEvil: 0 //num
+        assassin: true, //bool
+        mordred: true, //bool
+        morgana: false, //bool
+        oberon: false, //bool
+        noberon: false, //bool
+        numGenEvil: 0 //num
     }
 
     // map player count to number of good and bad roles in the game
@@ -232,7 +232,7 @@ export default class CreateForm extends React.Component {
         </FormControl>
         {/* SUBMIT */}
         <div className='Form-submit'>
-          <Button onClick={this.handleOnSubmit}>Create Room</Button>
+            <Button onClick={this.handleOnSubmit}>Create Room</Button>
         </div>
       </div>
     );

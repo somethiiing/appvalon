@@ -5,9 +5,9 @@ import TeamVote from './TeamVote';
 import TeamVoteResultView from './TeamVoteResultView';
 import MissionVote from './MissionVote';
 import MissionResultView from './MissionResultView';
-import { P } from './Text';
+import {P} from './Text';
 
-import { dispatchHandleTeamVoteResult } from '../ApiUtils';
+import {dispatchHandleTeamVoteResult} from '../ApiUtils';
 
 class ActionArea extends React.Component {
   constructor(props) {
@@ -18,9 +18,9 @@ class ActionArea extends React.Component {
   }
 
   renderActions() {
-    const { name, room, roomState = {} } = this.props;
-    const { status, players, proposedTeam } = roomState;
-    switch(status) {
+    const {name, room, roomState = {}} = this.props;
+    const {status, players, proposedTeam} = roomState;
+    switch (status) {
       case 'TEAM_PROPOSAL':
         if (players[name].isKing) {
           return <KingProposalView roomState={roomState} name={name}/>;
@@ -37,7 +37,7 @@ class ActionArea extends React.Component {
         }
       case 'MISSION_VOTE':
         if (proposedTeam.includes(name)) {
-          return (<MissionVote name={name} room={room} />);
+          return (<MissionVote name={name} room={room}/>);
         } else {
           return <P>Please wait while the mission is going</P>;
         }
