@@ -185,6 +185,7 @@ const unassignRoles = (roomObj) => {
 const isFailedMission = (missionVotes, isDoubleFailRequired) => {
     let failed = false;
     // check if mission was successful
+    console.log(missionVotes)
     if ((!isDoubleFailRequired && missionVotes.fail > 0) ||
         (isDoubleFailRequired && missionVotes.fail > 1)) {
         failed = true;
@@ -233,6 +234,7 @@ const isTeamApproved = (players) => {
     let successCount = 0;
 
     Object.values(players).forEach(player => {
+        console.log(player.teamVote)
         if (player.teamVote === enums.TeamVote.APPROVE) {
             successCount++;
         } else if (player.teamVote === enums.TeamVote.REJECT) {
@@ -240,6 +242,8 @@ const isTeamApproved = (players) => {
         }
     });
 
+    console.log("fail count: " + failCount)
+    console.log("success count: " + successCount)
     return successCount > failCount;
 
 }

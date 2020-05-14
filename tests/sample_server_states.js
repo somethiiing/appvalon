@@ -148,7 +148,7 @@ const resetBoard = {
             isKing: false,
             isLake: false,
             role: '',
-            teamVote: 'notVoted',
+            teamVote: 'NOT_VOTED',
             information: {},
             isHammer: false
           },
@@ -157,7 +157,7 @@ const resetBoard = {
             isKing: false,
             isLake: false,
             role: '',
-            teamVote: 'notVoted',
+            teamVote: 'NOT_VOTED',
             information: {},
             isHammer: false
           },
@@ -166,7 +166,7 @@ const resetBoard = {
             isKing: false,
             isLake: false,
             role: '',
-            teamVote: 'notVoted',
+            teamVote: 'NOT_VOTED',
             information: {},
             isHammer: false
           },
@@ -175,7 +175,7 @@ const resetBoard = {
             isKing: false,
             isLake: false,
             role: '',
-            teamVote: 'notVoted',
+            teamVote: 'NOT_VOTED',
             information: {},
             isHammer: false
           },
@@ -184,7 +184,7 @@ const resetBoard = {
             isKing: false,
             isLake: false,
             role: '',
-            teamVote: 'notVoted',
+            teamVote: 'NOT_VOTED',
             information: {},
             isHammer: false
           }],
