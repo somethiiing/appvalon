@@ -52,8 +52,7 @@ app.post('/api/joinRoom', (req, res) => {
     console.log("room full")
     res.send({status: 'FULL'});
   }
-
-  if (Object.values(players).length === playerCount) {
+  if (Object.values(state[room].players).length === playerCount) {
     state[room] = actionHandlers.handleGameStart(state[room]);
   }
   io.emit('UPDATE_STATE', {room, roomState: state[room]});
