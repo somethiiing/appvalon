@@ -8,6 +8,7 @@ import Header from './Header';
 import {fetchRoomData} from '../ApiUtils';
 import {KingProposalView} from "./KingProposalView";
 import NonKingProposalView from "./NonKingProposalView";
+import TeamVote from "./TeamVote";
 
 const api = 'http://localhost:5000';
 let socket;
@@ -66,6 +67,7 @@ class Board extends React.Component {
           {/*this KingProposalView here is just for testing*/}
           {<KingProposalView roomState={boardState} name={this.state.name}/>}
           {<NonKingProposalView roomState={boardState} name={this.state.name}/>}
+            <TeamVote roomState={boardState} name={this.state.name}/>
         </div>
     );
   }
