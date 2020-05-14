@@ -69,7 +69,7 @@ export default class JoinForm extends React.Component {
       .then( res => {
         const { status } = res.data;
         this.props.handleSubmit({status, name, room})
-        // setRelogToken({player: name, room});
+        setRelogToken({player: name, room});
       });
   }
 
