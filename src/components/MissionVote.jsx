@@ -7,17 +7,26 @@ class MissionVote extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      disableButtons: false
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(vote) {
+    const { name, room } = this.props;
+    this.setState({
+      disableButtons: true
+    });
+    dispatchSubmitMissionVote({room, player: name, missionVote: vote});
   }
 
   render() {
-    // visually disable both buttons
-    // put gold border on your vote and dim the other one
-    const { name, room } = this.props;
     return (
       <div className='MissionVote'>
-        <Card type='success' onClick={() => dispatchSubmitMissionVote({room, player: name, missionVote: 'SUCCESS'})}/>
-        <Card type='fail' onClick={() => dispatchSubmitMissionVote({room, player: name, missionVote: 'FAIL'})}/>
+        <Card type='success' disabled={this.state.disableButtons} onClick={() => this.handleClick('SUCCESS')}/>
+        <Card type='fail' disabled={this.state.disableButtons} onClick={() => this.handleClick('FAIL')}/>
       </div>
     );
   }
