@@ -37,9 +37,9 @@ const setVoteTrackCount = (roomObj, count) => {
  * Returns a new list of players that have been shuffled
  * @param {roomObj} array of players to be shuffled
  */
-const shufflePlayers = (roomObj) => {
+const shuffleKingOrder = (roomObj) => {
     let dup = otherUtils.deepCopy(roomObj)
-    otherUtils.shuffle(dup.players)
+    otherUtils.shuffle(dup.kingOrder)
     return dup;
 }
 
@@ -120,8 +120,7 @@ const shiftKing = (room) => {
     let currentKing = newRoom.kingOrder.shift();
     newRoom.kingOrder.push(currentKing);
     let futureKing = newRoom.kingOrder.shift();
-    newRoom.players = setKing(futureKing, newRoom.players);
-    return newRoom;
+    return setKing(newRoom, futureKing);
 }
 
 /**
@@ -184,16 +183,14 @@ const unassignRoles = (roomObj) => {
  * @param isDoubleFailRequired
  */
 const isFailedMission = (missionVotes, isDoubleFailRequired) => {
-    const failCount = missionVotes.filter( i => i === enums.MissionVote.FAIL).length;
-    const reverseCount = missionVotes.filter( i => i === enums.MissionVote.REVERSE).length;
     let failed = false;
     // check if mission was successful
-    if ((!isDoubleFailRequired && failCount > 0) ||
-        (isDoubleFailRequired && failCount > 1)) {
+    if ((!isDoubleFailRequired && missionVotes.fail > 0) ||
+        (isDoubleFailRequired && missionVotes.fail > 1)) {
         failed = true;
     }
     // reverse logic
-    if (reverseCount > 0 && reverseCount % 2 === 1) {
+    if (missionVotes.reverse > 0 && missionVotes.reverse % 2 === 1) {
         failed = !failed;
     }
     return failed;
@@ -234,7 +231,8 @@ const getGameStateBasedOnMissionStatus = (missions) => {
 const isTeamApproved = (players) => {
     let failCount = 0;
     let successCount = 0;
-    players.forEach(player => {
+
+    Object.values(players).forEach(player => {
         if (player.teamVote === enums.TeamVote.APPROVE) {
             successCount++;
         } else if (player.teamVote === enums.TeamVote.REJECT) {
@@ -281,7 +279,7 @@ const resetMissionVote = (roomObj) => {
 
     dup.missionVote = otherUtils.deepCopy(DEFAULT_MISSION_VOTE);
 
-    dup.team
+    return dup;
 }
 
 const getPlayer = (roomObj, playerName) => {
@@ -310,7 +308,7 @@ const getCurrentMission = (room) => {
     return room.boardInfo.missions[room.currentMission-1];
 }
 
-module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers, assignRoles,
+module.exports = { setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
     setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
-    setKingOrder, setSelectedRoles, setHammer };
+    setKingOrder, setSelectedRoles, setHammer, resetMissionVote, resetTeamVote };

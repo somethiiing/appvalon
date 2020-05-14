@@ -188,10 +188,13 @@
   margin-bottom: 0.2rem;
 }
 
-.Player.selected,
-.Player:focus {
+.Player.selected {
   outline: 0;
   border: 3px solid #ffbb01;
+}
+
+.Player:focus {
+  outline: 0;
 }
 
 .Player .hammer-icon {
