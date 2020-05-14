@@ -8,6 +8,8 @@ import Header from './Header';
 import {fetchRoomData} from '../ApiUtils';
 import {KingProposalView} from "./KingProposalView";
 import NonKingProposalView from "./NonKingProposalView";
+import MissionResultView from './MissionResultView';
+import VoteResultView from './VoteResultView';
 import TeamVote from "./TeamVote";
 
 const api = 'http://localhost:5000';
@@ -15,6 +17,8 @@ let socket;
 
 //TODO remove after testing
 const testRoomState = require('../testRoomStateObjects/teamProposal');
+const testMissionResultState = require('../testRoomStateObjects/missionResult');
+const testTeamVoteResultState = require('../testRoomStateObjects/teamVoteResult');
 console.log(testRoomState);
 
 class Board extends React.Component {
@@ -22,10 +26,12 @@ class Board extends React.Component {
     super(props);
 
     this.state = {
-        //testing stuff
-        name: 'ashwin',
-        room: 'mango',
-        roomState: testRoomState
+      //testing stuff
+      name: 'ashwin',
+      room: 'mango',
+      roomState: testRoomState,
+      missionState: testMissionResultState,
+      voteState: testTeamVoteResultState
     };
   }
 
@@ -57,13 +63,17 @@ class Board extends React.Component {
   render() {
     const { name, roomState } = this.props;
     const boardState = this.state.roomState;
+    const missionState = this.state.missionState;
+    const voteState = this.state.voteState;
     return (
         <div className="Board">
-          <Header name={this.props.name} roomState={this.state.roomState} />
+          <Header name={this.state.name} roomState={voteState} />
           <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
           <KingOrder/>
           <Missions boardState={boardState} />
           <ActionArea name={name} roomState={roomState} />
+          <MissionResultView boardState={missionState} name={this.state.name}/>
+          <VoteResultView boardState={voteState} name={this.state.name}/>
           {/*this KingProposalView here is just for testing*/}
           {<KingProposalView roomState={boardState} name={this.state.name}/>}
           {<NonKingProposalView roomState={boardState} name={this.state.name}/>}

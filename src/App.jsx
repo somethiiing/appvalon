@@ -87,7 +87,7 @@ class App extends React.Component {
               <button onClick={() => this.changePage('board')}>Board Test</button>
             </div>}
 
-              {this.state.currentPage === 'serverTest' && <Test/>}
+          {this.state.currentPage === 'serverTest' && <Test/>}
           {this.state.currentPage === 'componentTest' && testingComponents()}
           {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
           {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}

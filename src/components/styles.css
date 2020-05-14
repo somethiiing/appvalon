@@ -175,9 +175,8 @@
   align-items: center;
   flex-direction: column;
   position: relative;
-  margin: 0 20px;
+  margin: 0 20px 1rem;
   color: #f5f5f5;
-  cursor: pointer;
   padding: 0;
   border: 3px solid transparent;
 }
@@ -264,6 +263,10 @@
 
 .Form-submit {
   margin: 30px 0;
+}
+
+.Player-list {
+  margin: 20px 0;
 }
 
 @media screen and (max-width: 600px) {
