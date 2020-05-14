@@ -13,11 +13,12 @@ import { ReactComponent as GrClose } from '../icon-x.svg';
 import { Sub } from './Text';
 
 function Player(props) {
-  const {name, king, hammer, selected, teamVote, onClick} = props;
+  const {name, king, hammer, selected, teamVote, onClick, hue} = props;
   // use this to generate random icon colors on initialization
   // const randomColor = "#" + Math.random().toString(16).slice(2, 8);
   // Your colors are better but without access to the keyed layers to do a proper offset, this does the trick.
-  const randomNumber = Math.floor(Math.random() * Math.floor(360));
+  console.log('hue', hue, typeof hue);
+  const randomNumber = hue ? hue : Math.floor(Math.random() * Math.floor(360));
 
   return (
       <button type='button' className={`Player ${selected ? 'selected' : ''}`} onClick={onClick}>
