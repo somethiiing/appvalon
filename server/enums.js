@@ -32,7 +32,8 @@ Object.freeze(TeamVote)
 const MissionVote = {
     SUCCESS: "SUCCESS",
     FAIL: "FAIL",
-    REVERSE: "REVERSE"
+    REVERSE: "REVERSE",
+    NOT_VOTED: "NOT_VOTED"
 }
 
 Object.freeze(MissionVote)

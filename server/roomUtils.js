@@ -1,16 +1,16 @@
 const missionsData = require('./missionsData');
-const { deepCopy } = require('./otherUtils');
-
+const {deepCopy} = require('./otherUtils');
+const enums = require('./enums')
 const fruits = {
-  'apple': false,
-  'apricot': false,
-  'avocado': false,
-  'banana': false,
-  'blackberry': false,
-  'blueberry': false,
-  'cantaloupe': false,
-  'cherry': false,
-  'clementine': false,
+    'apple': false,
+    'apricot': false,
+    'avocado': false,
+    'banana': false,
+    'blackberry': false,
+    'blueberry': false,
+    'cantaloupe': false,
+    'cherry': false,
+    'clementine': false,
   'coconut': false,
   'cranberry': false,
   'cucumber': false,
@@ -64,22 +64,22 @@ const defaultState = {
   selectedRoles: [],
   players: [],
   boardInfo: {
-    playerCount: 5,
-    numGood: 3,
-    numEvil: 2,
-    doubleFailRequired: false,
-    missions: []
+      playerCount: 5,
+      numGood: 3,
+      numEvil: 2,
+      doubleFailRequired: false,
+      missions: []
   },
-  kingOrder: [],
-  currentMission: 1,
-  voteTrack: 1,
-  proposedTeam: [],
-  teamVoteResult: null,
-  missionVote: {
-    success: 0,
-    fail: 0,
-    reverse: 0
-  }
+    kingOrder: [],
+    currentMission: 1,
+    voteTrack: 1,
+    proposedTeam: [],
+    teamVoteResult: enums.TeamVote.NOT_VOTED,
+    missionVote: {
+        success: 0,
+        fail: 0,
+        reverse: 0
+    }
 }
 
 const FESettingsObj = {

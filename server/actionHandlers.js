@@ -104,29 +104,39 @@ const handleHandleTeamVoteResult = (room) => {
  *
  * @param room
  * @param vote
- * @returns room
+ * @returns newRoom
  */
-const handleSubmitMissionVote = (room, vote) => {
+const handleSubmitMissionVote = (room, player, vote) => {
     const newRoom = otherUtils.deepCopy(room);
-    console.log("vote recieved: " + vote)
-    switch(vote.toUpperCase()) {
-        case enums.MissionVote.FAIL:
-            newRoom.missionVote.fail++;
-            break;
-        case enums.MissionVote.SUCCESS:
-            newRoom.missionVote.success++;
-            break;
-        case enums.MissionVote.REVERSE:
-            newRoom.missionVote.reverse++;
-            break;
+    const playerObj = Object.values(newRoom.players).find(p => p.name === player);
+    console.log(playerObj.missionVote)
+    if (playerObj.missionVote === enums.MissionVote.NOT_VOTED) {
+        console.log("vote recieved: " + vote)
+        switch (vote.toUpperCase()) {
+            case enums.MissionVote.FAIL:
+                newRoom.missionVote.fail++;
+                break;
+            case enums.MissionVote.SUCCESS:
+                newRoom.missionVote.success++;
+                break;
+            case enums.MissionVote.REVERSE:
+                newRoom.missionVote.reverse++;
+                break;
+        }
+        playerObj.missionVote = vote;
+        console.log(playerObj)
+        const totalVotes = newRoom.missionVote.fail + newRoom.missionVote.success + newRoom.missionVote.reverse;
+        // Max votes reached
+        if (totalVotes === helpers.getCurrentMission(newRoom).size) {
+            console.log("mission votes have been submitted")
+            newRoom.status = enums.GameState.HANDLE_MISSION_VOTE_RESULT;
+        }
+        return newRoom
+    } else {
+        console.log("duplicate vote recieved from player: " + playerObj.name);
+        return newRoom;
     }
-    const totalVotes = newRoom.missionVote.fail + newRoom.missionVote.success + newRoom.missionVote.reverse;
-    // Max votes reached
-    if (totalVotes === helpers.getCurrentMission(newRoom).size) {
-        console.log("mission votes have been submitted")
-        newRoom.status = enums.GameState.HANDLE_MISSION_VOTE_RESULT;
-    }
-    return newRoom;
+
 }
 
 /**

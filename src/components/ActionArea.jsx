@@ -1,45 +1,48 @@
 import React from 'react';
+import KingProposalView from './KingProposalView';
+import NonKingProposalView from './NonKingProposalView';
+import TeamVote from './TeamVote';
+import TeamVoteResultView from './TeamVoteResultView';
 import MissionVote from './MissionVote';
+import MissionResultView from './MissionResultView';
+import {P} from './Text';
+
+import {dispatchHandleTeamVoteResult} from '../ApiUtils';
 
 class ActionArea extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {}
-
-    // this.props.roomObj = roomObj
-    // this.props.name = name
+    this.renderActions = this.renderActions.bind(this);
   }
 
   renderActions() {
-    const { name, room, roomState } = this.props;
-    const { status, players } = roomState;
-    switch(status) {
+    const {name, room, roomState = {}} = this.props;
+    const {status, players, proposedTeam} = roomState;
+    switch (status) {
       case 'TEAM_PROPOSAL':
         if (players[name].isKing) {
-
+          return <KingProposalView roomState={roomState} name={name}/>;
+        } else {
+          return <NonKingProposalView roomState={roomState} name={name}/>;
         }
-        break;
       case 'TEAM_VOTE':
-        if (players[name].isKing) {
-
-        }
-        break;
+        return <TeamVote roomState={roomState} name={name}/>;
       case 'DISPLAY_TEAM_VOTE':
         if (players[name].isKing) {
-
+          return <button onClick={() => dispatchHandleTeamVoteResult({room, name})}>Continue</button>
+        } else {
+          return <div>todo: display results here</div>;
         }
-        break;
       case 'MISSION_VOTE':
-        if (players[name].isKing) {
-
+        if (proposedTeam.includes(name)) {
+          return (<MissionVote name={name} room={room}/>);
+        } else {
+          return <P>Please wait while the mission is going</P>;
         }
-        break;
       case 'DISPLAY_MISSION_VOTE':
-        if (players[name].isKing) {
-
-        }
-        break;
+        return <MissionResultView boardState={roomState} name={name}/>;
       case 'SUBMIT_ASSASSINATION':
         // if assassin
         break;
@@ -49,11 +52,9 @@ class ActionArea extends React.Component {
   }
 
   render() {
-    //MissionVote currently here for testing
-    const { name, room } = this.props;
     return (
       <div className="ActionArea">
-        <MissionVote name={name} room={room} />
+        {this.renderActions()}
       </div>
     );
   }
