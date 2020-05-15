@@ -67,33 +67,32 @@ const inProgress = {
     playerCount: 5,
     lakeSettings: 'NONE',
     selectedRoles: ['merlin', 'percival', 'genericGood', 'mordred', 'morgana'],
-    players: [{
+    players: {alex: {
         name: 'alex',
         isKing: true,
         isLake: false,
         role: 'mordred'
-    }, {
+    }, wilson:{
         name: 'wilson',
         isKing: false,
         isLake: false,
         role: 'merlin'
-    }, {
+    }, bridget: {
         name: 'bridget',
         isKing: false,
         isLake: false,
         role: 'percival'
-    }, {
+    }, jason: {
         name: 'jason',
         isKing: false,
         isLake: false,
         role: 'morgana'
-    }, {
+    }, ashwin: {
         name: 'ashwin',
         isKing: false,
         isLake: false,
         role: 'genericGood'
-    }
-    ],
+    }},
     boardInfo: {
         playerCount: 5,
         numGood: 3,
@@ -102,12 +101,15 @@ const inProgress = {
         missions: [{
                 count: 1,
                 size: 2,
-                status: 'NOT_GONE'
+                status: 'NOT_GONE',
+                maxVoteTrack: 5
             },
             {
                 count: 2,
                 size: 3,
-                status: 'NOT_GONE'
+                status: 'NOT_GONE',
+                maxVoteTrack: 5
+
             },
             {
                 count: 3,
@@ -126,7 +128,7 @@ const inProgress = {
             }
         ]
     },
-    kingOrder: ['alex', 'bridget', 'chris', 'david', 'elliot'],
+    kingOrder: ['alex', 'wilson', 'bridget', 'jason', 'ashwin'],
     currentMission: 1,
     voteTrack: 1,
     proposedTeam: [],

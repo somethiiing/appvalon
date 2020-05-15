@@ -95,6 +95,7 @@ const handleHandleTeamVoteResult = (room) => {
         newRoom.voteTrack++;
         // Shift to new king
         newRoom = helpers.shiftKing(newRoom)
+        newRoom = helpers.setHammer(newRoom)
         return helpers.setStatus(newRoom, enums.GameState.TEAM_PROPOSAL);
     }
 }
@@ -163,7 +164,7 @@ const handleHandleMissionVoteResult = (room) => {
     } else {
         console.log("mission has succeeded!")
         currentMission.status = enums.MissionStatus.SUCCESS;
-}
+    }
 
     const gameState = helpers.getGameStateBasedOnMissionStatus(newRoom.boardInfo.missions);
     //Update the game state

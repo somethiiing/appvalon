@@ -257,10 +257,9 @@ const setHammer = (roomObj) => {
 
     const currentMission = getCurrentMission(dup);
     const maxVoteCount = currentMission.maxVoteTrack;
-
     const hammerName = dup.kingOrder[maxVoteCount - 1];
     const newHammer = getPlayer(dup, hammerName);
-
+    console.log(roomObj)
     const falseHammer = Object.values(dup.players).find(player => player.isHammer);
     if (falseHammer) {
         falseHammer.isHammer = false;
