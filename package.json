@@ -20,6 +20,8 @@
   },
   "scripts": {
     "start": "npm run build && node server/server.js",
+    "debug": "npm run build && node --inspect server/server.js",
+    "start:client": "react-scripts start",
     "start:watch": "npm run build && nodemon server/server.js",
     "build": "react-scripts build",
     "test": "mocha ./tests",
