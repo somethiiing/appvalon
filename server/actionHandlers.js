@@ -95,7 +95,6 @@ const handleHandleTeamVoteResult = (room) => {
         newRoom.voteTrack++;
         // Shift to new king
         newRoom = helpers.shiftKing(newRoom)
-        newRoom = helpers.setHammer(newRoom)
         return helpers.setStatus(newRoom, enums.GameState.TEAM_PROPOSAL);
     }
 }
@@ -174,6 +173,7 @@ const handleHandleMissionVoteResult = (room) => {
         newRoom.currentMission++;
         newRoom.voteTrack = 0;
         newRoom = helpers.shiftKing(newRoom);
+        newRoom = helpers.setHammer(newRoom)
         newRoom.status = enums.GameState.TEAM_PROPOSAL;
     }
     return newRoom;
