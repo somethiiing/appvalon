@@ -20,6 +20,9 @@ class ActionArea extends React.Component {
   renderActions() {
     const {name, room, roomState = {}} = this.props;
     const {status, players, proposedTeam} = roomState;
+    if (!players[name]) {
+      return null;
+    }
     switch (status) {
       case 'TEAM_PROPOSAL':
         if (players[name].isKing) {

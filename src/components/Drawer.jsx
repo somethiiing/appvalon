@@ -106,6 +106,7 @@ const renderRoleInfo = (name, room) => {
         break;
     }
     seeInfo.push(info);
+    //TODO return instead of push?
   });
 
   let noteInfo;
@@ -121,9 +122,6 @@ const renderRoleInfo = (name, room) => {
       break;
     case 'morgana':
       noteInfo = <Sub>You appear as a potential Merlin to Percival You are visible to Merlin.</Sub>
-      break;
-    case 'morgana':
-      noteInfo = <Sub>You appear as a potential Merlin to Percival. You are visible to Merlin.</Sub>
       break;
     case 'assassin':
       noteInfo = <Sub>You have the final say in assasinating Merlin if Good wins. You are visible to Merlin.</Sub>
@@ -171,7 +169,7 @@ function SimpleTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {renderRoleInfo(props.name, props.room)}
+        {renderRoleInfo(props.name, props.roomState)}
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Link href='https://avalon.fun/pdfs/rules.pdf'>Official Game Rules</Link>
