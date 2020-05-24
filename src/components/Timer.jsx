@@ -1,5 +1,5 @@
 import React from "react";
-import {Heading} from "./Text";
+import { Heading } from "./Text";
 
 class Timer extends React.Component {
     constructor(props) {
@@ -53,9 +53,11 @@ class Timer extends React.Component {
     }
 
     render() {
+        const { m, s } = this.state.time;
+        const formattedSeconds = s < 10 ? `0${s}` : s;
         return (
             <div>
-                {this.state.time.m} : {this.state.time.s}
+                {m} : {formattedSeconds}
                 {this.state.seconds === 0 && <Heading>Time is up. Please pick a target.</Heading>}
             </div>
         );
