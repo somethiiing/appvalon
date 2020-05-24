@@ -19,18 +19,18 @@ export default class CreateForm extends React.Component {
     // TODO set default role choices based on player number
     this.state = {
         name: '', // host name
-        playerCount: 5,
-        lakeSetting: 'ALIGNMENT',
+        playerCount: 7,
+        lakeSetting: 'ROLE',
 
         merlin: true, //bool
         percival: true, //bool
         tristan: false, //bool
         iseult: false, //bool
-        numGenGood: 1, //num
+        numGenGood: 2, //num
 
-        assassin: true, //bool
         mordred: true, //bool
-        morgana: false, //bool
+        morgana: true, //bool
+        assassin: true, //bool
         oberon: false, //bool
         noberon: false, //bool
         numGenEvil: 0 //num
@@ -79,9 +79,9 @@ export default class CreateForm extends React.Component {
         genericGood, //bool
         numGenGood, //num
 
-        assassin, //bool
         mordred, //bool
         morgana, //bool
+        assassin, //bool
         oberon, //bool
         noberon, //bool
         genericEvil, //bool
@@ -114,7 +114,7 @@ export default class CreateForm extends React.Component {
       merlin, percival, tristan, iseult, numGenGood,
       assassin, mordred, morgana, oberon, noberon, numGenEvil } = this.state;
     const goodError = ([merlin, percival, tristan, iseult].filter((v) => v).length + numGenGood) !== this.expectedNumGood[playerCount];
-    const evilError = ([assassin, mordred, morgana, oberon, noberon].filter((v) => v).length + numGenEvil) !== this.expectedNumEvil[playerCount];
+    const evilError = ([mordred, morgana, assassin, oberon, noberon].filter((v) => v).length + numGenEvil) !== this.expectedNumEvil[playerCount];
 
     const playerCountOptions = [];
     for(let i=5; i<=10; i++) {
@@ -202,16 +202,16 @@ export default class CreateForm extends React.Component {
             <FormLabel component="legend" className='Form-label'>Evil Roles</FormLabel>
             <FormHelperText>{`Choose ${this.expectedNumEvil[playerCount]} Evil Roles`}</FormHelperText>
             <FormControlLabel
-              control={<Checkbox checked={assassin} onChange={this.handleCheckboxChange} name="assassin" />}
-              label="Assassin"
-            />
-            <FormControlLabel
               control={<Checkbox checked={mordred} onChange={this.handleCheckboxChange} name="mordred" />}
               label="Mordred"
             />
             <FormControlLabel
               control={<Checkbox checked={morgana} onChange={this.handleCheckboxChange} name="morgana" />}
               label="Morgana"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={assassin} onChange={this.handleCheckboxChange} name="assassin" />}
+              label="Assassin"
             />
             <FormControlLabel
               control={<Checkbox checked={oberon} onChange={this.handleCheckboxChange} name="oberon" />}
