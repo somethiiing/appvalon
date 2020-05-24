@@ -21,6 +21,7 @@ function Missions(props) {
         voteTrack={voteTrack}
         maxVoteTrack={maxVoteTrack}
         doubleFail={isDoubleFail}
+        key={`mission-${count}`}
       />
     );
   }

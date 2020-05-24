@@ -1,7 +1,7 @@
 module.exports = {
     "roomName": "mango", // room name - used for all api calls
     "roomOwner": "alex", // room owner - used for forcing votes/afk,etc
-    "status": "DISPLAY_MISSION_VOTE", // controls action area
+    "status": "ASSASSINATION", // controls action area
     "createdAt": 1589336585126, // probably not useful, but just in case
     "playerCount": 5, // mostly state stuff, determines # of good/evil
     "lakeSetting": "NONE", // lake setting, lake role/alignment/none

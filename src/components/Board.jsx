@@ -12,23 +12,24 @@ import WaitingArea from "./WaitingArea";
 const api = '';
 let socket;
 
-//TODO remove after testing
+// To test:
+// Set roomState in constructor to one of these testRoomStateObjects
+// Comment out socket and fetchRoomData code in componentDidMount
+// Set name and room state in App.jsx to match your test data
 const testRoomState = require('../testRoomStateObjects/teamProposal');
 const testMissionResultState = require('../testRoomStateObjects/missionResult');
 const testTeamVoteResultState = require('../testRoomStateObjects/teamVoteResult');
+const testAssassinationState = require('../testRoomStateObjects/assassination');
 
 class Board extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      //testing stuff
       name: '',
       room: '',
       roomState: {},
       // roomState: testRoomState,
-      // missionState: testMissionResultState,
-      // voteState: testTeamVoteResultState
     };
   }
 

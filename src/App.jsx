@@ -3,19 +3,14 @@ import React from 'react';
 import './App.css';
 import './components/styles.css';
 
-import Header from './components/Header';
-import Mission from './components/Mission';
 import CreateForm from './components/CreateForm';
 import JoinForm from './components/JoinForm';
 import Board from './components/Board';
-import Player from './components/Player';
-import Card from './components/Card';
 
 import { Test } from './ServerTest';
 
 import {createMuiTheme} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
-import TeamSubmission from "./components/KingProposalView";
 
 class App extends React.Component {
   constructor(props) {
@@ -25,8 +20,8 @@ class App extends React.Component {
       // serverTest, componentTest
       // landing, joinRoomPage, createRoomPage, board
       currentPage: 'landing',
-      name: '',
-      room: ''
+      name: '', // set to a valid player from your test data
+      room: '' // set to 'mango' for testing
     };
 
     this.changePage = this.changePage.bind(this);
@@ -77,6 +72,7 @@ class App extends React.Component {
             {this.state.currentPage === 'landing' &&
             <div>
               {/*<button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>*/}
+              {/*<button onClick={() => this.changePage('board')}>BOARD TEST</button>*/}
               <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
               <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
             </div>}
@@ -84,7 +80,7 @@ class App extends React.Component {
           {this.state.currentPage === 'serverTest' && <Test/>}
           {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
           {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
-          {this.state.currentPage === 'board' && <Board name={this.state.name} room={this.state.room} />}
+          {this.state.currentPage === 'board' && <Board name={name} room={room} />}
         </ThemeProvider>
       </div>
     );
