@@ -1,6 +1,6 @@
 import React from 'react';
 import { Drawer as MaterialDrawer } from '@material-ui/core';
-import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -16,7 +16,7 @@ function Drawer(props) {
     <MaterialDrawer className='Drawer' anchor='right' open={props.isOpen}>
       <div>
         <IoIosCloseCircleOutline className='Drawer-close' onClick={props.toggleDrawer} size={35} />
-        <SimpleTabs name={name} room={roomState} />
+        <SimpleTabs name={name} roomState={roomState} />
       </div>
 
     </MaterialDrawer>
@@ -57,7 +57,7 @@ const renderRoleInfo = (name, room) => {
   const currentPlayer = room && room.players && room.players[name];
 
   if (!currentPlayer) {
-    return <P>Your role info will show up here.</P>
+    return <P>Your role info will show up here when everyone has joined.</P>
   }
 
   let roleInfo = `${room.players.name}, you are ${currentPlayer.role === 'genericGood' ? 'Generic Good' : currentPlayer.role}. You are ${currentPlayer.alignment || 'neutral'}.`;
