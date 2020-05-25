@@ -56,8 +56,8 @@ const renderRoleInfo = (name, room) => {
 
   const currentPlayer = room && room.players && room.players[name];
 
-  if (!currentPlayer) {
-    return <P>Your role info will show up here when everyone has joined.</P>
+  if (room.status === 'WAITING_FOR_PLAYERS') {
+    return <P>Your role info will be shown here when everyone has joined.</P>
   }
 
   let roleInfo = `${room.players.name}, you are ${currentPlayer.role === 'genericGood' ? 'Generic Good' : currentPlayer.role}. You are ${currentPlayer.alignment || 'neutral'}.`;
