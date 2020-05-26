@@ -1,14 +1,9 @@
 import React from 'react';
-import {IoMdClose, IoIosCloseCircleOutline} from 'react-icons/io';
-import {GiCloakDagger} from 'react-icons/gi';
-import { ReactComponent as Avatar } from '../avatar.svg';
-import { ReactComponent as Chalice } from '../icon-chalice.svg';
-import { ReactComponent as FcCheckmark } from '../icon-check.svg';
-import { ReactComponent as Close } from '../icon-close.svg';
-import { ReactComponent as FaCrown } from '../icon-crown.svg';
-import { ReactComponent as BsHammer } from '../icon-hammer.svg';
-import { ReactComponent as Info } from '../icon-info.svg';
-import {ReactComponent as GrClose} from '../icon-x.svg';
+import { IoMdClose } from 'react-icons/io';
+import { ReactComponent as Avatar } from '../icons/avatar.svg';
+import { ReactComponent as FcCheckmark } from '../icons/icon-check.svg';
+import { ReactComponent as FaCrown } from '../icons/icon-crown.svg';
+import { ReactComponent as BsHammer } from '../icons/icon-hammer.svg';
 import {BsQuestion} from 'react-icons/bs';
 
 import { Sub } from './Text';
