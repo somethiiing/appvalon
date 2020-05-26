@@ -28,7 +28,7 @@ export default class WaitingArea extends React.Component {
     const {players = {}, roomOwner, gameSettings = {}, playerCount, roomName} = this.props.roomState;
       const {lakeSetting} = gameSettings;
     let currentPlayerCount = Object.keys(players).length;
-
+    // TODO display player components
     return (
       <div className='WaitingArea'>
         <div>
