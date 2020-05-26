@@ -13,7 +13,8 @@ const api = '';
 let socket;
 
 // To test:
-// Set roomState in constructor to one of the testRoomStateObjects
+// Change testRoomState import to use your desired data from testRoomStateObjects
+// Set roomState in constructor to testRoomState
 // Comment out socket and fetchRoomData code in componentDidMount
 // Set name and room state in App.jsx to match your test data
 // Uncomment board test button in App.jsx
@@ -26,8 +27,8 @@ class Board extends React.Component {
     this.state = {
       name: '',
       room: '',
-      // roomState: {},
-      roomState: testRoomState,
+      roomState: {},
+      // roomState: testRoomState,
     };
   }
 
@@ -35,17 +36,17 @@ class Board extends React.Component {
     const {name, room} = this.props;
     this.setState({name, room});
 
-    // socket = io(`${api}/`);
-    // socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
-    //
-    // fetchRoomData({room})
-    //     .then(res => {
-    //       this.setState({roomState: res.data.roomState});
-    //     });
+    socket = io(`${api}/`);
+    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
+
+    fetchRoomData({room})
+        .then(res => {
+          this.setState({roomState: res.data.roomState});
+        });
   }
 
   componentWillUnmount() {
-    // socket.disconnect();
+    socket.disconnect();
   }
 
   handleUpdateState(res) {
