@@ -7,7 +7,6 @@ import MissionVote from './MissionVote';
 import MissionResultView from './MissionResultView';
 import {P} from './Text';
 import Assassination from './Assassination';
-import {dispatchHandleTeamVoteResult} from '../ApiUtils';
 
 class ActionArea extends React.Component {
   constructor(props) {

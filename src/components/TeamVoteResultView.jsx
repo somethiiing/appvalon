@@ -1,7 +1,6 @@
 import React from 'react';
 import {P, Sub} from './Text';
 import Button from './Button';
-import Player from './Player';
 import {dispatchHandleTeamVoteResult} from "../ApiUtils";
 
 function TeamVoteResultView(props) {

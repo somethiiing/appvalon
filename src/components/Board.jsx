@@ -16,6 +16,7 @@ let socket;
 // Set roomState in constructor to one of these testRoomStateObjects
 // Comment out socket and fetchRoomData code in componentDidMount
 // Set name and room state in App.jsx to match your test data
+// Uncomment board test button in App.jsx
 const testRoomState = require('../testRoomStateObjects/teamProposal');
 const testMissionResultState = require('../testRoomStateObjects/missionResult');
 const testTeamVoteResultState = require('../testRoomStateObjects/teamVoteResult');
