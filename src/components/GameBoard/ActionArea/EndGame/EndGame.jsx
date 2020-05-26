@@ -14,7 +14,7 @@ function EndGame (props) {
     <div style={{display: 'flex', flexDirection: 'column'}}>
       {props.status === 'GOOD_WIN' && renderGoodWin()}
       {props.status === 'EVIL_WIN' && renderEvilWin()}
-      <div style={{width: '2rem'}}><Button onClick={window.exitGame}>Exit Game</Button></div>
+      <div style={{width: '100%'}}><Button onClick={window.exitGame}>Exit Game</Button></div>
     </div>
   )
 }

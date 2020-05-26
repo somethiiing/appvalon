@@ -1,8 +1,8 @@
 import React from 'react';
 import Player from "../../../Base/Player";
-import {Heading} from "../../../Base/Text";
+import { Heading } from "../../../Base/Text";
 import Button from "../../../Base/Button";
-import {dispatchSubmitAssassination} from "../../../../ApiUtils";
+import { dispatchSubmitAssassination } from "../../../../ApiUtils";
 import Timer from "../../../Base/Timer";
 
 export default class Assassination extends React.Component {
@@ -11,14 +11,17 @@ export default class Assassination extends React.Component {
         this.state = {
             target: '',
             candidates: [],
-            assassin: '',
         }
     }
 
     submitAssassination = () => {
         const playerName = this.props.name;
         const roomName = this.props.roomState.roomName;
-        dispatchSubmitAssassination({room: roomName, player: playerName, assassinationTarget: this.state.target});
+        dispatchSubmitAssassination({
+          room: roomName,
+          player: playerName,
+          assassinationTarget: this.state.target
+        });
     }
 
     updateTarget(candidate) {
@@ -36,10 +39,8 @@ export default class Assassination extends React.Component {
     componentDidMount() {
         const players = this.props.roomState.players;
         const candidates = Object.keys(players).filter((name) => /good/.test(players[name].alignment));
-        const assassin = Object.keys(players).filter((name) => /assassin/.test(players[name].role));
         this.setState({
             candidates: candidates,
-            assassin: assassin
         })
     }
 
@@ -48,7 +49,8 @@ export default class Assassination extends React.Component {
         const target = this.state.target;
         const candidates = this.state.candidates;
         const players = this.props.roomState.players;
-        const isAssassin =  this.props.name === this.props.roomState.assassin
+        // if there is no assassin in the game, other roles may act as the assassin
+        const isAssassin =  this.props.name === this.props.roomState.assassin;
         return (
             <React.Fragment>
                 {isAssassin && <div className='LayoutGroup LayoutGroup--KingProposalView'>
@@ -60,7 +62,8 @@ export default class Assassination extends React.Component {
                         })}
                     </div>
                     <Button type='button' onClick={this.submitAssassination} disabled={disabled}>Attempt
-                        Assassination</Button>
+                        Assassination
+                    </Button>
                 </div>}
                 <Timer/>
             </React.Fragment>
