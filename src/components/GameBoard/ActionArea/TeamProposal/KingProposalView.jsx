@@ -1,8 +1,8 @@
 import React from 'react';
-import Player from "./Player";
-import {Heading} from "./Text";
-import Button from "./Button";
-import {dispatchSubmitForVote, dispatchUpdateTeamMembers} from "../ApiUtils";
+import Player from "../../../Base/Player";
+import {Heading} from "../../../Base/Text";
+import Button from "../../../Base/Button";
+import {dispatchSubmitForVote, dispatchUpdateTeamMembers} from "../../../../ApiUtils";
 
 //todo add validity for number of candidate
 export default class KingProposalView extends React.Component {

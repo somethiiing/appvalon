@@ -1,9 +1,9 @@
 import React from 'react';
-import Player from "./Player";
-import {Heading} from "./Text";
-import Button from "./Button";
-import {dispatchSubmitAssassination} from "../ApiUtils";
-import Timer from "./Timer";
+import Player from "../../../Base/Player";
+import {Heading} from "../../../Base/Text";
+import Button from "../../../Base/Button";
+import {dispatchSubmitAssassination} from "../../../../ApiUtils";
+import Timer from "../../../Base/Timer";
 
 export default class Assassination extends React.Component {
     constructor(props) {

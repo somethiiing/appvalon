@@ -1,5 +1,5 @@
 import React from 'react';
-import Player from './Player';
+import Player from '../Base/Player';
 
 function KingOrder(props) {
   const {kingOrder, players, proposedTeam, roomState} = props;

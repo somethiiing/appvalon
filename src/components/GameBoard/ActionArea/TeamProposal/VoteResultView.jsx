@@ -1,8 +1,8 @@
 import React from 'react';
-import { P, Sub } from './Text';
-import Button from './Button';
-import Player from './Player';
-import { dispatchHandleTeamVoteResult } from "../ApiUtils";
+import { P, Sub } from '../../../Base/Text';
+import Button from '../../../Base/Button';
+import Player from '../../../Base/Player';
+import { dispatchHandleTeamVoteResult } from "../../../../ApiUtils";
 
 function VoteResultView(props) {
   const { currentMission, missionVote, kingOrder, roomName, voteTrack, teamVoteResult, players } = props.boardState;
@@ -36,7 +36,7 @@ function VoteResultView(props) {
       <div className='Player-list'>
         {renderPlayers()}
       </div>
-      {(props.name === kingOrder[0]) && 
+      {(props.name === kingOrder[0]) &&
         <Button onClick={onClick}>Contifnue</Button>
       }
     </div>

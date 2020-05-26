@@ -1,8 +1,8 @@
 import React from 'react';
-import { P } from './Text';
-import Button from './Button';
-import Card from './Card';
-import { dispatchHandleMissionVoteResult } from "../ApiUtils";
+import { P } from '../../../Base/Text';
+import Button from '../../../Base/Button';
+import Card from '../../../Base/Card';
+import { dispatchHandleMissionVoteResult } from "../../../../ApiUtils";
 
 function MissionResultView(props) {
   const { currentMission, missionVote, kingOrder, roomName } = props.boardState;
@@ -36,7 +36,7 @@ function MissionResultView(props) {
       <div className='Card-list'>
         {renderCards()}
       </div>
-      {(props.name === kingOrder[1]) && 
+      {(props.name === kingOrder[1]) &&
         <Button onClick={onClick}>Continue</Button>
       }
     </div>

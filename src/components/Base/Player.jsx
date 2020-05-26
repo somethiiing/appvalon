@@ -1,9 +1,9 @@
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
-import { ReactComponent as Avatar } from '../icons/avatar.svg';
-import { ReactComponent as FcCheckmark } from '../icons/icon-check.svg';
-import { ReactComponent as FaCrown } from '../icons/icon-crown.svg';
-import { ReactComponent as BsHammer } from '../icons/icon-hammer.svg';
+import { ReactComponent as Avatar } from '../../icons/avatar.svg';
+import { ReactComponent as FcCheckmark } from '../../icons/icon-check.svg';
+import { ReactComponent as FaCrown } from '../../icons/icon-crown.svg';
+import { ReactComponent as BsHammer } from '../../icons/icon-hammer.svg';
 import { BsQuestion } from 'react-icons/bs';
 
 import { Sub } from './Text';

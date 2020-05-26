@@ -1,7 +1,6 @@
 import React from 'react';
 import { MdInfoOutline } from 'react-icons/md';
-import Button from './Button';
-import Drawer from './Drawer';
+import Drawer from '../Base/Drawer';
 import { Heading } from './Text';
 
 class Header extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Player from "./Player";
-import {Heading} from "./Text";
+import Player from "../../../Base/Player";
+import {Heading} from "../../../Base/Text";
 import {MdInfoOutline} from "react-icons/md";
 
 

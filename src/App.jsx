@@ -3,9 +3,9 @@ import React from 'react';
 import './App.css';
 import './components/styles.css';
 
-import CreateForm from './components/CreateForm';
-import JoinForm from './components/JoinForm';
-import Board from './components/Board';
+import CreateForm from './components/NotInGame/CreateForm';
+import JoinForm from './components/NotInGame/JoinForm';
+import Board from './components/GameBoard/Board';
 
 import { Test } from './ServerTest';
 

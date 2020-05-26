@@ -1,26 +1,23 @@
 import React from 'react';
 import io from 'socket.io-client';
+import WaitingArea from "../NotInGame/WaitingArea";
 import KingOrder from './KingOrder';
-import Missions from './Missions';
-import ActionArea from './ActionArea';
-import Header from './Header';
-import EndGame from './EndGame';
+import Missions from './Missions/Missions';
+import ActionArea from './ActionArea/ActionArea';
+import Header from '../Base/Header';
+import EndGame from './ActionArea/EndGame/EndGame';
 
-import {fetchRoomData} from '../ApiUtils';
-import WaitingArea from "./WaitingArea";
+import {fetchRoomData} from '../../ApiUtils';
 
 const api = '';
 let socket;
 
 // To test:
-// Set roomState in constructor to one of these testRoomStateObjects
+// Set roomState in constructor to one of the testRoomStateObjects
 // Comment out socket and fetchRoomData code in componentDidMount
 // Set name and room state in App.jsx to match your test data
 // Uncomment board test button in App.jsx
-const testRoomState = require('../testRoomStateObjects/teamProposal');
-const testMissionResultState = require('../testRoomStateObjects/missionResult');
-const testTeamVoteResultState = require('../testRoomStateObjects/teamVoteResult');
-const testAssassinationState = require('../testRoomStateObjects/assassination');
+const testRoomState = require('../../testRoomStateObjects/endGame');
 
 class Board extends React.Component {
   constructor(props) {
@@ -29,8 +26,8 @@ class Board extends React.Component {
     this.state = {
       name: '',
       room: '',
-      roomState: {},
-      // roomState: testRoomState,
+      // roomState: {},
+      roomState: testRoomState,
     };
   }
 
@@ -38,17 +35,17 @@ class Board extends React.Component {
     const {name, room} = this.props;
     this.setState({name, room});
 
-    socket = io(`${api}/`);
-    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
-
-    fetchRoomData({room})
-        .then(res => {
-          this.setState({roomState: res.data.roomState});
-        });
+    // socket = io(`${api}/`);
+    // socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
+    //
+    // fetchRoomData({room})
+    //     .then(res => {
+    //       this.setState({roomState: res.data.roomState});
+    //     });
   }
 
   componentWillUnmount() {
-    socket.disconnect();
+    // socket.disconnect();
   }
 
   handleUpdateState(res) {

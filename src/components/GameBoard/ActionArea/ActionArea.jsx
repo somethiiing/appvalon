@@ -1,12 +1,12 @@
 import React from 'react';
-import KingProposalView from './KingProposalView';
-import NonKingProposalView from './NonKingProposalView';
-import TeamVote from './TeamVote';
-import TeamVoteResultView from './TeamVoteResultView';
-import MissionVote from './MissionVote';
-import MissionResultView from './MissionResultView';
-import {P} from './Text';
-import Assassination from './Assassination';
+import KingProposalView from './TeamProposal/KingProposalView';
+import NonKingProposalView from './TeamProposal/NonKingProposalView';
+import TeamVote from './TeamProposal/TeamVote';
+import TeamVoteResultView from './TeamProposal/TeamVoteResultView';
+import MissionVote from './MissionVote/MissionVote';
+import MissionResultView from './MissionVote/MissionResultView';
+import {P} from '../../Base/Text';
+import Assassination from './EndGame/Assassination';
 
 class ActionArea extends React.Component {
   constructor(props) {

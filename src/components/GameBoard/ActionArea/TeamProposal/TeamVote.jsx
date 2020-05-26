@@ -1,8 +1,8 @@
 import React from 'react';
-import Player from "./Player";
-import Card from "./Card";
-import {dispatchSubmitTeamVote, dispatchRevealTeamVote} from "../ApiUtils";
-import Button from "./Button";
+import Player from "../../../Base/Player";
+import Card from "../../../Base/Card";
+import Button from "../../../Base/Button";
+import {dispatchSubmitTeamVote, dispatchRevealTeamVote} from "../../../../ApiUtils";
 
 class TeamVote extends React.Component {
 

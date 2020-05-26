@@ -5,10 +5,10 @@ import TextField from "@material-ui/core/TextField";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import Button from './Button';
+import Button from '../Base/Button';
 
-import { fetchRoomList, joinRoom } from '../ApiUtils';
-import { setRelogToken } from '../utils';
+import { fetchRoomList, joinRoom } from '../../ApiUtils';
+import { setRelogToken } from '../../utils';
 
 let socket;
 

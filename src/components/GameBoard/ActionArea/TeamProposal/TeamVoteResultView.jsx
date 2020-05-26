@@ -1,7 +1,7 @@
 import React from 'react';
-import {P, Sub} from './Text';
-import Button from './Button';
-import {dispatchHandleTeamVoteResult} from "../ApiUtils";
+import {P, Sub} from '../../../Base/Text';
+import Button from '../../../Base/Button';
+import {dispatchHandleTeamVoteResult} from "../../../../ApiUtils";
 
 function TeamVoteResultView(props) {
     const { room, name, roomState } = props;

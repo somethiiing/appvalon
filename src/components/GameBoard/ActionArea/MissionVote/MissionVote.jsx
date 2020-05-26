@@ -1,7 +1,6 @@
 import React from 'react';
-import Card from './Card';
-import {dispatchSubmitMissionVote} from '../ApiUtils';
-import {throttle} from '../utils';
+import Card from '../../../Base/Card';
+import {dispatchSubmitMissionVote} from '../../../../ApiUtils';
 
 class MissionVote extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class MissionVote extends React.Component {
 
   handleClick(vote) {
     const {name, room, roomState} = this.props;
-    const players = roomState.players
+    const players = roomState.players;
     this.setState({
       disableButtons: true
     });
