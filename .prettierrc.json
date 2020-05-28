@@ -2,7 +2,8 @@
   "semi": true,
   "trailingComma": "none",
   "singleQuote": true,
-  "useTabs": true,
+  "useTabs": false,
+  "tabWidth": 2,
   "bracketSpacing": true,
   "jsxBracketSameLine": false,
   "arrowParens": "always"
