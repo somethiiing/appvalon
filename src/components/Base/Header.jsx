@@ -17,7 +17,7 @@ class Header extends React.Component {
     this.setState({
       isOpen
     });
-  }
+  };
 
   render() {
     return (
@@ -26,8 +26,17 @@ class Header extends React.Component {
           <HamburgerMenu />
           <Heading>Appvalon</Heading>
         </div>
-        <MdInfoOutline className='Info-icon' onClick={() => this.toggleDrawer(true)} size={32} />
-        <Drawer name={this.props.name} roomState={this.props.roomState} isOpen={this.state.isOpen} toggleDrawer={() => this.toggleDrawer(false)}/>
+        <MdInfoOutline
+          className="Info-icon"
+          onClick={() => this.toggleDrawer(true)}
+          size={32}
+        />
+        <Drawer
+          name={this.props.name}
+          roomState={this.props.roomState}
+          isOpen={this.state.isOpen}
+          toggleDrawer={() => this.toggleDrawer(false)}
+        />
       </header>
     );
   }

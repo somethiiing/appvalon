@@ -11,7 +11,7 @@ function Missions(props) {
     const isSuccess = status === 'SUCCESS';
     const isFail = status === 'FAIL';
     const isCurrentMission = currentMission === count;
-    const isDoubleFail = doubleFailRequired && (count === 4);
+    const isDoubleFail = doubleFailRequired && count === 4;
 
     return (
       <Mission
@@ -29,8 +29,10 @@ function Missions(props) {
 
   return (
     <div className="Missions">
-      <div className='Mission-list'>
-        {boardInfo.missions.map((mission) => {return getMissionComponent(mission)})}
+      <div className="Mission-list">
+        {boardInfo.missions.map((mission) => {
+          return getMissionComponent(mission);
+        })}
       </div>
     </div>
   );

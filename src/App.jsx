@@ -9,8 +9,8 @@ import Board from './components/GameBoard/Board';
 
 import { Test } from './ServerTest';
 
-import {createMuiTheme} from "@material-ui/core";
-import {ThemeProvider} from "@material-ui/styles";
+import { createMuiTheme } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,21 +30,21 @@ class App extends React.Component {
   }
 
   changePage(page) {
-    this.setState({currentPage: page});
+    this.setState({ currentPage: page });
   }
 
-  handleJoinRoom({status, name, room}) {
+  handleJoinRoom({ status, name, room }) {
     if (status === 'SUCCESS') {
-      this.setState({name, room});
+      this.setState({ name, room });
       this.changePage('board');
-    } else if (status === 'FULL' ) {
+    } else if (status === 'FULL') {
       // handle spectator mode stuff
-      console.log('room full')
+      console.log('room full');
     }
   }
 
-  handleCreateRoom({name, room}) {
-    this.setState({name, room});
+  handleCreateRoom({ name, room }) {
+    this.setState({ name, room });
     this.changePage('board');
   }
 
@@ -56,8 +56,8 @@ class App extends React.Component {
   render() {
     const theme = createMuiTheme({
       palette: {
-        type: 'dark',
-      },
+        type: 'dark'
+      }
     });
 
     const { name, room } = this.state;
@@ -68,19 +68,30 @@ class App extends React.Component {
 
     return (
       <div className="App">
-          <ThemeProvider theme={theme}>
-            {this.state.currentPage === 'landing' &&
+        <ThemeProvider theme={theme}>
+          {this.state.currentPage === 'landing' && (
             <div>
               {/*<button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>*/}
               {/*<button onClick={() => this.changePage('board')}>BOARD TEST</button>*/}
-              <button onClick={() => this.changePage('joinRoomPage')}>JOIN ROOM</button>
-              <button onClick={() => this.changePage('createRoomPage')}>CREATE ROOM</button>
-            </div>}
+              <button onClick={() => this.changePage('joinRoomPage')}>
+                JOIN ROOM
+              </button>
+              <button onClick={() => this.changePage('createRoomPage')}>
+                CREATE ROOM
+              </button>
+            </div>
+          )}
 
-          {this.state.currentPage === 'serverTest' && <Test/>}
-          {this.state.currentPage === 'joinRoomPage' && <JoinRoom handleSubmit={this.handleJoinRoom} />}
-          {this.state.currentPage === 'createRoomPage' && <CreateRoom handleSubmit={this.handleCreateRoom} />}
-          {this.state.currentPage === 'board' && <Board name={name} room={room} />}
+          {this.state.currentPage === 'serverTest' && <Test />}
+          {this.state.currentPage === 'joinRoomPage' && (
+            <JoinRoom handleSubmit={this.handleJoinRoom} />
+          )}
+          {this.state.currentPage === 'createRoomPage' && (
+            <CreateRoom handleSubmit={this.handleCreateRoom} />
+          )}
+          {this.state.currentPage === 'board' && (
+            <Board name={name} room={room} />
+          )}
         </ThemeProvider>
       </div>
     );

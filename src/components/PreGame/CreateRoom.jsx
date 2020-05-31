@@ -7,7 +7,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import TextField from "@material-ui/core/TextField";
+import TextField from '@material-ui/core/TextField';
 import Button from '../Base/Button';
 import './CreateRoom.css';
 
@@ -20,23 +20,23 @@ export default class CreateRoom extends React.Component {
     // props: handleSubmit
     // TODO set default role choices based on player number
     this.state = {
-        name: '', // host name
-        playerCount: 7,
-        lakeSetting: 'ALIGNMENT',
+      name: '', // host name
+      playerCount: 7,
+      lakeSetting: 'ALIGNMENT',
 
-        merlin: true, //bool
-        percival: true, //bool
-        tristan: false, //bool
-        iseult: false, //bool
-        numGenGood: 2, //num
+      merlin: true, //bool
+      percival: true, //bool
+      tristan: false, //bool
+      iseult: false, //bool
+      numGenGood: 2, //num
 
-        mordred: true, //bool
-        morgana: true, //bool
-        assassin: true, //bool
-        oberon: false, //bool
-        noberon: false, //bool
-        numGenEvil: 0 //num
-    }
+      mordred: true, //bool
+      morgana: true, //bool
+      assassin: true, //bool
+      oberon: false, //bool
+      noberon: false, //bool
+      numGenEvil: 0 //num
+    };
 
     // map player count to number of good and bad roles in the game
     this.expectedNumEvil = {
@@ -46,7 +46,7 @@ export default class CreateRoom extends React.Component {
       8: 3,
       9: 3,
       10: 4
-    }
+    };
 
     this.expectedNumGood = {
       5: 3,
@@ -55,7 +55,7 @@ export default class CreateRoom extends React.Component {
       8: 5,
       9: 6,
       10: 6
-    }
+    };
 
     this.constructSettingsObj = this.constructSettingsObj.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
@@ -64,9 +64,21 @@ export default class CreateRoom extends React.Component {
   }
 
   constructSettingsObj() {
-    const { playerCount, lakeSetting,
-      merlin, percival, tristan, iseult, numGenGood,
-      assassin, mordred, morgana, oberon, noberon, numGenEvil } = this.state;
+    const {
+      playerCount,
+      lakeSetting,
+      merlin,
+      percival,
+      tristan,
+      iseult,
+      numGenGood,
+      assassin,
+      mordred,
+      morgana,
+      oberon,
+      noberon,
+      numGenEvil
+    } = this.state;
     const genericGood = numGenGood > 0;
     const genericEvil = numGenEvil > 0;
 
@@ -89,7 +101,7 @@ export default class CreateRoom extends React.Component {
         genericEvil, //bool
         numGenEvil //num
       }
-    }
+    };
     return settings;
   }
 
@@ -100,59 +112,89 @@ export default class CreateRoom extends React.Component {
   handleChange = (e) => {
     let field = e.target.name;
     let val = e.target.value;
-    this.setState({[field]: val});
-  }
+    this.setState({ [field]: val });
+  };
 
   handleOnSubmit() {
-    createRoom({settings: this.constructSettingsObj(), host: this.state.name})
-      .then( res => {
-        const { room, host } = res.data;
-        this.props.handleSubmit({name: host, room})
-      })
+    createRoom({
+      settings: this.constructSettingsObj(),
+      host: this.state.name
+    }).then((res) => {
+      const { room, host } = res.data;
+      this.props.handleSubmit({ name: host, room });
+    });
   }
 
   render() {
-    const { playerCount, lakeSetting,
-      merlin, percival, tristan, iseult, numGenGood,
-      assassin, mordred, morgana, oberon, noberon, numGenEvil } = this.state;
-    const goodError = ([merlin, percival, tristan, iseult].filter((v) => v).length + numGenGood) !== this.expectedNumGood[playerCount];
-    const evilError = ([mordred, morgana, assassin, oberon, noberon].filter((v) => v).length + numGenEvil) !== this.expectedNumEvil[playerCount];
+    const {
+      playerCount,
+      lakeSetting,
+      merlin,
+      percival,
+      tristan,
+      iseult,
+      numGenGood,
+      assassin,
+      mordred,
+      morgana,
+      oberon,
+      noberon,
+      numGenEvil
+    } = this.state;
+    const goodError =
+      [merlin, percival, tristan, iseult].filter((v) => v).length +
+        numGenGood !==
+      this.expectedNumGood[playerCount];
+    const evilError =
+      [mordred, morgana, assassin, oberon, noberon].filter((v) => v).length +
+        numGenEvil !==
+      this.expectedNumEvil[playerCount];
 
     const playerCountOptions = [];
-    for(let i=5; i<=10; i++) {
-      playerCountOptions.push(<MenuItem key={`${i}-players`} value={i}>{`${i} Players`}</MenuItem>);
+    for (let i = 5; i <= 10; i++) {
+      playerCountOptions.push(
+        <MenuItem key={`${i}-players`} value={i}>{`${i} Players`}</MenuItem>
+      );
     }
 
     const genGoodOptions = [];
-    for(let i=0; i<=6; i++) {
-      genGoodOptions.push(<MenuItem key={`${i}-good`} value={i}>{`${i} Generic Good`}</MenuItem>);
+    for (let i = 0; i <= 6; i++) {
+      genGoodOptions.push(
+        <MenuItem key={`${i}-good`} value={i}>{`${i} Generic Good`}</MenuItem>
+      );
     }
 
     const genEvilOptions = [];
-    for(let i=0; i<=4; i++) {
-      genEvilOptions.push(<MenuItem key={`${i}-evil`} value={i}>{`${i} Generic Evil`}</MenuItem>);
+    for (let i = 0; i <= 4; i++) {
+      genEvilOptions.push(
+        <MenuItem key={`${i}-evil`} value={i}>{`${i} Generic Evil`}</MenuItem>
+      );
     }
 
     return (
-      <div className='Create-room'>
+      <div className="Create-room">
         {/* NAME FORM */}
-        <FormLabel component="legend" className='Form-label'>Host Name</FormLabel>
+        <FormLabel component="legend" className="Form-label">
+          Host Name
+        </FormLabel>
         <TextField
-          variant='outlined'
-          margin='normal'
+          variant="outlined"
+          margin="normal"
           required
-          id='name'
-          label='Name'
-          name='name'
-          autoComplete='name'
+          id="name"
+          label="Name"
+          name="name"
+          autoComplete="name"
           autoFocus
           onChange={this.handleChange}
         />
         {/* PLAYER COUNT */}
-        <FormLabel component="legend" className='Form-label'>Game Settings</FormLabel>
+        <FormLabel component="legend" className="Form-label">
+          Game Settings
+        </FormLabel>
         <Select
-          className='Form-select'
-          name='playerCount'
+          className="Form-select"
+          name="playerCount"
           value={playerCount}
           onChange={this.handleChange}
         >
@@ -160,38 +202,70 @@ export default class CreateRoom extends React.Component {
         </Select>
         {/* LAKE SETTINGS */}
         <Select
-          className='Form-select'
-          name='lakeSetting'
+          className="Form-select"
+          name="lakeSetting"
           value={lakeSetting}
           onChange={this.handleChange}
         >
-          <MenuItem key={'no-lake'} value={'NONE'}>No Lake</MenuItem>
-          <MenuItem key={'lake-alignment'} value={'ALIGNMENT'}>Lake Alignment</MenuItem>
-          <MenuItem key={'lake-role'} value={'ROLE'}>Lake Role</MenuItem>
+          <MenuItem key={'no-lake'} value={'NONE'}>
+            No Lake
+          </MenuItem>
+          <MenuItem key={'lake-alignment'} value={'ALIGNMENT'}>
+            Lake Alignment
+          </MenuItem>
+          <MenuItem key={'lake-role'} value={'ROLE'}>
+            Lake Role
+          </MenuItem>
         </Select>
         {/* ROLE SETTINGS */}
         <FormControl required error={goodError} component="fieldset">
           <FormGroup>
-            <FormLabel component="legend" className='Form-label'>Good Roles</FormLabel>
+            <FormLabel component="legend" className="Form-label">
+              Good Roles
+            </FormLabel>
             <FormHelperText>{`Choose ${this.expectedNumGood[playerCount]} Good Roles`}</FormHelperText>
             <FormControlLabel
-              control={<Checkbox checked={merlin} onChange={this.handleCheckboxChange} name="merlin" />}
+              control={
+                <Checkbox
+                  checked={merlin}
+                  onChange={this.handleCheckboxChange}
+                  name="merlin"
+                />
+              }
               label="Merlin"
             />
             <FormControlLabel
-              control={<Checkbox checked={percival} onChange={this.handleCheckboxChange} name="percival" />}
+              control={
+                <Checkbox
+                  checked={percival}
+                  onChange={this.handleCheckboxChange}
+                  name="percival"
+                />
+              }
               label="Percival"
             />
             <FormControlLabel
-              control={<Checkbox checked={tristan} onChange={this.handleCheckboxChange} name="tristan" />}
+              control={
+                <Checkbox
+                  checked={tristan}
+                  onChange={this.handleCheckboxChange}
+                  name="tristan"
+                />
+              }
               label="Tristan"
             />
             <FormControlLabel
-              control={<Checkbox checked={iseult} onChange={this.handleCheckboxChange} name="iseult" />}
+              control={
+                <Checkbox
+                  checked={iseult}
+                  onChange={this.handleCheckboxChange}
+                  name="iseult"
+                />
+              }
               label="Iseult"
             />
             <Select
-              name='numGenGood'
+              name="numGenGood"
               value={numGenGood}
               onChange={this.handleChange}
             >
@@ -201,30 +275,62 @@ export default class CreateRoom extends React.Component {
         </FormControl>
         <FormControl required error={evilError} component="fieldset">
           <FormGroup>
-            <FormLabel component="legend" className='Form-label'>Evil Roles</FormLabel>
+            <FormLabel component="legend" className="Form-label">
+              Evil Roles
+            </FormLabel>
             <FormHelperText>{`Choose ${this.expectedNumEvil[playerCount]} Evil Roles`}</FormHelperText>
             <FormControlLabel
-              control={<Checkbox checked={mordred} onChange={this.handleCheckboxChange} name="mordred" />}
+              control={
+                <Checkbox
+                  checked={mordred}
+                  onChange={this.handleCheckboxChange}
+                  name="mordred"
+                />
+              }
               label="Mordred"
             />
             <FormControlLabel
-              control={<Checkbox checked={morgana} onChange={this.handleCheckboxChange} name="morgana" />}
+              control={
+                <Checkbox
+                  checked={morgana}
+                  onChange={this.handleCheckboxChange}
+                  name="morgana"
+                />
+              }
               label="Morgana"
             />
             <FormControlLabel
-              control={<Checkbox checked={assassin} onChange={this.handleCheckboxChange} name="assassin" />}
+              control={
+                <Checkbox
+                  checked={assassin}
+                  onChange={this.handleCheckboxChange}
+                  name="assassin"
+                />
+              }
               label="Assassin"
             />
             <FormControlLabel
-              control={<Checkbox checked={oberon} onChange={this.handleCheckboxChange} name="oberon" />}
+              control={
+                <Checkbox
+                  checked={oberon}
+                  onChange={this.handleCheckboxChange}
+                  name="oberon"
+                />
+              }
               label="Oberon (Seen by Merlin)"
             />
             <FormControlLabel
-              control={<Checkbox checked={noberon} onChange={this.handleCheckboxChange} name="noberon" />}
+              control={
+                <Checkbox
+                  checked={noberon}
+                  onChange={this.handleCheckboxChange}
+                  name="noberon"
+                />
+              }
               label="Oberon (Not Seen by Merlin)"
             />
             <Select
-              name='numGenEvil'
+              name="numGenEvil"
               value={numGenEvil}
               onChange={this.handleChange}
             >
@@ -233,10 +339,10 @@ export default class CreateRoom extends React.Component {
           </FormGroup>
         </FormControl>
         {/* SUBMIT */}
-        <div className='Form-submit'>
-            <Button onClick={this.handleOnSubmit}>Create Room</Button>
+        <div className="Form-submit">
+          <Button onClick={this.handleOnSubmit}>Create Room</Button>
         </div>
       </div>
     );
   }
-};
+}

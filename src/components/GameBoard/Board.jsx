@@ -1,6 +1,6 @@
 import React from 'react';
 import io from 'socket.io-client';
-import WaitingArea from "../PreGame/WaitingArea";
+import WaitingArea from '../PreGame/WaitingArea';
 import KingOrder from './KingOrder';
 import Missions from './Missions/Missions';
 import ActionArea from './ActionArea/ActionArea';
@@ -8,7 +8,7 @@ import Header from '../Base/Header';
 import EndGame from './ActionArea/EndGame/EndGame';
 import './Board.css';
 
-import {fetchRoomData} from '../../ApiUtils';
+import { fetchRoomData } from '../../ApiUtils';
 
 const api = '';
 let socket;
@@ -28,22 +28,21 @@ class Board extends React.Component {
     this.state = {
       name: '',
       room: '',
-      roomState: {},
+      roomState: {}
       // roomState: testRoomState,
     };
   }
 
   componentDidMount() {
-    const {name, room} = this.props;
-    this.setState({name, room});
+    const { name, room } = this.props;
+    this.setState({ name, room });
 
     socket = io(`${api}/`);
-    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
+    socket.on('UPDATE_STATE', (res) => this.handleUpdateState(res));
 
-    fetchRoomData({room})
-        .then(res => {
-          this.setState({roomState: res.data.roomState});
-        });
+    fetchRoomData({ room }).then((res) => {
+      this.setState({ roomState: res.data.roomState });
+    });
   }
 
   componentWillUnmount() {
@@ -51,32 +50,52 @@ class Board extends React.Component {
   }
 
   handleUpdateState(res) {
-    const {room, roomState} = res;
+    const { room, roomState } = res;
     if (room === this.state.room) {
-      this.setState({roomState});
+      this.setState({ roomState });
     }
   }
 
   renderBoard() {
-    const {name, room} = this.props;
-    const {roomState} = this.state;
+    const { name, room } = this.props;
+    const { roomState } = this.state;
     const {
-      roomName, roomOwner, status, createdAt,
-      playerCount, lakeSetting, selectedRoles, players,
-      boardInfo, kingOrder, currentMission, voteTrack,
-      proposedTeam, teamVoteResult, missionVote
+      roomName,
+      roomOwner,
+      status,
+      createdAt,
+      playerCount,
+      lakeSetting,
+      selectedRoles,
+      players,
+      boardInfo,
+      kingOrder,
+      currentMission,
+      voteTrack,
+      proposedTeam,
+      teamVoteResult,
+      missionVote
     } = this.state.roomState;
     if (!status) {
       return null;
     } else if (status === 'WAITING_FOR_PLAYERS') {
-      return <WaitingArea roomState={roomState}/>
+      return <WaitingArea roomState={roomState} />;
     } else {
       return (
-          <React.Fragment>
-            <KingOrder kingOrder={kingOrder} players={players} proposedTeam={proposedTeam} roomState={roomState}/>
-            <Missions currentMission={currentMission} boardInfo={boardInfo} voteTrack={voteTrack}/>
-            <ActionArea name={name} room={room} roomState={roomState}/>
-          </React.Fragment>
+        <React.Fragment>
+          <KingOrder
+            kingOrder={kingOrder}
+            players={players}
+            proposedTeam={proposedTeam}
+            roomState={roomState}
+          />
+          <Missions
+            currentMission={currentMission}
+            boardInfo={boardInfo}
+            voteTrack={voteTrack}
+          />
+          <ActionArea name={name} room={room} roomState={roomState} />
+        </React.Fragment>
       );
     }
   }
@@ -84,13 +103,14 @@ class Board extends React.Component {
   render() {
     const roomState = this.state.roomState;
     return (
-        <div className="Board">
-          <Header name={this.state.name} roomState={roomState}/>
-          {this.renderBoard()}
-          {(roomState.status === 'EVIL_WIN' || roomState.status === 'GOOD_WIN')
-            && <EndGame status={roomState.status} exitGame={this.props.exitGame} />
-          }
-        </div>
+      <div className="Board">
+        <Header name={this.state.name} roomState={roomState} />
+        {this.renderBoard()}
+        {(roomState.status === 'EVIL_WIN' ||
+          roomState.status === 'GOOD_WIN') && (
+          <EndGame status={roomState.status} exitGame={this.props.exitGame} />
+        )}
+      </div>
     );
   }
 }

@@ -18,11 +18,17 @@ export default function HamburgerMenu() {
   const handleExitGame = () => {
     window.exitGame();
     handleClose();
-  }
+  };
 
   return (
     <React.Fragment>
-      <IoIosMenu aria-controls="simple-menu" aria-haspopup="true" className="Menu" onClick={handleClick} size={35} />
+      <IoIosMenu
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        className="Menu"
+        onClick={handleClick}
+        size={35}
+      />
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}

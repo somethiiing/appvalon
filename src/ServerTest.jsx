@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-const api = ''
+const api = '';
 
 let socket;
 
@@ -24,8 +24,8 @@ const FESettingsObj = {
     genericEvil: false, //bool
     numGenEvil: 0 //num
   },
-  lakeSetting: 'ROLE', // ROLE, ALIGNMENT, NONE
-}
+  lakeSetting: 'ROLE' // ROLE, ALIGNMENT, NONE
+};
 
 export class Test extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ export class Test extends React.Component {
       missionVote: 'SUCCESS',
       roomList: [],
       roomState: {}
-    }
+    };
 
     this.createRoom = this.createRoom.bind(this);
     this.update = this.update.bind(this);
@@ -51,43 +51,51 @@ export class Test extends React.Component {
 
   componentDidMount() {
     socket = io(`${api}/`);
-    socket.on('UPDATE_STATE', res => this.handleUpdateState(res));
+    socket.on('UPDATE_STATE', (res) => this.handleUpdateState(res));
 
     this.getRoomList();
   }
 
   handleUpdateState(res) {
     const { room, roomState } = res;
-    if(room === this.state.room) {
-      this.setState({roomState});
+    if (room === this.state.room) {
+      this.setState({ roomState });
     }
   }
 
   handleInputChange(e, type) {
     let temp = {};
     temp[type] = e.target.value;
-    this.setState(temp)
+    this.setState(temp);
   }
 
   getRoomList() {
-    axios.get(`${api}/api/getRoomList`)
-    .then(res => {
-      this.setState({roomList: res.data.roomList});
+    axios.get(`${api}/api/getRoomList`).then((res) => {
+      this.setState({ roomList: res.data.roomList });
     });
   }
 
   getRoomData() {
-    axios.get(`${api}/api/getRoomData?room=${this.state.room}`)
-      .then( res => this.setState({roomState: res.data.roomState}));
+    axios
+      .get(`${api}/api/getRoomData?room=${this.state.room}`)
+      .then((res) => this.setState({ roomState: res.data.roomState }));
   }
 
   createRoom() {
-    axios.post(`${api}/api/createRoom`, {data: {
-      type: 'CREATE_ROOM',
-      settings: FESettingsObj,
-      host: this.state.host
-    }})
-      .then(res => this.setState({roomState: res.data.roomState, room: res.data.roomState.roomName}));
+    axios
+      .post(`${api}/api/createRoom`, {
+        data: {
+          type: 'CREATE_ROOM',
+          settings: FESettingsObj,
+          host: this.state.host
+        }
+      })
+      .then((res) =>
+        this.setState({
+          roomState: res.data.roomState,
+          room: res.data.roomState.roomName
+        })
+      );
   }
 
   update(e, action) {
@@ -99,7 +107,7 @@ export class Test extends React.Component {
       data: {}
     };
 
-    switch(action) {
+    switch (action) {
       case 'UPDATE_TEAM_MEMBERS':
         data.data.teamProposalArray = this.state.teamProposalArray.split(',');
         break;
@@ -123,87 +131,166 @@ export class Test extends React.Component {
         break;
     }
 
-    axios.post(`${api}/api/update`, data)
+    axios.post(`${api}/api/update`, data);
   }
 
   render() {
     return (
-      <div style={{display: 'flex', height: '100%', backgroundColor: 'lightgray'}}>
-        <div style={{padding: '10px', height: '100%', width: '50%', color: 'black', borderRight: '1px solid black'}}>
+      <div
+        style={{
+          display: 'flex',
+          height: '100%',
+          backgroundColor: 'lightgray'
+        }}
+      >
+        <div
+          style={{
+            padding: '10px',
+            height: '100%',
+            width: '50%',
+            color: 'black',
+            borderRight: '1px solid black'
+          }}
+        >
           <div>
-            <div>HOST: <input onChange={e => this.handleInputChange(e, 'host')} value={this.state.host} /></div>
-            <div>ROOM: <input onChange={e => this.handleInputChange(e, 'room')} value={this.state.room}/></div>
-            <div>PLAYER: <input onChange={e => this.handleInputChange(e, 'player')} value={this.state.player}/></div>
+            <div>
+              HOST:{' '}
+              <input
+                onChange={(e) => this.handleInputChange(e, 'host')}
+                value={this.state.host}
+              />
+            </div>
+            <div>
+              ROOM:{' '}
+              <input
+                onChange={(e) => this.handleInputChange(e, 'room')}
+                value={this.state.room}
+              />
+            </div>
+            <div>
+              PLAYER:{' '}
+              <input
+                onChange={(e) => this.handleInputChange(e, 'player')}
+                value={this.state.player}
+              />
+            </div>
             <hr />
-            <div style={{display: 'flex', flexDirection: 'column'}} >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h4>GET ROOM LIST</h4>
               <button onClick={this.getRoomList}>getRoomList</button>
             </div>
-            <div style={{display: 'flex', flexDirection: 'column'}} >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h4>GET ROOM DATA</h4>
               <button onClick={this.getRoomData}>getRoomData</button>
             </div>
-            <div style={{display: 'flex', flexDirection: 'column'}} >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h4>CREATE ROOM</h4>
               <button onClick={this.createRoom}>createRoom</button>
             </div>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'UPDATE_TEAM_MEMBERS')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'UPDATE_TEAM_MEMBERS')}
+            >
               <h4>ACTION: UPDATE_TEAM_MEMBERS</h4>
-              TEAM_PROPOSAL array: <input style={{width: '100%'}} onChange={e => this.handleInputChange(e, 'teamProposalArray')} value={this.state.teamProposalArray} placeholder='comma separated. no spaces. exactly as spelled as the player associated. ex: axel,bob,charlie,david,elliot' />
+              TEAM_PROPOSAL array:{' '}
+              <input
+                style={{ width: '100%' }}
+                onChange={(e) => this.handleInputChange(e, 'teamProposalArray')}
+                value={this.state.teamProposalArray}
+                placeholder="comma separated. no spaces. exactly as spelled as the player associated. ex: axel,bob,charlie,david,elliot"
+              />
               <button>UPDATE_TEAM_MEMBERS</button>
             </form>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'SUBMIT_FOR_VOTE')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'SUBMIT_FOR_VOTE')}
+            >
               <h4>ACTION: SUBMIT_FOR_VOTE</h4>
               <button>SUBMIT_FOR_VOTE</button>
             </form>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'SUBMIT_TEAM_VOTE')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'SUBMIT_TEAM_VOTE')}
+            >
               <h4>ACTION: SUBMIT_TEAM_VOTE</h4>
-              <select value={this.state.teamVote}
-                onChange={e => this.handleInputChange(e, 'teamVote')}>
-                {['APPROVE', 'REJECT'].map(el => <option>{el}</option>)}
+              <select
+                value={this.state.teamVote}
+                onChange={(e) => this.handleInputChange(e, 'teamVote')}
+              >
+                {['APPROVE', 'REJECT'].map((el) => (
+                  <option>{el}</option>
+                ))}
               </select>
               <button>SUBMIT_TEAM_VOTE</button>
             </form>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'REVEAL_TEAM_VOTE')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'REVEAL_TEAM_VOTE')}
+            >
               <h4>ACTION: REVEAL_TEAM_VOTE</h4>
               <button>REVEAL_TEAM_VOTE</button>
             </form>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'HANDLE_TEAM_VOTE_RESULT')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'HANDLE_TEAM_VOTE_RESULT')}
+            >
               <h4>ACTION: HANDLE_TEAM_VOTE_RESULT</h4>
               <button>HANDLE_TEAM_VOTE_RESULT</button>
             </form>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'SUBMIT_MISSION_VOTE')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'SUBMIT_MISSION_VOTE')}
+            >
               <h4>ACTION: SUBMIT_MISSION_VOTE</h4>
-              <select value={this.state.missionVote}
-                onChange={e => this.handleInputChange(e, 'missionVote')}>
-                {['SUCCESS', 'FAIL', 'REVERSE'].map(el => <option>{el}</option>)}
+              <select
+                value={this.state.missionVote}
+                onChange={(e) => this.handleInputChange(e, 'missionVote')}
+              >
+                {['SUCCESS', 'FAIL', 'REVERSE'].map((el) => (
+                  <option>{el}</option>
+                ))}
               </select>
               <button>SUBMIT_MISSION_VOTE</button>
             </form>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'HANDLE_MISSION_VOTE_RESULT')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'HANDLE_MISSION_VOTE_RESULT')}
+            >
               <h4>ACTION: HANDLE_MISSION_VOTE_RESULT</h4>
               <button>HANDLE_MISSION_VOTE_RESULT</button>
             </form>
-            <form style={{display: 'flex', flexDirection: 'column'}}
-              onSubmit={(e) => this.update(e, 'SUBMIT_ASSASSINATION')}>
+            <form
+              style={{ display: 'flex', flexDirection: 'column' }}
+              onSubmit={(e) => this.update(e, 'SUBMIT_ASSASSINATION')}
+            >
               <h4>ACTION: SUBMIT_ASSASSINATION</h4>
               ASSASSINATION TARGET:
-              <input onChange={e => this.handleInputChange(e, 'assassinationTarget')} value={this.state.assassinationTarget} placeholder='assassination target. exactly as spelled as the player associated. ex: axel'/>
+              <input
+                onChange={(e) =>
+                  this.handleInputChange(e, 'assassinationTarget')
+                }
+                value={this.state.assassinationTarget}
+                placeholder="assassination target. exactly as spelled as the player associated. ex: axel"
+              />
               <button>SUBMIT_ASSASSINATION</button>
             </form>
           </div>
         </div>
-        <div style={{padding: '10px', height: '100%', width: '50%', overflowY: 'scroll'}}>
-          <pre style={{color: 'black', textAlign: 'left', paddingLeft: '30px'}}>{JSON.stringify(this.state, null, 2)}</pre>
+        <div
+          style={{
+            padding: '10px',
+            height: '100%',
+            width: '50%',
+            overflowY: 'scroll'
+          }}
+        >
+          <pre
+            style={{ color: 'black', textAlign: 'left', paddingLeft: '30px' }}
+          >
+            {JSON.stringify(this.state, null, 2)}
+          </pre>
         </div>
       </div>
-    )
+    );
   }
 }
