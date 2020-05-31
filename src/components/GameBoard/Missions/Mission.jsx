@@ -14,7 +14,7 @@ function Mission(props) {
   return (
     <div className={`Mission-wrapper ${active ? 'active' : ''}`}>
       {doubleFail && (
-        <span className="Mission-double-fail">2 Fails Required</span>
+        <span className='Mission-double-fail'>2 Fails Required</span>
       )}
       <div
         className={`Mission ${success ? 'success' : ''} ${fail ? 'fail' : ''}`}

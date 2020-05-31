@@ -23,14 +23,14 @@ export default function HamburgerMenu() {
   return (
     <React.Fragment>
       <IoIosMenu
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        className="Menu"
+        aria-controls='simple-menu'
+        aria-haspopup='true'
+        className='Menu'
         onClick={handleClick}
         size={35}
       />
       <Menu
-        id="simple-menu"
+        id='simple-menu'
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}

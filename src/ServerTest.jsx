@@ -197,7 +197,7 @@ export class Test extends React.Component {
                 style={{ width: '100%' }}
                 onChange={(e) => this.handleInputChange(e, 'teamProposalArray')}
                 value={this.state.teamProposalArray}
-                placeholder="comma separated. no spaces. exactly as spelled as the player associated. ex: axel,bob,charlie,david,elliot"
+                placeholder='comma separated. no spaces. exactly as spelled as the player associated. ex: axel,bob,charlie,david,elliot'
               />
               <button>UPDATE_TEAM_MEMBERS</button>
             </form>
@@ -270,7 +270,7 @@ export class Test extends React.Component {
                   this.handleInputChange(e, 'assassinationTarget')
                 }
                 value={this.state.assassinationTarget}
-                placeholder="assassination target. exactly as spelled as the player associated. ex: axel"
+                placeholder='assassination target. exactly as spelled as the player associated. ex: axel'
               />
               <button>SUBMIT_ASSASSINATION</button>
             </form>

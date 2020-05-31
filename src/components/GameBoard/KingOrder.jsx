@@ -33,7 +33,7 @@ function KingOrder(props) {
   }
 
   return (
-    <div className="KingOrder">
+    <div className='KingOrder'>
       {kingOrder.map((player) => {
         return getPlayerComponent(player, roomState);
       })}

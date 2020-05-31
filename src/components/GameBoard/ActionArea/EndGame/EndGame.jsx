@@ -12,7 +12,7 @@ const renderEvilWin = () => {
 function EndGame(props) {
   const { roomState } = props;
   return (
-    <div className="EndGame">
+    <div className='EndGame'>
       {roomState.status === 'GOOD_WIN' && renderGoodWin()}
       {roomState.status === 'EVIL_WIN' && renderEvilWin()}
       <Button onClick={window.exitGame}>Exit Game</Button>

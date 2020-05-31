@@ -2,6 +2,7 @@
   "semi": true,
   "trailingComma": "none",
   "singleQuote": true,
+  "jsxSingleQuote": true,
   "useTabs": false,
   "tabWidth": 2,
   "bracketSpacing": true,

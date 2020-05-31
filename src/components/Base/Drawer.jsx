@@ -16,10 +16,10 @@ function Drawer(props) {
   const { name, roomState } = props;
 
   return (
-    <MaterialDrawer className="Drawer" anchor="right" open={props.isOpen}>
+    <MaterialDrawer className='Drawer' anchor='right' open={props.isOpen}>
       <div>
         <IoIosCloseCircleOutline
-          className="Drawer-close"
+          className='Drawer-close'
           onClick={props.toggleDrawer}
           size={35}
         />
@@ -36,7 +36,7 @@ function TabPanel(props) {
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -107,7 +107,7 @@ const renderRoleInfo = (name, room) => {
         info = (
           <Sub>
             <Highlight>{name}</Highlight> is{' '}
-            <span className="red">{alignment}</span>.
+            <span className='red'>{alignment}</span>.
           </Sub>
         );
         break;
@@ -115,8 +115,8 @@ const renderRoleInfo = (name, room) => {
         info = (
           <Sub>
             <Highlight>{name}</Highlight> is{' '}
-            <span className="blue">Merlin</span> or{' '}
-            <span className="red">Morgana</span>.
+            <span className='blue'>Merlin</span> or{' '}
+            <span className='red'>Morgana</span>.
           </Sub>
         );
         break;
@@ -124,7 +124,7 @@ const renderRoleInfo = (name, room) => {
         info = (
           <Sub>
             <Highlight>{name}</Highlight> is also{' '}
-            <span className="red">{alignment}</span>.
+            <span className='red'>{alignment}</span>.
           </Sub>
         );
         break;
@@ -132,7 +132,7 @@ const renderRoleInfo = (name, room) => {
         info = (
           <Sub>
             <Highlight>{name}</Highlight> is also{' '}
-            <span className="red">{alignment}</span>.
+            <span className='red'>{alignment}</span>.
           </Sub>
         );
         break;
@@ -140,7 +140,7 @@ const renderRoleInfo = (name, room) => {
         info = (
           <Sub>
             <Highlight>{name}</Highlight> is also{' '}
-            <span className="red">{alignment}</span>.
+            <span className='red'>{alignment}</span>.
           </Sub>
         );
         break;
@@ -210,7 +210,7 @@ const renderRoleInfo = (name, room) => {
         if (!info) {
           return null;
         }
-        return <div className="Rules-role">{info}</div>;
+        return <div className='Rules-role'>{info}</div>;
       })}
     </div>
   );
@@ -226,54 +226,54 @@ function SimpleTabs(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Intel" />
-          <Tab label="Rules" />
+          <Tab label='Intel' />
+          <Tab label='Rules' />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         {renderRoleInfo(props.name, props.roomState)}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Link href="https://avalon.fun/pdfs/rules.pdf">
+        <Link href='https://avalon.fun/pdfs/rules.pdf'>
           Official Game Rules
         </Link>
-        <div className="Tab-Rules">
+        <div className='Tab-Rules'>
           <Heading>Roles</Heading>
-          <div className="Rules-role">
+          <div className='Rules-role'>
             <Sub>
               <Highlight>Merlin - Good</Highlight>
               Can see all evil characters except Mordred.
             </Sub>
           </div>
-          <div className="Rules-role">
+          <div className='Rules-role'>
             <Sub>
               <Highlight>Percival - Good</Highlight>
               Can see 2 names, belonging to Merlin(good) and Morgana(evil), but
               does not know who is what role.
             </Sub>
           </div>
-          <div className="Rules-role">
+          <div className='Rules-role'>
             <Sub>
               <Highlight>Morgana - Evil</Highlight>
               Is one of the names that Percival sees as a potential Merlin.
             </Sub>
           </div>
-          <div className="Rules-role">
+          <div className='Rules-role'>
             <Sub>
               <Highlight>Mordred - Evil</Highlight>
               Is hidden from Merlin.
             </Sub>
           </div>
-          <div className="Rules-role">
+          <div className='Rules-role'>
             <Sub>
               <Highlight>Assassin - Evil</Highlight>
               Is the final call on who to assasinate at the end in case Good
               wins.
             </Sub>
           </div>
-          <div className="Rules-role">
+          <div className='Rules-role'>
             <Sub>
               <Highlight>Oberon - Evil</Highlight>
               Does not know who else is evil, and is hidden from other Evil

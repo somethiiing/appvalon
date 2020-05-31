@@ -58,7 +58,7 @@ class ActionArea extends React.Component {
   }
 
   render() {
-    return <div className="ActionArea">{this.renderActions()}</div>;
+    return <div className='ActionArea'>{this.renderActions()}</div>;
   }
 }
 

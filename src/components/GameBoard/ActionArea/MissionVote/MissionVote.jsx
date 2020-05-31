@@ -28,16 +28,16 @@ class MissionVote extends React.Component {
     const players = roomState.players;
     const isGood = players[name].alignment === 'good';
     return (
-      <div className="MissionVote">
+      <div className='MissionVote'>
         <Card
-          type="success"
+          type='success'
           disabled={this.state.disableButtons}
           inputType={'checkbox'}
           inputName={'success'}
           onClick={() => this.handleClick('SUCCESS')}
         />
         <Card
-          type="fail"
+          type='fail'
           disabled={isGood || this.state.disableButtons}
           inputType={'checkbox'}
           inputName={'fail'}

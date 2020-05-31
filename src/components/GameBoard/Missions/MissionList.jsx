@@ -28,7 +28,7 @@ function Missions(props) {
   }
 
   return (
-    <div className="MissionList">
+    <div className='MissionList'>
       {boardInfo.missions.map((mission) => {
         return getMissionComponent(mission);
       })}

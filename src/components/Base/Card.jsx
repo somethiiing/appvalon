@@ -23,22 +23,22 @@ class Card extends React.Component {
     let cardIcon;
     switch (this.props.type) {
       case 'approve':
-        cardIcon = <IoIosCheckmarkCircleOutline size={92} color="#00d673" />;
+        cardIcon = <IoIosCheckmarkCircleOutline size={92} color='#00d673' />;
         break;
       case 'reject':
-        cardIcon = <IoIosCloseCircleOutline size={92} color="#d10146" />;
+        cardIcon = <IoIosCloseCircleOutline size={92} color='#d10146' />;
         break;
       case 'success':
-        cardIcon = <GiJeweledChalice size={92} color="#ffbb01" />;
+        cardIcon = <GiJeweledChalice size={92} color='#ffbb01' />;
         break;
       case 'fail':
-        cardIcon = <GiJeweledChalice size={92} color="#212121" />;
+        cardIcon = <GiJeweledChalice size={92} color='#212121' />;
         break;
       default:
         break;
     }
     return (
-      <div className="CardWrapper" onClick={this.handleOnClick}>
+      <div className='CardWrapper' onClick={this.handleOnClick}>
         <input
           disabled={this.props.disabled}
           className={`${this.props.type}`}

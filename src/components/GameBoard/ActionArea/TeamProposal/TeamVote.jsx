@@ -47,16 +47,16 @@ class TeamVote extends React.Component {
             />
           );
         })}
-        <div className="Card-list">
+        <div className='Card-list'>
           <form>
             <Card
-              type="approve"
+              type='approve'
               inputType={'radio'}
               inputName={'votes'}
               onClick={() => this.dispatchTeamVote('APPROVE')}
             />
             <Card
-              type="reject"
+              type='reject'
               inputType={'radio'}
               inputName={'votes'}
               onClick={() => this.dispatchTeamVote('REJECT')}

@@ -27,13 +27,13 @@ class Header extends React.Component {
     const { isOpen } = this.state;
 
     return (
-      <header className="Header">
-        <div className="Header-left">
+      <header className='Header'>
+        <div className='Header-left'>
           <HamburgerMenu />
           <Heading>Appvalon</Heading>
         </div>
         <MdInfoOutline
-          className="Info-icon"
+          className='Info-icon'
           onClick={() => this.toggleDrawer(true)}
           size={32}
         />

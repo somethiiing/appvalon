@@ -56,11 +56,11 @@ export default class Assassination extends React.Component {
     return (
       <React.Fragment>
         {isAssassin && (
-          <div className="LayoutGroup LayoutGroup--KingProposalView">
+          <div className='LayoutGroup LayoutGroup--KingProposalView'>
             <Heading>
               {this.props.name}, select a target to assassinate as Merlin.
             </Heading>
-            <div className="PlayerGroup PlayerGroup--KingView">
+            <div className='PlayerGroup PlayerGroup--KingView'>
               {candidates.map((name) => {
                 return (
                   <Player
@@ -74,7 +74,7 @@ export default class Assassination extends React.Component {
               })}
             </div>
             <Button
-              type="button"
+              type='button'
               onClick={this.submitAssassination}
               disabled={disabled}
             >

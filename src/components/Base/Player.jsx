@@ -31,25 +31,25 @@ function Player(props) {
   }
   return (
     <button
-      type="button"
+      type='button'
       className={`Player ${selected ? 'selected' : ''}`}
       onClick={onClick}
     >
-      {king && <FaCrown className="king-icon" size={22} color="#ffbb01" />}
-      {hammer && <BsHammer className="hammer-icon" size={20} color="#ffbb01" />}
+      {king && <FaCrown className='king-icon' size={22} color='#ffbb01' />}
+      {hammer && <BsHammer className='hammer-icon' size={20} color='#ffbb01' />}
       <Avatar
-        className="avatar"
+        className='avatar'
         style={{ filter: `hue-rotate(` + playerColor + `deg)` }}
       />
       <Sub>{name}</Sub>
       {status && teamVote === 'APPROVE' && (
-        <FcCheckmark className="vote-icon" size={25} color="#00d673" />
+        <FcCheckmark className='vote-icon' size={25} color='#00d673' />
       )}
       {status && teamVote === 'REJECT' && (
-        <IoMdClose className="vote-icon" size={25} color="#d10146" />
+        <IoMdClose className='vote-icon' size={25} color='#d10146' />
       )}
       {!status && teamVote && teamVote !== 'NOT_VOTED' && (
-        <BsQuestion className="vote-icon" size={25} color="#015aff" />
+        <BsQuestion className='vote-icon' size={25} color='#015aff' />
       )}
     </button>
   );

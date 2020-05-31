@@ -66,17 +66,8 @@ class Board extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <KingOrder
-            kingOrder={kingOrder}
-            players={players}
-            proposedTeam={proposedTeam}
-            roomState={roomState}
-          />
-          <Missions
-            currentMission={currentMission}
-            boardInfo={boardInfo}
-            voteTrack={voteTrack}
-          />
+          <KingOrder roomState={roomState} />
+          <MissionList roomState={roomState} />
           <ActionArea name={name} room={room} roomState={roomState} />
         </React.Fragment>
       );
@@ -86,7 +77,7 @@ class Board extends React.Component {
   render() {
     const { name, roomState } = this.state;
     return (
-      <div className="Board">
+      <div className='Board'>
         <Header name={name} roomState={roomState} />
         {this.renderBoard()}
       </div>

@@ -172,29 +172,29 @@ export default class CreateRoom extends React.Component {
     }
 
     return (
-      <div className="Create-room">
+      <div className='Create-room'>
         {/* NAME FORM */}
-        <FormLabel component="legend" className="Form-label">
+        <FormLabel component='legend' className='Form-label'>
           Host Name
         </FormLabel>
         <TextField
-          variant="outlined"
-          margin="normal"
+          variant='outlined'
+          margin='normal'
           required
-          id="name"
-          label="Name"
-          name="name"
-          autoComplete="name"
+          id='name'
+          label='Name'
+          name='name'
+          autoComplete='name'
           autoFocus
           onChange={this.handleChange}
         />
         {/* PLAYER COUNT */}
-        <FormLabel component="legend" className="Form-label">
+        <FormLabel component='legend' className='Form-label'>
           Game Settings
         </FormLabel>
         <Select
-          className="Form-select"
-          name="playerCount"
+          className='Form-select'
+          name='playerCount'
           value={playerCount}
           onChange={this.handleChange}
         >
@@ -202,8 +202,8 @@ export default class CreateRoom extends React.Component {
         </Select>
         {/* LAKE SETTINGS */}
         <Select
-          className="Form-select"
-          name="lakeSetting"
+          className='Form-select'
+          name='lakeSetting'
           value={lakeSetting}
           onChange={this.handleChange}
         >
@@ -218,9 +218,9 @@ export default class CreateRoom extends React.Component {
           </MenuItem>
         </Select>
         {/* ROLE SETTINGS */}
-        <FormControl required error={goodError} component="fieldset">
+        <FormControl required error={goodError} component='fieldset'>
           <FormGroup>
-            <FormLabel component="legend" className="Form-label">
+            <FormLabel component='legend' className='Form-label'>
               Good Roles
             </FormLabel>
             <FormHelperText>{`Choose ${this.expectedNumGood[playerCount]} Good Roles`}</FormHelperText>
@@ -229,43 +229,43 @@ export default class CreateRoom extends React.Component {
                 <Checkbox
                   checked={merlin}
                   onChange={this.handleCheckboxChange}
-                  name="merlin"
+                  name='merlin'
                 />
               }
-              label="Merlin"
+              label='Merlin'
             />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={percival}
                   onChange={this.handleCheckboxChange}
-                  name="percival"
+                  name='percival'
                 />
               }
-              label="Percival"
+              label='Percival'
             />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={tristan}
                   onChange={this.handleCheckboxChange}
-                  name="tristan"
+                  name='tristan'
                 />
               }
-              label="Tristan"
+              label='Tristan'
             />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={iseult}
                   onChange={this.handleCheckboxChange}
-                  name="iseult"
+                  name='iseult'
                 />
               }
-              label="Iseult"
+              label='Iseult'
             />
             <Select
-              name="numGenGood"
+              name='numGenGood'
               value={numGenGood}
               onChange={this.handleChange}
             >
@@ -273,9 +273,9 @@ export default class CreateRoom extends React.Component {
             </Select>
           </FormGroup>
         </FormControl>
-        <FormControl required error={evilError} component="fieldset">
+        <FormControl required error={evilError} component='fieldset'>
           <FormGroup>
-            <FormLabel component="legend" className="Form-label">
+            <FormLabel component='legend' className='Form-label'>
               Evil Roles
             </FormLabel>
             <FormHelperText>{`Choose ${this.expectedNumEvil[playerCount]} Evil Roles`}</FormHelperText>
@@ -284,53 +284,53 @@ export default class CreateRoom extends React.Component {
                 <Checkbox
                   checked={mordred}
                   onChange={this.handleCheckboxChange}
-                  name="mordred"
+                  name='mordred'
                 />
               }
-              label="Mordred"
+              label='Mordred'
             />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={morgana}
                   onChange={this.handleCheckboxChange}
-                  name="morgana"
+                  name='morgana'
                 />
               }
-              label="Morgana"
+              label='Morgana'
             />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={assassin}
                   onChange={this.handleCheckboxChange}
-                  name="assassin"
+                  name='assassin'
                 />
               }
-              label="Assassin"
+              label='Assassin'
             />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={oberon}
                   onChange={this.handleCheckboxChange}
-                  name="oberon"
+                  name='oberon'
                 />
               }
-              label="Oberon (Seen by Merlin)"
+              label='Oberon (Seen by Merlin)'
             />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={noberon}
                   onChange={this.handleCheckboxChange}
-                  name="noberon"
+                  name='noberon'
                 />
               }
-              label="Oberon (Not Seen by Merlin)"
+              label='Oberon (Not Seen by Merlin)'
             />
             <Select
-              name="numGenEvil"
+              name='numGenEvil'
               value={numGenEvil}
               onChange={this.handleChange}
             >
@@ -339,7 +339,7 @@ export default class CreateRoom extends React.Component {
           </FormGroup>
         </FormControl>
         {/* SUBMIT */}
-        <div className="Form-submit">
+        <div className='Form-submit'>
           <Button onClick={this.handleOnSubmit}>Create Room</Button>
         </div>
       </div>

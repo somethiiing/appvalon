@@ -15,7 +15,7 @@ function TeamVoteResultView(props) {
   const teamApproved = numApproved > numRejected;
 
   return (
-    <div className="Vote-Result">
+    <div className='Vote-Result'>
       <Sub>
         Vote Results for Mission #{currentMission}, Proposal #{voteTrack}
       </Sub>

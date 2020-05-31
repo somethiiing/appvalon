@@ -87,20 +87,20 @@ export default class JoinRoom extends React.Component {
     return (
       <div>
         <div>
-          <form className="Join-room" onSubmit={this.onSubmitHandler}>
+          <form className='Join-room' onSubmit={this.onSubmitHandler}>
             <TextField
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               required
-              id="name"
-              label="Name"
-              name="name"
-              autoComplete="name"
+              id='name'
+              label='Name'
+              name='name'
+              autoComplete='name'
               autoFocus
               onChange={this.onChangeHandler}
             />
             <Select
-              name="room"
+              name='room'
               value={this.state.room}
               onChange={this.onChangeHandler}
             >
@@ -113,7 +113,7 @@ export default class JoinRoom extends React.Component {
               })}
             </Select>
             {/*Not sure which style to do here but I'm gonna leave it as is*/}
-            <Button type="submit" className="Button">
+            <Button type='submit' className='Button'>
               Join Room
             </Button>
           </form>

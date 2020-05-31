@@ -8,7 +8,7 @@ function NonKingProposalView(props) {
   const kingOrder = props.roomState.kingOrder;
   const players = props.roomState.players;
   return (
-    <div className="PlayerGroup PlayerGroup--PlayerView">
+    <div className='PlayerGroup PlayerGroup--PlayerView'>
       {kingOrder
         .filter((name) => teamProposalArray.includes(name))
         .map((name) => {

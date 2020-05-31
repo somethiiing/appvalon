@@ -41,7 +41,7 @@ export default class WaitingArea extends React.Component {
     let currentPlayerCount = Object.keys(players).length;
     // TODO display player components
     return (
-      <div className="WaitingArea">
+      <div className='WaitingArea'>
         <div>
           {`Waiting for ${playerCount - currentPlayerCount} players to join.`}
         </div>

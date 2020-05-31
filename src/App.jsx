@@ -67,12 +67,14 @@ class App extends React.Component {
     window.state = () => console.log(this.state);
 
     return (
-      <div className="App">
+      <div className='App'>
         <ThemeProvider theme={theme}>
           {this.state.currentPage === 'landing' && (
             <div>
               {/*<button onClick={() => this.changePage('serverTest')}>SERVER TESTER ONLY</button>*/}
-              {/*<button onClick={() => this.changePage('board')}>BOARD TEST</button>*/}
+              {/*<button onClick={() => this.changePage('board')}>
+                  BOARD TEST
+                </button>*/}
               <button onClick={() => this.changePage('joinRoomPage')}>
                 JOIN ROOM
               </button>

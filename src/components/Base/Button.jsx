@@ -4,7 +4,7 @@ import './Button.css';
 function Button(props) {
   return (
     <button
-      className="Button"
+      className='Button'
       onClick={props.onClick}
       disabled={props.disabled}
     >
