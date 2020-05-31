@@ -1,5 +1,6 @@
 import React from 'react';
 import Mission from './Mission';
+import './Mission.css';
 
 function Missions(props) {
   const { currentMission, boardInfo, voteTrack } = props;

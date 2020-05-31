@@ -1,0 +1,54 @@
+.Text-P {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+.Text-Heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.Text-Sub {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.Text-Highlight {
+  font-size: 1.25rem;
+  font-weight: 550;
+  display: block;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  padding: 0;
+  color: #ccc;
+}
+
+
+.Text-Bold {
+  font-size: 1.25rem;
+  font-weight: 550;
+  margin-bottom: 5px;
+  display: block;
+  padding: 0;
+  color: #ccc;
+}
+
+.Text-Link {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+  color: #ccc;
+}
+
+.Text-Link:hover {
+  text-decoration: underline;
+  color: white;
+}

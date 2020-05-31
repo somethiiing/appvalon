@@ -1,5 +1,6 @@
 import React from 'react';
 import Player from '../Base/Player';
+import './KingOrder.css';
 
 function KingOrder(props) {
   const {kingOrder, players, proposedTeam, roomState} = props;

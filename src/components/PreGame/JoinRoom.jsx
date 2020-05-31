@@ -14,7 +14,7 @@ let socket;
 
 let api = '';
 
-export default class JoinForm extends React.Component {
+export default class JoinRoom extends React.Component {
   constructor(props) {
     super(props);
 

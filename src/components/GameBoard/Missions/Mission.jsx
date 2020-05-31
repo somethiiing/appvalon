@@ -1,4 +1,5 @@
 import React from 'react';
+import './Mission.css';
 
 function Mission(props) {
   const { success, fail, active, size, voteTrack, maxVoteTrack, doubleFail } = props;

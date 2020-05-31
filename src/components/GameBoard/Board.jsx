@@ -1,11 +1,12 @@
 import React from 'react';
 import io from 'socket.io-client';
-import WaitingArea from "../NotInGame/WaitingArea";
+import WaitingArea from "../PreGame/WaitingArea";
 import KingOrder from './KingOrder';
 import Missions from './Missions/Missions';
 import ActionArea from './ActionArea/ActionArea';
 import Header from '../Base/Header';
 import EndGame from './ActionArea/EndGame/EndGame';
+import './Board.css';
 
 import {fetchRoomData} from '../../ApiUtils';
 

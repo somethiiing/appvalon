@@ -1,4 +1,5 @@
 import React from 'react';
+import './Text.css';
 
 function P(props) {
   return (

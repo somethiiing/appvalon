@@ -7,6 +7,7 @@ import MissionVote from './MissionVote/MissionVote';
 import MissionResultView from './MissionVote/MissionResultView';
 import {P} from '../../Base/Text';
 import Assassination from './EndGame/Assassination';
+import './ActionArea.css';
 
 class ActionArea extends React.Component {
   constructor(props) {

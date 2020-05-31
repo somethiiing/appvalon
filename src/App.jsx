@@ -3,8 +3,8 @@ import React from 'react';
 import './App.css';
 import './components/styles.css';
 
-import CreateForm from './components/NotInGame/CreateForm';
-import JoinForm from './components/NotInGame/JoinForm';
+import CreateRoom from './components/PreGame/CreateRoom';
+import JoinRoom from './components/PreGame/JoinRoom';
 import Board from './components/GameBoard/Board';
 
 import { Test } from './ServerTest';
@@ -78,8 +78,8 @@ class App extends React.Component {
             </div>}
 
           {this.state.currentPage === 'serverTest' && <Test/>}
-          {this.state.currentPage === 'joinRoomPage' && <JoinForm handleSubmit={this.handleJoinRoom} />}
-          {this.state.currentPage === 'createRoomPage' && <CreateForm handleSubmit={this.handleCreateRoom} />}
+          {this.state.currentPage === 'joinRoomPage' && <JoinRoom handleSubmit={this.handleJoinRoom} />}
+          {this.state.currentPage === 'createRoomPage' && <CreateRoom handleSubmit={this.handleCreateRoom} />}
           {this.state.currentPage === 'board' && <Board name={name} room={room} />}
         </ThemeProvider>
       </div>

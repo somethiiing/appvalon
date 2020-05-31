@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../../../Base/Card';
+import './MissionVote.css';
 import {dispatchSubmitMissionVote} from '../../../../ApiUtils';
 
 class MissionVote extends React.Component {

@@ -4,6 +4,8 @@ import Button from '../../../Base/Button';
 import Player from '../../../Base/Player';
 import { dispatchHandleTeamVoteResult } from "../../../../ApiUtils";
 
+//TODO rename to clarify these components
+
 function VoteResultView(props) {
   const { currentMission, missionVote, kingOrder, roomName, voteTrack, teamVoteResult, players } = props.boardState;
 

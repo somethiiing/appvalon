@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Link, Sub, Bold as Highlight, Heading, P } from './Text';
 
+//TODO split into multiple components
+
 function Drawer(props) {
   const { name, roomState } = props;
 
