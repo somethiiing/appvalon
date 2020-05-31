@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import Button from '../Base/Button';
 
+import './JoinRoom.css';
+
 import { fetchRoomList, joinRoom } from '../../ApiUtils';
 import { setRelogToken } from '../../utils';
 

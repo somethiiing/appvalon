@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdInfoOutline } from 'react-icons/md';
-import Drawer from '../Base/Drawer';
+import Drawer from './Drawer';
+import HamburgerMenu from './HamburgerMenu';
 import { Heading } from './Text';
 import './Header.css';
 
@@ -21,7 +22,10 @@ class Header extends React.Component {
   render() {
     return (
       <header className="Header">
-        <Heading>Appvalon</Heading>
+        <div className="Header-left">
+          <HamburgerMenu />
+          <Heading>Appvalon</Heading>
+        </div>
         <MdInfoOutline className='Info-icon' onClick={() => this.toggleDrawer(true)} size={32} />
         <Drawer name={this.props.name} roomState={this.props.roomState} isOpen={this.state.isOpen} toggleDrawer={() => this.toggleDrawer(false)}/>
       </header>

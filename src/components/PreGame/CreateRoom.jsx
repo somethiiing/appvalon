@@ -9,6 +9,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from "@material-ui/core/TextField";
 import Button from '../Base/Button';
+import './CreateRoom.css';
+
 import { createRoom } from '../../ApiUtils';
 
 export default class CreateRoom extends React.Component {
@@ -20,7 +22,7 @@ export default class CreateRoom extends React.Component {
     this.state = {
         name: '', // host name
         playerCount: 7,
-        lakeSetting: 'ROLE',
+        lakeSetting: 'ALIGNMENT',
 
         merlin: true, //bool
         percival: true, //bool
