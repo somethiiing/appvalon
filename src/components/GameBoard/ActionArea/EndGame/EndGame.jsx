@@ -10,13 +10,12 @@ const renderEvilWin = () => {
 };
 
 function EndGame(props) {
+  const { roomState } = props;
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {props.status === 'GOOD_WIN' && renderGoodWin()}
-      {props.status === 'EVIL_WIN' && renderEvilWin()}
-      <div style={{ width: '100%' }}>
-        <Button onClick={window.exitGame}>Exit Game</Button>
-      </div>
+    <div className="EndGame">
+      {roomState.status === 'GOOD_WIN' && renderGoodWin()}
+      {roomState.status === 'EVIL_WIN' && renderEvilWin()}
+      <Button onClick={window.exitGame}>Exit Game</Button>
     </div>
   );
 }

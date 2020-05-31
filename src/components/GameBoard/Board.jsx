@@ -2,10 +2,10 @@ import React from 'react';
 import io from 'socket.io-client';
 import WaitingArea from '../PreGame/WaitingArea';
 import KingOrder from './KingOrder';
-import Missions from './Missions/Missions';
+import MissionList from './Missions/MissionList';
 import ActionArea from './ActionArea/ActionArea';
 import Header from '../Base/Header';
-import EndGame from './ActionArea/EndGame/EndGame';
+
 import './Board.css';
 
 import { fetchRoomData } from '../../ApiUtils';
@@ -57,25 +57,8 @@ class Board extends React.Component {
   }
 
   renderBoard() {
-    const { name, room } = this.props;
-    const { roomState } = this.state;
-    const {
-      roomName,
-      roomOwner,
-      status,
-      createdAt,
-      playerCount,
-      lakeSetting,
-      selectedRoles,
-      players,
-      boardInfo,
-      kingOrder,
-      currentMission,
-      voteTrack,
-      proposedTeam,
-      teamVoteResult,
-      missionVote
-    } = this.state.roomState;
+    const { name, room, roomState } = this.state;
+    const { status } = roomState;
     if (!status) {
       return null;
     } else if (status === 'WAITING_FOR_PLAYERS') {
@@ -101,15 +84,11 @@ class Board extends React.Component {
   }
 
   render() {
-    const roomState = this.state.roomState;
+    const { name, roomState } = this.state;
     return (
       <div className="Board">
-        <Header name={this.state.name} roomState={roomState} />
+        <Header name={name} roomState={roomState} />
         {this.renderBoard()}
-        {(roomState.status === 'EVIL_WIN' ||
-          roomState.status === 'GOOD_WIN') && (
-          <EndGame status={roomState.status} exitGame={this.props.exitGame} />
-        )}
       </div>
     );
   }

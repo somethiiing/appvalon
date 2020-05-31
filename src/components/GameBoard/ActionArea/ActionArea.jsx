@@ -1,12 +1,15 @@
 import React from 'react';
+
 import KingProposalView from './TeamProposal/KingProposalView';
 import NonKingProposalView from './TeamProposal/NonKingProposalView';
 import TeamVote from './TeamProposal/TeamVote';
 import TeamVoteResultView from './TeamProposal/TeamVoteResultView';
 import MissionVote from './MissionVote/MissionVote';
 import MissionResultView from './MissionVote/MissionResultView';
-import { P } from '../../Base/Text';
 import Assassination from './EndGame/Assassination';
+import EndGame from './EndGame/EndGame';
+import { P } from '../../Base/Text';
+
 import './ActionArea.css';
 
 class ActionArea extends React.Component {
@@ -19,7 +22,7 @@ class ActionArea extends React.Component {
 
   renderActions() {
     const { name, room, roomState = {} } = this.props;
-    const { status, players, proposedTeam } = roomState;
+    const { status = '', players = [], proposedTeam = [] } = roomState;
     if (!players[name]) {
       return null;
     }
@@ -46,6 +49,9 @@ class ActionArea extends React.Component {
         return <MissionResultView boardState={roomState} name={name} />;
       case 'ASSASSINATION':
         return <Assassination roomState={roomState} name={name} />;
+      case 'EVIL_WIN':
+      case 'GOOD_WIN':
+        return <EndGame roomState={roomState} />;
       default:
         break;
     }

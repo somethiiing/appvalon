@@ -1,7 +1,7 @@
 import React from 'react';
 
-import './App.css';
-import './components/styles.css';
+import { createMuiTheme } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 
 import CreateRoom from './components/PreGame/CreateRoom';
 import JoinRoom from './components/PreGame/JoinRoom';
@@ -9,8 +9,8 @@ import Board from './components/GameBoard/Board';
 
 import { Test } from './ServerTest';
 
-import { createMuiTheme } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/styles';
+import './App.css';
+import './components/styles.css';
 
 class App extends React.Component {
   constructor(props) {

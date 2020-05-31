@@ -1,13 +1,16 @@
 import React from 'react';
 import { MdInfoOutline } from 'react-icons/md';
+
 import Drawer from './Drawer';
 import HamburgerMenu from './HamburgerMenu';
 import { Heading } from './Text';
+
 import './Header.css';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
+    // TODO auto-open when role info becomes available
     this.state = {
       isOpen: false
     };
@@ -20,6 +23,9 @@ class Header extends React.Component {
   };
 
   render() {
+    const { name, roomState } = this.props;
+    const { isOpen } = this.state;
+
     return (
       <header className="Header">
         <div className="Header-left">
@@ -32,9 +38,9 @@ class Header extends React.Component {
           size={32}
         />
         <Drawer
-          name={this.props.name}
-          roomState={this.props.roomState}
-          isOpen={this.state.isOpen}
+          name={name}
+          roomState={roomState}
+          isOpen={isOpen}
           toggleDrawer={() => this.toggleDrawer(false)}
         />
       </header>

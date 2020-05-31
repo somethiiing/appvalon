@@ -3,7 +3,7 @@ import Mission from './Mission';
 import './MissionList.css';
 
 function Missions(props) {
-  const { currentMission, boardInfo, voteTrack } = props;
+  const { currentMission, boardInfo, voteTrack } = props.roomState;
 
   function getMissionComponent(mission) {
     const { doubleFailRequired } = boardInfo;

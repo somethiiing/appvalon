@@ -54,7 +54,7 @@
 }
 
 .Mission-tracker:after {
-  content: ' attempts';
+  content: ' proposals';
   display: inline-block;
   position: absolute;
   bottom: -0.2rem;
