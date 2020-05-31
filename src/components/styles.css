@@ -7,6 +7,16 @@
   padding: 10px 30px;
 }
 
+.Header-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Menu {
+  margin-right: 15px;
+}
+
 .Button {
   min-width: 100px;
   background-color: #00d673;
