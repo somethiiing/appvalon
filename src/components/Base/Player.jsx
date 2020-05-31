@@ -8,6 +8,8 @@ import { BsQuestion } from 'react-icons/bs';
 
 import { Sub } from './Text';
 
+import './Player.css';
+
 function Player(props) {
     const {name, king, hammer, selected, teamVote, onClick, hue, roomState} = props;
     // use this to generate random icon colors on initialization

@@ -260,7 +260,7 @@ module.exports = {
   ],
   "currentMission": 1,
   "voteTrack": 1,
-  "proposedTeam": [],
+  "proposedTeam": ["jason","wilson"],
   "teamVoteResult": null,
   "missionVote": {
     "success": 0,

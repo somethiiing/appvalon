@@ -2,6 +2,9 @@ import React from 'react';
 import { P, Sub } from '../../../Base/Text';
 import Button from '../../../Base/Button';
 import Player from '../../../Base/Player';
+
+import './VoteResultView.css';
+
 import { dispatchHandleTeamVoteResult } from "../../../../ApiUtils";
 
 //TODO rename to clarify these components

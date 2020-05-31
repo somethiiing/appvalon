@@ -15,6 +15,7 @@ module.exports = {
     "players": { // object used for live object lookup. player name is key,
         "alex": {
             "role": "mordred",
+            "alignment": "evil",
             "name": "alex",
             "sees": {
                 "morgana": {
@@ -32,6 +33,7 @@ module.exports = {
         },
         "wilson": {
             "role": "percival",
+            "alignment": "good",
             "name": "wilson",
             "sees": {
                 "merlin": {
@@ -58,6 +60,7 @@ module.exports = {
         },
         "bridget": {
             "role": "merlin",
+            "alignment": "good",
             "name": "bridget",
             "sees": {
                 "morgana": {
@@ -74,6 +77,7 @@ module.exports = {
         },
         "jason": {
             "role": "morgana",
+            "alignment": "evil",
             "name": "jason",
             "sees": {
                 "mordred": {
@@ -90,6 +94,7 @@ module.exports = {
         },
         "ashwin": {
             "role": "genericGood",
+            "alignment": "good",
             "name": "ashwin",
             "sees": {}
         }
@@ -139,6 +144,7 @@ module.exports = {
         "jason",
         "ashwin"
     ],
+    "assassin": "jason",
     "currentMission": 1, // what mission # we're on
     "voteTrack": 1, // how many team proposals its been
     "proposedTeam": ['bridget', 'wilson'], // team proposal array, list of strings

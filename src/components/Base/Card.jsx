@@ -2,6 +2,7 @@ import React from 'react';
 import {IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline} from 'react-icons/io';
 import {GiJeweledChalice} from 'react-icons/gi';
 import {P} from './Text';
+import './Card.css';
 
 
 class Card extends React.Component {

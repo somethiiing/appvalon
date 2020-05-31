@@ -7,6 +7,10 @@
   color: #015aff
 }
 
+.Card-list {
+  position: relative;
+}
+
 .PlayerGroup {
   margin-bottom: 1rem;
 }
@@ -19,7 +23,7 @@
   pointer-events: none;
 }
 
-/* TODO put this style on ActionArea instead? or move Mission-result next to its component */
+/* TODO put this style on ActionArea instead? or move Mission-result next to its component, remove from assassination view */
 .LayoutGroup--KingProposalView,
 .Vote-Result,
 .Mission-Result {
