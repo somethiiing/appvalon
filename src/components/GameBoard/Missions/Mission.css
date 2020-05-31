@@ -1,20 +1,3 @@
-/*Needs all attributes here and on wrapper for scroll snapping to work.*/
-.Mission-list {
-  display: inline-block;
-  width: 100%;
-  white-space: nowrap;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 1.5rem;
-  margin-top: 1rem;
-}
-
-.Mission-wrapper {
-  scroll-snap-align: center;
-}
-
-/* TODO combine styles and rename to Missions in missions.css*/
-
 .Mission-wrapper {
   width: 105px;
   height: 110px;
@@ -61,16 +44,13 @@
   position: absolute;
   left: 0;
   bottom: 5px;
+  margin-left: -0.7rem;
+  margin-bottom: -0.7rem;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
   font-size: .9rem;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.Mission-tracker {
-  margin-left: -0.7rem;
-  margin-bottom: -0.7rem;
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
 }
 
 .Mission-tracker:after {

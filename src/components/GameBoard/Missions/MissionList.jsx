@@ -1,6 +1,6 @@
 import React from 'react';
 import Mission from './Mission';
-import './Mission.css';
+import './MissionList.css';
 
 function Missions(props) {
   const { currentMission, boardInfo, voteTrack } = props;
@@ -28,12 +28,10 @@ function Missions(props) {
   }
 
   return (
-    <div className="Missions">
-      <div className="Mission-list">
-        {boardInfo.missions.map((mission) => {
-          return getMissionComponent(mission);
-        })}
-      </div>
+    <div className="MissionList">
+      {boardInfo.missions.map((mission) => {
+        return getMissionComponent(mission);
+      })}
     </div>
   );
 }
