@@ -15,8 +15,7 @@ class MissionVote extends React.Component {
   }
 
   handleClick(vote) {
-    const { name, room, roomState } = this.props;
-    const players = roomState.players;
+    const { name, room } = this.props;
     this.setState({
       disableButtons: true
     });

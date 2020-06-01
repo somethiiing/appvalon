@@ -127,6 +127,7 @@ export class Test extends React.Component {
         break;
       case 'SUBMIT_ASSASSINATION':
         data.data.assassinationTarget = this.state.assassinationTarget;
+        break;
       default:
         break;
     }
