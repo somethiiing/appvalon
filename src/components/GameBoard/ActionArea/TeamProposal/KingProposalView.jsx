@@ -95,7 +95,7 @@ export default class KingProposalView extends React.Component {
                 name={name}
                 selected={teamProposalArray.includes(name)}
                 onClick={() => this.updateTeamProposal(name)}
-                hue={players[name].hue}
+                hue={players[name] && players[name].hue}
               />
             );
           })}

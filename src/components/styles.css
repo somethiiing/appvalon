@@ -22,10 +22,3 @@
 .PlayerGroup--PlayerView .Player {
   pointer-events: none;
 }
-
-/* TODO put this style on ActionArea instead? or move Mission-result next to its component, remove from assassination view */
-.LayoutGroup--KingProposalView,
-.Vote-Result,
-.Mission-Result {
-  margin-bottom: 5rem;
-}

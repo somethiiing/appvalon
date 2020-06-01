@@ -1,7 +1,7 @@
 module.exports = {
   roomName: 'pamelo',
   roomOwner: 'alex',
-  status: 'TEAM_PROPOSAL',
+  status: 'DISPLAY_TEAM_VOTE',
   createdAt: 1589429564693,
   playerCount: 8,
   lakeSetting: 'ALIGNMENT',
@@ -229,7 +229,7 @@ module.exports = {
     ]
   },
   kingOrder: [
-    'Jesus',
+    'jesus',
     'bridget',
     'fred',
     'ashwin',
