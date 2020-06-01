@@ -18,7 +18,6 @@ export default class CreateRoom extends React.Component {
     super(props);
 
     // props: handleSubmit
-    // TODO set default role choices based on player number
     this.state = {
       name: '', // host name
       playerCount: 7,
@@ -57,10 +56,86 @@ export default class CreateRoom extends React.Component {
       10: 6
     };
 
+    this.getDefaultRolesForSize = this.getDefaultRolesForSize.bind(this);
     this.constructSettingsObj = this.constructSettingsObj.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+  }
+
+  getDefaultRolesForSize(playerCount) {
+    let roles = {
+      merlin: false, //bool
+      percival: false, //bool
+      tristan: false, //bool
+      iseult: false, //bool
+      numGenGood: 0, //num
+
+      mordred: false, //bool
+      morgana: false, //bool
+      assassin: false, //bool
+      oberon: false, //bool
+      noberon: false, //bool
+      numGenEvil: 0 //num
+    };
+    switch (playerCount) {
+      case 5:
+        roles.merlin = true;
+        roles.percival = true;
+        roles.numGenGood = 1;
+        roles.morgana = true;
+        roles.mordred = true;
+        break;
+      case 6:
+        roles.merlin = true;
+        roles.percival = true;
+        roles.numGenGood = 2;
+        roles.morgana = true;
+        roles.mordred = true;
+        break;
+      case 7:
+        roles.merlin = true;
+        roles.percival = true;
+        roles.numGenGood = 2;
+        roles.morgana = true;
+        roles.mordred = true;
+        roles.assassin = true;
+        break;
+      case 8:
+        roles.merlin = true;
+        roles.percival = true;
+        roles.numGenGood = 3;
+        roles.morgana = true;
+        roles.mordred = true;
+        roles.assassin = true;
+        break;
+      case 9:
+        roles.merlin = true;
+        roles.percival = true;
+        roles.numGenGood = 4;
+        roles.morgana = true;
+        roles.mordred = true;
+        roles.assassin = true;
+        break;
+      case 10:
+        roles.merlin = true;
+        roles.percival = true;
+        roles.numGenGood = 4;
+        roles.morgana = true;
+        roles.assassin = true;
+        roles.oberon = true;
+        roles.numGenEvil = 1;
+        break;
+      default:
+        roles.merlin = true;
+        roles.percival = true;
+        roles.numGenGood = 2;
+        roles.morgana = true;
+        roles.mordred = true;
+        roles.assassin = true;
+        break;
+    }
+    return roles;
   }
 
   constructSettingsObj() {
@@ -112,7 +187,12 @@ export default class CreateRoom extends React.Component {
   handleChange = (e) => {
     let field = e.target.name;
     let val = e.target.value;
-    this.setState({ [field]: val });
+    if (field === 'playerCount') {
+      const roles = this.getDefaultRolesForSize(val);
+      this.setState({ playerCount: val, ...roles });
+    } else {
+      this.setState({ [field]: val });
+    }
   };
 
   handleOnSubmit() {
