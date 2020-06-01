@@ -1,7 +1,7 @@
 module.exports = {
   roomName: 'mango',
   roomOwner: 'alex',
-  status: 'TEAM_PROPOSAL',
+  status: 'WAITING_FOR_PLAYERS',
   createdAt: 1589429564693,
   playerCount: 8,
   lakeSetting: 'ALIGNMENT',

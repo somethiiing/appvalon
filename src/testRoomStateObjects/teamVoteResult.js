@@ -1,5 +1,5 @@
 module.exports = {
-  roomName: 'pamelo',
+  roomName: 'mango',
   roomOwner: 'alex',
   status: 'DISPLAY_TEAM_VOTE',
   createdAt: 1589429564693,

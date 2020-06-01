@@ -19,7 +19,7 @@ let socket;
 // Comment out socket and fetchRoomData code in componentDidMount
 // Set name and room state in App.jsx to match your test data
 // Uncomment board test button in App.jsx
-const testRoomState = require('../../testRoomStateObjects/endGame');
+const testRoomState = require('../../testRoomStateObjects/teamProposal');
 
 class Board extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class Board extends React.Component {
       name: '',
       room: '',
       roomState: {}
-      // roomState: testRoomState,
+      // roomState: testRoomState
     };
   }
 

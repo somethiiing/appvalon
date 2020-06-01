@@ -23,3 +23,8 @@
   padding-bottom: 15px;
   border-bottom: 1px solid #555555;
 }
+
+.SimpleTabs {
+  flex-grow: 1;
+  background-color: '#333';
+}

@@ -56,15 +56,16 @@ export default class CreateRoom extends React.Component {
       10: 6
     };
 
-    this.getDefaultRolesForSize = this.getDefaultRolesForSize.bind(this);
+    this.getDefaultSettingsForSize = this.getDefaultSettingsForSize.bind(this);
     this.constructSettingsObj = this.constructSettingsObj.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
-  getDefaultRolesForSize(playerCount) {
-    let roles = {
+  getDefaultSettingsForSize(playerCount) {
+    let settings = {
+      lakeSetting: 'NONE',
       merlin: false, //bool
       percival: false, //bool
       tristan: false, //bool
@@ -80,62 +81,67 @@ export default class CreateRoom extends React.Component {
     };
     switch (playerCount) {
       case 5:
-        roles.merlin = true;
-        roles.percival = true;
-        roles.numGenGood = 1;
-        roles.morgana = true;
-        roles.mordred = true;
+        settings.merlin = true;
+        settings.percival = true;
+        settings.numGenGood = 1;
+        settings.morgana = true;
+        settings.mordred = true;
         break;
       case 6:
-        roles.merlin = true;
-        roles.percival = true;
-        roles.numGenGood = 2;
-        roles.morgana = true;
-        roles.mordred = true;
+        settings.merlin = true;
+        settings.percival = true;
+        settings.numGenGood = 2;
+        settings.morgana = true;
+        settings.mordred = true;
         break;
       case 7:
-        roles.merlin = true;
-        roles.percival = true;
-        roles.numGenGood = 2;
-        roles.morgana = true;
-        roles.mordred = true;
-        roles.assassin = true;
+        settings.lakeSetting = 'ALIGNMENT';
+        settings.merlin = true;
+        settings.percival = true;
+        settings.numGenGood = 2;
+        settings.morgana = true;
+        settings.mordred = true;
+        settings.assassin = true;
         break;
       case 8:
-        roles.merlin = true;
-        roles.percival = true;
-        roles.numGenGood = 3;
-        roles.morgana = true;
-        roles.mordred = true;
-        roles.assassin = true;
+        settings.lakeSetting = 'ROLE';
+        settings.merlin = true;
+        settings.percival = true;
+        settings.numGenGood = 3;
+        settings.morgana = true;
+        settings.mordred = true;
+        settings.assassin = true;
         break;
       case 9:
-        roles.merlin = true;
-        roles.percival = true;
-        roles.numGenGood = 4;
-        roles.morgana = true;
-        roles.mordred = true;
-        roles.assassin = true;
+        settings.lakeSetting = 'ROLE';
+        settings.merlin = true;
+        settings.percival = true;
+        settings.numGenGood = 4;
+        settings.morgana = true;
+        settings.mordred = true;
+        settings.assassin = true;
         break;
       case 10:
-        roles.merlin = true;
-        roles.percival = true;
-        roles.numGenGood = 4;
-        roles.morgana = true;
-        roles.assassin = true;
-        roles.oberon = true;
-        roles.numGenEvil = 1;
+        settings.lakeSetting = 'ROLE';
+        settings.merlin = true;
+        settings.percival = true;
+        settings.numGenGood = 4;
+        settings.morgana = true;
+        settings.assassin = true;
+        settings.oberon = true;
+        settings.numGenEvil = 1;
         break;
       default:
-        roles.merlin = true;
-        roles.percival = true;
-        roles.numGenGood = 2;
-        roles.morgana = true;
-        roles.mordred = true;
-        roles.assassin = true;
+        settings.lakeSetting = 'ALIGNMENT';
+        settings.merlin = true;
+        settings.percival = true;
+        settings.numGenGood = 2;
+        settings.morgana = true;
+        settings.mordred = true;
+        settings.assassin = true;
         break;
     }
-    return roles;
+    return settings;
   }
 
   constructSettingsObj() {
@@ -188,8 +194,8 @@ export default class CreateRoom extends React.Component {
     let field = e.target.name;
     let val = e.target.value;
     if (field === 'playerCount') {
-      const roles = this.getDefaultRolesForSize(val);
-      this.setState({ playerCount: val, ...roles });
+      const settings = this.getDefaultSettingsForSize(val);
+      this.setState({ playerCount: val, ...settings });
     } else {
       this.setState({ [field]: val });
     }

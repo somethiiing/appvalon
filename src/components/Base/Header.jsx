@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdInfoOutline } from 'react-icons/md';
 
-import Drawer from './Drawer';
+import Drawer from './Drawer/Drawer';
 import HamburgerMenu from './HamburgerMenu';
 import { Heading } from './Text';
 
