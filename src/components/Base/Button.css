@@ -1,0 +1,21 @@
+.Button {
+  min-width: 100px;
+  background-color: #00d673;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  font-weight: 500;
+  font-size: .8rem;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.Button:disabled {
+  cursor: default;
+}
+
+@media screen and (max-width: 600px) {
+  .Button {
+    width: 75%;
+  }
+}

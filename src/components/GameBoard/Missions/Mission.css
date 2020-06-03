@@ -1,0 +1,65 @@
+.Mission-wrapper {
+  width: 105px;
+  height: 110px;
+  border-radius: 5px;
+  margin: 0 20px;
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+}
+
+.Mission-wrapper.active {
+  background-color: #212121;
+}
+
+.Mission {
+  border-radius: 50%;
+  background-color: #555555;
+  font-size: 3rem;
+  width: 102px;
+  height: 102px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Mission.success {
+  background-color: #015aff;
+}
+
+.Mission.fail {
+  background-color: #d10146;
+}
+
+.Mission-double-fail {
+  font-size: .8rem;
+}
+
+.Mission-tracker {
+  border-radius: 50%;
+  background-color: #555555;
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  margin-left: -0.7rem;
+  margin-bottom: -0.7rem;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Mission-tracker:after {
+  content: ' proposals';
+  display: inline-block;
+  position: absolute;
+  bottom: -0.2rem;
+}
+
+.Mission-tracker.hammer-vote {
+  background-color: #d10146;
+}

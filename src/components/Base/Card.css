@@ -1,0 +1,45 @@
+.Card {
+  width: 135px;
+  height: 225px;
+  background: rgb(85, 85, 85);
+  border-radius: 5px;
+  color: #212121;
+  margin: 7px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid transparent;
+}
+
+.CardWrapper {
+  display: inline-block;
+}
+
+.CardWrapper input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 135px;
+  height: 225px;
+}
+
+.CardWrapper input:checked + .Card {
+  border: 3px solid #ffbb01;
+}
+.CardWrapper input.success:checked + .Card svg {
+  z-index: 2;
+}
+
+.CardWrapper input:checked + .fail:after,
+.CardWrapper input:checked + .success:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  background-color: black;
+  opacity: 0.6;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}

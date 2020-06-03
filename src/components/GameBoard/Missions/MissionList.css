@@ -1,0 +1,10 @@
+/*Needs all attributes here and on wrapper for scroll snapping to work.*/
+.MissionList {
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
+}

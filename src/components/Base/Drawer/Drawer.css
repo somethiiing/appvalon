@@ -1,0 +1,30 @@
+.MuiDrawer-paperAnchorRight {
+  width: 380px;
+  border-radius: 5px;
+  background-color: #eee;
+  padding: 20px;
+}
+
+.Drawer-close {
+  cursor: pointer;
+  color: red;
+}
+
+.Info-icon {
+  cursor: pointer;
+}
+
+.MuiTabs-root {
+  background-color: #212121;
+}
+
+.Rules-role {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #555555;
+}
+
+.SimpleTabs {
+  flex-grow: 1;
+  background-color: '#333';
+}
