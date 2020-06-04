@@ -22,7 +22,7 @@ class ActionArea extends React.Component {
 
   renderActions() {
     const { name, room, roomState = {} } = this.props;
-    const { status = '', players = [], proposedTeam = [] } = roomState;
+    const { status = '', players = {}, proposedTeam = [] } = roomState;
     if (!players[name]) {
       return null;
     }
@@ -46,7 +46,9 @@ class ActionArea extends React.Component {
           return <P>Please wait while the mission is going</P>;
         }
       case 'DISPLAY_MISSION_VOTE':
-        return <MissionResultView boardState={roomState} name={name} />;
+        return (
+          <MissionResultView roomState={roomState} name={name} room={room} />
+        );
       case 'ASSASSINATION':
         return <Assassination roomState={roomState} name={name} />;
       case 'EVIL_WIN':

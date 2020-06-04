@@ -24,7 +24,7 @@ function TeamVoteResultView(props) {
           ? 'This proposed mission was approved.'
           : 'This proposed mission was rejected.'}
       </P>
-      {props.name === kingOrder[0] && (
+      {players[name] && players[name].isKing && (
         <Button onClick={() => dispatchHandleTeamVoteResult({ room, name })}>
           Continue
         </Button>

@@ -5,11 +5,12 @@ import Card from '../../../Base/Card';
 import { dispatchHandleMissionVoteResult } from '../../../../ApiUtils';
 
 function MissionResultView(props) {
-  const { currentMission, missionVote, kingOrder, roomName } = props.boardState;
+  const { room, name, roomState } = props;
+  const { currentMission, missionVote, kingOrder, players } = roomState;
   const { success, fail } = missionVote;
 
   const onClick = () => {
-    dispatchHandleMissionVoteResult({ room: roomName, player: kingOrder[1] });
+    dispatchHandleMissionVoteResult({ room: room, player: name });
   };
 
   const renderCards = () => {
@@ -30,13 +31,16 @@ function MissionResultView(props) {
     return null;
   }
 
+  const currentKing = Object.values(players).find((player) => player.isKing);
+  const nextKingIndex =
+    (kingOrder.indexOf(currentKing.name) + 1) % kingOrder.length;
+  const nextKing = kingOrder[nextKingIndex];
+
   return (
     <div className='Mission-Result'>
       <P>Results for Mission #{currentMission}</P>
       <div className='Card-list'>{renderCards()}</div>
-      {props.name === kingOrder[1] && (
-        <Button onClick={onClick}>Continue</Button>
-      )}
+      {name === nextKing && <Button onClick={onClick}>Continue</Button>}
     </div>
   );
 }
