@@ -94,7 +94,7 @@ const handleHandleTeamVoteResult = (room) => {
         newRoom.players = helpers.resetPlayerTeamVotes(newRoom.players);
         newRoom.voteTrack++;
         // Shift to new king
-        newRoom = helpers.shiftKing(newRoom)
+        newRoom = helpers.updateKing(newRoom)
         return helpers.setStatus(newRoom, enums.GameState.TEAM_PROPOSAL);
     }
 }
@@ -171,9 +171,9 @@ const handleHandleMissionVoteResult = (room) => {
     // If the game is not over we need to move things along for the next mission
     if (newRoom.status === enums.GameState.TEAM_PROPOSAL) {
         newRoom.currentMission++;
-        newRoom.voteTrack = 0;
-        newRoom = helpers.shiftKing(newRoom);
-        newRoom = helpers.setHammer(newRoom)
+        newRoom.voteTrack = 1;
+        newRoom = helpers.updateKing(newRoom);
+        newRoom = helpers.setHammer(newRoom);
         newRoom.status = enums.GameState.TEAM_PROPOSAL;
     }
     return newRoom;

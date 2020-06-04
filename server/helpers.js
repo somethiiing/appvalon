@@ -113,15 +113,15 @@ const setKingOrder = (roomObj) => {
  }
 
 /**
- * Shifts the king
+ * Updates the active king based on previous king
  * @param room
  */
-const shiftKing = (room) => {
-    let newRoom = otherUtils.deepCopy(room)
-    let currentKing = newRoom.kingOrder.shift();
-    newRoom.kingOrder.push(currentKing);
-    let futureKing = newRoom.kingOrder[0];
-    return setKing(newRoom, futureKing);
+const updateKing = (room) => {
+    const newRoom = otherUtils.deepCopy(room)
+
+    const currentKing = Object.values(newRoom.players).find(player => player.isKing);
+    const nextKingIndex = (newRoom.kingOrder.indexOf(currentKing.name) + 1) % newRoom.kingOrder.length;
+    return setKing(newRoom, newRoom.kingOrder[nextKingIndex]);
 }
 
 /**
@@ -254,15 +254,26 @@ const isTeamApproved = (players) => {
  */
 const setHammer = (roomObj) => {
     const dup = otherUtils.deepCopy(roomObj);
-
+    let newHammerName;
     const currentMission = getCurrentMission(dup);
     const maxVoteCount = currentMission.maxVoteTrack;
-    const hammerName = dup.kingOrder[maxVoteCount - 1];
-    const newHammer = getPlayer(dup, hammerName);
+    const currentHammer = Object.values(dup.players).find(player => player.isHammer);
+
+    if(currentHammer){
+        // advance hammer if it exists, wrapping at end of array
+        const newHammerIndex = (dup.kingOrder.indexOf(currentHammer.name) + 1) % dup.kingOrder.length;
+        console.log("index of hammer name: " + newHammerIndex)
+        newHammerName = dup.kingOrder[newHammerIndex];
+    } else {
+        // start of game - set the hammer
+        newHammerName =  dup.kingOrder[maxVoteCount - 1];
+    }
+    console.log("new hammer name: " + newHammerName)
+
+    const newHammer = getPlayer(dup,newHammerName);
     console.log(roomObj)
-    const falseHammer = Object.values(dup.players).find(player => player.isHammer);
-    if (falseHammer) {
-        falseHammer.isHammer = false;
+    if (currentHammer) {
+        currentHammer.isHammer = false;
     }
     newHammer.isHammer = true
 
@@ -340,7 +351,7 @@ const getAssassin = (roomObj) => {
 
 module.exports = {
     setMissionCount, setVoteTrackCount, shufflePlayers: shuffleKingOrder, assignRoles,
-    setStatus, setKing, setLake, shiftKing, reinitializeBoard, setTeamMembers, isFailedMission,
+    setStatus, setKing, setLake, updateKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
     setKingOrder, setSelectedRoles, setHammer, resetMissionVote, addHueToPlayers, getPlayer,
     getAssassin
