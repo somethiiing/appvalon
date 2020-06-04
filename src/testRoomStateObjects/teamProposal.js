@@ -118,7 +118,7 @@ module.exports = {
       alignment: 'good',
       teamVote: 'APPROVE',
       isKing: false,
-      isHammer: false,
+      isHammer: true,
       isLake: false,
       hue: 141
     },
@@ -146,7 +146,7 @@ module.exports = {
       alignment: 'evil',
       teamVote: 'APPROVE',
       isKing: false,
-      isHammer: true,
+      isHammer: false,
       isLake: false,
       hue: 176
     },
@@ -229,11 +229,11 @@ module.exports = {
     ]
   },
   kingOrder: [
-    'fred',
     'bridget',
     'jesus',
     'ashwin',
     'jason',
+    'fred',
     'alex',
     'wilson',
     'mehtab'
