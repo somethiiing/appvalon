@@ -261,7 +261,9 @@ const setHammer = (roomObj) => {
 
     if(currentHammer){
         // advance hammer if it exists, wrapping at end of array
-        const newHammerIndex = (dup.kingOrder.indexOf(currentHammer.name) + 1) % dup.kingOrder.length;
+        const currentKing = Object.values(dup.players).find(player => player.isKing);
+        const kingIndex = dup.kingOrder.indexOf(currentKing.name);
+        const newHammerIndex = (kingIndex + (maxVoteCount - 1)) % dup.kingOrder.length;
         console.log("index of hammer name: " + newHammerIndex)
         newHammerName = dup.kingOrder[newHammerIndex];
     } else {
