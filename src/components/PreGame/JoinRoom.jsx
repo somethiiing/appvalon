@@ -57,7 +57,7 @@ export default class JoinRoom extends React.Component {
 
       const previousRoom = window.localStorage.getItem('room');
       if (res.data.roomList.includes(previousRoom)) {
-        const previousName = window.localStorage.getItem('name');
+        const previousName = window.localStorage.getItem('player');
         this.props.handleSubmit({
           status: 'SUCCESS',
           room: previousRoom,
