@@ -39,7 +39,7 @@ class App extends React.Component {
       this.changePage('board');
     } else if (status === 'FULL') {
       // handle spectator mode stuff
-      console.log('room full');
+      alert('room full');
     }
   }
 
