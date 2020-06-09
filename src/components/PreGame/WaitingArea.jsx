@@ -38,12 +38,15 @@ export default class WaitingArea extends React.Component {
       roomName
     } = this.props.roomState;
     const { lakeSetting } = gameSettings;
-    let currentPlayerCount = Object.keys(players).length;
+    const currentPlayerCount = Object.keys(players).length;
+    const remainingPlayers = playerCount - currentPlayerCount;
     // TODO display player components
     return (
       <div className='WaitingArea'>
         <div>
-          {`Waiting for ${playerCount - currentPlayerCount} players to join.`}
+          {`Waiting for ${remainingPlayers} ${
+            remainingPlayers > 1 ? 'players' : 'player'
+          } to join.`}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>

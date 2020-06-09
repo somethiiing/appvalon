@@ -27,45 +27,6 @@ module.exports = {
       isLake: false,
       hue: 1
     },
-    jesus: {
-      role: 'mordred',
-      name: 'jesus',
-      sees: {
-        morgana: {
-          role: 'morgana',
-          alignment: 'evil',
-          knowsRole: false,
-          players: {
-            assigned: ['fred']
-          }
-        },
-        assassin: {
-          role: 'assassin',
-          alignment: 'evil',
-          knowsRole: false,
-          players: {
-            assigned: ['jason']
-          }
-        }
-      },
-      alignment: 'evil',
-      teamVote: 'APPROVE',
-      isKing: false,
-      isHammer: false,
-      isLake: false,
-      hue: 36
-    },
-    mehtab: {
-      role: 'genericGood',
-      name: 'mehtab',
-      sees: {},
-      alignment: 'good',
-      teamVote: 'APPROVE',
-      isKing: false,
-      isHammer: false,
-      isLake: true,
-      hue: 71
-    },
     wilson: {
       role: 'percival',
       name: 'wilson',
