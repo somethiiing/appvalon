@@ -50,14 +50,14 @@ app.post('/api/joinRoom', (req, res) => {
     state[room] = joinRoom(state[room], name)
     console.log('room joined')
     res.send({status: 'SUCCESS', name, room});
+    if (Object.values(state[room].players).length === playerCount) {
+      state[room] = actionHandlers.handleGameStart(state[room]);
+    }
+    io.emit('UPDATE_STATE', {room, roomState: state[room]});
   } else {
     console.log('room full')
     res.send({status: 'FULL'});
   }
-  if (Object.values(state[room].players).length === playerCount) {
-    state[room] = actionHandlers.handleGameStart(state[room]);
-  }
-  io.emit('UPDATE_STATE', {room, roomState: state[room]});
 });
 
 app.post('/api/update', (req, res) => {
