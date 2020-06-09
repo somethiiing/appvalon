@@ -12,6 +12,7 @@ import Button from '../Base/Button';
 import './CreateRoom.css';
 
 import { createRoom } from '../../ApiUtils';
+import { setRelogToken } from '../../utils';
 
 export default class CreateRoom extends React.Component {
   constructor(props) {
@@ -207,6 +208,7 @@ export default class CreateRoom extends React.Component {
       host: this.state.name
     }).then((res) => {
       const { room, host } = res.data;
+      setRelogToken({player: host, room});
       this.props.handleSubmit({ name: host, room });
     });
   }
