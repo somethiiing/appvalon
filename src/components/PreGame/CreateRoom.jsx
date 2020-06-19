@@ -208,7 +208,7 @@ export default class CreateRoom extends React.Component {
       host: this.state.name
     }).then((res) => {
       const { room, host } = res.data;
-      setRelogToken({player: host, room});
+      setRelogToken({ player: host, room });
       this.props.handleSubmit({ name: host, room });
     });
   }

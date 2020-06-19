@@ -4,21 +4,23 @@ const api = '';
 
 const fetchRoomList = () => {
   return axios.get(`${api}/api/getRoomList`);
-}
+};
 
-const fetchRoomData = ({room}) => {
+const fetchRoomData = ({ room }) => {
   return axios.get(`${api}/api/getRoomData?room=${room}`);
-}
+};
 
-const joinRoom = ({name, room}) => {
-  return axios.post(`${api}/api/joinRoom`, {name, room});
-}
+const joinRoom = ({ name, room }) => {
+  return axios.post(`${api}/api/joinRoom`, { name, room });
+};
 
-const createRoom = ({settings, host}) => {
-  return axios.post(`${api}/api/createRoom`, {data: {type: 'CREATE_ROOM', settings, host}});
-}
+const createRoom = ({ settings, host }) => {
+  return axios.post(`${api}/api/createRoom`, {
+    data: { type: 'CREATE_ROOM', settings, host }
+  });
+};
 
-const dispatchUpdateTeamMembers = ({room, player, teamProposalArray}) => {
+const dispatchUpdateTeamMembers = ({ room, player, teamProposalArray }) => {
   return axios.post(`${api}/api/update`, {
     type: 'UPDATE_TEAM_MEMBERS',
     room,
@@ -27,7 +29,7 @@ const dispatchUpdateTeamMembers = ({room, player, teamProposalArray}) => {
   });
 };
 
-const dispatchSubmitForVote = ({room, player}) => {
+const dispatchSubmitForVote = ({ room, player }) => {
   return axios.post(`${api}/api/update`, {
     type: 'SUBMIT_FOR_VOTE',
     room,
@@ -35,7 +37,7 @@ const dispatchSubmitForVote = ({room, player}) => {
   });
 };
 
-const dispatchSubmitTeamVote = ({room, player, teamVote}) => {
+const dispatchSubmitTeamVote = ({ room, player, teamVote }) => {
   return axios.post(`${api}/api/update`, {
     type: 'SUBMIT_TEAM_VOTE',
     room,
@@ -44,7 +46,7 @@ const dispatchSubmitTeamVote = ({room, player, teamVote}) => {
   });
 };
 
-const dispatchRevealTeamVote = ({room, player}) => {
+const dispatchRevealTeamVote = ({ room, player }) => {
   return axios.post(`${api}/api/update`, {
     type: 'REVEAL_TEAM_VOTE',
     room,
@@ -52,7 +54,7 @@ const dispatchRevealTeamVote = ({room, player}) => {
   });
 };
 
-const dispatchHandleTeamVoteResult = ({room, player}) => {
+const dispatchHandleTeamVoteResult = ({ room, player }) => {
   return axios.post(`${api}/api/update`, {
     type: 'HANDLE_TEAM_VOTE_RESULT',
     room,
@@ -60,7 +62,7 @@ const dispatchHandleTeamVoteResult = ({room, player}) => {
   });
 };
 
-const dispatchSubmitMissionVote = ({room, player, missionVote}) => {
+const dispatchSubmitMissionVote = ({ room, player, missionVote }) => {
   return axios.post(`${api}/api/update`, {
     type: 'SUBMIT_MISSION_VOTE',
     room,
@@ -69,7 +71,7 @@ const dispatchSubmitMissionVote = ({room, player, missionVote}) => {
   });
 };
 
-const dispatchHandleMissionVoteResult = ({room, player}) => {
+const dispatchHandleMissionVoteResult = ({ room, player }) => {
   return axios.post(`${api}/api/update`, {
     type: 'HANDLE_MISSION_VOTE_RESULT',
     room,
@@ -77,7 +79,7 @@ const dispatchHandleMissionVoteResult = ({room, player}) => {
   });
 };
 
-const dispatchSubmitAssassination = ({room, player, assassinationTarget}) => {
+const dispatchSubmitAssassination = ({ room, player, assassinationTarget }) => {
   return axios.post(`${api}/api/update`, {
     type: 'SUBMIT_ASSASSINATION',
     room,
@@ -86,7 +88,7 @@ const dispatchSubmitAssassination = ({room, player, assassinationTarget}) => {
   });
 };
 
-const dispatchReconfigureGame = ({room, player}) => {
+const dispatchReconfigureGame = ({ room, player }) => {
   return axios.post(`${api}/api/update`, {
     type: 'RECONFIGURE_GAME',
     room,

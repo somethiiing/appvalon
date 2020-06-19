@@ -33,7 +33,7 @@
 }
 
 .Mission-double-fail {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .Mission-tracker {
@@ -46,8 +46,8 @@
   bottom: 5px;
   margin-left: -0.7rem;
   margin-bottom: -0.7rem;
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
-  font-size: .9rem;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;

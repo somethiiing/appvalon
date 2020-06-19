@@ -1,8 +1,8 @@
 .KingOrder {
-    display: inline-block;
-    width: 100%;
-    white-space: nowrap;
-    overflow-x: auto;
-    padding-bottom: 1.5rem;
-    margin-top: 1rem;
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
 }
