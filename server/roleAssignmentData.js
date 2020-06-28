@@ -3,6 +3,7 @@ module.exports = {
   merlin: {
     roleTitle: 'Merlin',
     alignment: 'good',
+    isAssassinTarget: true,
     sees: {
       morgana: {
         roleTitle: 'Morgana',
@@ -27,10 +28,12 @@ module.exports = {
       assassin: {
         roleTitle: 'Assassin',
         alignment: 'evil',
+        roleTitle: 'Agravaine',
+        alignment: 'evil',
         knowsRole: false
       },
-      oberon: {
-        roleTitle: 'Oberon',
+      genericEvil: {
+        roleTitle: 'Generic Evil',
         alignment: 'evil',
         knowsRole: false
       }
@@ -58,6 +61,7 @@ module.exports = {
   tristan: {
     roleTitle: 'Tristan',
     alignment: 'good',
+    isAssassinTarget: true,
     sees: {
       iseult: {
         roleTitle: 'iseult',
@@ -70,6 +74,7 @@ module.exports = {
   iseult: {
     roleTitle: 'Iseult',
     alignment: 'good',
+    isAssassinTarget: true,
     sees: {
       tristan: {
         roleTitle: 'tristan',
@@ -82,12 +87,14 @@ module.exports = {
   titania: {
     roleTitle: 'Titania',
     alignment: 'good',
+    isAssassinTarget: false,
     sees: {},
     description: 'appears as Evil to Evil roles (except Colgrevance).'
   },
   genericGood: {
     roleTitle: 'Generic Good',
     alignment: 'good',
+    isAssassinTarget: false,
     sees: {},
     description: 'doesn\'t see anyone. The loyalest servant of King Arthur'
   },
@@ -96,6 +103,7 @@ module.exports = {
   assassin: {
     roleTitle: 'Assassin',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {
       mordred: {
         roleTitle: 'Mordred',
@@ -128,6 +136,7 @@ module.exports = {
   mordred: {
     roleTitle: 'Mordred',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {
       morgana: {
         roleTitle: 'Morgana',
@@ -160,6 +169,7 @@ module.exports = {
   morgana: {
     roleTitle: 'Morgana',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {
       mordred: {
         roleTitle: 'Mordred',
@@ -192,6 +202,7 @@ module.exports = {
   agravaine: {
     roleTitle: 'Agravaine',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {
       mordred: {
         roleTitle: 'Mordred',
@@ -224,6 +235,7 @@ module.exports = {
   colgrevance: {
     roleTitle: 'Colgrevance',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {
       mordred: {
         roleTitle: 'Mordred',
@@ -261,6 +273,7 @@ module.exports = {
   genericEvil: {
     roleTitle: 'Generic Evil',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {
       mordred: {
         roleTitle: 'Mordred',
@@ -286,6 +299,11 @@ module.exports = {
         roleTitle: 'Titania',
         alignment: 'evil',
         knowsRole: false
+      },
+      genericEvil: {
+        roleTitle: 'Generic Evil',
+        alignment: 'evil',
+        knowsRole: true
       }
     },
     description: 'An evil Minion of Mordred'
@@ -293,12 +311,14 @@ module.exports = {
   oberon: {
     roleTitle: 'Oberon',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {},
     description: 'is hidden from other Evil roles, but is visible to Merlin'
   },
   noberon: {
     roleTitle: 'NOberon',
     alignment: 'evil',
+    isAssassinTarget: false,
     sees: {},
     description: 'is hidden from other Evil roles and is also hidden from Merlin'
   }

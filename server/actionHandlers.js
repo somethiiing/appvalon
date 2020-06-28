@@ -1,6 +1,7 @@
 const enums = require('./enums');
 const helpers = require('./helpers');
 const otherUtils = require( "./otherUtils");
+const roles = require("./roleAssignmentData");
 
 /**
  * Creates an array of player objects with roles assigned
@@ -165,7 +166,7 @@ const handleHandleMissionVoteResult = (room) => {
         currentMission.status = enums.MissionStatus.SUCCESS;
     }
 
-    const gameState = helpers.getGameStateBasedOnMissionStatus(newRoom.boardInfo.missions);
+    const gameState = helpers.getGameStateBasedOnMissionStatus(newRoom);
     //Update the game state
     newRoom = helpers.setStatus(newRoom, gameState);
     // If the game is not over we need to move things along for the next mission
