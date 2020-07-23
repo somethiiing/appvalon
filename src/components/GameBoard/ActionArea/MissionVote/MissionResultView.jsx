@@ -10,7 +10,11 @@ function MissionResultView(props) {
   const { success, fail } = missionVote;
 
   const onClick = () => {
-    dispatchHandleMissionVotvalueeResult({ room: room, player: name, currentMission });
+    dispatchHandleMissionVotvalueeResult({
+      room: room,
+      player: name,
+      currentMission
+    });
   };
 
   const renderCards = () => {
