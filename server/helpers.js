@@ -322,7 +322,7 @@ const getCurrentMission = (room) => {
  * Returns object corresponding to the mission number - please note this is a real number, NOT index
  * @param {number} missionNumber - number, not index
  */
-const getMissionAt = (missionNumber) => {
+const getMissionAt = (room, missionNumber) => {
     return room.boardInfo.missions[missionNumber-1];
 }
 

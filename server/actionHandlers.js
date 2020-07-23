@@ -147,16 +147,17 @@ const handleSubmitMissionVote = (room, player, vote) => {
  *
  * If game moves to the next mission reset the votes, and move the king
  *
- * @param room
+ * @param room, missionNumber
  * @returns room
  */
 const handleHandleMissionVoteResult = (room, missionNumber) => {
     let newRoom = otherUtils.deepCopy(room);
+    if (missionNumber !== newRoom.currentMission) throw "Invalid request: mission already went!";
     console.log(newRoom.boardInfo.doubleFailRequired)
     //gross magic numbers ewww
     const failed = helpers.isFailedMission(newRoom.missionVote, newRoom.boardInfo.doubleFailRequired && room.currentMission == 4)
     newRoom = helpers.resetMissionVote(newRoom);
-    const currentMission = helpers.getMissionAt(missionNumber);
+    const currentMission = helpers.getMissionAt(newRoom, missionNumber);
     if (failed) {
         console.log("fission mailed.")
         currentMission.status = enums.MissionStatus.FAIL;

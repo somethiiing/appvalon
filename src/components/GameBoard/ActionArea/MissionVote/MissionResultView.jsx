@@ -10,7 +10,7 @@ function MissionResultView(props) {
   const { success, fail } = missionVote;
 
   const onClick = () => {
-    dispatchHandleMissionVotvalueeResult({
+    dispatchHandleMissionVoteResult({
       room: room,
       player: name,
       currentMission
