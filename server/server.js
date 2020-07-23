@@ -62,7 +62,7 @@ app.post('/api/joinRoom', (req, res) => {
 
 app.post('/api/update', (req, res) => {
   const { type, room, player, data = {} } = req.body;
-  const { teamProposalArray, teamVote, missionVote, assassinationTarget } = data;
+  const { teamProposalArray, teamVote, missionVote, assassinationTarget, currentMission } = data;
   console.log(type, room, player, data);
   switch(type) {
     case 'UPDATE_TEAM_MEMBERS':
@@ -84,7 +84,7 @@ app.post('/api/update', (req, res) => {
       state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
       break;
     case 'HANDLE_MISSION_VOTE_RESULT':
-      state[room] = actionHandlers.handleHandleMissionVoteResult(state[room], missionNumber);
+      state[room] = actionHandlers.handleHandleMissionVoteResult(state[room], currentMission);
       break;
     case 'SUBMIT_ASSASSINATION':
       state[room] = actionHandlers.handleSubmitAssassination(state[room], assassinationTarget);
