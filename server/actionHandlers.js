@@ -150,13 +150,13 @@ const handleSubmitMissionVote = (room, player, vote) => {
  * @param room
  * @returns room
  */
-const handleHandleMissionVoteResult = (room) => {
+const handleHandleMissionVoteResult = (room, missionNumber) => {
     let newRoom = otherUtils.deepCopy(room);
     console.log(newRoom.boardInfo.doubleFailRequired)
     //gross magic numbers ewww
     const failed = helpers.isFailedMission(newRoom.missionVote, newRoom.boardInfo.doubleFailRequired && room.currentMission == 4)
     newRoom = helpers.resetMissionVote(newRoom);
-    const currentMission = helpers.getCurrentMission(newRoom);
+    const currentMission = helpers.getMissionAt(missionNumber);
     if (failed) {
         console.log("fission mailed.")
         currentMission.status = enums.MissionStatus.FAIL;

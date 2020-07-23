@@ -71,11 +71,12 @@ const dispatchSubmitMissionVote = ({ room, player, missionVote }) => {
   });
 };
 
-const dispatchHandleMissionVoteResult = ({ room, player }) => {
+const dispatchHandleMissionVoteResult = ({ room, player, currentMission }) => {
   return axios.post(`${api}/api/update`, {
     type: 'HANDLE_MISSION_VOTE_RESULT',
     room,
-    player
+    player,
+    data: { currentMission }
   });
 };
 

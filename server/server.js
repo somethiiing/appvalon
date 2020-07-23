@@ -84,7 +84,7 @@ app.post('/api/update', (req, res) => {
       state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
       break;
     case 'HANDLE_MISSION_VOTE_RESULT':
-      state[room] = actionHandlers.handleHandleMissionVoteResult(state[room]);
+      state[room] = actionHandlers.handleHandleMissionVoteResult(state[room], missionNumber);
       break;
     case 'SUBMIT_ASSASSINATION':
       state[room] = actionHandlers.handleSubmitAssassination(state[room], assassinationTarget);
