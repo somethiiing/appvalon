@@ -62,41 +62,46 @@ app.post('/api/joinRoom', (req, res) => {
 
 app.post('/api/update', (req, res) => {
   const { type, room, player, data = {} } = req.body;
-  const { teamProposalArray, teamVote, missionVote, assassinationTarget } = data;
+  const { teamProposalArray, teamVote, missionVote, assassinationTarget, currentMission } = data;
   console.log(type, room, player, data);
-  switch(type) {
-    case 'UPDATE_TEAM_MEMBERS':
-      state[room] = actionHandlers.handleUpdateTeamMembers(state[room], teamProposalArray);
-      break;
-    case 'SUBMIT_FOR_VOTE':
-      state[room] = actionHandlers.handleSubmitForVote(state[room]);
-      break;
-    case 'SUBMIT_TEAM_VOTE':
-      state[room] = actionHandlers.handleSubmitTeamVote(state[room], player, teamVote);
-      break;
-    case 'REVEAL_TEAM_VOTE':
-      state[room] = actionHandlers.handleRevealTeamVote(state[room]);
-      break;
-    case 'HANDLE_TEAM_VOTE_RESULT':
-      state[room] = actionHandlers.handleHandleTeamVoteResult(state[room]);
-      break;
-    case 'SUBMIT_MISSION_VOTE':
-      state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
-      break;
-    case 'HANDLE_MISSION_VOTE_RESULT':
-      state[room] = actionHandlers.handleHandleMissionVoteResult(state[room]);
-      break;
-    case 'SUBMIT_ASSASSINATION':
-      state[room] = actionHandlers.handleSubmitAssassination(state[room], assassinationTarget);
-      break;
-    case 'RECONFIGURE_GAME':
-      state[room] = actionHandlers.handleReconfigureGame(state[room]);
-      break;
-    default:
-      break;
+  try {
+    switch(type) {
+      case 'UPDATE_TEAM_MEMBERS':
+        state[room] = actionHandlers.handleUpdateTeamMembers(state[room], teamProposalArray);
+        break;
+      case 'SUBMIT_FOR_VOTE':
+        state[room] = actionHandlers.handleSubmitForVote(state[room]);
+        break;
+      case 'SUBMIT_TEAM_VOTE':
+        state[room] = actionHandlers.handleSubmitTeamVote(state[room], player, teamVote);
+        break;
+      case 'REVEAL_TEAM_VOTE':
+        state[room] = actionHandlers.handleRevealTeamVote(state[room]);
+        break;
+      case 'HANDLE_TEAM_VOTE_RESULT':
+        state[room] = actionHandlers.handleHandleTeamVoteResult(state[room]);
+        break;
+      case 'SUBMIT_MISSION_VOTE':
+        state[room] = actionHandlers.handleSubmitMissionVote(state[room], player, missionVote);
+        break;
+      case 'HANDLE_MISSION_VOTE_RESULT':
+        state[room] = actionHandlers.handleHandleMissionVoteResult(state[room], currentMission);
+        break;
+      case 'SUBMIT_ASSASSINATION':
+        state[room] = actionHandlers.handleSubmitAssassination(state[room], assassinationTarget);
+        break;
+      case 'RECONFIGURE_GAME':
+        state[room] = actionHandlers.handleReconfigureGame(state[room]);
+        break;
+      default:
+        break;
+    }
+    io.emit('UPDATE_STATE', {room, roomState: state[room]});
+    res.sendStatus(200);
+  } catch(err){
+    console.log(err)
+    res.send({error: err});
   }
-  io.emit('UPDATE_STATE', {room, roomState: state[room]});
-  res.sendStatus(200);
 });
 
 // Handles any requests that don't match the ones above

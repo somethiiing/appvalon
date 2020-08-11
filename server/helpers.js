@@ -318,6 +318,15 @@ const getCurrentMission = (room) => {
     return room.boardInfo.missions[room.currentMission-1];
 }
 
+/**
+ * Returns object corresponding to the mission number - please note this is a real number, NOT index
+ * @param {number} missionNumber - number, not index
+ */
+const getMissionAt = (room, missionNumber) => {
+    return room.boardInfo.missions[missionNumber-1];
+}
+
+
 const addHueToPlayers = (room) => {
     const dup = otherUtils.deepCopy(room);
     // ensure an even spread over the 360 different colors frontend can display,
@@ -356,5 +365,5 @@ module.exports = {
     setStatus, setKing, setLake, updateKing, reinitializeBoard, setTeamMembers, isFailedMission,
     getGameStateBasedOnMissionStatus, isTeamApproved, resetPlayerTeamVotes, getCurrentMission,
     setKingOrder, setSelectedRoles, setHammer, resetMissionVote, addHueToPlayers, getPlayer,
-    getAssassin
+    getAssassin, getMissionAt
 };
