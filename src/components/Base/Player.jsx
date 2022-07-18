@@ -11,16 +11,8 @@ import { Sub } from './Text';
 import './Player.css';
 
 function Player(props) {
-  const {
-    name,
-    king,
-    hammer,
-    selected,
-    teamVote,
-    onClick,
-    hue,
-    roomState
-  } = props;
+  const { name, king, hammer, selected, teamVote, onClick, hue, roomState } =
+    props;
   // use this to generate random icon colors on initialization
   // const randomColor = "#" + Math.random().toString(16).slice(2, 8);
   // Your colors are better but without access to the keyed layers to do a proper offset, this does the trick.

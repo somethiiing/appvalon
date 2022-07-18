@@ -45,9 +45,10 @@ export default class KingProposalView extends React.Component {
     const playerName = this.props.name;
     const roomName = this.props.roomState.roomName;
     let teamProposal = this.state.teamProposalArray;
-    const missionSize = this.props.roomState.boardInfo.missions[
-      this.props.roomState.currentMission - 1
-    ].size;
+    const missionSize =
+      this.props.roomState.boardInfo.missions[
+        this.props.roomState.currentMission - 1
+      ].size;
     let valid = false;
     if (teamProposal.includes(candidate)) {
       teamProposal = teamProposal.filter((e) => e !== candidate);
@@ -77,9 +78,10 @@ export default class KingProposalView extends React.Component {
     const teamProposalArray = this.state.teamProposalArray;
     const kingOrder = this.props.roomState.kingOrder;
     const name = this.props.name;
-    const missionSize = this.props.roomState.boardInfo.missions[
-      this.props.roomState.currentMission - 1
-    ].size;
+    const missionSize =
+      this.props.roomState.boardInfo.missions[
+        this.props.roomState.currentMission - 1
+      ].size;
     const disabled = missionSize !== teamProposalArray.length;
     const players = this.props.roomState.players;
     return (

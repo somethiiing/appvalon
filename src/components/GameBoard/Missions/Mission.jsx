@@ -2,15 +2,8 @@ import React from 'react';
 import './Mission.css';
 
 function Mission(props) {
-  const {
-    success,
-    fail,
-    active,
-    size,
-    voteTrack,
-    maxVoteTrack,
-    doubleFail
-  } = props;
+  const { success, fail, active, size, voteTrack, maxVoteTrack, doubleFail } =
+    props;
   return (
     <div className={`Mission-wrapper ${active ? 'active' : ''}`}>
       {doubleFail && (
