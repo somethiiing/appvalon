@@ -203,8 +203,10 @@ const isFailedMission = (missionVotes, isDoubleFailRequired) => {
  * Can be one of GameState.ASSASSINATION, EVIL_WIN, or TEAM_PROPOSAL if the game continues
  * @param missions
  */
-const getGameStateBasedOnMissionStatus = (missions) => {
+const getGameStateBasedOnMissionStatus = (roomObj) => {
     // Check if the game ends
+    const missions = roomObj.boardInfo.missions
+    const hasTargets = hasAssassinTargets(roomObj.selectedRoles)
     let missionSuccessCount = 0;
     let missionFailedCount = 0;
     missions.forEach(mission => {
@@ -215,8 +217,10 @@ const getGameStateBasedOnMissionStatus = (missions) => {
         }
     });
     // Game ends
-    if (missionSuccessCount >= 3) {
+    if (missionSuccessCount >= 3 && hasTargets) {
         return enums.GameState.ASSASSINATION;
+    }  else if(missionSuccessCount >= 3 && !hasTargets) {
+        return enums.GameState.GOOD_WIN;
     } else if (missionFailedCount >= 3) {
         return enums.GameState.EVIL_WIN;
     }
@@ -358,6 +362,19 @@ const getAssassin = (roomObj) => {
     }
     roomObj.assassin = assassin;
     return roomObj;
+}
+
+/**
+ * Returns true if the current room has assassinatable roles
+ * @param {[Role]} selectedRoles 
+ */
+const hasAssassinTargets = (selectedRoles) => {
+    selectedRoles.forEach(role => {
+        if (role.isAssassinTarget){
+            return true
+        }
+    })
+    return false;
 }
 
 module.exports = {
